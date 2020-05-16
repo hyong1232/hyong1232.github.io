@@ -79,19 +79,33 @@
 
 
 
-<meta name="description" content="简介感谢阮一峰先生的分享grid-layout-tutorial 本文基本照抄，不作商业用途，仅供个人学习。 网格布局（Grid）是最强大的 CSS 布局方案。 它将网页划分成一个个网格，可以任意组合不同的网格，做出各种各样的布局。以前，只能通过复杂的 CSS 框架达到的效果，现在浏览器内置了。">
+<meta name="description" content="简介感谢阮一峰先生的分享grid-layout-tutorial 仅供个人学习。 网格布局（Grid）是最强大的 CSS 布局方案。 它将网页划分成一个个网格，可以任意组合不同的网格，做出各种各样的布局。以前，只能通过复杂的 CSS 框架达到的效果，现在浏览器内置了。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="gird布局">
 <meta property="og:url" content="http://yoursite.com/2020/05/14/gird%E5%B8%83%E5%B1%80/index.html">
 <meta property="og:site_name" content="Mr.H 的个人博客">
-<meta property="og:description" content="简介感谢阮一峰先生的分享grid-layout-tutorial 本文基本照抄，不作商业用途，仅供个人学习。 网格布局（Grid）是最强大的 CSS 布局方案。 它将网页划分成一个个网格，可以任意组合不同的网格，做出各种各样的布局。以前，只能通过复杂的 CSS 框架达到的效果，现在浏览器内置了。">
+<meta property="og:description" content="简介感谢阮一峰先生的分享grid-layout-tutorial 仅供个人学习。 网格布局（Grid）是最强大的 CSS 布局方案。 它将网页划分成一个个网格，可以任意组合不同的网格，做出各种各样的布局。以前，只能通过复杂的 CSS 框架达到的效果，现在浏览器内置了。">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://www.wangbase.com/blogimg/asset/201903/1_bg2019032501.png">
+<meta property="og:image" content="http://yoursite.com/images/browserSupport.PNG">
 <meta property="og:image" content="https://www.wangbase.com/blogimg/asset/201903/bg2019032506.png">
-<meta property="og:image" content="https://www.wangbase.com/blogimg/asset/201903/bg2019032507.png">
 <meta property="og:image" content="https://www.wangbase.com/blogimg/asset/201903/bg2019032508.png">
+<meta property="og:image" content="https://www.wangbase.com/blogimg/asset/201903/bg2019032511.png">
+<meta property="og:image" content="https://www.wangbase.com/blogimg/asset/201903/bg2019032514.png">
+<meta property="og:image" content="http://yoursite.com/images/overgridnumber.PNG">
+<meta property="og:image" content="http://yoursite.com/images/center-stretch.PNG">
+<meta property="og:image" content="http://yoursite.com/images/place-self.PNG">
+<meta property="og:image" content="https://www.wangbase.com/blogimg/asset/201903/bg2019032522.png">
+<meta property="og:image" content="https://www.wangbase.com/blogimg/asset/201903/bg2019032523.png">
+<meta property="og:image" content="https://www.wangbase.com/blogimg/asset/201903/bg2019032524.png">
+<meta property="og:image" content="https://www.wangbase.com/blogimg/asset/201903/bg2019032525.png">
+<meta property="og:image" content="http://yoursite.com/images/grid-template.PNG">
+<meta property="og:image" content="https://www.wangbase.com/blogimg/asset/201903/bg2019032527.png">
+<meta property="og:image" content="https://www.wangbase.com/blogimg/asset/201903/bg2019032528.png">
+<meta property="og:image" content="https://www.wangbase.com/blogimg/asset/201903/bg2019032530.png">
+<meta property="og:image" content="http://yoursite.com/images/grid-area.PNG">
 <meta property="article:published_time" content="2020-05-14T09:21:53.000Z">
-<meta property="article:modified_time" content="2020-05-14T16:44:40.000Z">
+<meta property="article:modified_time" content="2020-05-16T17:46:42.000Z">
 <meta property="article:author" content="Mr.H">
 <meta property="article:tag" content="css布局">
 <meta property="article:tag" content="css">
@@ -350,7 +364,7 @@
       
 
       
-        <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p><strong>感谢阮一峰先生的分享<a href="http://www.ruanyifeng.com/blog/2019/03/grid-layout-tutorial.html" target="_blank" rel="noopener">grid-layout-tutorial</a> 本文基本照抄，不作商业用途，仅供个人学习。</strong></p>
+        <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p><strong>感谢阮一峰先生的分享<a href="http://www.ruanyifeng.com/blog/2019/03/grid-layout-tutorial.html" target="_blank" rel="noopener">grid-layout-tutorial</a> 仅供个人学习。</strong></p>
 <p>网格布局（Grid）是最强大的 CSS 布局方案。</p>
 <p>它将网页划分成一个个网格，可以任意组合不同的网格，做出各种各样的布局。以前，只能通过复杂的 CSS 框架达到的效果，现在浏览器内置了。</p>
 <a id="more"></a>
@@ -358,83 +372,209 @@
 <img src="https://www.wangbase.com/blogimg/asset/201903/1_bg2019032501.png" class="" width="802" height="366" title="grid布局演示图片">
 
 <p>如上图所示，grid布局是一种类二维布局的css布局方式，与flex布局一样，极大的方便了网页布局。</p>
-<h2 id="属性介绍"><a href="#属性介绍" class="headerlink" title="属性介绍"></a>属性介绍</h2><ul>
-<li><p>grid-template-columns</p>
-<blockquote>
+<h2 id="浏览器支持"><a href="#浏览器支持" class="headerlink" title="浏览器支持"></a>浏览器支持</h2><p><img src="/images/browserSupport.PNG" alt="browser-spport"></p>
+<p class="image-caption">支持的浏览器及其版本</p>
+
+<h2 id="属性介绍"><a href="#属性介绍" class="headerlink" title="属性介绍"></a>属性介绍</h2><h3 id="display"><a href="#display" class="headerlink" title="display"></a>display</h3><blockquote>
+<p>可选参数 gird/inline-grid<br> 当参数为：gird时为块级元素、inline-grid则为行内元素</p>
+</blockquote>
+<h3 id="grid-template-columns"><a href="#grid-template-columns" class="headerlink" title="grid-template-columns"></a>grid-template-columns</h3><blockquote>
 <p>规定grid的列宽<br>example:</p>
 </blockquote>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grid-template-columns:100px 100px 100px;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>grid-template-rows</p>
-<blockquote>
+
+<h3 id="grid-template-rows"><a href="#grid-template-rows" class="headerlink" title="grid-template-rows"></a>grid-template-rows</h3><blockquote>
 <p>规定grid的行宽<br>example:</p>
 </blockquote>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">grid-template-rows:100px 100px 100px;</span><br><span class="line">grid-template-rows:33% 33% 33%;</span><br><span class="line">grid-template-rows:repeat(3,33%);</span><br></pre></td></tr></table></figure>
 
-</li>
-</ul>
 <blockquote><p><strong>grid函数设置宽高的函数</strong></p>
 <blockquote>
 <p>这些函数都可以与百分比、px、fr特数字组合定义宽高</p>
 </blockquote>
 <p>固定100px的结果如下图所示<br><img src="https://www.wangbase.com/blogimg/asset/201903/bg2019032506.png" class="" width="220" height="320" title="固定px的grid示例"></p>
 <p>平分宽度|高度的可以设置== 百分比 ==，或者设置1fr-类似flex，结合repeat函数则为</p>
-<ul>
-<li><p>repeat(循环次数，循环体)</p>
-<ul>
-<li><p>参数：循环体可以为特殊关键字n+fr，与flex类似。</p>
-<blockquote>
-<p>循环次数可为特殊关键字auto-fill，表示使用循环体格式自动填充满整个grid布局 。</p>
-</blockquote>
-  <figure class="highlight plain"><figcaption><span>repeat函数示例</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">grid-template-rows:repeat(3,1fr);</span><br><span class="line">grid-template-rows:repeat(3,33%);</span><br></pre></td></tr></table></figure>
-  >特殊的循环体
-  <figure class="highlight plain"><figcaption><span>repeat函数特殊循环体示例</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grid-template-columns: repeat(2, 100px 20px 80px);</span><br></pre></td></tr></table></figure>
+<h4 id="repeat-循环次数，循环体"><a href="#repeat-循环次数，循环体" class="headerlink" title="repeat(循环次数，循环体)"></a>repeat(循环次数，循环体)</h4><pre><code>参数：循环体可以为特殊关键字n+fr，与flex类似。
+   &gt;循环次数可为特殊关键字auto-fill，表示使用循环体格式自动填充满整个grid布局 。
 
-  <img src="https://www.wangbase.com/blogimg/asset/201903/bg2019032507.png" class="" title="特殊循环体的repeat示例">
-</li>
-</ul>
-</li>
-<li><p>minmax(min,max)函数</p>
-<ul>
-<li>参数：最大最小值，可以为px，fr，百分比</li>
-<li>定义一个范围值，让宽高在这之中自适应<figure class="highlight plain"><figcaption><span>minmax函数示例</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">grid-template-rows:minmax(100px,1fr);</span><br><span class="line">grid-template-rows:minmax(100px,33%);</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-</li>
-<li><p>auto关键字</p>
-<blockquote>
+   &lt;figure class=&quot;highlight plain&quot;&gt;&lt;figcaption&gt;&lt;span&gt;repeat函数示例&lt;/span&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;grid-template-rows:repeat(3,1fr);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;grid-template-rows:repeat(3,33%);&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+   &gt;特殊的循环体
+   &lt;figure class=&quot;highlight plain&quot;&gt;&lt;figcaption&gt;&lt;span&gt;repeat函数特殊循环体示例&lt;/span&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;grid-template-columns: repeat(2, 100px 20px 80px);&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+
+   &lt;img src=&quot;https://www.wangbase.com/blogimg/asset/201903/bg2019032507.png&quot; class=&quot;&quot; title=&quot;特殊循环体的repeat示例&quot;&gt;</code></pre><h4 id="minmax-min-max-函数"><a href="#minmax-min-max-函数" class="headerlink" title="minmax(min,max)函数"></a>minmax(min,max)函数</h4><pre><code>#### 参数：最大最小值，可以为px，fr，百分比
+#### 定义一个范围值，让宽高在这之中自适应
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;figcaption&gt;&lt;span&gt;minmax函数示例&lt;/span&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;grid-template-rows:minmax(100px,1fr);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;grid-template-rows:minmax(100px,33%);&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;</code></pre><h4 id="auto关键字"><a href="#auto关键字" class="headerlink" title="auto关键字"></a>auto关键字</h4><blockquote>
 <p>可在宽高定义时，与百分比，px，fr混用</p>
 </blockquote>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grid-template-columns: 100px auto 100px;</span><br></pre></td></tr></table></figure>
 >表示grid布局中，左右为100px，中间为自适应宽度
-</li>
-<li><p>auto-fill关键字</p>
-<blockquote>
+
+<h4 id="auto-fill关键字"><a href="#auto-fill关键字" class="headerlink" title="auto-fill关键字"></a>auto-fill关键字</h4><blockquote>
 <p>可以与百分比，fr，px混用，还可以代替repeat函数的循环次数，让他自适应，并换行，类似flex布局的</p>
 </blockquote>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">flex-wrap:wrap;</span><br></pre></td></tr></table></figure>
 >自动换行：
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">display: grid;</span><br><span class="line">grid-template-columns: repeat(auto-fill, 100px);</span><br></pre></td></tr></table></figure>
-<img src="https://www.wangbase.com/blogimg/asset/201903/bg2019032508.png" class="" title="auto-fill关键字 + repeat函数自动换行示例">
-</li>
-<li><p>布局实用示例</p>
+<img src="https://www.wangbase.com/blogimg/asset/201903/bg2019032508.png" class="" title="auto-fill关键字+repeat函数自动换行示例">
+
+<h4 id="布局实用示例"><a href="#布局实用示例" class="headerlink" title="布局实用示例"></a>布局实用示例</h4><pre><code>### 3:7两栏式布局
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;display: grid;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;grid-template-columns: 70% 30%;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+### 十二网格布局
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;display: grid;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;grid-template-columns: repeat(12,1fr);&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;</code></pre></blockquote>
+
+<h3 id="grid-row-gap-amp-amp-grid-column-gap"><a href="#grid-row-gap-amp-amp-grid-column-gap" class="headerlink" title="grid-row-gap&amp;&amp;grid-column-gap"></a>grid-row-gap&amp;&amp;grid-column-gap</h3><blockquote>
+<p>两者可以结合写成```css3 gird-gap:<grid-row-gap> <grid-column-gap><br>简写成gird-gap时，可以只写一个值，表示行间距与列间距相同</p>
+</blockquote>
+<figure class="highlight plain"><figcaption><span>example</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grid-gap: 20px</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>新标准省略grid-字符，简写为</p>
+</blockquote>
+<figure class="highlight plain"><figcaption><span>example</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gap: 20px</span><br></pre></td></tr></table></figure>
+
+<img src="https://www.wangbase.com/blogimg/asset/201903/bg2019032511.png" class="" width="280" title="gap间距为20px示例">
+
+<h3 id="grid-auto-flow"><a href="#grid-auto-flow" class="headerlink" title="grid-auto-flow"></a>grid-auto-flow</h3><blockquote>
+<p>规定grid布局的排列顺序，可选参数：row/column，默认为row，即优先从左到右的依次排列<br>可选参数row dense/column dense规定除了指定行列的布局外，其他grid单元的布局顺序</p>
+</blockquote>
+<figure class="highlight plain"><figcaption><span>container的css</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">display:grid;</span><br><span class="line">grid-template-rows:repeat(3,100px);</span><br><span class="line">grid-template-columns:repeat(3,100px);</span><br><span class="line">grid-auto-flow:row dense;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>指定grid-cell的列宽，左闭右开原则</p>
+</blockquote>
+<figure class="highlight plain"><figcaption><span>指定列宽的grid-cell的css</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">grid-column-start:1;</span><br><span class="line">grid-column-end:3;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>grid-column-start/end设置的数字单位为grid-cell面积，左闭右开<br>结果如下</p>
+</blockquote>
+<img src="https://www.wangbase.com/blogimg/asset/201903/bg2019032514.png" class="" width="280" title="指定单元格，其余row
+布局示例">
+
+<blockquote>
+<p>如果单独设置grid的大小要注意不要超过grid定义的gird-cell个数，否则自适应<br><img src="/images/overgridnumber.PNG" alt="over-grid-number"></p>
+</blockquote>
+<p class="image-caption">自定义grid-cell范围超过初始化定义图</p>
+上图中7、8、9因为超过了初始设置的grid-cell范围，而自适应
+**解决办法**：补足不足grid个数或调整布局**增加初始设置的行列即可**
+
+<h3 id="align-items-amp-amp-justliy-items-amp-amp-place-items"><a href="#align-items-amp-amp-justliy-items-amp-amp-place-items" class="headerlink" title="align-items&amp;&amp;justliy-items&amp;&amp;place-items"></a>align-items&amp;&amp;justliy-items&amp;&amp;place-items</h3><blockquote>
+<p>规定grid-cell的位置，align表示行高、justlify表示列宽<br>可选属性：start|center|end|stretch——靠左|居中|靠右|自动填满<br>place-items是简写形式</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">place-items:&lt;align-items&gt; &lt;justify-items&gt;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>如果不写第二个参数则默认两个属性值相同</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">align-items:center;</span><br><span class="line">justify-items:strech;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>可简写为</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">place-items:&lt;align-items&gt; &lt;justify-items&gt;</span><br><span class="line">place-items:center stretch;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>如下图所示<br><img src="/images/center-stretch.PNG" alt="place-items"></p>
+</blockquote>
+<p class="image-caption">place-items结果图</p>
+
+<h3 id="align-self-amp-amp-justify-self-amp-amp-place-self"><a href="#align-self-amp-amp-justify-self-amp-amp-place-self" class="headerlink" title="align-self&amp;&amp;justify-self&amp;&amp;place-self"></a>align-self&amp;&amp;justify-self&amp;&amp;place-self</h3><blockquote>
+<p>与align|justify|place-items用法完全一致，但只作用于单个grid-cell</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">.item-1 &#123;</span><br><span class="line">  place-self:stretch center;</span><br><span class="line">  background-color: #ef342a;</span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
+
+<p><img src="/images/place-self.PNG" alt="place-self"></p>
+<p class="image-caption">place-self单个grid-cell作用域</p>
+
+<h3 id="align-content-amp-amp-justify-content-amp-amp-place-content"><a href="#align-content-amp-amp-justify-content-amp-amp-place-content" class="headerlink" title="align-content&amp;&amp;justify-content&amp;&amp;place-content"></a>align-content&amp;&amp;justify-content&amp;&amp;place-content</h3><blockquote>
+<p>规定整个项目在grid-container中的位置<br>可选属性：start|center|space-between|space-evenly|space-around——between间隔在项目之间<br>    <div style="display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:160px;grid-auto-rows:0;gap:10px"><br>        <div style="grid-column-start:1;grid-row-start:1;"><img src="https://www.wangbase.com/blogimg/asset/201903/bg2019032522.png" class="" title="space-around"></div><br>        <div style="grid-column-start:2;grid-row-start:1;"><img src="https://www.wangbase.com/blogimg/asset/201903/bg2019032523.png" class="" title="space-between"></div><br>        <div style="grid-column-start:3;grid-row-start:1;"><img src="https://www.wangbase.com/blogimg/asset/201903/bg2019032524.png" class="" title="space-evenly"></div><br>    </div></p>
+</blockquote>
+<h3 id="grid-auto-row-amp-amp-grid-auto-column"><a href="#grid-auto-row-amp-amp-grid-auto-column" class="headerlink" title="grid-auto-row&amp;&amp;grid-auto-column"></a>grid-auto-row&amp;&amp;grid-auto-column</h3><blockquote>
+<p>规定如果定义的grid-cell不在初始定义的grid-cell数量之内，扩展的grid-cell的列宽、行高</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">display: grid;</span><br><span class="line">grid-template-columns: 100px 100px 100px;</span><br><span class="line">grid-template-rows: 100px 100px 100px;</span><br><span class="line">grid-auto-rows: 50px;</span><br></pre></td></tr></table></figure>
+
+<img src="https://www.wangbase.com/blogimg/asset/201903/bg2019032525.png" class="" width="280" title="grid-auto-row为50px">
+
+<h3 id="grid-template-amp-amp-grid"><a href="#grid-template-amp-amp-grid" class="headerlink" title="grid-template&amp;&amp;grid"></a>grid-template&amp;&amp;grid</h3><blockquote>
 <ul>
-<li>3:7两栏式布局<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">display: grid;</span><br><span class="line">grid-template-columns: 70% 30%;</span><br></pre></td></tr></table></figure></li>
-<li>十二网格布局<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">display: grid;</span><br><span class="line">grid-template-columns: repeat(12,1fr);</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-</li>
+<li>grid-template属性是grid-template-columns、grid-template-rows和grid-template-areas这三个属性的合并简写形式。</li>
 </ul>
 </blockquote>
-
-<ul>
-<li>display：可选参数 gird/inline-grid<blockquote>
-<p>当参数为：gird时为块级元素、inline-grid则为行内元素</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">grid-template:&lt;grid-template-rows&gt; &lt;grid-template-area&gt; &#x2F; &lt;grid-template-columns&gt;</span><br><span class="line">example</span><br><span class="line">grid-template: [header-left] &quot;head head&quot; 30px [header-right]</span><br><span class="line">                [main-left]   &quot;nav  main&quot; 1fr  [main-right]</span><br><span class="line">                [footer-left] &quot;nav  foot&quot; 30px [footer-right]</span><br><span class="line">                &#x2F; 120px 1fr;</span><br></pre></td></tr></table></figure>                
+<blockquote>
+<p>等同于</p>
 </blockquote>
-</li>
-</ul>
-<p>+</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">grid-template-rows: [header-left] 30px [header-right main-left] 1fr [main-right footer-left] 30px [footer-right];</span><br><span class="line">grid-template-columns: 120px 1fr;</span><br><span class="line">grid-template-areas: &quot;head head&quot; &quot;nav main&quot; &quot;nav foot&quot;;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>结果图<br><img src="/images/grid-template.PNG" alt="grid-template"></p>
+</blockquote>
+<p class="image-caption">grid-template简写结果图</p>
 
+<blockquote>
+<ul>
+<li>grid属性是grid-template-rows、grid-template-columns、grid-template-areas、 grid-auto-rows、grid-auto-columns、grid-auto-flow这六个属性的合并简写形式。<br>从易读易写的角度考虑，还是建议不要合并属性，所以这里就不详细介绍这个属性了。</li>
+</ul>
+</blockquote>
+<h3 id="grid-column-start-end-amp-amp-grid-row-start-end"><a href="#grid-column-start-end-amp-amp-grid-row-start-end" class="headerlink" title="grid-column-start|end&amp;&amp;grid-row-start|end"></a>grid-column-start|end&amp;&amp;grid-row-start|end</h3><blockquote>
+<ul>
+<li>属性值可为数字，与grid-auto-flow属性结合可以实现特定布局</li>
+</ul>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">grid-column-start: 1;</span><br><span class="line">grid-column-end: 3;</span><br><span class="line">grid-row-start: 2;</span><br><span class="line">grid-row-end: 4;</span><br></pre></td></tr></table></figure>
+
+<img src="https://www.wangbase.com/blogimg/asset/201903/bg2019032527.png" class="" width="280" title="数字方式定义grid-cell起始位置">
+<blockquote>
+<ul>
+<li>span参数结合使用，表示跨过多少个grid-cell，即可用在start，也可用在end</li>
+</ul>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grid-column-end: span 2;</span><br></pre></td></tr></table></figure>
+
+<img src="https://www.wangbase.com/blogimg/asset/201903/bg2019032528.png" class="" width="280" title="数字方式定义grid-cell起始位置">
+<blockquote>
+<ul>
+<li>如果因为设置属性产生了重叠，可通过设置z-index调整</li>
+</ul>
+</blockquote>
+<h3 id="grid-column-amp-amp-grid-row"><a href="#grid-column-amp-amp-grid-row" class="headerlink" title="grid-column&amp;&amp;grid-row"></a>grid-column&amp;&amp;grid-row</h3><blockquote>
+<ul>
+<li>是grid-row-start|end和grid-column-start|end的简写</li>
+</ul>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">grid-row:&lt;grid-row-start&gt; &lt;grid-row-end&gt;;</span><br><span class="line">grid-columns:&lt;grid-columns-start&gt; &lt;grid-columns-end&gt;;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<ul>
+<li>可以与span（宽行）联合使用</li>
+</ul>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">  background: #b03532;</span><br><span class="line">  grid-column: 1 &#x2F; 3;</span><br><span class="line">  grid-row: 1 &#x2F; 3;</span><br><span class="line">&#x2F;* 等同于 *&#x2F;</span><br><span class="line">  background: #b03532;</span><br><span class="line">  grid-column: 1 &#x2F; span 2;</span><br><span class="line">  grid-row: 1 &#x2F; span 2;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<ul>
+<li>可以不写/end，默认是跨了一行</li>
+</ul>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">grid-column: 1;</span><br><span class="line">grid-row: 1;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>上面代码表示第一个grid<br><strong>简写时不可直接写span+n而不规定起/始位置</strong></p>
+</blockquote>
+<h3 id="grid-area"><a href="#grid-area" class="headerlink" title="grid-area"></a>grid-area</h3><blockquote>
+<ul>
+<li>与grid-template-area结合使用，指定grid-cell位置</li>
+</ul>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">.container&#123;</span><br><span class="line">  display: grid;</span><br><span class="line">  grid-template-columns: 100px 100px 100px;</span><br><span class="line">  grid-template-rows: 100px 100px 100px;</span><br><span class="line">  grid-template-areas: &#39;a b c&#39;</span><br><span class="line">                     &#39;d e f&#39;</span><br><span class="line">                     &#39;g h i&#39;;</span><br><span class="line">&#125;</span><br><span class="line">.item-1 &#123;</span><br><span class="line">  background-color: #ef342a;</span><br><span class="line">  grid-area: e;</span><br><span class="line">&#125;       </span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>如下图</p>
+</blockquote>
+<img src="https://www.wangbase.com/blogimg/asset/201903/bg2019032530.png" class="" width="280" title="grid-area指定grid-cell位置">
+
+<blockquote>
+<ul>
+<li>是grid-row|column-start|end的简写</li>
+</ul>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">grid-area: &lt;row-start&gt; &#x2F; &lt;column-start&gt; &#x2F; &lt;row-end&gt; &#x2F; &lt;column-end&gt;;</span><br><span class="line">example</span><br><span class="line">gird:1&#x2F;1&#x2F;3&#x2F;3</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>如下图所示，简写结果 <strong>不支持span结合使用</strong><br><img src="/images/grid-area.PNG" alt="grid-area简写"></p>
+</blockquote>
+<p class="image-caption">gird-area简写</p>
       
     </div>
     
@@ -462,6 +602,22 @@
       
       
 
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/05/16/flex%E5%B8%83%E5%B1%80/" rel="prev" title="flex布局">
+                flex布局 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
       
 
       
@@ -535,7 +691,7 @@
               
                 <a href="/archives/%20%7C%7C%20archive">
               
-                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-count">2</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -590,7 +746,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#简介"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#属性介绍"><span class="nav-number">2.</span> <span class="nav-text">属性介绍</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#简介"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#浏览器支持"><span class="nav-number">2.</span> <span class="nav-text">浏览器支持</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#属性介绍"><span class="nav-number">3.</span> <span class="nav-text">属性介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#display"><span class="nav-number">3.1.</span> <span class="nav-text">display</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#grid-template-columns"><span class="nav-number">3.2.</span> <span class="nav-text">grid-template-columns</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#grid-template-rows"><span class="nav-number">3.3.</span> <span class="nav-text">grid-template-rows</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#repeat-循环次数，循环体"><span class="nav-number">3.3.1.</span> <span class="nav-text">repeat(循环次数，循环体)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#minmax-min-max-函数"><span class="nav-number">3.3.2.</span> <span class="nav-text">minmax(min,max)函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#auto关键字"><span class="nav-number">3.3.3.</span> <span class="nav-text">auto关键字</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#auto-fill关键字"><span class="nav-number">3.3.4.</span> <span class="nav-text">auto-fill关键字</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#布局实用示例"><span class="nav-number">3.3.5.</span> <span class="nav-text">布局实用示例</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#grid-row-gap-amp-amp-grid-column-gap"><span class="nav-number">3.4.</span> <span class="nav-text">grid-row-gap&amp;&amp;grid-column-gap</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#grid-auto-flow"><span class="nav-number">3.5.</span> <span class="nav-text">grid-auto-flow</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#align-items-amp-amp-justliy-items-amp-amp-place-items"><span class="nav-number">3.6.</span> <span class="nav-text">align-items&amp;&amp;justliy-items&amp;&amp;place-items</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#align-self-amp-amp-justify-self-amp-amp-place-self"><span class="nav-number">3.7.</span> <span class="nav-text">align-self&amp;&amp;justify-self&amp;&amp;place-self</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#align-content-amp-amp-justify-content-amp-amp-place-content"><span class="nav-number">3.8.</span> <span class="nav-text">align-content&amp;&amp;justify-content&amp;&amp;place-content</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#grid-auto-row-amp-amp-grid-auto-column"><span class="nav-number">3.9.</span> <span class="nav-text">grid-auto-row&amp;&amp;grid-auto-column</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#grid-template-amp-amp-grid"><span class="nav-number">3.10.</span> <span class="nav-text">grid-template&amp;&amp;grid</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#grid-column-start-end-amp-amp-grid-row-start-end"><span class="nav-number">3.11.</span> <span class="nav-text">grid-column-start|end&amp;&amp;grid-row-start|end</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#grid-column-amp-amp-grid-row"><span class="nav-number">3.12.</span> <span class="nav-text">grid-column&amp;&amp;grid-row</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#grid-area"><span class="nav-number">3.13.</span> <span class="nav-text">grid-area</span></a></li></ol></li></ol></div>
             
 
           </div>
