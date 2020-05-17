@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="css布局,css," />
 
 
 
@@ -79,17 +79,42 @@
 
 
 
-<meta name="description" content="人生有酒需尽欢，莫使金樽空对月">
+<meta name="description" content="简介感谢阮一峰先生的分享flex-examples 仅供个人学习2009年，W3C 提出了一种新的方案—-Flex 布局，可以简便、完整、响应式地实现各种页面布局。目前，它已经得到了所有浏览器的支持，这意味着，现在就能很安全地使用这项功能。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="flex布局">
 <meta property="og:url" content="http://yoursite.com/2020/05/16/flex%E5%B8%83%E5%B1%80/index.html">
 <meta property="og:site_name" content="Mr.H 的个人博客">
-<meta property="og:description" content="人生有酒需尽欢，莫使金樽空对月">
+<meta property="og:description" content="简介感谢阮一峰先生的分享flex-examples 仅供个人学习2009年，W3C 提出了一种新的方案—-Flex 布局，可以简便、完整、响应式地实现各种页面布局。目前，它已经得到了所有浏览器的支持，这意味着，现在就能很安全地使用这项功能。">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://www.ruanyifeng.com/blogimg/asset/2015/bg2015071004.png">
+<meta property="og:image" content="http://www.ruanyifeng.com/blogimg/asset/2015/bg2015071003.jpg">
+<meta property="og:image" content="http://www.ruanyifeng.com/blogimg/asset/2015/bg2015071005.png">
+<meta property="og:image" content="http://www.ruanyifeng.com/blogimg/asset/2015/bg2015071007.png">
+<meta property="og:image" content="http://www.ruanyifeng.com/blogimg/asset/2015/bg2015071008.jpg">
+<meta property="og:image" content="http://www.ruanyifeng.com/blogimg/asset/2015/bg2015071009.jpg">
+<meta property="og:image" content="http://yoursite.com/images/flex/flex-start.PNG">
+<meta property="og:image" content="http://yoursite.com/images/flex/flex-end.PNG">
+<meta property="og:image" content="http://yoursite.com/images/flex/center.PNG">
+<meta property="og:image" content="http://yoursite.com/images/flex/space-between.PNG">
+<meta property="og:image" content="http://yoursite.com/images/flex/space-around.PNG">
+<meta property="og:image" content="http://yoursite.com/images/flex/ai-flex-start.PNG">
+<meta property="og:image" content="http://yoursite.com/images/flex/ai-flex-end.PNG">
+<meta property="og:image" content="http://yoursite.com/images/flex/ai-center.PNG">
+<meta property="og:image" content="http://yoursite.com/images/flex/ai-stretch.PNG">
+<meta property="og:image" content="http://yoursite.com/images/flex/ai-base-line.PNG">
+<meta property="og:image" content="http://www.ruanyifeng.com/blogimg/asset/2015/bg2015071012.png">
+<meta property="og:image" content="http://yoursite.com/images/flex/fi-order.PNG">
+<meta property="og:image" content="http://yoursite.com/images/flex/fi-flex-grow.PNG">
+<meta property="og:image" content="http://yoursite.com/images/flex/fi-flex-shrink.PNG">
+<meta property="og:image" content="http://yoursite.com/images/flex/fi-flex-basis.PNG">
+<meta property="og:image" content="http://yoursite.com/images/flex/fi-align-self.PNG">
 <meta property="article:published_time" content="2020-05-16T10:07:12.000Z">
-<meta property="article:modified_time" content="2020-05-16T10:07:14.000Z">
+<meta property="article:modified_time" content="2020-05-17T09:26:42.000Z">
 <meta property="article:author" content="Mr.H">
+<meta property="article:tag" content="css布局">
+<meta property="article:tag" content="css">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://www.ruanyifeng.com/blogimg/asset/2015/bg2015071004.png">
 
 
 
@@ -272,6 +297,50 @@
           </span>
 
           
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/css/" itemprop="url" rel="index">
+                    <span itemprop="name">css</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/css/css%E5%B8%83%E5%B1%80/" itemprop="url" rel="index">
+                    <span itemprop="name">css布局</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/" itemprop="url" rel="index">
+                    <span itemprop="name">前端开发</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -299,7 +368,91 @@
       
 
       
-        
+        <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p><strong>感谢阮一峰先生的分享<a href="http://www.ruanyifeng.com/blog/2015/07/flex-examples.html" target="_blank" rel="noopener">flex-examples</a> 仅供个人学习</strong><br>2009年，W3C 提出了一种新的方案—-Flex 布局，可以简便、完整、响应式地实现各种页面布局。目前，它已经得到了所有浏览器的支持，这意味着，现在就能很安全地使用这项功能。<a id="more"></a></p>
+<blockquote>
+<ul>
+<li>Flex 是 Flexible Box 的缩写，意为”弹性布局”，用来为盒状模型提供最大的灵活性。<br>任何一个容器都可以指定为 Flex 布局，行内元素也可以使用flex布局，跳帧位置。</li>
+</ul>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;*块级元素*&#x2F;</span><br><span class="line">display: flex;</span><br><span class="line">&#x2F;*行内元素*&#x2F;</span><br><span class="line">display: inline-flex;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<ul>
+<li>Webkit 内核的浏览器，必须加上-webkit前缀。</li>
+</ul>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">.box&#123;</span><br><span class="line">  display: -webkit-flex; &#x2F;* Safari *&#x2F;</span><br><span class="line">  display: flex;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong><em>注意，设为 Flex 布局以后，子元素的float、clear和vertical-align属性将失效。</em></strong></p>
+<blockquote>
+<ul>
+<li>flex布局的元素，称为flex container，他的所有子元素成为flex-items项目。</li>
+</ul>
+</blockquote>
+<img src="http://www.ruanyifeng.com/blogimg/asset/2015/bg2015071004.png" class="" title="flex-container">
+<blockquote>
+<p>其中main-axis称为主轴，across-axis称为交叉轴，所有flex-item默认沿着主轴排列。单个项目占据的主轴|交叉轴空间叫做main-size|across-size</p>
+</blockquote>
+<h2 id="浏览器支持"><a href="#浏览器支持" class="headerlink" title="浏览器支持"></a>浏览器支持</h2><img src="http://www.ruanyifeng.com/blogimg/asset/2015/bg2015071003.jpg" class="" title="browser Support">
+
+<h2 id="属性介绍"><a href="#属性介绍" class="headerlink" title="属性介绍"></a>属性介绍</h2><h3 id="flex-container属性"><a href="#flex-container属性" class="headerlink" title="flex-container属性"></a>flex-container属性</h3><h4 id="flex-direction"><a href="#flex-direction" class="headerlink" title="flex-direction"></a>flex-direction</h4><blockquote><p>决定主轴的方向，即项目的排列方向</p>
+<ul>
+<li>row（默认值）：主轴为水平方向，起点在左端。</li>
+<li>row-reverse：主轴为水平方向，起点在右端。</li>
+<li>column：主轴为垂直方向，起点在上沿。</li>
+<li>column-reverse：主轴为垂直方向，起点在下沿。</li>
+</ul>
+<footer><strong>可选属性</strong></footer></blockquote>
+
+<img src="http://www.ruanyifeng.com/blogimg/asset/2015/bg2015071005.png" class="" title="flex-dirction布局样式">
+
+<h4 id="flex-wrap"><a href="#flex-wrap" class="headerlink" title="flex-wrap"></a>flex-wrap</h4><blockquote>
+<p>默认情况下所有flex-item都排列在主轴上，此属性规定超过了主轴长度后的项目排列方式<br>可选属性：nowrap（默认）|wrap换行|wrap-reverse换行并且换行的flex-item排列在上面<br>如下图所示<br>    <div style="display:flex;align-items:center;justify-content:center;"><br>        <div style="flex:1;"><img src="http://www.ruanyifeng.com/blogimg/asset/2015/bg2015071007.png" class="" title="flex-wrap:nowrap布局样式"></div><br>        <div style="flex:1;"><img src="http://www.ruanyifeng.com/blogimg/asset/2015/bg2015071008.jpg" class="" title="flex-wrap:wrap布局样式"></div><br>        <div style="flex:1;"><img src="http://www.ruanyifeng.com/blogimg/asset/2015/bg2015071009.jpg" class="" title="flex-wrap:wrap-reverse布局样式"></div><br>    </div></p>
+</blockquote>
+<h4 id="flex-flow"><a href="#flex-flow" class="headerlink" title="flex-flow"></a>flex-flow</h4><blockquote>
+<p>是flex-direction和flex-wrap的简写形式</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">flex-flow:&lt;flex-direction&gt; || &lt;flex-wrap&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="justify-content"><a href="#justify-content" class="headerlink" title="justify-content"></a>justify-content</h4><blockquote>
+<p>定义了flex-item在主轴上的排列位置<br>可选属性：flex-start（默认）左对齐|flex-end右对齐|center居中|space-between两端对齐，项目间隔相等|space-around项目间隔相等，项目直接间隔是项目与flex-container边框间隔的2倍<br>    <div style="display:flex;align-items:center;justify-content:center;"><br>        <div style="flex:1;"><img src="/images/flex/flex-start.PNG" alt="flex-start"><br>            <p class="image-caption">flex-start</p><br>        </div><br>        <div style="flex:1;"><img src="/images/flex/flex-end.PNG" alt="flex-start"><br>            <p class="image-caption">flex-end</p><br>        </div><br>        <div style="flex:1;"><img src="/images/flex/center.PNG" alt="flex-start"><br>            <p class="image-caption">cener</p><br>        </div><br>    </div><br>    <div style="display:flex;align-items:center;justify-content:center;"><br>        <div style="flex:1;"><img src="/images/flex/space-between.PNG" alt="flex-start"><br>            <p class="image-caption">space-between</p><br>        </div><br>        <div style="flex:1;"><img src="/images/flex/space-around.PNG" alt="flex-start"><br>            <p class="image-caption">space-around</p><br>        </div><br>    </div></p>
+</blockquote>
+<h4 id="align-items"><a href="#align-items" class="headerlink" title="align-items"></a>align-items</h4><blockquote>
+<p>定义了flex-item在交叉轴上的排列位置<br>可选属性：flex-start对齐交叉轴顶点|flex-end对齐交叉轴终点|center对齐交叉轴中心|stretch（默认）拉升高度至交叉轴高度|baseline所有的flex-items的第一行文字基线<br>    <div style="display:flex;align-items:center;justify-content:center;"><br>        <div style="flex:1;"><img src="/images/flex/ai-flex-start.PNG" alt="flex-start"><br>            <p class="image-caption">align-items:flex-start</p><br>        </div><br>        <div style="flex:1;"><img src="/images/flex/ai-flex-end.PNG" alt="flex-start"><br>            <p class="image-caption">align-items:flex-end</p><br>        </div><br>        <div style="flex:1;"><img src="/images/flex/ai-center.PNG" alt="flex-start"><br>            <p class="image-caption">align-items:cener</p><br>        </div><br>    </div><br>    <div style="display:flex;align-items:center;justify-content:center;"><br>        <div style="flex:1;"><img src="/images/flex/ai-stretch.PNG" alt="flex-start"><br>            <p class="image-caption">align-items:stretch</p><br>        </div><br>        <div style="flex:1;"><img src="/images/flex/ai-base-line.PNG" alt="flex-start"><br>            <p class="image-caption">align-items:baseline</p><br>        </div><br>    </div></p>
+</blockquote>
+<h4 id="align-content"><a href="#align-content" class="headerlink" title="align-content"></a>align-content</h4><blockquote>
+<p>定义多轴线（多行？）的对齐方式，单一轴线不起作用<br>可选参数：flex-start|flex-end|center|space-bewteen|stretch|around</p>
+</blockquote>
+<img src="http://www.ruanyifeng.com/blogimg/asset/2015/bg2015071012.png" class="" width="280" title="align-content样式图">
+
+<h3 id="flex-items属性"><a href="#flex-items属性" class="headerlink" title="flex-items属性"></a>flex-items属性</h3><h4 id="order"><a href="#order" class="headerlink" title="order"></a>order</h4><blockquote>
+<p>设置flex-item的显示位置，数字越小越靠前，类似于grid布局的grid-column|row-start|end属性设置<br><img src="/images/flex/fi-order.PNG" alt="browser-spport"></p>
+</blockquote>
+<p class="image-caption">设置第四个order数值最小</p>
+
+<h4 id="flex-grow"><a href="#flex-grow" class="headerlink" title="flex-grow"></a>flex-grow</h4><blockquote>
+<p>当以当主轴空间大于实际需要时，放大的比例，默认为0，即不放大<br>如果其他属性设置为1，当前设置为2，则当前项目是其他项目的两倍main-sie<br><img src="/images/flex/fi-flex-grow.PNG" alt="browser-spport"></p>
+</blockquote>
+<p class="image-caption">flex-grow:2的flex-item</p>
+
+<h4 id="flex-shrink"><a href="#flex-shrink" class="headerlink" title="flex-shrink"></a>flex-shrink</h4><blockquote>
+<p>定义当主轴空间不足时，flex-item的缩小比例<br>如果设置属性值为0，其他flex-item属性值为1则当空间不足时，不会缩小此flex-item<br><img src="/images/flex/fi-flex-shrink.PNG" alt="browser-spport"></p>
+</blockquote>
+<p class="image-caption">属性flex-shrink:0的flex-item不会缩小</p>
+
+<h4 id="flex-basis"><a href="#flex-basis" class="headerlink" title="flex-basis"></a>flex-basis</h4><blockquote>
+<p>规定再分配多余的空间之前，flex-item占据main-size的大小，浏览器根据占据的main-size计算是否长度充足<br>默认为auto，及项目本来大小，设置大小：n+px，flex-item将始终占据指定大小main-size</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;*默认*&#x2F;</span><br><span class="line">flex-basis:auto;</span><br><span class="line">&#x2F;*自定义*&#x2F;</span><br><span class="line">flex-basis:300px;</span><br></pre></td></tr></table></figure>
+<p><img src="/images/flex/fi-flex-basis.PNG" alt="browser-spport"></p>
+<p class="image-caption">默认值auto，即为原本main-size</p>
+
+<h4 id="flex"><a href="#flex" class="headerlink" title="flex"></a>flex</h4><blockquote>
+<p>是flex-grow&amp;flex-shrink&amp;flex-basis的简写形式<br>特殊样例 auto = 1 1 auto &amp;&amp; none = 0 0 auto</p>
+</blockquote>
+<h4 id="align-self"><a href="#align-self" class="headerlink" title="align-self"></a>align-self</h4><blockquote>
+<p>默认是auto，即继承inherit父类即align-items的设置，但是可以单独设置样式来覆盖父类样式，没有父元素则属性值为stretch<br>可选属性值与align-items相同，用法相同，作用域只限于当前的flex-item<br><img src="/images/flex/fi-align-self.PNG" alt="browser-spport"></p>
+</blockquote>
+<p class="image-caption">单独设置align-self:flex-end属性图</p>
       
     </div>
     
@@ -313,6 +466,14 @@
     
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/css%E5%B8%83%E5%B1%80/" rel="tag"># css布局</a>
+          
+            <a href="/tags/css/" rel="tag"># css</a>
+          
+        </div>
       
 
       
@@ -383,8 +544,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -444,6 +614,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#简介"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#浏览器支持"><span class="nav-number">2.</span> <span class="nav-text">浏览器支持</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#属性介绍"><span class="nav-number">3.</span> <span class="nav-text">属性介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#flex-container属性"><span class="nav-number">3.1.</span> <span class="nav-text">flex-container属性</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#flex-direction"><span class="nav-number">3.1.1.</span> <span class="nav-text">flex-direction</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#flex-wrap"><span class="nav-number">3.1.2.</span> <span class="nav-text">flex-wrap</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#flex-flow"><span class="nav-number">3.1.3.</span> <span class="nav-text">flex-flow</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#justify-content"><span class="nav-number">3.1.4.</span> <span class="nav-text">justify-content</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#align-items"><span class="nav-number">3.1.5.</span> <span class="nav-text">align-items</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#align-content"><span class="nav-number">3.1.6.</span> <span class="nav-text">align-content</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#flex-items属性"><span class="nav-number">3.2.</span> <span class="nav-text">flex-items属性</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#order"><span class="nav-number">3.2.1.</span> <span class="nav-text">order</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#flex-grow"><span class="nav-number">3.2.2.</span> <span class="nav-text">flex-grow</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#flex-shrink"><span class="nav-number">3.2.3.</span> <span class="nav-text">flex-shrink</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#flex-basis"><span class="nav-number">3.2.4.</span> <span class="nav-text">flex-basis</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#flex"><span class="nav-number">3.2.5.</span> <span class="nav-text">flex</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#align-self"><span class="nav-number">3.2.6.</span> <span class="nav-text">align-self</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
