@@ -3,11 +3,11 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: XIXI
-subtitle: ''
-description: ''
+title: Mr.H 的个人博客
+subtitle: 'ambition'
+description: '人生有酒需尽欢，莫使金樽空对月'
 keywords:
-author: John Doe
+author: Mr.H
 language: en
 timezone: ''
 
@@ -100,4 +100,4 @@ theme: hexo-theme-next
 deploy:
   type: git
   repo: https://hyong1232:hy498015507.@github.com/hyong1232/hyong1232.github.io.git
-  message: '静态博客第一次提交'
+  message: ''
