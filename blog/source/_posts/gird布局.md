@@ -112,7 +112,8 @@ grid-template-columns: repeat(auto-fill, 100px);
 {% endblockquote %}
 
 ### grid-row-gap&&grid-column-gap
-> 两者可以结合写成```css3 gird-gap:<grid-row-gap> <grid-column-gap>
+> 两者可以结合写成
+{% codeblock lang:css3 %}gird-gap:<grid-row-gap> <grid-column-gap>{% endcodeblock %}
 > 简写成gird-gap时，可以只写一个值，表示行间距与列间距相同
 {% codeblock lang:css3 example %}
 grid-gap: 20px
