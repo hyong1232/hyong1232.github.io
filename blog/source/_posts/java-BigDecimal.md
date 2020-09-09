@@ -2,9 +2,9 @@
 title: java-BigDecimal
 date: 2020-09-07 21:58:12
 tags:
--[java,calculator]
+- [java,calculator]
 categories:
--[java]
+- [java]
 ---
 
 ## 简介
@@ -24,6 +24,7 @@ daytwo，Java中的大数据精确计算使用BigInteger和BigDecimal分别尽�
 |(BigDecimal a).setScale|(保留位数,舍入方式)|BigDecimal类方法|
 
 > BigDecimal类的舍入方式
+
 |类型|释义|
 |--- | ---|
 |BigDecimal.ROUND_HALF_EVEN|精确舍入|
@@ -33,7 +34,9 @@ daytwo，Java中的大数据精确计算使用BigInteger和BigDecimal分别尽�
 |BigDecimal.ROUND_UP|向大数字取整|
 |BigDecimal.ROUND_FLOOR|向下取整|
 |BigDecimal.ROUND_CEILING|向上取整|
-** 使用BigDecimal和BigInteger运算的结果是一个新的此类对象，使用int/doulb/...+Value()方法转换成不同数字变量
+
++ **使用BigDecimal和BigInteger运算的结果是一个新的此类对象，使用int/doulb/...+Value()方法转换成不同数字变量**
+
 ### BigInteger
 
 |常用api|参数|释义|
