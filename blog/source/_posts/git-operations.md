@@ -88,3 +88,6 @@ git commit -a
 #提交时显示所有diff信息
 git commit -v
 {% endcodeblock %}
+
+## 提交文件至远程仓库
+
