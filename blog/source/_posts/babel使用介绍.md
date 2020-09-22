@@ -75,3 +75,37 @@ npx babel es6dir -d outdir -s
 {% blockquote 阮一峰 http://www.ruanyifeng.com/blog/2013/01/javascript_source_map.html JavaScript Source Map 详解 %}
 sourceMap介绍
 {% endblockquote %}
+
+### @babel/node的使用
+> 安装了这个包就可以在命令行直接执行es6命令，或者直接运行es6文件
+{% codeblock lang:javascript %}
+//直接运行es6文件
+npx node-node es6.js
+{% endcodeblock %}
+
+### @babel/register
+> 这个包的作用是在文件中对通过require加载的文件进行实时转换
+{% codeblock lang:javascript %}
+//安装
+npm i @babel/register -D
+//使用（文件中）
+require('@babel/register');
+require('./es6.js')
+//上述代码会自动将加载的es6文件转换
+{% endcodeblock %}
+
++ 此包仅在运行时有效（适用于开发时使用）
++ 使用时要先加载此包，放在文件的顶部
++ 当前文件不会自动转换，只会转换require加载的文件（加一个钩子）
+
+### polyfill
+> babel默认不会转换es6新的api，只会转换语法（syntax）例如Iterator、Generator、Set、Map、Proxy、Reflect、Symbol、Promies等全局对象，及部分全局对象的工具方法例如Array.from()方法。使用polyfill可解决这个问题
+
+{% codeblock lang:javascript %}
+//安装(regenerator是转换generator的包)
+npm i core-js regenerator-runtime -D
+//使用（文件中）导入即可（require/import）
+import 'core-js'
+import 'regenerator-runtime/runtime'
+{% endcodeblock %}
+
