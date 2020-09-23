@@ -2,7 +2,10 @@
 title: Object.assign函数
 date: 2020-09-23 17:05:02
 tags:
+- [es6]
+- [Object操作]
 categories:
+- [es6,Object操作]
 ---
 
 ## 简介

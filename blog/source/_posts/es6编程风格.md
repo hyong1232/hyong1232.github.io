@@ -51,8 +51,12 @@ const obj = {
 {% endcodeblock %}
 
 2、尽量不要修改，静态化，修改使用Object.assign(target,...origin)（可以有多个源对象）修改。
-
-
+{% codeblock lang:javascript %}
+const target = {
+    one:'one'
+}
+Object.assign(target,{two:'two'})===>target={one:'one',two:'two'}
+{% endcodeblock %}
 
 3、如果定义时元素名称不确定，使用属性表达式，即‘[要运算的表达式]’作为元素名称。
 {% codeblock lang:javascript %}
