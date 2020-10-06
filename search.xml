@@ -1,0 +1,1291 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title>babel使用介绍</title>
+    <url>/2020/09/21/babel%E4%BD%BF%E7%94%A8%E4%BB%8B%E7%BB%8D/</url>
+    <content><![CDATA[<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>babel+webpack作为es6必用的工具，配置和使用较为麻烦，小节了一下常见的使用和配置。</p>
+<a id="more"></a>
+
+<h3 id="配置在项目中使用"><a href="#配置在项目中使用" class="headerlink" title="配置在项目中使用"></a>配置在项目中使用</h3><blockquote>
+<p>可使用配置文件.babelrc将常见配置写入文件中（放置在项目的根目录下），再webpack打包的过程中，会自动读取这个文件的配置，常见的配置写法如下:</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="string">"presets"</span>:[<span class="string">'es2015'</span>,<span class="string">'env'</span>,<span class="string">'stage-0'</span>],</span><br><span class="line">    <span class="string">"plugins"</span>:[<span class="string">'transform-runtime'</span>]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>.babelrc文件整个就是一个对象，在对象{}中配置相应的属性即可</li>
+<li>常用的presets规则以及转换插件需要自行下载（npm命令即可）</li>
+</ul>
+<p><strong>babel配置也可以在webpack的配置文件中配置，即在module下的rules数组对象的规则对象的use属性中添加options属性中添加即可</strong></p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="built_in">module</span>:&#123;</span><br><span class="line">    rules:[</span><br><span class="line">        &#123;</span><br><span class="line">            test:<span class="regexp">/\.js$/</span>,</span><br><span class="line">            exclude:<span class="regexp">/node_modules/</span>,</span><br><span class="line">            use:&#123;</span><br><span class="line">                loader:<span class="string">'babel-loader'</span>,</span><br><span class="line">                options:&#123;</span><br><span class="line">                    presets:[<span class="string">'env'</span>],</span><br><span class="line">                    plugins:[<span class="string">'transform-runtime'</span>]</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>关于转换规则stage-0/1/2…在新的webpack中不在推荐使用，避免过多使用</strong></p>
+<h3 id="命令行中直接转换"><a href="#命令行中直接转换" class="headerlink" title="命令行中直接转换"></a>命令行中直接转换</h3><blockquote>
+<p>除了在项目中使用还可以直接在命令行转换es6的代码</p>
+</blockquote>
+<p>1、安装@babel/cli</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">npm i -D @babel/cli</span><br></pre></td></tr></table></figure>
+<p>2、基本用法</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">//转换单个es6语法的文件到指定文件夹</span></span><br><span class="line">npx babel es6.js --out-file out.js</span><br><span class="line"><span class="comment">//简写为</span></span><br><span class="line">npx babel es6.js -o out.js</span><br><span class="line"></span><br><span class="line"><span class="comment">//转换文件夹至指定路径输出</span></span><br><span class="line">npx babel es6dir -out-dir outdir</span><br><span class="line"><span class="comment">//简写为</span></span><br><span class="line">npx babel es6dir -d outdir</span><br><span class="line"></span><br><span class="line"><span class="comment">//加上 -s参数生产source map文件</span></span><br><span class="line">npx babel es6dir -d outdir -s</span><br></pre></td></tr></table></figure>
+<ul>
+<li>转换文件到目标文件/文件夹时，没有会自动创建</li>
+<li>文件夹转换是将源文件夹中的文件依次转换到对应的输出，出错则停止转换</li>
+<li>关于npx可见<blockquote><p>常见的npx使用方式</p>
+<footer><strong>阮一峰</strong><cite><a href="https://www.ruanyifeng.com/blog/2019/02/npx.html" target="_blank" rel="noopener">npx使用教程</a></cite></footer></blockquote></li>
+<li>关于sourceMap可见<blockquote><p>sourceMap介绍</p>
+<footer><strong>阮一峰</strong><cite><a href="http://www.ruanyifeng.com/blog/2013/01/javascript_source_map.html" target="_blank" rel="noopener">JavaScript Source Map 详解</a></cite></footer></blockquote>
+
+</li>
+</ul>
+<h3 id="babel-node的使用"><a href="#babel-node的使用" class="headerlink" title="@babel/node的使用"></a>@babel/node的使用</h3><blockquote>
+<p>安装了这个包就可以在命令行直接执行es6命令，或者直接运行es6文件</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">//直接运行es6文件</span></span><br><span class="line">npx node-node es6.js</span><br></pre></td></tr></table></figure>
+
+<h3 id="babel-register"><a href="#babel-register" class="headerlink" title="@babel/register"></a>@babel/register</h3><blockquote>
+<p>这个包的作用是在文件中对通过require加载的文件进行实时转换</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">//安装</span></span><br><span class="line">npm i @babel/register -D</span><br><span class="line"><span class="comment">//使用（文件中）</span></span><br><span class="line"><span class="built_in">require</span>(<span class="string">'@babel/register'</span>);</span><br><span class="line"><span class="built_in">require</span>(<span class="string">'./es6.js'</span>)</span><br><span class="line"><span class="comment">//上述代码会自动将加载的es6文件转换</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>此包仅在运行时有效（适用于开发时使用）</li>
+<li>使用时要先加载此包，放在文件的顶部</li>
+<li>当前文件不会自动转换，只会转换require加载的文件（加一个钩子）</li>
+</ul>
+<h3 id="polyfill"><a href="#polyfill" class="headerlink" title="polyfill"></a>polyfill</h3><blockquote>
+<p>babel默认不会转换es6新的api，只会转换语法（syntax）例如Iterator、Generator、Set、Map、Proxy、Reflect、Symbol、Promies等全局对象，及部分全局对象的工具方法例如Array.from()方法。使用polyfill可解决这个问题</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">//安装(regenerator是转换generator的包)</span></span><br><span class="line">npm i core-js regenerator-runtime -D</span><br><span class="line"><span class="comment">//使用（文件中）导入即可（require/import）</span></span><br><span class="line"><span class="keyword">import</span> <span class="string">'core-js'</span></span><br><span class="line"><span class="keyword">import</span> <span class="string">'regenerator-runtime/runtime'</span></span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>ES6</category>
+        <category>babel</category>
+      </categories>
+      <tags>
+        <tag>ES6</tag>
+        <tag>babel</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Object.assign函数</title>
+    <url>/2020/09/23/Object-assign%E5%87%BD%E6%95%B0/</url>
+    <content><![CDATA[<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p><strong>Object.assign()</strong>方法使用target的setter方法和origin对象的getter方法，复制对象可枚举的属性值，适用于很多的object操作。</p>
+<a id="more"></a>
+
+<h2 id="常用方法"><a href="#常用方法" class="headerlink" title="常用方法"></a>常用方法</h2><p>1、复制对象值，并返回新创建新对象</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">Objec</span><br><span class="line">t.assign(&#123;&#125;,&#123;<span class="attr">a</span>:<span class="string">'a'</span>&#125;,&#123;<span class="attr">b</span>:<span class="string">'b'</span>&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>2、为对象添加新属性</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="built_in">Object</span>.assign(orgin,&#123;<span class="attr">add</span>:<span class="string">'add'</span>&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>3、为对象添加新方法</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> obj = &#123;</span><br><span class="line">    val:<span class="string">'val'</span>,</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">Object</span>.assign(obj.prototype,&#123;</span><br><span class="line">    getName()&#123;</span><br><span class="line">        ....</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h3 id="特性："><a href="#特性：" class="headerlink" title="特性："></a>特性：</h3><p>1、由于Object.assign采用的是浅拷贝，因此源对象的属性值是对象时，只是复制了引用，再后面的复制中出现此对象的修改，则直接替换他的引用</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> obj1 = &#123;<span class="attr">a</span>: &#123;<span class="attr">b</span>: <span class="number">1</span>&#125;&#125;;</span><br><span class="line"><span class="keyword">const</span> obj2 = <span class="built_in">Object</span>.assign(&#123;&#125;, obj1);</span><br><span class="line"></span><br><span class="line">obj1.a.b = <span class="number">2</span>;</span><br><span class="line">obj2.a.b <span class="comment">// 2</span></span><br></pre></td></tr></table></figure>
+
+<p>2、不能复制origin源对象的继承属性，只能同通过Object.getPrototypeOf(origin)+Object.create()+origin方法，将其继承的方法单独调出来，然后合并</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> originProto = <span class="built_in">Object</span>.getPrototypeOf(origin);</span><br><span class="line"><span class="keyword">return</span> <span class="built_in">Object</span>.assign(<span class="built_in">Object</span>.create(originProto), origin);</span><br></pre></td></tr></table></figure>
+
+
+<p>3、target/orgin对象为非对象</p>
+<ul>
+<li>target为非对象，转换成对象，如果是null/undefined不可转换成对象的属性时，报错</li>
+<li>origin为非对象时，自动转换，如果是null/undefined不可转换成对象的属性时，直接跳过</li>
+</ul>
+<p>4、数组处理</p>
+<blockquote>
+<p>将数组当成对象处理，键值为index下标</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="built_in">Object</span>.assign([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>],[<span class="number">4</span>,<span class="number">5</span>])=&gt;[<span class="number">4</span>,<span class="number">5</span>,<span class="number">3</span>]</span><br></pre></td></tr></table></figure>
+
+<p>5、取值函数处理（关键字get开头）</p>
+<blockquote>
+<p>直接取值，不会获取取值函数合并</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> obj = &#123;</span><br><span class="line">    <span class="keyword">get</span> name ()&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">'jack'</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">Object</span>.assign(&#123;&#125;,obj)=&gt;&#123;<span class="attr">name</span>:<span class="string">'jack'</span>&#125;</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>es6</category>
+        <category>Object操作</category>
+      </categories>
+      <tags>
+        <tag>es6</tag>
+        <tag>Object操作</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>flex布局</title>
+    <url>/2020/05/16/flex%E5%B8%83%E5%B1%80/</url>
+    <content><![CDATA[<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p><strong>感谢阮一峰先生的分享<a href="http://www.ruanyifeng.com/blog/2015/07/flex-examples.html" target="_blank" rel="noopener">flex-examples</a> 仅供个人学习</strong><br>2009年，W3C 提出了一种新的方案—-Flex 布局，可以简便、完整、响应式地实现各种页面布局。目前，它已经得到了所有浏览器的支持，这意味着，现在就能很安全地使用这项功能。<a id="more"></a></p>
+<blockquote>
+<ul>
+<li>Flex 是 Flexible Box 的缩写，意为”弹性布局”，用来为盒状模型提供最大的灵活性。<br>任何一个容器都可以指定为 Flex 布局，行内元素也可以使用flex布局，跳帧位置。</li>
+</ul>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x2F;*块级元素*&#x2F;</span><br><span class="line">display: flex;</span><br><span class="line">&#x2F;*行内元素*&#x2F;</span><br><span class="line">display: inline-flex;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<ul>
+<li>Webkit 内核的浏览器，必须加上-webkit前缀。</li>
+</ul>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">.box&#123;</span><br><span class="line">  display: -webkit-flex; &#x2F;* Safari *&#x2F;</span><br><span class="line">  display: flex;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong><em>注意，设为 Flex 布局以后，子元素的float、clear和vertical-align属性将失效。</em></strong></p>
+<blockquote>
+<ul>
+<li>flex布局的元素，称为flex container，他的所有子元素成为flex-items项目。</li>
+</ul>
+</blockquote>
+<img src="http://www.ruanyifeng.com/blogimg/asset/2015/bg2015071004.png" class="" title="flex-container">
+<blockquote>
+<p>其中main-axis称为主轴，across-axis称为交叉轴，所有flex-item默认沿着主轴排列。单个项目占据的主轴|交叉轴空间叫做main-size|across-size</p>
+</blockquote>
+<h2 id="浏览器支持"><a href="#浏览器支持" class="headerlink" title="浏览器支持"></a>浏览器支持</h2><img src="http://www.ruanyifeng.com/blogimg/asset/2015/bg2015071003.jpg" class="" title="browser Support">
+
+<h2 id="属性介绍"><a href="#属性介绍" class="headerlink" title="属性介绍"></a>属性介绍</h2><h3 id="flex-container属性"><a href="#flex-container属性" class="headerlink" title="flex-container属性"></a>flex-container属性</h3><h4 id="flex-direction"><a href="#flex-direction" class="headerlink" title="flex-direction"></a>flex-direction</h4><blockquote><p>决定主轴的方向，即项目的排列方向</p>
+<ul>
+<li>row（默认值）：主轴为水平方向，起点在左端。</li>
+<li>row-reverse：主轴为水平方向，起点在右端。</li>
+<li>column：主轴为垂直方向，起点在上沿。</li>
+<li>column-reverse：主轴为垂直方向，起点在下沿。</li>
+</ul>
+<footer><strong>可选属性</strong></footer></blockquote>
+
+<img src="http://www.ruanyifeng.com/blogimg/asset/2015/bg2015071005.png" class="" title="flex-dirction布局样式">
+
+<h4 id="flex-wrap"><a href="#flex-wrap" class="headerlink" title="flex-wrap"></a>flex-wrap</h4><blockquote>
+<p>默认情况下所有flex-item都排列在主轴上，此属性规定超过了主轴长度后的项目排列方式<br>可选属性：nowrap（默认）|wrap换行|wrap-reverse换行并且换行的flex-item排列在上面<br>如下图所示<br>    <div style="display:flex;align-items:center;justify-content:center;"><br>        <div style="flex:1;"><img src="http://www.ruanyifeng.com/blogimg/asset/2015/bg2015071007.png" class="" title="flex-wrap:nowrap布局样式"></div><br>        <div style="flex:1;"><img src="http://www.ruanyifeng.com/blogimg/asset/2015/bg2015071008.jpg" class="" title="flex-wrap:wrap布局样式"></div><br>        <div style="flex:1;"><img src="http://www.ruanyifeng.com/blogimg/asset/2015/bg2015071009.jpg" class="" title="flex-wrap:wrap-reverse布局样式"></div><br>    </div></p>
+</blockquote>
+<h4 id="flex-flow"><a href="#flex-flow" class="headerlink" title="flex-flow"></a>flex-flow</h4><blockquote>
+<p>是flex-direction和flex-wrap的简写形式</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">flex-flow:&lt;flex-direction&gt; || &lt;flex-wrap&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="justify-content"><a href="#justify-content" class="headerlink" title="justify-content"></a>justify-content</h4><blockquote>
+<p>定义了flex-item在主轴上的排列位置<br>可选属性：flex-start（默认）左对齐|flex-end右对齐|center居中|space-between两端对齐，项目间隔相等|space-around项目间隔相等，项目直接间隔是项目与flex-container边框间隔的2倍<br>    <div style="display:flex;align-items:center;justify-content:center;"><br>        <div style="flex:1;"><img src="/images/flex/flex-start.PNG" alt="flex-start"><br>            <p class="image-caption">flex-start</p><br>        </div><br>        <div style="flex:1;"><img src="/images/flex/flex-end.PNG" alt="flex-start"><br>            <p class="image-caption">flex-end</p><br>        </div><br>        <div style="flex:1;"><img src="/images/flex/center.PNG" alt="flex-start"><br>            <p class="image-caption">cener</p><br>        </div><br>    </div><br>    <div style="display:flex;align-items:center;justify-content:center;"><br>        <div style="flex:1;"><img src="/images/flex/space-between.PNG" alt="flex-start"><br>            <p class="image-caption">space-between</p><br>        </div><br>        <div style="flex:1;"><img src="/images/flex/space-around.PNG" alt="flex-start"><br>            <p class="image-caption">space-around</p><br>        </div><br>    </div></p>
+</blockquote>
+<h4 id="align-items"><a href="#align-items" class="headerlink" title="align-items"></a>align-items</h4><blockquote>
+<p>定义了flex-item在交叉轴上的排列位置<br>可选属性：flex-start对齐交叉轴顶点|flex-end对齐交叉轴终点|center对齐交叉轴中心|stretch（默认）拉升高度至交叉轴高度|baseline所有的flex-items的第一行文字基线<br>    <div style="display:flex;align-items:center;justify-content:center;"><br>        <div style="flex:1;"><img src="/images/flex/ai-flex-start.PNG" alt="flex-start"><br>            <p class="image-caption">align-items:flex-start</p><br>        </div><br>        <div style="flex:1;"><img src="/images/flex/ai-flex-end.PNG" alt="flex-start"><br>            <p class="image-caption">align-items:flex-end</p><br>        </div><br>        <div style="flex:1;"><img src="/images/flex/ai-center.PNG" alt="flex-start"><br>            <p class="image-caption">align-items:cener</p><br>        </div><br>    </div><br>    <div style="display:flex;align-items:center;justify-content:center;"><br>        <div style="flex:1;"><img src="/images/flex/ai-stretch.PNG" alt="flex-start"><br>            <p class="image-caption">align-items:stretch</p><br>        </div><br>        <div style="flex:1;"><img src="/images/flex/ai-base-line.PNG" alt="flex-start"><br>            <p class="image-caption">align-items:baseline</p><br>        </div><br>    </div></p>
+</blockquote>
+<h4 id="align-content"><a href="#align-content" class="headerlink" title="align-content"></a>align-content</h4><blockquote>
+<p>定义多轴线（多行？）的对齐方式，单一轴线不起作用<br>可选参数：flex-start|flex-end|center|space-bewteen|stretch|around</p>
+</blockquote>
+<img src="http://www.ruanyifeng.com/blogimg/asset/2015/bg2015071012.png" class="" width="280" title="align-content样式图">
+
+<h3 id="flex-items属性"><a href="#flex-items属性" class="headerlink" title="flex-items属性"></a>flex-items属性</h3><h4 id="order"><a href="#order" class="headerlink" title="order"></a>order</h4><blockquote>
+<p>设置flex-item的显示位置，数字越小越靠前，类似于grid布局的grid-column|row-start|end属性设置<br><img src="/images/flex/fi-order.PNG" alt="browser-spport"></p>
+</blockquote>
+<p class="image-caption">设置第四个order数值最小</p>
+
+<h4 id="flex-grow"><a href="#flex-grow" class="headerlink" title="flex-grow"></a>flex-grow</h4><blockquote>
+<p>当以当主轴空间大于实际需要时，放大的比例，默认为0，即不放大<br>如果其他属性设置为1，当前设置为2，则当前项目是其他项目的两倍main-sie<br><img src="/images/flex/fi-flex-grow.PNG" alt="browser-spport"></p>
+</blockquote>
+<p class="image-caption">flex-grow:2的flex-item</p>
+
+<h4 id="flex-shrink"><a href="#flex-shrink" class="headerlink" title="flex-shrink"></a>flex-shrink</h4><blockquote>
+<p>定义当主轴空间不足时，flex-item的缩小比例<br>如果设置属性值为0，其他flex-item属性值为1则当空间不足时，不会缩小此flex-item<br><img src="/images/flex/fi-flex-shrink.PNG" alt="browser-spport"></p>
+</blockquote>
+<p class="image-caption">属性flex-shrink:0的flex-item不会缩小</p>
+
+<h4 id="flex-basis"><a href="#flex-basis" class="headerlink" title="flex-basis"></a>flex-basis</h4><blockquote>
+<p>规定再分配多余的空间之前，flex-item占据main-size的大小，浏览器根据占据的main-size计算是否长度充足<br>默认为auto，及项目本来大小，设置大小：n+px，flex-item将始终占据指定大小main-size</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x2F;*默认*&#x2F;</span><br><span class="line">flex-basis:auto;</span><br><span class="line">&#x2F;*自定义*&#x2F;</span><br><span class="line">flex-basis:300px;</span><br></pre></td></tr></table></figure>
+<p><img src="/images/flex/fi-flex-basis.PNG" alt="browser-spport"></p>
+<p class="image-caption">默认值auto，即为原本main-size</p>
+
+<h4 id="flex"><a href="#flex" class="headerlink" title="flex"></a>flex</h4><blockquote>
+<p>是flex-grow&amp;flex-shrink&amp;flex-basis的简写形式<br>特殊样例 auto = 1 1 auto &amp;&amp; none = 0 0 auto</p>
+</blockquote>
+<h4 id="align-self"><a href="#align-self" class="headerlink" title="align-self"></a>align-self</h4><blockquote>
+<p>默认是auto，即继承inherit父类即align-items的设置，但是可以单独设置样式来覆盖父类样式，没有父元素则属性值为stretch<br>可选属性值与align-items相同，用法相同，作用域只限于当前的flex-item<br><img src="/images/flex/fi-align-self.PNG" alt="browser-spport"></p>
+</blockquote>
+<p class="image-caption">单独设置align-self:flex-end属性图</p>]]></content>
+      <categories>
+        <category>css</category>
+        <category>css布局</category>
+        <category>前端开发</category>
+      </categories>
+      <tags>
+        <tag>css布局</tag>
+        <tag>css</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>es6编程风格</title>
+    <url>/2020/09/23/es6%E7%BC%96%E7%A8%8B%E9%A3%8E%E6%A0%BC/</url>
+    <content><![CDATA[<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>由于现行js的使用版本不一致，导致老版js和es6混用，以及es6本身的使用不规范，造成代码的格式不标准，不便于代码的维护和修改，故参考行业先进规范以改正。</p>
+<a id="more"></a>
+
+<h2 id="变量定义关键字替换"><a href="#变量定义关键字替换" class="headerlink" title="变量定义关键字替换"></a>变量定义关键字替换</h2><p>1、使用let取代var</p>
+<ul>
+<li>没有了变量提升，更严谨（存在temporal dead zone暂时性死区）需要先定义再使用。</li>
+</ul>
+<p>2、使用const声明全局常量</p>
+<h2 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h2><p>统一使用单引号，有变量的成分就是用反引号。</p>
+<h2 id="赋值"><a href="#赋值" class="headerlink" title="赋值"></a>赋值</h2><blockquote>
+<p>尽量使用结构赋值，保证简洁明了</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">//常用于</span></span><br><span class="line"><span class="comment">//1、数组赋值</span></span><br><span class="line"><span class="keyword">const</span> arr = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]</span><br><span class="line"><span class="keyword">const</span> [one,two] = arr</span><br><span class="line"><span class="comment">//2、获取函数参数</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">everyfunc</span>(<span class="params">params</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">const</span> &#123;one,two&#125; = params</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//3、函数返回值&amp;&amp;获取函数返回值（尽量使用对象返回结构，便于添加和修改顺序）</span></span><br><span class="line"><span class="keyword">const</span> &#123;one,two&#125; = getReturnFunc()</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getReturnFunc</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;one,two&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="对象"><a href="#对象" class="headerlink" title="对象"></a>对象</h2><p>1、对象定义时，多行元素最后一个要加上‘,’，定义在一行上则不必</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> obj = &#123;<span class="attr">a</span>:<span class="number">1</span>,<span class="attr">b</span>:<span class="number">3</span>&#125;</span><br><span class="line"><span class="keyword">const</span> obj = &#123;</span><br><span class="line">    a:<span class="number">1</span>,</span><br><span class="line">    b:<span class="number">3</span>,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>2、尽量不要修改，静态化，修改使用Object.assign(target,…origin)（可以有多个源对象）修改。</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> target = &#123;</span><br><span class="line">    one:<span class="string">'one'</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">Object</span>.assign(target,&#123;<span class="attr">two</span>:<span class="string">'two'</span>&#125;)===&gt;target=&#123;<span class="attr">one</span>:<span class="string">'one'</span>,<span class="attr">two</span>:<span class="string">'two'</span>&#125;</span><br></pre></td></tr></table></figure>
+
+<p>3、如果定义时元素名称不确定，使用属性表达式，即‘[要运算的表达式]’作为元素名称。</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> obj = &#123;</span><br><span class="line">    [getName(<span class="string">'key'</span>)]:<span class="string">'jack'</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>4、对象内部方法省略function关键字，同名键名称省略</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> obj = &#123;</span><br><span class="line">    one,</span><br><span class="line">    <span class="keyword">get</span>()&#123;</span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h2><p>1、复制数组使用扩展运算符</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> oldArr = [<span class="number">1</span>,<span class="number">2</span>]</span><br><span class="line"><span class="keyword">let</span> newArr = [...oldArr]</span><br></pre></td></tr></table></figure>
+
+<p>2、将类数组转换成数组使用Array.from(target)target需要是可迭代的对象（有length属性）</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="built_in">Array</span>.from(<span class="built_in">document</span>.querySelector(<span class="string">'li'</span>))</span><br></pre></td></tr></table></figure>
+
+<h2 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h2><p>1、箭头函数</p>
+<ul>
+<li><p>简单的函数</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">;[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>].map(<span class="function"><span class="params">x</span> =&gt;</span> x * x)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>绑定this值，代替使用（_self/that/_this）表示this</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// bad</span></span><br><span class="line"><span class="keyword">const</span> self = <span class="keyword">this</span>;</span><br><span class="line"><span class="keyword">const</span> boundMethod = <span class="function"><span class="keyword">function</span>(<span class="params">...params</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> method.apply(self, params);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// acceptable</span></span><br><span class="line"><span class="keyword">const</span> boundMethod = method.bind(<span class="keyword">this</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// best</span></span><br><span class="line"><span class="keyword">const</span> boundMethod = <span class="function">(<span class="params">...params</span>) =&gt;</span> method.apply(<span class="keyword">this</span>, params);</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p>2、参数</p>
+<ul>
+<li><p>不用argument关键字，获取参数使用（…params）直接获取参数数组</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span>(<span class="params">...params</span>)</span>&#123;</span><br><span class="line">    params.join(<span class="string">''</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在参数列表设置默认参数</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span>(<span class="params">params=&#123;&#125;</span>)</span>&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h2 id="使用Map代替Object对象的使用"><a href="#使用Map代替Object对象的使用" class="headerlink" title="使用Map代替Object对象的使用"></a>使用Map代替Object对象的使用</h2><blockquote>
+<p>Map有key:value结构，有自己的遍历方法，object使用在具体业务特殊对象。</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> map = <span class="keyword">new</span> <span class="built_in">Map</span>(可迭代对象)</span><br><span class="line"><span class="keyword">let</span> map = <span class="keyword">new</span> <span class="built_in">Map</span>([[<span class="number">1</span>,<span class="string">'one'</span>],[<span class="number">2</span>,<span class="string">'two'</span>]])</span><br><span class="line"><span class="comment">//keys()便利key值</span></span><br><span class="line"><span class="keyword">for</span> key <span class="keyword">of</span> map.keys()&#123;&#125; ;</span><br><span class="line"><span class="comment">//values()便利值</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//entries()获取值和key值（为数组则是下标数值）</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="class代替原有的直接操作Prototype属性，规范类定义使用"><a href="#class代替原有的直接操作Prototype属性，规范类定义使用" class="headerlink" title="class代替原有的直接操作Prototype属性，规范类定义使用"></a>class代替原有的直接操作Prototype属性，规范类定义使用</h2><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// bad</span></span><br><span class="line"><span class="keyword">const</span> inherits = <span class="built_in">require</span>(<span class="string">'inherits'</span>);</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">PeekableQueue</span>(<span class="params">contents</span>) </span>&#123;</span><br><span class="line">  Queue.apply(<span class="keyword">this</span>, contents);</span><br><span class="line">&#125;</span><br><span class="line">inherits(PeekableQueue, Queue);</span><br><span class="line">PeekableQueue.prototype.peek = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">this</span>._queue[<span class="number">0</span>];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// good</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">PeekableQueue</span> <span class="keyword">extends</span> <span class="title">Queue</span> </span>&#123;</span><br><span class="line">  peek() &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>._queue[<span class="number">0</span>];</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="使用es6的模块化代替CommonJS的模块化引用"><a href="#使用es6的模块化代替CommonJS的模块化引用" class="headerlink" title="使用es6的模块化代替CommonJS的模块化引用"></a>使用es6的模块化代替CommonJS的模块化引用</h2>]]></content>
+      <categories>
+        <category>es6</category>
+        <category>编程风格/规范</category>
+      </categories>
+      <tags>
+        <tag>es6</tag>
+        <tag>编程风格</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>comonjs与ES6的文件导入导出比较</title>
+    <url>/2020/09/20/comonjs%E4%B8%8EES6%E7%9A%84%E6%96%87%E4%BB%B6%E5%AF%BC%E5%85%A5%E5%AF%BC%E5%87%BA%E6%AF%94%E8%BE%83/</url>
+    <content><![CDATA[<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>es6的模块化加载和node服务端的模块化加载，他们的关键字比较相近，而且在webpack打包的项目中，两种方式的模块化引用都是有效的，为了便于区分，小结了一下。</p>
+<a id="more"></a>
+
+<h2 id="CommonJS模块化加载"><a href="#CommonJS模块化加载" class="headerlink" title="CommonJS模块化加载"></a>CommonJS模块化加载</h2><blockquote>
+<p>只有在运行时才会加载（同步加载），而且是加载整个路径的文件生成一个对象，然后再从这个对象中解构赋值给要查找的属性,例如：</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> &#123;a,b&#125; = <span class="built_in">require</span>(<span class="string">'fs'</span>)</span><br><span class="line"><span class="comment">//等同于</span></span><br><span class="line"><span class="keyword">let</span> _fs = <span class="built_in">require</span>(<span class="string">'fs'</span>)</span><br><span class="line"><span class="keyword">let</span> a =  _fs.a</span><br><span class="line"><span class="keyword">let</span> b =  _fs.b</span><br></pre></td></tr></table></figure>
+<h3 id="导出"><a href="#导出" class="headerlink" title="导出"></a>导出</h3><p>1、导出单个对象时，给modules.exports对象直接赋值即可<br>2、导出多个对象时，使用关键字exports，将其看成对象，增加属性（为属性赋值）<br><strong>exports关键字只是modules.epxorts的引用，直接给exports赋值不会改变导出结果</strong></p>
+<h3 id="导入require（）函数"><a href="#导入require（）函数" class="headerlink" title="导入require（）函数"></a>导入require（）函数</h3><p>1、运行时加载且为同步加载。<br>2、优先从缓存加载，重复文件不回加载。<br>3、循环加载时不会将父文件完整加载，而是只加载到调用自身时为止的内容，避免循环产生。<br>4、路径可为运行时才可得到的结果。</p>
+<h2 id="ES6模块化加载"><a href="#ES6模块化加载" class="headerlink" title="ES6模块化加载"></a>ES6模块化加载</h2><blockquote>
+<p>静态化思想，<strong>编译时</strong>就确定模块关系，即在模块内就指定要加载模块，运行时使用import加载指定的模块 </p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">//import &#123;a,b&#125; from 'fs'</span></span><br></pre></td></tr></table></figure>
+<p><strong>fs文件可以不写后缀需要在webpack中配置说明</strong></p>
+<h3 id="export命令"><a href="#export命令" class="headerlink" title="export命令"></a>export命令</h3><blockquote>
+<p>常见写法</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">var</span> a = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">var</span> b = <span class="string">'jack'</span>;</span><br><span class="line"><span class="comment">//相当于</span></span><br><span class="line"><span class="keyword">var</span> a = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">var</span> b = <span class="string">'jack'</span></span><br><span class="line"><span class="keyword">export</span> &#123;a,b&#125;;</span><br><span class="line"><span class="comment">//函数或类</span></span><br><span class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">exportFunc</span>(<span class="params"></span>)</span>&#123;...&#125;</span><br><span class="line"><span class="keyword">export</span> <span class="class"><span class="keyword">class</span> <span class="title">exportClass</span> </span>&#123;...&#125;</span><br><span class="line"><span class="comment">//使用as关键字为导出变量重命名,同一个导出变量可有多个不同名称的输出</span></span><br><span class="line"><span class="keyword">var</span> a = <span class="string">'jack'</span></span><br><span class="line"><span class="keyword">export</span> &#123;a <span class="keyword">as</span> summer,a <span class="keyword">as</span> peter&#125;;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>通过export与import关键字进行导入导出，实际上就是导出了代码的引用到对应位置，因此他的数据是可变的（实时的）</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">//100ms之后导出的a的值会变成'change'</span></span><br><span class="line"><span class="keyword">var</span> a = <span class="string">'origin'</span></span><br><span class="line">setTimeout(<span class="function"><span class="params">_</span>=&gt;</span>&#123;a = <span class="string">'change'</span>&#125;,<span class="number">100</span>)</span><br><span class="line"><span class="keyword">export</span> &#123;a&#125;;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>因为静态时确定模块导入/出关系，export关键字不可放在函数中，导出/导入表达式中不可有运行之后才有明确结果的变量成分</p>
+</li>
+<li><p>导出的结果为一个对象类型，若没有指定default导出，则不可单独导出其他类型</p>
+</li>
+</ul>
+<h3 id="import关键字"><a href="#import关键字" class="headerlink" title="import关键字"></a>import关键字</h3><blockquote>
+<p>常见写法</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123;a,b&#125; <span class="keyword">from</span> <span class="string">'./exprot.js'</span></span><br><span class="line"><span class="comment">//可为导入的成员重新命名</span></span><br><span class="line"><span class="keyword">import</span> &#123;a <span class="keyword">as</span> c,b <span class="keyword">as</span> d&#125; <span class="keyword">from</span> <span class="string">'./exprot.js'</span></span><br><span class="line"><span class="comment">//导出变量如果不是对象，不可赋值（只读），是对象也不推荐赋值，影响代码维护</span></span><br><span class="line"><span class="keyword">import</span> &#123; a&#125; form <span class="string">'export.js'</span></span><br><span class="line">a = XXX——错误（不推荐）的写法</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>多次调用一个导入文件，等同于引用一个导出的多个被选引用，会自动合并相同引用例如</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; foo &#125; <span class="keyword">from</span> <span class="string">'my_module'</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; bar &#125; <span class="keyword">from</span> <span class="string">'my_module'</span>;</span><br><span class="line"><span class="comment">// 等同于</span></span><br><span class="line"><span class="keyword">import</span> &#123; foo, bar &#125; <span class="keyword">from</span> <span class="string">'my_module'</span>;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>不要和CommonJS的模块加载混用，CommonJS是运行时加载会出问题</p>
+</li>
+</ul>
+<h3 id="特殊导入-导出"><a href="#特殊导入-导出" class="headerlink" title="特殊导入/导出"></a>特殊导入/导出</h3><p>1、导入*——将整体导入成一个对象（但不可为对象属性赋值），可用as重命名</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> * <span class="keyword">as</span> circle <span class="keyword">from</span> <span class="string">'./circle'</span>;</span><br><span class="line"><span class="comment">// 下面两行都是不允许的</span></span><br><span class="line">circle.foo = <span class="string">'hello'</span>;</span><br><span class="line">circle.area = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>2、默认导入关键字default——导出default名称的变量，导入时可自由命名，不用使用as</p>
+<blockquote>
+<p>常见写法</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">//导出命名函数——同导出匿名函数一样，名称无用，导入时自用命名</span></span><br><span class="line">exprot <span class="keyword">default</span> <span class="function"><span class="keyword">function</span> <span class="title">f</span>(<span class="params"></span>)</span>&#123;...&#125;</span><br><span class="line"><span class="comment">//等同于</span></span><br><span class="line">exprot <span class="keyword">default</span> <span class="function"><span class="keyword">function</span> (<span class="params"></span>)</span>&#123;...&#125;</span><br><span class="line"><span class="comment">//导入时不用加&#123;&#125;</span></span><br><span class="line"><span class="keyword">import</span> anyname <span class="keyword">from</span> <span class="string">'default.js'</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//上述操作等同于</span></span><br><span class="line"><span class="keyword">var</span> something= <span class="string">'...'</span></span><br><span class="line">exprot &#123;something <span class="keyword">as</span> <span class="keyword">default</span>&#125; </span><br><span class="line"><span class="keyword">import</span> &#123;<span class="keyword">default</span> <span class="keyword">as</span> anyname&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>默认导入/导出可与导出对象叠加使用<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">//导出</span></span><br><span class="line">eport <span class="keyword">default</span> <span class="function"><span class="keyword">function</span> (<span class="params">obj</span>) </span>&#123;···&#125;</span><br><span class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">each</span>(<span class="params">obj, iterator, context</span>) </span>&#123;...&#125;</span><br><span class="line"><span class="keyword">export</span> &#123; each <span class="keyword">as</span> forEach &#125;;</span><br><span class="line"><span class="comment">//导入</span></span><br><span class="line"><span class="keyword">import</span> _, &#123; each, forEach &#125; <span class="keyword">from</span> <span class="string">'export.js'</span>;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p>3、合并import+export做转发or重命名or模块继承（添加完善）</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">//模块转发</span></span><br><span class="line"><span class="keyword">export</span> &#123; foo, bar &#125; <span class="keyword">from</span> <span class="string">'my_module'</span>;</span><br><span class="line"><span class="comment">// 可以简单理解为</span></span><br><span class="line"><span class="keyword">import</span> &#123; foo, bar &#125; <span class="keyword">from</span> <span class="string">'my_module'</span>;</span><br><span class="line"><span class="keyword">export</span> &#123; foo, bar &#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">//模块转发并重命名</span></span><br><span class="line"><span class="keyword">export</span> * <span class="keyword">as</span> ns <span class="keyword">from</span> <span class="string">"mod"</span>;</span><br><span class="line"><span class="comment">// 等同于</span></span><br><span class="line"><span class="keyword">import</span> * <span class="keyword">as</span> ns <span class="keyword">from</span> <span class="string">"mod"</span>;</span><br><span class="line"><span class="keyword">export</span> &#123;ns&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">//模块继承（*号表示非默认default导出的对象）</span></span><br><span class="line"><span class="keyword">export</span> * <span class="keyword">from</span> <span class="string">'circle'</span>;<span class="comment">//不包括default默认导出</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">var</span> e = <span class="number">2.71828182846</span>;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="function"><span class="keyword">function</span>(<span class="params">x</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="built_in">Math</span>.exp(x);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//引用修改（加强）的模块</span></span><br><span class="line"><span class="keyword">import</span> * <span class="keyword">as</span> math <span class="keyword">from</span> <span class="string">'circleplus'</span>;</span><br><span class="line"><span class="keyword">import</span> exp <span class="keyword">from</span> <span class="string">'circleplus'</span>;<span class="comment">//上面继承模块默认导出的对象引用（函数）</span></span><br><span class="line"><span class="built_in">console</span>.log(exp(math.e));   </span><br></pre></td></tr></table></figure>
+
+<h3 id="import（）函数"><a href="#import（）函数" class="headerlink" title="import（）函数"></a>import（）函数</h3><blockquote>
+<p>es2020添加了类似require的动态加载模块功能，返回一个promise对象，而加载成功则引用模块作为对象参数返回给回调函数</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">//常见写法</span></span><br><span class="line"><span class="built_in">Promise</span>.all([</span><br><span class="line">  <span class="keyword">import</span>(<span class="string">'./module1.js'</span>),</span><br><span class="line">  <span class="keyword">import</span>(<span class="string">'./module2.js'</span>),</span><br><span class="line">  <span class="keyword">import</span>(<span class="string">'./module3.js'</span>),</span><br><span class="line">])</span><br><span class="line">.then(<span class="function">(<span class="params">[module1, module2, module3]</span>) =&gt;</span> &#123;</span><br><span class="line">   ···</span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">//导入模块后直接解构获取值</span></span><br><span class="line"><span class="keyword">import</span>(<span class="string">'./myModule.js'</span>)</span><br><span class="line">.then(<span class="function">(<span class="params">&#123;export1, export2&#125;</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">// ...·</span></span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">//获取默认导出</span></span><br><span class="line"><span class="keyword">import</span>(<span class="string">'./myModule.js'</span>)</span><br><span class="line">.then(<span class="function"><span class="params">myModule</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(myModule.default);</span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">//默认导出的具名形式</span></span><br><span class="line"><span class="keyword">import</span>(<span class="string">'./myModule.js'</span>)</span><br><span class="line">.then(<span class="function">(<span class="params">&#123;<span class="keyword">default</span>: theDefault&#125;</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(theDefault);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>总结特点：1、加载路径可变，动态加载引用2、可在函数内使用3、异步加载</p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>javascript</category>
+        <category>CommonJS模块化加载</category>
+      </categories>
+      <tags>
+        <tag>es6</tag>
+        <tag>node</tag>
+        <tag>CommonJS模块化加载</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>git-operations</title>
+    <url>/2020/09/08/git-operations/</url>
+    <content><![CDATA[<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p><strong>感谢阮一峰先生的分享<a href="http://www.ruanyifeng.com/blog/2015/12/git-cheat-sheet.html" target="_blank" rel="noopener">常用git命令清单</a> 仅供个人学习。</strong><br>关于git的常见操作命令，和对版本，分支的处理还有git的工作流程的解释说明。</p>
+<a id="more"></a>
+<p>常用的6个git命令可以用下面的一张图表示：</p>
+<img src="/images/git.png" class="" title="常用git命令图">
+
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>释义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>workspace</td>
+<td>工作区，即自己写代码的文件夹</td>
+</tr>
+<tr>
+<td>Index</td>
+<td>暂存区，可以撤销保存，适用于大型项目文件的提交修改</td>
+</tr>
+<tr>
+<td>Remote</td>
+<td>可以是自己的服务器或者是github或者gitee这样的第三方工作仓库。</td>
+</tr>
+<tr>
+<td>Repository</td>
+<td>指的是自己的本地仓库，就是在以.git结尾的文件夹中的文件</td>
+</tr>
+</tbody></table>
+<h2 id="新建代码库"><a href="#新建代码库" class="headerlink" title="新建代码库"></a>新建代码库</h2><p> 初始化一个代码库 </p>
+<blockquote>
+<p>本地初始化</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">git init [project-name]</span><br></pre></td></tr></table></figure>
+<ul>
+<li>本地新建一个代码库会新建一个.git隐藏文件</li>
+</ul>
+<blockquote>
+<p>clone仓库中已有的代码到本地</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">git clone url [project-name] [--depth=num] </span><br></pre></td></tr></table></figure>
+<ul>
+<li>其中num为想要拷取的代码仓库深度，为1则表示最近一次的更新的最新代码</li>
+</ul>
+<h2 id="暂存区操作"><a href="#暂存区操作" class="headerlink" title="暂存区操作"></a>暂存区操作</h2><p>1、添加文件到暂存区</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">git add [file1] [file2] ...</span><br><span class="line">git add [dir]</span><br><span class="line">git add .</span><br></pre></td></tr></table></figure>
+<ul>
+<li>其中 . 代表所有修改了的文件，最常用</li>
+</ul>
+<p>2、将文件删除/从暂存区删除</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">git rm [file1] [file2] ...</span><br><span class="line">git rm --cached [filename]</span><br></pre></td></tr></table></figure>
+<ul>
+<li>其中–cached代表不删除工作区文件，只是从暂存区中删除</li>
+<li>只有在暂存区中的文件对其执行删除操作才有效</li>
+</ul>
+<p>3、修改文件名称，并将修改信息存入暂存区</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">git mv [file-origin-name] [file-new-name] </span><br></pre></td></tr></table></figure>
+<ul>
+<li>文件要先在暂存区中</li>
+</ul>
+<h2 id="提交文件到本地仓库"><a href="#提交文件到本地仓库" class="headerlink" title="提交文件到本地仓库"></a>提交文件到本地仓库</h2><blockquote>
+<p>提交操作都是需要写注释的，便于协作</p>
+</blockquote>
+<p>1、直接提交文件到仓库</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">提交所有有修改记录的文件到仓库</span></span><br><span class="line">git commit -m "message"</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">指定要提交的提交文件</span></span><br><span class="line">git commit [file1] [file2]... -m "message" </span><br></pre></td></tr></table></figure>
+
+<p>2、用本次提交覆盖上次的提交</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">覆盖上次提交到仓库的内容，仓库中的文件修改一本次为准</span></span><br><span class="line">git commit --amend -m "message"</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">指定要覆盖的仓库文件</span></span><br><span class="line">git commit --amend [file1] [file2]... -m "message" </span><br></pre></td></tr></table></figure>
+
+<p>3、其他提交</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">提交工作区自上次commit之后的变化，直接到仓库区(不包括新增文件/文件夹)</span></span><br><span class="line">git commit -a</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">提交时显示所有diff信息</span></span><br><span class="line">git commit -v</span><br></pre></td></tr></table></figure>
+
+<h2 id="提交文件至远程仓库"><a href="#提交文件至远程仓库" class="headerlink" title="提交文件至远程仓库"></a>提交文件至远程仓库</h2><table>
+<thead>
+<tr>
+<th>命令</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>git fetch [remote]</td>
+<td>更新指定远程仓库的所有修改到本地仓库中</td>
+</tr>
+<tr>
+<td>git remote -v</td>
+<td>显示所有的远程的别名&amp;地址</td>
+</tr>
+<tr>
+<td>git remote show remote-name</td>
+<td>显示别名仓库地址的信息</td>
+</tr>
+<tr>
+<td>git remote add remote-name url</td>
+<td>添加新的远程仓库地址，并命名</td>
+</tr>
+<tr>
+<td>git pull [remote] [branch]</td>
+<td>将远程仓库中的内容与指定分支合并</td>
+</tr>
+<tr>
+<td>git push [remote] [branch]</td>
+<td>将本地指定分支推送到远程仓库</td>
+</tr>
+<tr>
+<td>git push [remote] –force</td>
+<td>将本地分支强行推送到远程仓库，忽略冲突</td>
+</tr>
+<tr>
+<td>git push [remote] –all</td>
+<td>将所有分支推送到远程仓库</td>
+</tr>
+</tbody></table>
+<h2 id="分支"><a href="#分支" class="headerlink" title="分支"></a>分支</h2><p>1、新建分支&amp;切换工作区</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">新建分支</span></span><br><span class="line">git branch [branch-name]</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">切换当前分支到指定分支</span></span><br><span class="line">git checkout [branch-name]</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">新建分支并切换到该分支</span></span><br><span class="line">git checkout -b [branch-name]</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">切换到最近切换的分支</span></span><br><span class="line">git checkout -</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>2、查看分支</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">产看本地分支</span></span><br><span class="line">git branch</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">查看远程分支</span></span><br><span class="line">git branch -r</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">查看所有分支（本地加远程）</span></span><br><span class="line">git branch -a</span><br></pre></td></tr></table></figure>
+
+<p>3、删除分支</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">删除本地分支</span></span><br><span class="line">git branch -d [branch-name]</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">删除远程分支</span></span><br><span class="line">git branch [remote-name] --delete [branch-name]</span><br><span class="line">git branch -dr [remote/branch]</span><br></pre></td></tr></table></figure>
+
+<p>4、合并分支</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">合并指定分支到当前分支</span></span><br><span class="line">git merge [branch]</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>git</category>
+        <category>git常用操作</category>
+      </categories>
+      <tags>
+        <tag>git</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>java-BigDecimal</title>
+    <url>/2020/09/07/java-BigDecimal/</url>
+    <content><![CDATA[<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>daytwo，Java中的大数据精确计算使用BigInteger和BigDecimal分别尽心大整数和精确浮点数的计算</p>
+<a id="more"></a>
+
+<h2 id="java中的大数字运算"><a href="#java中的大数字运算" class="headerlink" title="java中的大数字运算"></a>java中的大数字运算</h2><h3 id="BigDecimal"><a href="#BigDecimal" class="headerlink" title="BigDecimal"></a>BigDecimal</h3><table>
+<thead>
+<tr>
+<th>常用api</th>
+<th>参数</th>
+<th>释义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>a.multiply(b)</td>
+<td>BigDecimal类对象</td>
+<td>加法</td>
+</tr>
+<tr>
+<td>a.subtract(b)</td>
+<td>BigDecimal类对象</td>
+<td>减法</td>
+</tr>
+<tr>
+<td>a.multiply(b)</td>
+<td>BigDecimal类对象</td>
+<td>乘法</td>
+</tr>
+<tr>
+<td>a.divide(b)</td>
+<td>BigDecimal类对象,保留位数,舍入方式)</td>
+<td>除法</td>
+</tr>
+<tr>
+<td>(BigDecimal a).setScale</td>
+<td>(保留位数,舍入方式)</td>
+<td>BigDecimal类方法</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>BigDecimal类的舍入方式</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>释义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>BigDecimal.ROUND_HALF_EVEN</td>
+<td>精确舍入</td>
+</tr>
+<tr>
+<td>BigDecimal.ROUND_HALF_UP</td>
+<td>四舍五入</td>
+</tr>
+<tr>
+<td>BigDecimal.ROUND_HALF_DOWN</td>
+<td>五舍六入</td>
+</tr>
+<tr>
+<td>BigDecimal.ROUND_DOWN</td>
+<td>向小数字取整</td>
+</tr>
+<tr>
+<td>BigDecimal.ROUND_UP</td>
+<td>向大数字取整</td>
+</tr>
+<tr>
+<td>BigDecimal.ROUND_FLOOR</td>
+<td>向下取整</td>
+</tr>
+<tr>
+<td>BigDecimal.ROUND_CEILING</td>
+<td>向上取整</td>
+</tr>
+</tbody></table>
+<ul>
+<li><strong>使用BigDecimal和BigInteger运算的结果是一个新的此类对象，使用int/doulb/…+Value()方法转换成不同数字变量</strong></li>
+</ul>
+<h3 id="BigInteger"><a href="#BigInteger" class="headerlink" title="BigInteger"></a>BigInteger</h3><table>
+<thead>
+<tr>
+<th>常用api</th>
+<th>参数</th>
+<th>释义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>a.multiply(b)</td>
+<td>BigInteger类对象</td>
+<td>加法</td>
+</tr>
+<tr>
+<td>a.subtract(b)</td>
+<td>BigInteger类对象</td>
+<td>减法</td>
+</tr>
+<tr>
+<td>a.multiply(b)</td>
+<td>BigInteger类对象</td>
+<td>乘法</td>
+</tr>
+<tr>
+<td>a.divide(b)</td>
+<td>BigInteger类对象</td>
+<td>除法</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>没有小数处理？暂不清楚其他api用法</p>
+</blockquote>
+<p>运算符优先级</p>
+<blockquote>
+<p>java大体分6种运算符，按照优先级顺序为:单目、算数、移位运算符、关系运算符、逻辑运算符、赋值运算符</p>
+</blockquote>
+<p>详见<a href="https://www.jianshu.com/p/9d2204712097" target="_blank" rel="noopener">Java运算符优先级</a> </p>
+]]></content>
+      <categories>
+        <category>java</category>
+      </categories>
+      <tags>
+        <tag>java,calculator</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>java-day3</title>
+    <url>/2020/09/08/java-day3/</url>
+    <content><![CDATA[<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>daythree，Java中的final变量，JVM堆栈区，binarysearch&amp;ArrayList的add方法，静态资源调用，代码块执行顺序<br>1、代码块执行顺序<br>2、重写listarray，并用cellction.binarysearch方法依次插入数据<br>3、输入整数，转换成byte数组，保存，查看使用静态代码块初始化</p>
+]]></content>
+      <categories>
+        <category>java</category>
+      </categories>
+      <tags>
+        <tag>java</tag>
+        <tag>final</tag>
+        <tag>static</tag>
+        <tag>JVM</tag>
+        <tag>Collection</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>gird布局</title>
+    <url>/2020/05/14/grid%E5%B8%83%E5%B1%80/</url>
+    <content><![CDATA[<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p><strong>感谢阮一峰先生的分享<a href="http://www.ruanyifeng.com/blog/2019/03/grid-layout-tutorial.html" target="_blank" rel="noopener">grid-layout-tutorial</a> 仅供个人学习。</strong></p>
+<p>网格布局（Grid）是最强大的 CSS 布局方案。</p>
+<p>它将网页划分成一个个网格，可以任意组合不同的网格，做出各种各样的布局。以前，只能通过复杂的 CSS 框架达到的效果，现在浏览器内置了。</p>
+<a id="more"></a>
+
+<img src="https://www.wangbase.com/blogimg/asset/201903/1_bg2019032501.png" class="" width="802" height="366" title="grid布局演示图片">
+
+<p>如上图所示，grid布局是一种类二维布局的css布局方式，与flex布局一样，极大的方便了网页布局。</p>
+<h2 id="浏览器支持"><a href="#浏览器支持" class="headerlink" title="浏览器支持"></a>浏览器支持</h2><p><img src="/images/browserSupport.PNG" alt="browser-spport"></p>
+<p class="image-caption">支持的浏览器及其版本</p>
+
+<h2 id="grid属性"><a href="#grid属性" class="headerlink" title="grid属性"></a>grid属性</h2><h3 id="display"><a href="#display" class="headerlink" title="display"></a>display</h3><blockquote>
+<p>可选参数 gird/inline-grid<br> 当参数为：gird时为块级元素、inline-grid则为行内元素</p>
+</blockquote>
+<h3 id="grid-template-columns"><a href="#grid-template-columns" class="headerlink" title="grid-template-columns"></a>grid-template-columns</h3><blockquote>
+<p>规定grid的列宽<br>example:</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">grid-template-columns:100px 100px 100px;</span><br></pre></td></tr></table></figure>
+
+<h3 id="grid-template-rows"><a href="#grid-template-rows" class="headerlink" title="grid-template-rows"></a>grid-template-rows</h3><blockquote>
+<p>规定grid的行宽<br>example:</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">grid-template-rows:100px 100px 100px;</span><br><span class="line">grid-template-rows:33% 33% 33%;</span><br><span class="line">grid-template-rows:repeat(3,33%);</span><br></pre></td></tr></table></figure>
+
+<blockquote><p><strong>grid函数设置宽高的函数</strong></p>
+<blockquote>
+<p>这些函数都可以与百分比、px、fr特数字组合定义宽高</p>
+</blockquote>
+<p>固定100px的结果如下图所示<br><img src="https://www.wangbase.com/blogimg/asset/201903/bg2019032506.png" class="" width="220" height="320" title="固定px的grid示例"></p>
+<p>平分宽度|高度的可以设置== 百分比 ==，或者设置1fr-类似flex，结合repeat函数则为</p>
+<h4 id="repeat-循环次数，循环体"><a href="#repeat-循环次数，循环体" class="headerlink" title="repeat(循环次数，循环体)"></a>repeat(循环次数，循环体)</h4><pre><code>参数：循环体可以为特殊关键字n+fr，与flex类似。
+   &gt;循环次数可为特殊关键字auto-fill，表示使用循环体格式自动填充满整个grid布局 。
+
+   &lt;figure class=&quot;highlight plain&quot;&gt;&lt;figcaption&gt;&lt;span&gt;repeat函数示例&lt;/span&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;grid-template-rows:repeat(3,1fr);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;grid-template-rows:repeat(3,33%);&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+   &gt;特殊的循环体
+   &lt;figure class=&quot;highlight plain&quot;&gt;&lt;figcaption&gt;&lt;span&gt;repeat函数特殊循环体示例&lt;/span&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;grid-template-columns: repeat(2, 100px 20px 80px);&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+
+   &lt;img src=&quot;https://www.wangbase.com/blogimg/asset/201903/bg2019032507.png&quot; class=&quot;&quot; title=&quot;特殊循环体的repeat示例&quot;&gt;</code></pre><h4 id="minmax-min-max-函数"><a href="#minmax-min-max-函数" class="headerlink" title="minmax(min,max)函数"></a>minmax(min,max)函数</h4><pre><code>#### 参数：最大最小值，可以为px，fr，百分比
+#### 定义一个范围值，让宽高在这之中自适应
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;figcaption&gt;&lt;span&gt;minmax函数示例&lt;/span&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;grid-template-rows:minmax(100px,1fr);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;grid-template-rows:minmax(100px,33%);&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;</code></pre><h4 id="auto关键字"><a href="#auto关键字" class="headerlink" title="auto关键字"></a>auto关键字</h4><blockquote>
+<p>可在宽高定义时，与百分比，px，fr混用</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">grid-template-columns: 100px auto 100px;</span><br></pre></td></tr></table></figure>
+>表示grid布局中，左右为100px，中间为自适应宽度
+
+<h4 id="auto-fill关键字"><a href="#auto-fill关键字" class="headerlink" title="auto-fill关键字"></a>auto-fill关键字</h4><blockquote>
+<p>可以与百分比，fr，px混用，还可以代替repeat函数的循环次数，让他自适应，并换行，类似flex布局的</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">flex-wrap:wrap;</span><br></pre></td></tr></table></figure>
+>自动换行：
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">display: grid;</span><br><span class="line">grid-template-columns: repeat(auto-fill, 100px);</span><br></pre></td></tr></table></figure>
+<img src="https://www.wangbase.com/blogimg/asset/201903/bg2019032508.png" class="" title="auto-fill关键字+repeat函数自动换行示例">
+
+<h4 id="布局实用示例"><a href="#布局实用示例" class="headerlink" title="布局实用示例"></a>布局实用示例</h4><pre><code>### 3:7两栏式布局
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;display: grid;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;grid-template-columns: 70% 30%;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+### 十二网格布局
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;display: grid;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;grid-template-columns: repeat(12,1fr);&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;</code></pre></blockquote>
+
+<h3 id="grid-row-gap-amp-amp-grid-column-gap"><a href="#grid-row-gap-amp-amp-grid-column-gap" class="headerlink" title="grid-row-gap&amp;&amp;grid-column-gap"></a>grid-row-gap&amp;&amp;grid-column-gap</h3><blockquote>
+<p>两者可以结合写成</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">gird-gap:&lt;grid-row-gap&gt; &lt;grid-column-gap&gt;</span><br></pre></td></tr></table></figure>
+> 简写成gird-gap时，可以只写一个值，表示行间距与列间距相同
+<figure class="highlight plain"><figcaption><span>example</span></figcaption><table><tr><td class="code"><pre><span class="line">grid-gap: 20px</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>新标准省略grid-字符，简写为</p>
+</blockquote>
+<figure class="highlight plain"><figcaption><span>example</span></figcaption><table><tr><td class="code"><pre><span class="line">gap: 20px</span><br></pre></td></tr></table></figure>
+
+<img src="https://www.wangbase.com/blogimg/asset/201903/bg2019032511.png" class="" width="280" title="gap间距为20px示例">
+
+<h3 id="grid-auto-flow"><a href="#grid-auto-flow" class="headerlink" title="grid-auto-flow"></a>grid-auto-flow</h3><blockquote>
+<p>规定grid布局的排列顺序，可选参数：row/column，默认为row，即优先从左到右的依次排列<br>可选参数row dense/column dense规定除了指定行列的布局外，其他grid单元的布局顺序</p>
+</blockquote>
+<figure class="highlight plain"><figcaption><span>container的css</span></figcaption><table><tr><td class="code"><pre><span class="line">display:grid;</span><br><span class="line">grid-template-rows:repeat(3,100px);</span><br><span class="line">grid-template-columns:repeat(3,100px);</span><br><span class="line">grid-auto-flow:row dense;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>指定grid-cell的列宽，左闭右开原则</p>
+</blockquote>
+<figure class="highlight plain"><figcaption><span>指定列宽的grid-cell的css</span></figcaption><table><tr><td class="code"><pre><span class="line">grid-column-start:1;</span><br><span class="line">grid-column-end:3;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>grid-column-start/end设置的数字单位为grid-cell面积，左闭右开<br>结果如下</p>
+</blockquote>
+<img src="https://www.wangbase.com/blogimg/asset/201903/bg2019032514.png" class="" width="280" title="指定单元格，其余row
+布局示例">
+
+<blockquote>
+<p>如果单独设置grid的大小要注意不要超过grid定义的gird-cell个数，否则自适应<br><img src="/images/overgridnumber.PNG" alt="over-grid-number"></p>
+</blockquote>
+<p class="image-caption">自定义grid-cell范围超过初始化定义图</p>
+
+<p>上图中7、8、9因为超过了初始设置的grid-cell范围，而自适应 <strong>解决办法</strong>：补足不足grid个数或调整布局 <strong>增加初始设置的行列即可</strong></p>
+<h3 id="align-items-amp-amp-justliy-items-amp-amp-place-items"><a href="#align-items-amp-amp-justliy-items-amp-amp-place-items" class="headerlink" title="align-items&amp;&amp;justliy-items&amp;&amp;place-items"></a>align-items&amp;&amp;justliy-items&amp;&amp;place-items</h3><blockquote>
+<p>规定grid-cell的位置，align表示高（上、中、下）、justlify表示宽（左、中、右）<br>可选属性：start|center|end|stretch——靠左|居中|靠右|自动填满<br>place-items是简写形式</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">place-items:&lt;align-items&gt; &lt;justify-items&gt;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>如果不写第二个参数则默认两个属性值相同</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">align-items:center;</span><br><span class="line">justify-items:strech;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>可简写为</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">place-items:&lt;align-items&gt; &lt;justify-items&gt;</span><br><span class="line">place-items:stretch center;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>如下图所示<br><img src="/images/center-stretch.PNG" alt="place-items"></p>
+</blockquote>
+<p class="image-caption">place-items结果图</p>
+
+<h3 id="align-self-amp-amp-justify-self-amp-amp-place-self"><a href="#align-self-amp-amp-justify-self-amp-amp-place-self" class="headerlink" title="align-self&amp;&amp;justify-self&amp;&amp;place-self"></a>align-self&amp;&amp;justify-self&amp;&amp;place-self</h3><blockquote>
+<p>与align|justify|place-items用法完全一致，但只作用于单个grid-cell</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">.item-1 &#123;</span><br><span class="line">  place-self:stretch center;</span><br><span class="line">  background-color: #ef342a;</span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
+
+<p><img src="/images/place-self.PNG" alt="place-self"></p>
+<p class="image-caption">place-self单个grid-cell作用域</p>
+
+<h3 id="align-content-amp-amp-justify-content-amp-amp-place-content"><a href="#align-content-amp-amp-justify-content-amp-amp-place-content" class="headerlink" title="align-content&amp;&amp;justify-content&amp;&amp;place-content"></a>align-content&amp;&amp;justify-content&amp;&amp;place-content</h3><blockquote>
+<p>规定整个项目在grid-container中的位置<br>可选属性：start|center|space-between|space-evenly|space-around——between间隔在项目之间<br>    <div style="display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:160px;grid-auto-rows:0;gap:10px"><br>        <div style="grid-column-start:1;grid-row-start:1;"><img src="https://www.wangbase.com/blogimg/asset/201903/bg2019032522.png" class="" title="space-around"></div><br>        <div style="grid-column-start:2;grid-row-start:1;"><img src="https://www.wangbase.com/blogimg/asset/201903/bg2019032523.png" class="" title="space-between"></div><br>        <div style="grid-column-start:3;grid-row-start:1;"><img src="https://www.wangbase.com/blogimg/asset/201903/bg2019032524.png" class="" title="space-evenly"></div><br>    </div></p>
+</blockquote>
+<h3 id="grid-auto-row-amp-amp-grid-auto-column"><a href="#grid-auto-row-amp-amp-grid-auto-column" class="headerlink" title="grid-auto-row&amp;&amp;grid-auto-column"></a>grid-auto-row&amp;&amp;grid-auto-column</h3><blockquote>
+<p>规定如果定义的grid-cell不在初始定义的grid-cell数量之内，扩展的grid-cell的列宽、行高</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">display: grid;</span><br><span class="line">grid-template-columns: 100px 100px 100px;</span><br><span class="line">grid-template-rows: 100px 100px 100px;</span><br><span class="line">grid-auto-rows: 50px;</span><br></pre></td></tr></table></figure>
+
+<img src="https://www.wangbase.com/blogimg/asset/201903/bg2019032525.png" class="" width="280" title="grid-auto-row为50px">
+
+<h3 id="grid-template-amp-amp-grid"><a href="#grid-template-amp-amp-grid" class="headerlink" title="grid-template&amp;&amp;grid"></a>grid-template&amp;&amp;grid</h3><blockquote>
+<ul>
+<li>grid-template属性是grid-template-columns、grid-template-rows和grid-template-areas这三个属性的合并简写形式。</li>
+</ul>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">grid-template:&lt;grid-template-rows&gt; &lt;grid-template-area&gt; &#x2F; &lt;grid-template-columns&gt;</span><br><span class="line">example</span><br><span class="line">grid-template: [header-left] &quot;head head&quot; 30px [header-right]</span><br><span class="line">                [main-left]   &quot;nav  main&quot; 1fr  [main-right]</span><br><span class="line">                [footer-left] &quot;nav  foot&quot; 30px [footer-right]</span><br><span class="line">                &#x2F; 120px 1fr;</span><br></pre></td></tr></table></figure>                
+<blockquote>
+<p>等同于</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">grid-template-rows: [header-left] 30px [header-right main-left] 1fr [main-right footer-left] 30px [footer-right];</span><br><span class="line">grid-template-columns: 120px 1fr;</span><br><span class="line">grid-template-areas: &quot;head head&quot; &quot;nav main&quot; &quot;nav foot&quot;;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>结果图<br><img src="/images/grid-template.PNG" alt="grid-template"></p>
+</blockquote>
+<p class="image-caption">grid-template简写结果图</p>
+
+<blockquote>
+<ul>
+<li>grid属性是grid-template-rows、grid-template-columns、grid-template-areas、 grid-auto-rows、grid-auto-columns、grid-auto-flow这六个属性的合并简写形式。<br>从易读易写的角度考虑，还是建议不要合并属性，所以这里就不详细介绍这个属性了。</li>
+</ul>
+</blockquote>
+<h2 id="grid-cell属性"><a href="#grid-cell属性" class="headerlink" title="grid-cell属性"></a>grid-cell属性</h2><h3 id="grid-column-start-end-amp-amp-grid-row-start-end"><a href="#grid-column-start-end-amp-amp-grid-row-start-end" class="headerlink" title="grid-column-start|end&amp;&amp;grid-row-start|end"></a>grid-column-start|end&amp;&amp;grid-row-start|end</h3><blockquote>
+<ul>
+<li>属性值可为数字，与grid-auto-flow属性结合可以实现特定布局</li>
+</ul>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">grid-column-start: 1;</span><br><span class="line">grid-column-end: 3;</span><br><span class="line">grid-row-start: 2;</span><br><span class="line">grid-row-end: 4;</span><br></pre></td></tr></table></figure>
+
+<img src="https://www.wangbase.com/blogimg/asset/201903/bg2019032527.png" class="" width="280" title="数字方式定义grid-cell起始位置">
+<blockquote>
+<ul>
+<li>span参数结合使用，表示跨过多少个grid-cell，即可用在start，也可用在end</li>
+</ul>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">grid-column-end: span 2;</span><br></pre></td></tr></table></figure>
+
+<img src="https://www.wangbase.com/blogimg/asset/201903/bg2019032528.png" class="" width="280" title="数字方式定义grid-cell起始位置">
+<blockquote>
+<ul>
+<li>如果因为设置属性产生了重叠，可通过设置z-index调整</li>
+</ul>
+</blockquote>
+<h3 id="grid-column-amp-amp-grid-row"><a href="#grid-column-amp-amp-grid-row" class="headerlink" title="grid-column&amp;&amp;grid-row"></a>grid-column&amp;&amp;grid-row</h3><blockquote>
+<ul>
+<li>是grid-row-start|end和grid-column-start|end的简写</li>
+</ul>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">grid-row:&lt;grid-row-start&gt; &lt;grid-row-end&gt;;</span><br><span class="line">grid-columns:&lt;grid-columns-start&gt; &lt;grid-columns-end&gt;;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<ul>
+<li>可以与span（宽行）联合使用</li>
+</ul>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">  background: #b03532;</span><br><span class="line">  grid-column: 1 &#x2F; 3;</span><br><span class="line">  grid-row: 1 &#x2F; 3;</span><br><span class="line">&#x2F;* 等同于 *&#x2F;</span><br><span class="line">  background: #b03532;</span><br><span class="line">  grid-column: 1 &#x2F; span 2;</span><br><span class="line">  grid-row: 1 &#x2F; span 2;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<ul>
+<li>可以不写/end，默认是跨了一行</li>
+</ul>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">grid-column: 1;</span><br><span class="line">grid-row: 1;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>上面代码表示第一个grid<br><strong>简写时不可直接写span+n而不规定起/始位置</strong></p>
+</blockquote>
+<h3 id="grid-template-areas"><a href="#grid-template-areas" class="headerlink" title="grid-template-areas"></a>grid-template-areas</h3><blockquote>
+<ul>
+<li>给grid命名并划分区域</li>
+</ul>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">display: grid;</span><br><span class="line">grid-template-columns: 100px 100px 100px;</span><br><span class="line">grid-template-rows: 100px 100px 100px;</span><br><span class="line">grid-template-areas: &#39;a b c&#39;</span><br><span class="line">                     &#39;d e f&#39;</span><br><span class="line">                     &#39;g h i&#39;;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>上面代码表示将grid划分为a~i的九个区域，相同命名就是同一个区域，结合grid-area可指定grid-cell大小</p>
+</blockquote>
+<blockquote>
+<ul>
+<li>不用利用的区域用’.’代替命名</li>
+</ul>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">display: grid;</span><br><span class="line">grid-template-columns: 100px 100px 100px;</span><br><span class="line">grid-template-rows: 100px 100px 100px;</span><br><span class="line">grid-template-areas: &#39;a . c&#39;</span><br><span class="line">                    &#39;d . f&#39;</span><br><span class="line">                    &#39;g . i&#39;;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>上面代码表示中间区域不使用,不属于任何区域</p>
+</blockquote>
+<blockquote>
+<ul>
+<li>区域的命名会影响到网格线。每个区域的起始网格线，会自动命名为 <strong>区域名-start</strong>，终止网格线自动命名为 <strong>区域名-end</strong>。如上面的a区域的起始网格线为a-start&amp;a-end</li>
+</ul>
+</blockquote>
+<h3 id="grid-area"><a href="#grid-area" class="headerlink" title="grid-area"></a>grid-area</h3><blockquote>
+<ul>
+<li>与grid-template-area结合使用，指定grid-cell位置</li>
+</ul>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">.container&#123;</span><br><span class="line">  display: grid;</span><br><span class="line">  grid-template-columns: 100px 100px 100px;</span><br><span class="line">  grid-template-rows: 100px 100px 100px;</span><br><span class="line">  grid-template-areas: &#39;a b c&#39;</span><br><span class="line">                     &#39;d e f&#39;</span><br><span class="line">                     &#39;g h i&#39;;</span><br><span class="line">&#125;</span><br><span class="line">.item-1 &#123;</span><br><span class="line">  background-color: #ef342a;</span><br><span class="line">  grid-area: e;</span><br><span class="line">&#125;       </span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>如下图</p>
+</blockquote>
+<img src="https://www.wangbase.com/blogimg/asset/201903/bg2019032530.png" class="" width="280" title="grid-area指定grid-cell位置">
+
+<blockquote>
+<ul>
+<li>是grid-row|column-start|end的简写</li>
+</ul>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">grid-area: &lt;row-start&gt; &#x2F; &lt;column-start&gt; &#x2F; &lt;row-end&gt; &#x2F; &lt;column-end&gt;;</span><br><span class="line">example</span><br><span class="line">gird:1&#x2F;1&#x2F;3&#x2F;3</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>如下图所示，简写结果 <strong>不支持span结合使用</strong><br><img src="/images/grid-area.PNG" alt="grid-area简写"></p>
+</blockquote>
+<p class="image-caption">gird-area简写</p>]]></content>
+      <categories>
+        <category>css</category>
+        <category>css布局</category>
+        <category>前端开发</category>
+      </categories>
+      <tags>
+        <tag>css布局</tag>
+        <tag>css</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>java-bitOperation</title>
+    <url>/2020/09/07/java-bitOperation/</url>
+    <content><![CDATA[<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>java继续学习了，上次学习还是去年，中间断断续续几乎停了,唉，加油，从位运算开始。</p>
+<a id="more"></a>
+
+<h2 id="常见位运算"><a href="#常见位运算" class="headerlink" title="常见位运算"></a>常见位运算</h2><table>
+<thead>
+<tr>
+<th>符号</th>
+<th>解释</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>&amp;</td>
+<td>位与，上面是1并且下面是1，结果才是1</td>
+</tr>
+<tr>
+<td>|</td>
+<td>位或，上面是1或者下面是1，结果才是1</td>
+</tr>
+<tr>
+<td>^</td>
+<td>异或，不同是1</td>
+</tr>
+<tr>
+<td>~</td>
+<td>求反，1变成0，0变成1</td>
+</tr>
+<tr>
+<td>&gt;&gt;</td>
+<td>带符号的位右移</td>
+</tr>
+<tr>
+<td>&lt;&lt;</td>
+<td>大夫好的左位移</td>
+</tr>
+<tr>
+<td>&gt;&gt;&gt;</td>
+<td>不带符号的右位移</td>
+</tr>
+</tbody></table>
+]]></content>
+  </entry>
+  <entry>
+    <title>java-day6</title>
+    <url>/2020/09/15/java-day6/</url>
+    <content><![CDATA[<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>day6，upup~</p>
+<a id="more"></a>
+
+<h2 id="Date类的简单实用"><a href="#Date类的简单实用" class="headerlink" title="Date类的简单实用"></a>Date类的简单实用</h2><blockquote>
+<p>SimpleDateFormat+Date类</p>
+</blockquote>
+<h2 id="内部类"><a href="#内部类" class="headerlink" title="内部类"></a>内部类</h2><blockquote>
+<p>内部类就是类里面嵌套了类</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>普通内部类</th>
+<th>静态内部类</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>异</td>
+<td>普通内部类只能由具体的外部类对象生成内部内对象，静态内部类则可以直接生成对象</td>
+</tr>
+<tr>
+<td>同</td>
+<td>在类的里面定义，引入有导入包+外部类名.内部类名两种方式</td>
+</tr>
+<tr>
+<td>同</td>
+<td>在内部类和其外部类中可以相互引用私有变量/方法，部手限制关键字影响</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>局部内部类</p>
+</blockquote>
+<p>1、使用场景，只出现一次，需要不确定的类型实现对象引用接口/父类方法<br>2、使用方式new +父类/接口名（）{}即可。<br><strong>限制</strong>：</p>
+<ul>
+<li>使用局部变量需要final关键字（jdk1.8后可省略）</li>
+<li>声明只在定义的局部代码块中有效/可用，但对象地址可以传递出去——&gt;用对象实现方法调用（传递出去时返回类型使用父类声明即可）</li>
+</ul>
+<p><strong>应用</strong></p>
+<ul>
+<li>sort方法总的comparator接口对象</li>
+</ul>
+]]></content>
+  </entry>
+  <entry>
+    <title>java-day5</title>
+    <url>/2020/09/14/java-day5/</url>
+    <content><![CDATA[<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>day5，访问控制符&amp;接口</p>
+<a id="more"></a>
+
+<h2 id="访问控制符"><a href="#访问控制符" class="headerlink" title="访问控制符"></a>访问控制符</h2><blockquote>
+<p>作用及范围</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>符号</th>
+<th>本类</th>
+<th>本包</th>
+<th>子类</th>
+<th>无限制</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>public</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+</tr>
+<tr>
+<td>protected</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+<td>-</td>
+</tr>
+<tr>
+<td>default</td>
+<td>√</td>
+<td>√</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td>private</td>
+<td>√</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>static关键字的使用时机：1.公用资源2.通用方法</p>
+</blockquote>
+<h2 id="接口"><a href="#接口" class="headerlink" title="接口"></a>接口</h2><blockquote>
+<p>常量+抽象方法<br>1、常量：在接口中定义的变量都是常量（自动加上public static final关键字）<br>2、抽象方法：自动加上（public abstract 关键字）</p>
+</blockquote>
+<ul>
+<li>作用分离具体功能类和功能类——变形金刚和他的武器库，而使用功能类则为测试类。</li>
+</ul>
+<h2 id="面向对象OOP（Object-oriented-programming）"><a href="#面向对象OOP（Object-oriented-programming）" class="headerlink" title="面向对象OOP（Object-oriented programming）"></a>面向对象OOP（Object-oriented programming）</h2><blockquote>
+<p>面向对象的三大原则——封装、继承、多态</p>
+</blockquote>
+<p>1、封装——类私有化——private</p>
+<ul>
+<li><p>构造方法—<strong>抽象类是有构造方法的，在实现他的子类创建对象的时候运行</strong>常用与给成员变量赋值</p>
+</li>
+<li><p>this指定当前对象的引用地址，构造方法之间的相互引用</p>
+</li>
+</ul>
+<p>2、继承——子类继承父类功能，并扩展自己的功能<br>3、多态——子类重写了父类的方法，同一个父类不同的实现类。</p>
+]]></content>
+      <categories>
+        <category>java</category>
+        <category>javase</category>
+      </categories>
+      <tags>
+        <tag>access-control-character</tag>
+        <tag>interface</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>vue-cli使用</title>
+    <url>/2020/09/26/vue-cli%E4%BD%BF%E7%94%A8/</url>
+    <content><![CDATA[<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>用于vue-cli的升级较快，记录下变化</p>
+<a id="more"></a>
+
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">全局安装</span></span><br><span class="line">npm install -g @vue/cli</span><br><span class="line"><span class="meta">#</span><span class="bash">升级项目中的cli相关模块</span></span><br><span class="line"><span class="meta">#</span><span class="bash">vue  upgrade [options] [plugin-name]</span></span><br><span class="line"><span class="meta">#</span><span class="bash">（试用）升级 Vue CLI 服务及插件</span></span><br><span class="line"><span class="meta">#</span><span class="bash">选项：</span></span><br><span class="line">  -t, --to &lt;version&gt;    升级 &lt;plugin-name&gt; 到指定的版本</span><br><span class="line">  -f, --from &lt;version&gt;  跳过本地版本检测，默认插件是从此处指定的版本升级上来</span><br><span class="line">  -r, --registry &lt;url&gt;  使用指定的 registry 地址安装依赖</span><br><span class="line">  --all                 升级所有的插件</span><br><span class="line">  --next                检查插件新版本时，包括 alpha/beta/rc 版本在内</span><br><span class="line">  -h, --help            输出帮助内容</span><br></pre></td></tr></table></figure>
+
+<h2 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h2><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">vue create [options] &lt;app-name&gt;</span><br><span class="line"><span class="meta">#</span><span class="bash">创建一个由 `vue-cli-service` 提供支持的新项目</span></span><br><span class="line"><span class="meta">#</span><span class="bash">选项：</span></span><br><span class="line">  -p, --preset &lt;presetName&gt;       忽略提示符并使用已保存的或远程的预设选项</span><br><span class="line">  -d, --default                   忽略提示符并使用默认预设选项</span><br><span class="line">  -i, --inlinePreset &lt;json&gt;       忽略提示符并使用内联的 JSON 字符串预设选项</span><br><span class="line">  -m, --packageManager &lt;command&gt;  在安装依赖时使用指定的 npm 客户端</span><br><span class="line">  -r, --registry &lt;url&gt;            在安装依赖时使用指定的 npm registry</span><br><span class="line">  -g, --git [message]             强制 / 跳过 git 初始化，并可选的指定初始化提交信息</span><br><span class="line">  -n, --no-git                    跳过 git 初始化</span><br><span class="line">  -f, --force                     覆写目标目录可能存在的配置</span><br><span class="line">  -c, --clone                     使用 git clone 获取远程预设选项</span><br><span class="line">  -x, --proxy                     使用指定的代理创建项目</span><br><span class="line">  -b, --bare                      创建项目时省略默认组件中的新手指导信息</span><br><span class="line">  -h, --help                      输出使用帮助信息</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>需要使用vue-init功能，安装@vue/cli-init包即可</li>
+<li>使用图像化创建项目<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">vue ui</span><br></pre></td></tr></table></figure></li>
+</ul>
+]]></content>
+  </entry>
+  <entry>
+    <title>java-day4</title>
+    <url>/2020/09/13/java-day4/</url>
+    <content><![CDATA[<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>day4，主要讲了String类&amp;局部/全局变量&amp;Array常见方法使用&amp;递归&amp;BufferReader/FileReader/FileWriter&amp;混合变量后的类加载顺序</p>
+<a id="more"></a>
+
+<h2 id="混合变量类加载顺序"><a href="#混合变量类加载顺序" class="headerlink" title="混合变量类加载顺序"></a>混合变量类加载顺序</h2><blockquote>
+<p>Array.copyOf(original,newlength)<br>返回新数组，不改变原数组<br>新数组的长度可大于或小于原数组——&gt;数组的切割/增大容量</p>
+</blockquote>
+<blockquote>
+<p>类加载<br>1、将父类加载到方法区，并为其静态变量分配内存空间<br>2、将子类加载到方法区，并为其静态变量分配内存空间<br>3、为父类的静态变量赋值&amp;执行父类静态代码块（无先后顺序）<br>4、为子类的静态变量赋值&amp;执行子类静态代码块（无先后顺序）</p>
+</blockquote>
+<blockquote>
+<p>new新对象<br>5、在堆中创建父类对象，为父类成员变量分配内存<br>6、在堆中创建子类对象，为子类成员变量分配内存<br>7、为父类的成员变量赋值<br>8、执行父类的构造函数<br>9、为子类的成员变量赋值<br>10、执行子类的构造函数</p>
+</blockquote>
+<p>binarySearch+ArrayList？？？</p>
+]]></content>
+      <categories>
+        <category>java</category>
+        <category>javase</category>
+      </categories>
+      <tags>
+        <tag>fileOperation</tag>
+        <tag>String</tag>
+        <tag>Arrays</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>java-day7</title>
+    <url>/2020/09/22/java-day7/</url>
+    <content><![CDATA[<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>主要是集合内容，linklist以及ArrayList对比，应用场景的区分。</p>
+<a id="more"></a>
+
+<ul>
+<li>Java中没有引用传递都是值传递</li>
+</ul>
+<h4 id="LinkedList使用"><a href="#LinkedList使用" class="headerlink" title="LinkedList使用"></a>LinkedList使用</h4><ul>
+<li>双向链表，头部和尾部相互引用</li>
+<li>操作头/尾数据效率高，中间效率低 </li>
+</ul>
+<p>1、常用api</p>
+<table>
+<thead>
+<tr>
+<th>api</th>
+<th>释义</th>
+<th>返回值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>add(elem)</td>
+<td>添加list元素</td>
+<td>返回Boolean值，成功true</td>
+</tr>
+<tr>
+<td>get(num)</td>
+<td>通过下标来获取数组元素</td>
+<td>对应元素</td>
+</tr>
+<tr>
+<td>remove(num)</td>
+<td>删除指定位置元素</td>
+<td>删除的元素</td>
+</tr>
+<tr>
+<td>remove(elem)</td>
+<td>删除重载方法</td>
+<td>返回Boolean值，删除了为true</td>
+</tr>
+<tr>
+<td>size()</td>
+<td>list大小</td>
+<td>数字</td>
+</tr>
+<tr>
+<td>iterator()</td>
+<td>生成iterator对象</td>
+<td>一个Iterator对象</td>
+</tr>
+</tbody></table>
+<p>2、特性</p>
+<ul>
+<li><p>头/尾部两端效率高，中间效率低，由于内部结构是双向链表，可当作栈或队列stac/queue使用<br>  1、当普通双向链表时</p>
+<table>
+<thead>
+<tr>
+<th>api</th>
+<th>释义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>addFirst(elem)</td>
+<td>添加到头部</td>
+</tr>
+<tr>
+<td>getFirst()</td>
+<td>获取第一个元素</td>
+</tr>
+<tr>
+<td>removeFirst()</td>
+<td>删除第一个元素</td>
+</tr>
+<tr>
+<td>addLast(elem)</td>
+<td>添加到尾部</td>
+</tr>
+<tr>
+<td>getLast()</td>
+<td>获取最后一个元素</td>
+</tr>
+<tr>
+<td>removeLast()</td>
+<td>删除最后一个元素</td>
+</tr>
+</tbody></table>
+<p>  2、当成queue队列时</p>
+<table>
+<thead>
+<tr>
+<th>api</th>
+<th>释义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>offer(elem)</td>
+<td>添加到头部</td>
+</tr>
+<tr>
+<td>peek()</td>
+<td>获取第一个元素</td>
+</tr>
+<tr>
+<td>poll()</td>
+<td>删除第一个元素</td>
+</tr>
+</tbody></table>
+<p>  3、当成stack栈时</p>
+<table>
+<thead>
+<tr>
+<th>api</th>
+<th>释义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>posh(elem)</td>
+<td>添加到头部</td>
+</tr>
+<tr>
+<td>pop()</td>
+<td>删除第一个元素</td>
+</tr>
+</tbody></table>
+</li>
+<li><p>下标遍历效率低，使用iterator()方法生成迭代器对象，用迭代器的hasNext+next()方法遍历效率相对高。</p>
+</li>
+<li><p>iterator迭代器对象中存了list元素的引用，调用next方法自动引用元素值，同时将保存的引用换成下一个元素的。</p>
+</li>
+</ul>
+<h3 id="和ArrayList对比"><a href="#和ArrayList对比" class="headerlink" title="和ArrayList对比"></a>和ArrayList对比</h3><ul>
+<li>LinkedList适用于频繁的修改、添加头尾数据（丑数），获取数据较之慢</li>
+<li>ArrayList适用于海量数据的查询（可直接由内存大小算出存储元素的地址，因此快），数据添加（添加至末尾）</li>
+</ul>
+]]></content>
+  </entry>
+  <entry>
+    <title>scroll滚动</title>
+    <url>/2020/09/08/scroll%E6%BB%9A%E5%8A%A8/</url>
+    <content><![CDATA[<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>简单总结一下js的ceilheight&amp;offsetheight的关系，以及scroll的使用方法</p>
+<a id="more"></a>
+
+<h2 id="clientHeight-amp-offsetHeight-amp-scrollHeight"><a href="#clientHeight-amp-offsetHeight-amp-scrollHeight" class="headerlink" title="clientHeight&amp;offsetHeight&amp;scrollHeight"></a>clientHeight&amp;offsetHeight&amp;scrollHeight</h2><p>1、常见的scrollHeight指的就是文本要放置的最小高度，包含被滚动条遮挡的未显示的部分<br><img src="/images/scrollHeight.webp" alt="scollHeight"></p>
+<p>2、clientHeight指的是当前可视部分（可以直接看到的文本内容窗口大小）<br><img src="/images/clientHeight.webp" alt="clientHeight&amp;&amp;offsetHeight"></p>
+<p>3、offsetHeight则是包含了可见部分的滚动条宽度和可视文本部分</p>
+<h2 id="scrollTop-amp-amp-offsetTop"><a href="#scrollTop-amp-amp-offsetTop" class="headerlink" title="scrollTop&amp;&amp;offsetTop"></a>scrollTop&amp;&amp;offsetTop</h2><p>1、scrollTop指的是所有文本高度到可是部分的顶点的高度</p>
+<p>2、offsetHeight指的是父级设置了position属性的节点到本节点顶部的距离，若没有设置position则默认body到元素顶部的偏移量</p>
+]]></content>
+      <categories>
+        <category>javascript</category>
+        <category>css</category>
+      </categories>
+      <tags>
+        <tag>css</tag>
+        <tag>css-layout</tag>
+        <tag>javascript</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>常用css设置</title>
+    <url>/2020/09/24/%E5%B8%B8%E7%94%A8css%E8%AE%BE%E7%BD%AE/</url>
+    <content><![CDATA[<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>列举常见的css命令，用于特定的功能。</p>
+<a id="more"></a>
+
+<h2 id="文本用超过使用…表示"><a href="#文本用超过使用…表示" class="headerlink" title="文本用超过使用…表示"></a>文本用超过使用…表示</h2><p>1、单行显示省略号</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">selector&#123;</span><br><span class="line">    overflow:hidden;</span><br><span class="line">    text-overflow:ellipsis;<span class="comment">//使用省略号代替截断文字</span></span><br><span class="line">    white-space:nowrap;<span class="comment">//不换行</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>2、多行显示（适用于chrome内核的浏览器）</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">selector&#123;</span><br><span class="line">    overflow:hidden;</span><br><span class="line">    text-overflow:ellipsis;</span><br><span class="line">    display:-webkit-box;<span class="comment">//显示格式为弹性伸缩盒子</span></span><br><span class="line">    -webkit-box-orient:vertical;<span class="comment">//元素内部排列方式</span></span><br><span class="line">    -webkit-line-clamp:<span class="number">2</span>;<span class="comment">//显示的文本行数（非标准属性，与上面两个属性结合才可使用）</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="将元素设置为吸顶模式"><a href="#将元素设置为吸顶模式" class="headerlink" title="将元素设置为吸顶模式"></a>将元素设置为吸顶模式</h2><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">selector&#123;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="将元素设置为内敛模式"><a href="#将元素设置为内敛模式" class="headerlink" title="将元素设置为内敛模式"></a>将元素设置为内敛模式</h2><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">selector&#123;</span><br><span class="line">    box-sizing:content-box;默认</span><br><span class="line">    box-sizing:border-box;<span class="comment">//设置为内敛模式</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+  </entry>
+  <entry>
+    <title>vue文档记录</title>
+    <url>/2020/09/25/vue%E6%96%87%E6%A1%A3%E8%AE%B0%E5%BD%95/</url>
+    <content><![CDATA[<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>开始重新阅读vue官方文档，记录下重点内容，加强理解和记忆。</p>
+<a id="more"></a>
+
+<h3 id="计算属性computed"><a href="#计算属性computed" class="headerlink" title="计算属性computed"></a>计算属性computed</h3><p>1、使用场景：模板内表达式的复杂计算</p>
+<p>2、特性：响应式计算（不重复计算相同值，缓存响应式的依赖，即data中的值改变才重新计算，否则使用缓存值）优于方法和watch监听属性</p>
+<p>示例：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> vm = <span class="keyword">new</span> Vue(&#123;</span><br><span class="line">    data:&#123;</span><br><span class="line">        firstname:<span class="string">'foo'</span>,</span><br><span class="line">        lastname:<span class="string">'bar'</span></span><br><span class="line">    &#125;,</span><br><span class="line">    computed:&#123;</span><br><span class="line">        fullname()&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">this</span>.firstname+<span class="string">'  '</span>+<span class="keyword">this</span>.lastname</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    template:<span class="string">`</span></span><br><span class="line"><span class="string">        &lt;div&gt;&lt;/div&gt;</span></span><br><span class="line"><span class="string">    `</span></span><br><span class="line">&#125;).$mount(<span class="string">'#app'</span>)</span><br></pre></td></tr></table></figure>
+
+<p>3、自定义setter方法：一般计算属性默认只有getter方法，但支持添加setter方法，example</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">...</span><br><span class="line">computed:&#123;</span><br><span class="line">    fullname:&#123;</span><br><span class="line">        <span class="keyword">get</span>:function()&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">this</span>.firstname+<span class="string">' '</span>+<span class="keyword">this</span>.lastname</span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="keyword">set</span>:function(newVal)&#123;</span><br><span class="line">            <span class="keyword">let</span> nameArr = newVal.split(<span class="string">' '</span>)</span><br><span class="line">            <span class="keyword">this</span>.firstname = nameArr[<span class="number">0</span>]</span><br><span class="line">            <span class="keyword">this</span>.lastname = nameArr[nameArr.length<span class="number">-1</span>]</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">...</span><br><span class="line"><span class="comment">//改变fullname则会调用setter方法</span></span><br><span class="line">vm.fullname = <span class="string">'jack ma'</span></span><br></pre></td></tr></table></figure>
+
+<h3 id=""><a href="#" class="headerlink" title=""></a></h3>]]></content>
+  </entry>
+</search>
