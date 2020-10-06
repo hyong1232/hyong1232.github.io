@@ -5,9 +5,11 @@ tags:
 categories:
 ---
 ## 简介
+
 用于vue-cli的升级较快，记录下变化
 
 ## 安装
+
 {% codeblock lang:shell %}
 #全局安装
 npm install -g @vue/cli
@@ -23,7 +25,8 @@ npm install -g @vue/cli
   -h, --help            输出帮助内容
 {% endcodeblock %}
 
-## 初始化项目
+## 初始化
+
 {% codeblock lang:shell %}
 vue create [options] <app-name>
 #创建一个由 `vue-cli-service` 提供支持的新项目

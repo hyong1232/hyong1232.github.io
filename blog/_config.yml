@@ -3,12 +3,12 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: Mr.H 的个人博客
+title: Mr.H's blog
 subtitle: 'ambition'
 description: '人生有酒需尽欢，莫使金樽空对月'
 keywords:
 author: Mr.H
-language: en
+language: zh-CN
 timezone: ''
 
 # URL
@@ -93,7 +93,7 @@ ignore:
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: hexo-theme-next
+theme: next
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
@@ -101,3 +101,15 @@ deploy:
   type: git
   repo: https://hyong1232:hy498015507.@github.com/hyong1232/hyong1232.github.io.git
   message: ''
+
+live2d:
+  enable: true
+  scriptFrom: local
+  model: 
+    use: live2d-widget-model-koharu
+  display:
+    position: right
+    width: 300
+    height: 600
+  mobile:
+   show: true
