@@ -7,6 +7,7 @@ categories:
 ## 简介
 
 用于vue-cli的升级较快，记录下变化
+<!-- more -->
 
 ## 安装
 
