@@ -1,6 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Object.assign函数</title>
+    <url>/2020/09/23/Object-assign%E5%87%BD%E6%95%B0/</url>
+    <content><![CDATA[<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p><strong>Object.assign()</strong>方法使用target的setter方法和origin对象的getter方法，复制对象可枚举的属性值，适用于很多的object操作。</p>
+<a id="more"></a>
+
+<h2 id="常用方法"><a href="#常用方法" class="headerlink" title="常用方法"></a>常用方法</h2><p>1、复制对象值，并返回新创建新对象</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">Objec</span><br><span class="line">t.assign(&#123;&#125;,&#123;<span class="attr">a</span>:<span class="string">'a'</span>&#125;,&#123;<span class="attr">b</span>:<span class="string">'b'</span>&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>2、为对象添加新属性</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="built_in">Object</span>.assign(orgin,&#123;<span class="attr">add</span>:<span class="string">'add'</span>&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>3、为对象添加新方法</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> obj = &#123;</span><br><span class="line">    val:<span class="string">'val'</span>,</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">Object</span>.assign(obj.prototype,&#123;</span><br><span class="line">    getName()&#123;</span><br><span class="line">        ....</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h3 id="特性："><a href="#特性：" class="headerlink" title="特性："></a>特性：</h3><p>1、由于Object.assign采用的是浅拷贝，因此源对象的属性值是对象时，只是复制了引用，再后面的复制中出现此对象的修改，则直接替换他的引用</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> obj1 = &#123;<span class="attr">a</span>: &#123;<span class="attr">b</span>: <span class="number">1</span>&#125;&#125;;</span><br><span class="line"><span class="keyword">const</span> obj2 = <span class="built_in">Object</span>.assign(&#123;&#125;, obj1);</span><br><span class="line"></span><br><span class="line">obj1.a.b = <span class="number">2</span>;</span><br><span class="line">obj2.a.b <span class="comment">// 2</span></span><br></pre></td></tr></table></figure>
+
+<p>2、不能复制origin源对象的继承属性，只能同通过Object.getPrototypeOf(origin)+Object.create()+origin方法，将其继承的方法单独调出来，然后合并</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> originProto = <span class="built_in">Object</span>.getPrototypeOf(origin);</span><br><span class="line"><span class="keyword">return</span> <span class="built_in">Object</span>.assign(<span class="built_in">Object</span>.create(originProto), origin);</span><br></pre></td></tr></table></figure>
+
+
+<p>3、target/orgin对象为非对象</p>
+<ul>
+<li>target为非对象，转换成对象，如果是null/undefined不可转换成对象的属性时，报错</li>
+<li>origin为非对象时，自动转换，如果是null/undefined不可转换成对象的属性时，直接跳过</li>
+</ul>
+<p>4、数组处理</p>
+<blockquote>
+<p>将数组当成对象处理，键值为index下标</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="built_in">Object</span>.assign([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>],[<span class="number">4</span>,<span class="number">5</span>])=&gt;[<span class="number">4</span>,<span class="number">5</span>,<span class="number">3</span>]</span><br></pre></td></tr></table></figure>
+
+<p>5、取值函数处理（关键字get开头）</p>
+<blockquote>
+<p>直接取值，不会获取取值函数合并</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> obj = &#123;</span><br><span class="line">    <span class="keyword">get</span> name ()&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">'jack'</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">Object</span>.assign(&#123;&#125;,obj)=&gt;&#123;<span class="attr">name</span>:<span class="string">'jack'</span>&#125;</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>es6</category>
+        <category>Object操作</category>
+      </categories>
+      <tags>
+        <tag>es6</tag>
+        <tag>Object操作</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>babel使用介绍</title>
     <url>/2020/09/21/babel%E4%BD%BF%E7%94%A8%E4%BB%8B%E7%BB%8D/</url>
     <content><![CDATA[<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>babel+webpack作为es6必用的工具，配置和使用较为麻烦，小节了一下常见的使用和配置。</p>
@@ -66,50 +113,81 @@
       </tags>
   </entry>
   <entry>
-    <title>Object.assign函数</title>
-    <url>/2020/09/23/Object-assign%E5%87%BD%E6%95%B0/</url>
-    <content><![CDATA[<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p><strong>Object.assign()</strong>方法使用target的setter方法和origin对象的getter方法，复制对象可枚举的属性值，适用于很多的object操作。</p>
+    <title>comonjs与ES6的文件导入导出比较</title>
+    <url>/2020/09/20/comonjs%E4%B8%8EES6%E7%9A%84%E6%96%87%E4%BB%B6%E5%AF%BC%E5%85%A5%E5%AF%BC%E5%87%BA%E6%AF%94%E8%BE%83/</url>
+    <content><![CDATA[<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>es6的模块化加载和node服务端的模块化加载，他们的关键字比较相近，而且在webpack打包的项目中，两种方式的模块化引用都是有效的，为了便于区分，小结了一下。</p>
 <a id="more"></a>
 
-<h2 id="常用方法"><a href="#常用方法" class="headerlink" title="常用方法"></a>常用方法</h2><p>1、复制对象值，并返回新创建新对象</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">Objec</span><br><span class="line">t.assign(&#123;&#125;,&#123;<span class="attr">a</span>:<span class="string">'a'</span>&#125;,&#123;<span class="attr">b</span>:<span class="string">'b'</span>&#125;)</span><br></pre></td></tr></table></figure>
+<h2 id="CommonJS模块化加载"><a href="#CommonJS模块化加载" class="headerlink" title="CommonJS模块化加载"></a>CommonJS模块化加载</h2><blockquote>
+<p>只有在运行时才会加载（同步加载），而且是加载整个路径的文件生成一个对象，然后再从这个对象中解构赋值给要查找的属性,例如：</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> &#123;a,b&#125; = <span class="built_in">require</span>(<span class="string">'fs'</span>)</span><br><span class="line"><span class="comment">//等同于</span></span><br><span class="line"><span class="keyword">let</span> _fs = <span class="built_in">require</span>(<span class="string">'fs'</span>)</span><br><span class="line"><span class="keyword">let</span> a =  _fs.a</span><br><span class="line"><span class="keyword">let</span> b =  _fs.b</span><br></pre></td></tr></table></figure>
+<h3 id="导出"><a href="#导出" class="headerlink" title="导出"></a>导出</h3><p>1、导出单个对象时，给modules.exports对象直接赋值即可<br>2、导出多个对象时，使用关键字exports，将其看成对象，增加属性（为属性赋值）<br><strong>exports关键字只是modules.epxorts的引用，直接给exports赋值不会改变导出结果</strong></p>
+<h3 id="导入require（）函数"><a href="#导入require（）函数" class="headerlink" title="导入require（）函数"></a>导入require（）函数</h3><p>1、运行时加载且为同步加载。<br>2、优先从缓存加载，重复文件不回加载。<br>3、循环加载时不会将父文件完整加载，而是只加载到调用自身时为止的内容，避免循环产生。<br>4、路径可为运行时才可得到的结果。</p>
+<h2 id="ES6模块化加载"><a href="#ES6模块化加载" class="headerlink" title="ES6模块化加载"></a>ES6模块化加载</h2><blockquote>
+<p>静态化思想，<strong>编译时</strong>就确定模块关系，即在模块内就指定要加载模块，运行时使用import加载指定的模块 </p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">//import &#123;a,b&#125; from 'fs'</span></span><br></pre></td></tr></table></figure>
+<p><strong>fs文件可以不写后缀需要在webpack中配置说明</strong></p>
+<h3 id="export命令"><a href="#export命令" class="headerlink" title="export命令"></a>export命令</h3><blockquote>
+<p>常见写法</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">var</span> a = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">var</span> b = <span class="string">'jack'</span>;</span><br><span class="line"><span class="comment">//相当于</span></span><br><span class="line"><span class="keyword">var</span> a = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">var</span> b = <span class="string">'jack'</span></span><br><span class="line"><span class="keyword">export</span> &#123;a,b&#125;;</span><br><span class="line"><span class="comment">//函数或类</span></span><br><span class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">exportFunc</span>(<span class="params"></span>)</span>&#123;...&#125;</span><br><span class="line"><span class="keyword">export</span> <span class="class"><span class="keyword">class</span> <span class="title">exportClass</span> </span>&#123;...&#125;</span><br><span class="line"><span class="comment">//使用as关键字为导出变量重命名,同一个导出变量可有多个不同名称的输出</span></span><br><span class="line"><span class="keyword">var</span> a = <span class="string">'jack'</span></span><br><span class="line"><span class="keyword">export</span> &#123;a <span class="keyword">as</span> summer,a <span class="keyword">as</span> peter&#125;;</span><br></pre></td></tr></table></figure>
 
-<p>2、为对象添加新属性</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="built_in">Object</span>.assign(orgin,&#123;<span class="attr">add</span>:<span class="string">'add'</span>&#125;)</span><br></pre></td></tr></table></figure>
-
-<p>3、为对象添加新方法</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> obj = &#123;</span><br><span class="line">    val:<span class="string">'val'</span>,</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">Object</span>.assign(obj.prototype,&#123;</span><br><span class="line">    getName()&#123;</span><br><span class="line">        ....</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-<h3 id="特性："><a href="#特性：" class="headerlink" title="特性："></a>特性：</h3><p>1、由于Object.assign采用的是浅拷贝，因此源对象的属性值是对象时，只是复制了引用，再后面的复制中出现此对象的修改，则直接替换他的引用</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> obj1 = &#123;<span class="attr">a</span>: &#123;<span class="attr">b</span>: <span class="number">1</span>&#125;&#125;;</span><br><span class="line"><span class="keyword">const</span> obj2 = <span class="built_in">Object</span>.assign(&#123;&#125;, obj1);</span><br><span class="line"></span><br><span class="line">obj1.a.b = <span class="number">2</span>;</span><br><span class="line">obj2.a.b <span class="comment">// 2</span></span><br></pre></td></tr></table></figure>
-
-<p>2、不能复制origin源对象的继承属性，只能同通过Object.getPrototypeOf(origin)+Object.create()+origin方法，将其继承的方法单独调出来，然后合并</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> originProto = <span class="built_in">Object</span>.getPrototypeOf(origin);</span><br><span class="line"><span class="keyword">return</span> <span class="built_in">Object</span>.assign(<span class="built_in">Object</span>.create(originProto), origin);</span><br></pre></td></tr></table></figure>
-
-
-<p>3、target/orgin对象为非对象</p>
 <ul>
-<li>target为非对象，转换成对象，如果是null/undefined不可转换成对象的属性时，报错</li>
-<li>origin为非对象时，自动转换，如果是null/undefined不可转换成对象的属性时，直接跳过</li>
+<li><p>通过export与import关键字进行导入导出，实际上就是导出了代码的引用到对应位置，因此他的数据是可变的（实时的）</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">//100ms之后导出的a的值会变成'change'</span></span><br><span class="line"><span class="keyword">var</span> a = <span class="string">'origin'</span></span><br><span class="line">setTimeout(<span class="function"><span class="params">_</span>=&gt;</span>&#123;a = <span class="string">'change'</span>&#125;,<span class="number">100</span>)</span><br><span class="line"><span class="keyword">export</span> &#123;a&#125;;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>因为静态时确定模块导入/出关系，export关键字不可放在函数中，导出/导入表达式中不可有运行之后才有明确结果的变量成分</p>
+</li>
+<li><p>导出的结果为一个对象类型，若没有指定default导出，则不可单独导出其他类型</p>
+</li>
 </ul>
-<p>4、数组处理</p>
-<blockquote>
-<p>将数组当成对象处理，键值为index下标</p>
+<h3 id="import关键字"><a href="#import关键字" class="headerlink" title="import关键字"></a>import关键字</h3><blockquote>
+<p>常见写法</p>
 </blockquote>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="built_in">Object</span>.assign([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>],[<span class="number">4</span>,<span class="number">5</span>])=&gt;[<span class="number">4</span>,<span class="number">5</span>,<span class="number">3</span>]</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123;a,b&#125; <span class="keyword">from</span> <span class="string">'./exprot.js'</span></span><br><span class="line"><span class="comment">//可为导入的成员重新命名</span></span><br><span class="line"><span class="keyword">import</span> &#123;a <span class="keyword">as</span> c,b <span class="keyword">as</span> d&#125; <span class="keyword">from</span> <span class="string">'./exprot.js'</span></span><br><span class="line"><span class="comment">//导出变量如果不是对象，不可赋值（只读），是对象也不推荐赋值，影响代码维护</span></span><br><span class="line"><span class="keyword">import</span> &#123; a&#125; form <span class="string">'export.js'</span></span><br><span class="line">a = XXX——错误（不推荐）的写法</span><br></pre></td></tr></table></figure>
 
-<p>5、取值函数处理（关键字get开头）</p>
+<ul>
+<li><p>多次调用一个导入文件，等同于引用一个导出的多个被选引用，会自动合并相同引用例如</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; foo &#125; <span class="keyword">from</span> <span class="string">'my_module'</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; bar &#125; <span class="keyword">from</span> <span class="string">'my_module'</span>;</span><br><span class="line"><span class="comment">// 等同于</span></span><br><span class="line"><span class="keyword">import</span> &#123; foo, bar &#125; <span class="keyword">from</span> <span class="string">'my_module'</span>;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>不要和CommonJS的模块加载混用，CommonJS是运行时加载会出问题</p>
+</li>
+</ul>
+<h3 id="特殊导入-导出"><a href="#特殊导入-导出" class="headerlink" title="特殊导入/导出"></a>特殊导入/导出</h3><p>1、导入*——将整体导入成一个对象（但不可为对象属性赋值），可用as重命名</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> * <span class="keyword">as</span> circle <span class="keyword">from</span> <span class="string">'./circle'</span>;</span><br><span class="line"><span class="comment">// 下面两行都是不允许的</span></span><br><span class="line">circle.foo = <span class="string">'hello'</span>;</span><br><span class="line">circle.area = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>2、默认导入关键字default——导出default名称的变量，导入时可自由命名，不用使用as</p>
 <blockquote>
-<p>直接取值，不会获取取值函数合并</p>
+<p>常见写法</p>
 </blockquote>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> obj = &#123;</span><br><span class="line">    <span class="keyword">get</span> name ()&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">'jack'</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">Object</span>.assign(&#123;&#125;,obj)=&gt;&#123;<span class="attr">name</span>:<span class="string">'jack'</span>&#125;</span><br></pre></td></tr></table></figure>]]></content>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">//导出命名函数——同导出匿名函数一样，名称无用，导入时自用命名</span></span><br><span class="line">exprot <span class="keyword">default</span> <span class="function"><span class="keyword">function</span> <span class="title">f</span>(<span class="params"></span>)</span>&#123;...&#125;</span><br><span class="line"><span class="comment">//等同于</span></span><br><span class="line">exprot <span class="keyword">default</span> <span class="function"><span class="keyword">function</span> (<span class="params"></span>)</span>&#123;...&#125;</span><br><span class="line"><span class="comment">//导入时不用加&#123;&#125;</span></span><br><span class="line"><span class="keyword">import</span> anyname <span class="keyword">from</span> <span class="string">'default.js'</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//上述操作等同于</span></span><br><span class="line"><span class="keyword">var</span> something= <span class="string">'...'</span></span><br><span class="line">exprot &#123;something <span class="keyword">as</span> <span class="keyword">default</span>&#125; </span><br><span class="line"><span class="keyword">import</span> &#123;<span class="keyword">default</span> <span class="keyword">as</span> anyname&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>默认导入/导出可与导出对象叠加使用<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">//导出</span></span><br><span class="line">eport <span class="keyword">default</span> <span class="function"><span class="keyword">function</span> (<span class="params">obj</span>) </span>&#123;···&#125;</span><br><span class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">each</span>(<span class="params">obj, iterator, context</span>) </span>&#123;...&#125;</span><br><span class="line"><span class="keyword">export</span> &#123; each <span class="keyword">as</span> forEach &#125;;</span><br><span class="line"><span class="comment">//导入</span></span><br><span class="line"><span class="keyword">import</span> _, &#123; each, forEach &#125; <span class="keyword">from</span> <span class="string">'export.js'</span>;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p>3、合并import+export做转发or重命名or模块继承（添加完善）</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">//模块转发</span></span><br><span class="line"><span class="keyword">export</span> &#123; foo, bar &#125; <span class="keyword">from</span> <span class="string">'my_module'</span>;</span><br><span class="line"><span class="comment">// 可以简单理解为</span></span><br><span class="line"><span class="keyword">import</span> &#123; foo, bar &#125; <span class="keyword">from</span> <span class="string">'my_module'</span>;</span><br><span class="line"><span class="keyword">export</span> &#123; foo, bar &#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">//模块转发并重命名</span></span><br><span class="line"><span class="keyword">export</span> * <span class="keyword">as</span> ns <span class="keyword">from</span> <span class="string">"mod"</span>;</span><br><span class="line"><span class="comment">// 等同于</span></span><br><span class="line"><span class="keyword">import</span> * <span class="keyword">as</span> ns <span class="keyword">from</span> <span class="string">"mod"</span>;</span><br><span class="line"><span class="keyword">export</span> &#123;ns&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">//模块继承（*号表示非默认default导出的对象）</span></span><br><span class="line"><span class="keyword">export</span> * <span class="keyword">from</span> <span class="string">'circle'</span>;<span class="comment">//不包括default默认导出</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">var</span> e = <span class="number">2.71828182846</span>;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="function"><span class="keyword">function</span>(<span class="params">x</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="built_in">Math</span>.exp(x);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//引用修改（加强）的模块</span></span><br><span class="line"><span class="keyword">import</span> * <span class="keyword">as</span> math <span class="keyword">from</span> <span class="string">'circleplus'</span>;</span><br><span class="line"><span class="keyword">import</span> exp <span class="keyword">from</span> <span class="string">'circleplus'</span>;<span class="comment">//上面继承模块默认导出的对象引用（函数）</span></span><br><span class="line"><span class="built_in">console</span>.log(exp(math.e));   </span><br></pre></td></tr></table></figure>
+
+<h3 id="import（）函数"><a href="#import（）函数" class="headerlink" title="import（）函数"></a>import（）函数</h3><blockquote>
+<p>es2020添加了类似require的动态加载模块功能，返回一个promise对象，而加载成功则引用模块作为对象参数返回给回调函数</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">//常见写法</span></span><br><span class="line"><span class="built_in">Promise</span>.all([</span><br><span class="line">  <span class="keyword">import</span>(<span class="string">'./module1.js'</span>),</span><br><span class="line">  <span class="keyword">import</span>(<span class="string">'./module2.js'</span>),</span><br><span class="line">  <span class="keyword">import</span>(<span class="string">'./module3.js'</span>),</span><br><span class="line">])</span><br><span class="line">.then(<span class="function">(<span class="params">[module1, module2, module3]</span>) =&gt;</span> &#123;</span><br><span class="line">   ···</span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">//导入模块后直接解构获取值</span></span><br><span class="line"><span class="keyword">import</span>(<span class="string">'./myModule.js'</span>)</span><br><span class="line">.then(<span class="function">(<span class="params">&#123;export1, export2&#125;</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">// ...·</span></span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">//获取默认导出</span></span><br><span class="line"><span class="keyword">import</span>(<span class="string">'./myModule.js'</span>)</span><br><span class="line">.then(<span class="function"><span class="params">myModule</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(myModule.default);</span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">//默认导出的具名形式</span></span><br><span class="line"><span class="keyword">import</span>(<span class="string">'./myModule.js'</span>)</span><br><span class="line">.then(<span class="function">(<span class="params">&#123;<span class="keyword">default</span>: theDefault&#125;</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(theDefault);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>总结特点：1、加载路径可变，动态加载引用2、可在函数内使用3、异步加载</p>
+</blockquote>
+]]></content>
       <categories>
-        <category>es6</category>
-        <category>Object操作</category>
+        <category>javascript</category>
+        <category>CommonJS模块化加载</category>
       </categories>
       <tags>
         <tag>es6</tag>
-        <tag>Object操作</tag>
+        <tag>node</tag>
+        <tag>CommonJS模块化加载</tag>
       </tags>
   </entry>
   <entry>
@@ -280,84 +358,6 @@
       <tags>
         <tag>es6</tag>
         <tag>编程风格</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>comonjs与ES6的文件导入导出比较</title>
-    <url>/2020/09/20/comonjs%E4%B8%8EES6%E7%9A%84%E6%96%87%E4%BB%B6%E5%AF%BC%E5%85%A5%E5%AF%BC%E5%87%BA%E6%AF%94%E8%BE%83/</url>
-    <content><![CDATA[<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>es6的模块化加载和node服务端的模块化加载，他们的关键字比较相近，而且在webpack打包的项目中，两种方式的模块化引用都是有效的，为了便于区分，小结了一下。</p>
-<a id="more"></a>
-
-<h2 id="CommonJS模块化加载"><a href="#CommonJS模块化加载" class="headerlink" title="CommonJS模块化加载"></a>CommonJS模块化加载</h2><blockquote>
-<p>只有在运行时才会加载（同步加载），而且是加载整个路径的文件生成一个对象，然后再从这个对象中解构赋值给要查找的属性,例如：</p>
-</blockquote>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> &#123;a,b&#125; = <span class="built_in">require</span>(<span class="string">'fs'</span>)</span><br><span class="line"><span class="comment">//等同于</span></span><br><span class="line"><span class="keyword">let</span> _fs = <span class="built_in">require</span>(<span class="string">'fs'</span>)</span><br><span class="line"><span class="keyword">let</span> a =  _fs.a</span><br><span class="line"><span class="keyword">let</span> b =  _fs.b</span><br></pre></td></tr></table></figure>
-<h3 id="导出"><a href="#导出" class="headerlink" title="导出"></a>导出</h3><p>1、导出单个对象时，给modules.exports对象直接赋值即可<br>2、导出多个对象时，使用关键字exports，将其看成对象，增加属性（为属性赋值）<br><strong>exports关键字只是modules.epxorts的引用，直接给exports赋值不会改变导出结果</strong></p>
-<h3 id="导入require（）函数"><a href="#导入require（）函数" class="headerlink" title="导入require（）函数"></a>导入require（）函数</h3><p>1、运行时加载且为同步加载。<br>2、优先从缓存加载，重复文件不回加载。<br>3、循环加载时不会将父文件完整加载，而是只加载到调用自身时为止的内容，避免循环产生。<br>4、路径可为运行时才可得到的结果。</p>
-<h2 id="ES6模块化加载"><a href="#ES6模块化加载" class="headerlink" title="ES6模块化加载"></a>ES6模块化加载</h2><blockquote>
-<p>静态化思想，<strong>编译时</strong>就确定模块关系，即在模块内就指定要加载模块，运行时使用import加载指定的模块 </p>
-</blockquote>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">//import &#123;a,b&#125; from 'fs'</span></span><br></pre></td></tr></table></figure>
-<p><strong>fs文件可以不写后缀需要在webpack中配置说明</strong></p>
-<h3 id="export命令"><a href="#export命令" class="headerlink" title="export命令"></a>export命令</h3><blockquote>
-<p>常见写法</p>
-</blockquote>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">var</span> a = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">var</span> b = <span class="string">'jack'</span>;</span><br><span class="line"><span class="comment">//相当于</span></span><br><span class="line"><span class="keyword">var</span> a = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">var</span> b = <span class="string">'jack'</span></span><br><span class="line"><span class="keyword">export</span> &#123;a,b&#125;;</span><br><span class="line"><span class="comment">//函数或类</span></span><br><span class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">exportFunc</span>(<span class="params"></span>)</span>&#123;...&#125;</span><br><span class="line"><span class="keyword">export</span> <span class="class"><span class="keyword">class</span> <span class="title">exportClass</span> </span>&#123;...&#125;</span><br><span class="line"><span class="comment">//使用as关键字为导出变量重命名,同一个导出变量可有多个不同名称的输出</span></span><br><span class="line"><span class="keyword">var</span> a = <span class="string">'jack'</span></span><br><span class="line"><span class="keyword">export</span> &#123;a <span class="keyword">as</span> summer,a <span class="keyword">as</span> peter&#125;;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><p>通过export与import关键字进行导入导出，实际上就是导出了代码的引用到对应位置，因此他的数据是可变的（实时的）</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">//100ms之后导出的a的值会变成'change'</span></span><br><span class="line"><span class="keyword">var</span> a = <span class="string">'origin'</span></span><br><span class="line">setTimeout(<span class="function"><span class="params">_</span>=&gt;</span>&#123;a = <span class="string">'change'</span>&#125;,<span class="number">100</span>)</span><br><span class="line"><span class="keyword">export</span> &#123;a&#125;;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>因为静态时确定模块导入/出关系，export关键字不可放在函数中，导出/导入表达式中不可有运行之后才有明确结果的变量成分</p>
-</li>
-<li><p>导出的结果为一个对象类型，若没有指定default导出，则不可单独导出其他类型</p>
-</li>
-</ul>
-<h3 id="import关键字"><a href="#import关键字" class="headerlink" title="import关键字"></a>import关键字</h3><blockquote>
-<p>常见写法</p>
-</blockquote>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123;a,b&#125; <span class="keyword">from</span> <span class="string">'./exprot.js'</span></span><br><span class="line"><span class="comment">//可为导入的成员重新命名</span></span><br><span class="line"><span class="keyword">import</span> &#123;a <span class="keyword">as</span> c,b <span class="keyword">as</span> d&#125; <span class="keyword">from</span> <span class="string">'./exprot.js'</span></span><br><span class="line"><span class="comment">//导出变量如果不是对象，不可赋值（只读），是对象也不推荐赋值，影响代码维护</span></span><br><span class="line"><span class="keyword">import</span> &#123; a&#125; form <span class="string">'export.js'</span></span><br><span class="line">a = XXX——错误（不推荐）的写法</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><p>多次调用一个导入文件，等同于引用一个导出的多个被选引用，会自动合并相同引用例如</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; foo &#125; <span class="keyword">from</span> <span class="string">'my_module'</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; bar &#125; <span class="keyword">from</span> <span class="string">'my_module'</span>;</span><br><span class="line"><span class="comment">// 等同于</span></span><br><span class="line"><span class="keyword">import</span> &#123; foo, bar &#125; <span class="keyword">from</span> <span class="string">'my_module'</span>;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>不要和CommonJS的模块加载混用，CommonJS是运行时加载会出问题</p>
-</li>
-</ul>
-<h3 id="特殊导入-导出"><a href="#特殊导入-导出" class="headerlink" title="特殊导入/导出"></a>特殊导入/导出</h3><p>1、导入*——将整体导入成一个对象（但不可为对象属性赋值），可用as重命名</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> * <span class="keyword">as</span> circle <span class="keyword">from</span> <span class="string">'./circle'</span>;</span><br><span class="line"><span class="comment">// 下面两行都是不允许的</span></span><br><span class="line">circle.foo = <span class="string">'hello'</span>;</span><br><span class="line">circle.area = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;&#125;;</span><br></pre></td></tr></table></figure>
-
-<p>2、默认导入关键字default——导出default名称的变量，导入时可自由命名，不用使用as</p>
-<blockquote>
-<p>常见写法</p>
-</blockquote>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">//导出命名函数——同导出匿名函数一样，名称无用，导入时自用命名</span></span><br><span class="line">exprot <span class="keyword">default</span> <span class="function"><span class="keyword">function</span> <span class="title">f</span>(<span class="params"></span>)</span>&#123;...&#125;</span><br><span class="line"><span class="comment">//等同于</span></span><br><span class="line">exprot <span class="keyword">default</span> <span class="function"><span class="keyword">function</span> (<span class="params"></span>)</span>&#123;...&#125;</span><br><span class="line"><span class="comment">//导入时不用加&#123;&#125;</span></span><br><span class="line"><span class="keyword">import</span> anyname <span class="keyword">from</span> <span class="string">'default.js'</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//上述操作等同于</span></span><br><span class="line"><span class="keyword">var</span> something= <span class="string">'...'</span></span><br><span class="line">exprot &#123;something <span class="keyword">as</span> <span class="keyword">default</span>&#125; </span><br><span class="line"><span class="keyword">import</span> &#123;<span class="keyword">default</span> <span class="keyword">as</span> anyname&#125;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>默认导入/导出可与导出对象叠加使用<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">//导出</span></span><br><span class="line">eport <span class="keyword">default</span> <span class="function"><span class="keyword">function</span> (<span class="params">obj</span>) </span>&#123;···&#125;</span><br><span class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">each</span>(<span class="params">obj, iterator, context</span>) </span>&#123;...&#125;</span><br><span class="line"><span class="keyword">export</span> &#123; each <span class="keyword">as</span> forEach &#125;;</span><br><span class="line"><span class="comment">//导入</span></span><br><span class="line"><span class="keyword">import</span> _, &#123; each, forEach &#125; <span class="keyword">from</span> <span class="string">'export.js'</span>;</span><br></pre></td></tr></table></figure>
-
-</li>
-</ul>
-<p>3、合并import+export做转发or重命名or模块继承（添加完善）</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">//模块转发</span></span><br><span class="line"><span class="keyword">export</span> &#123; foo, bar &#125; <span class="keyword">from</span> <span class="string">'my_module'</span>;</span><br><span class="line"><span class="comment">// 可以简单理解为</span></span><br><span class="line"><span class="keyword">import</span> &#123; foo, bar &#125; <span class="keyword">from</span> <span class="string">'my_module'</span>;</span><br><span class="line"><span class="keyword">export</span> &#123; foo, bar &#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">//模块转发并重命名</span></span><br><span class="line"><span class="keyword">export</span> * <span class="keyword">as</span> ns <span class="keyword">from</span> <span class="string">"mod"</span>;</span><br><span class="line"><span class="comment">// 等同于</span></span><br><span class="line"><span class="keyword">import</span> * <span class="keyword">as</span> ns <span class="keyword">from</span> <span class="string">"mod"</span>;</span><br><span class="line"><span class="keyword">export</span> &#123;ns&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">//模块继承（*号表示非默认default导出的对象）</span></span><br><span class="line"><span class="keyword">export</span> * <span class="keyword">from</span> <span class="string">'circle'</span>;<span class="comment">//不包括default默认导出</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">var</span> e = <span class="number">2.71828182846</span>;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="function"><span class="keyword">function</span>(<span class="params">x</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="built_in">Math</span>.exp(x);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//引用修改（加强）的模块</span></span><br><span class="line"><span class="keyword">import</span> * <span class="keyword">as</span> math <span class="keyword">from</span> <span class="string">'circleplus'</span>;</span><br><span class="line"><span class="keyword">import</span> exp <span class="keyword">from</span> <span class="string">'circleplus'</span>;<span class="comment">//上面继承模块默认导出的对象引用（函数）</span></span><br><span class="line"><span class="built_in">console</span>.log(exp(math.e));   </span><br></pre></td></tr></table></figure>
-
-<h3 id="import（）函数"><a href="#import（）函数" class="headerlink" title="import（）函数"></a>import（）函数</h3><blockquote>
-<p>es2020添加了类似require的动态加载模块功能，返回一个promise对象，而加载成功则引用模块作为对象参数返回给回调函数</p>
-</blockquote>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">//常见写法</span></span><br><span class="line"><span class="built_in">Promise</span>.all([</span><br><span class="line">  <span class="keyword">import</span>(<span class="string">'./module1.js'</span>),</span><br><span class="line">  <span class="keyword">import</span>(<span class="string">'./module2.js'</span>),</span><br><span class="line">  <span class="keyword">import</span>(<span class="string">'./module3.js'</span>),</span><br><span class="line">])</span><br><span class="line">.then(<span class="function">(<span class="params">[module1, module2, module3]</span>) =&gt;</span> &#123;</span><br><span class="line">   ···</span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">//导入模块后直接解构获取值</span></span><br><span class="line"><span class="keyword">import</span>(<span class="string">'./myModule.js'</span>)</span><br><span class="line">.then(<span class="function">(<span class="params">&#123;export1, export2&#125;</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">// ...·</span></span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">//获取默认导出</span></span><br><span class="line"><span class="keyword">import</span>(<span class="string">'./myModule.js'</span>)</span><br><span class="line">.then(<span class="function"><span class="params">myModule</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(myModule.default);</span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">//默认导出的具名形式</span></span><br><span class="line"><span class="keyword">import</span>(<span class="string">'./myModule.js'</span>)</span><br><span class="line">.then(<span class="function">(<span class="params">&#123;<span class="keyword">default</span>: theDefault&#125;</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(theDefault);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>总结特点：1、加载路径可变，动态加载引用2、可在函数内使用3、异步加载</p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>javascript</category>
-        <category>CommonJS模块化加载</category>
-      </categories>
-      <tags>
-        <tag>es6</tag>
-        <tag>node</tag>
-        <tag>CommonJS模块化加载</tag>
       </tags>
   </entry>
   <entry>
@@ -622,22 +622,6 @@
       </tags>
   </entry>
   <entry>
-    <title>java-day3</title>
-    <url>/2020/09/08/java-day3/</url>
-    <content><![CDATA[<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>daythree，Java中的final变量，JVM堆栈区，binarysearch&amp;ArrayList的add方法，静态资源调用，代码块执行顺序<br>1、代码块执行顺序<br>2、重写listarray，并用cellction.binarysearch方法依次插入数据<br>3、输入整数，转换成byte数组，保存，查看使用静态代码块初始化</p>
-]]></content>
-      <categories>
-        <category>java</category>
-      </categories>
-      <tags>
-        <tag>java</tag>
-        <tag>final</tag>
-        <tag>static</tag>
-        <tag>JVM</tag>
-        <tag>Collection</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>gird布局</title>
     <url>/2020/05/14/grid%E5%B8%83%E5%B1%80/</url>
     <content><![CDATA[<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p><strong>感谢阮一峰先生的分享<a href="http://www.ruanyifeng.com/blog/2019/03/grid-layout-tutorial.html" target="_blank" rel="noopener">grid-layout-tutorial</a> 仅供个人学习。</strong></p>
@@ -886,6 +870,22 @@
       </tags>
   </entry>
   <entry>
+    <title>java-day3</title>
+    <url>/2020/09/08/java-day3/</url>
+    <content><![CDATA[<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>daythree，Java中的final变量，JVM堆栈区，binarysearch&amp;ArrayList的add方法，静态资源调用，代码块执行顺序<br>1、代码块执行顺序<br>2、重写listarray，并用cellction.binarysearch方法依次插入数据<br>3、输入整数，转换成byte数组，保存，查看使用静态代码块初始化</p>
+]]></content>
+      <categories>
+        <category>java</category>
+      </categories>
+      <tags>
+        <tag>java</tag>
+        <tag>final</tag>
+        <tag>static</tag>
+        <tag>JVM</tag>
+        <tag>Collection</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>java-bitOperation</title>
     <url>/2020/09/07/java-bitOperation/</url>
     <content><![CDATA[<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>java继续学习了，上次学习还是去年，中间断断续续几乎停了,唉，加油，从位运算开始。</p>
@@ -930,50 +930,31 @@
 ]]></content>
   </entry>
   <entry>
-    <title>java-day6</title>
-    <url>/2020/09/15/java-day6/</url>
-    <content><![CDATA[<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>day6，upup~</p>
+    <title>java-day4</title>
+    <url>/2020/09/13/java-day4/</url>
+    <content><![CDATA[<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>day4，主要讲了String类&amp;局部/全局变量&amp;Array常见方法使用&amp;递归&amp;BufferReader/FileReader/FileWriter&amp;混合变量后的类加载顺序</p>
 <a id="more"></a>
 
-<h2 id="Date类的简单实用"><a href="#Date类的简单实用" class="headerlink" title="Date类的简单实用"></a>Date类的简单实用</h2><blockquote>
-<p>SimpleDateFormat+Date类</p>
+<h2 id="混合变量类加载顺序"><a href="#混合变量类加载顺序" class="headerlink" title="混合变量类加载顺序"></a>混合变量类加载顺序</h2><blockquote>
+<p>Array.copyOf(original,newlength)<br>返回新数组，不改变原数组<br>新数组的长度可大于或小于原数组——&gt;数组的切割/增大容量</p>
 </blockquote>
-<h2 id="内部类"><a href="#内部类" class="headerlink" title="内部类"></a>内部类</h2><blockquote>
-<p>内部类就是类里面嵌套了类</p>
-</blockquote>
-<table>
-<thead>
-<tr>
-<th>普通内部类</th>
-<th>静态内部类</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>异</td>
-<td>普通内部类只能由具体的外部类对象生成内部内对象，静态内部类则可以直接生成对象</td>
-</tr>
-<tr>
-<td>同</td>
-<td>在类的里面定义，引入有导入包+外部类名.内部类名两种方式</td>
-</tr>
-<tr>
-<td>同</td>
-<td>在内部类和其外部类中可以相互引用私有变量/方法，部手限制关键字影响</td>
-</tr>
-</tbody></table>
 <blockquote>
-<p>局部内部类</p>
+<p>类加载<br>1、将父类加载到方法区，并为其静态变量分配内存空间<br>2、将子类加载到方法区，并为其静态变量分配内存空间<br>3、为父类的静态变量赋值&amp;执行父类静态代码块（无先后顺序）<br>4、为子类的静态变量赋值&amp;执行子类静态代码块（无先后顺序）</p>
 </blockquote>
-<p>1、使用场景，只出现一次，需要不确定的类型实现对象引用接口/父类方法<br>2、使用方式new +父类/接口名（）{}即可。<br><strong>限制</strong>：</p>
-<ul>
-<li>使用局部变量需要final关键字（jdk1.8后可省略）</li>
-<li>声明只在定义的局部代码块中有效/可用，但对象地址可以传递出去——&gt;用对象实现方法调用（传递出去时返回类型使用父类声明即可）</li>
-</ul>
-<p><strong>应用</strong></p>
-<ul>
-<li>sort方法总的comparator接口对象</li>
-</ul>
+<blockquote>
+<p>new新对象<br>5、在堆中创建父类对象，为父类成员变量分配内存<br>6、在堆中创建子类对象，为子类成员变量分配内存<br>7、为父类的成员变量赋值<br>8、执行父类的构造函数<br>9、为子类的成员变量赋值<br>10、执行子类的构造函数</p>
+</blockquote>
+<p>binarySearch+ArrayList？？？</p>
 ]]></content>
+      <categories>
+        <category>java</category>
+        <category>javase</category>
+      </categories>
+      <tags>
+        <tag>fileOperation</tag>
+        <tag>String</tag>
+        <tag>Arrays</tag>
+      </tags>
   </entry>
   <entry>
     <title>java-day5</title>
@@ -1054,47 +1035,50 @@
       </tags>
   </entry>
   <entry>
-    <title>vue-cli使用</title>
-    <url>/2020/09/26/vue-cli%E4%BD%BF%E7%94%A8/</url>
-    <content><![CDATA[<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>用于vue-cli的升级较快，记录下变化</p>
+    <title>java-day6</title>
+    <url>/2020/09/15/java-day6/</url>
+    <content><![CDATA[<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>day6，upup~</p>
 <a id="more"></a>
 
-<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">全局安装</span></span><br><span class="line">npm install -g @vue/cli</span><br><span class="line"><span class="meta">#</span><span class="bash">升级项目中的cli相关模块</span></span><br><span class="line"><span class="meta">#</span><span class="bash">vue  upgrade [options] [plugin-name]</span></span><br><span class="line"><span class="meta">#</span><span class="bash">（试用）升级 Vue CLI 服务及插件</span></span><br><span class="line"><span class="meta">#</span><span class="bash">选项：</span></span><br><span class="line">  -t, --to &lt;version&gt;    升级 &lt;plugin-name&gt; 到指定的版本</span><br><span class="line">  -f, --from &lt;version&gt;  跳过本地版本检测，默认插件是从此处指定的版本升级上来</span><br><span class="line">  -r, --registry &lt;url&gt;  使用指定的 registry 地址安装依赖</span><br><span class="line">  --all                 升级所有的插件</span><br><span class="line">  --next                检查插件新版本时，包括 alpha/beta/rc 版本在内</span><br><span class="line">  -h, --help            输出帮助内容</span><br></pre></td></tr></table></figure>
-
-<h2 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h2><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">vue create [options] &lt;app-name&gt;</span><br><span class="line"><span class="meta">#</span><span class="bash">创建一个由 `vue-cli-service` 提供支持的新项目</span></span><br><span class="line"><span class="meta">#</span><span class="bash">选项：</span></span><br><span class="line">  -p, --preset &lt;presetName&gt;       忽略提示符并使用已保存的或远程的预设选项</span><br><span class="line">  -d, --default                   忽略提示符并使用默认预设选项</span><br><span class="line">  -i, --inlinePreset &lt;json&gt;       忽略提示符并使用内联的 JSON 字符串预设选项</span><br><span class="line">  -m, --packageManager &lt;command&gt;  在安装依赖时使用指定的 npm 客户端</span><br><span class="line">  -r, --registry &lt;url&gt;            在安装依赖时使用指定的 npm registry</span><br><span class="line">  -g, --git [message]             强制 / 跳过 git 初始化，并可选的指定初始化提交信息</span><br><span class="line">  -n, --no-git                    跳过 git 初始化</span><br><span class="line">  -f, --force                     覆写目标目录可能存在的配置</span><br><span class="line">  -c, --clone                     使用 git clone 获取远程预设选项</span><br><span class="line">  -x, --proxy                     使用指定的代理创建项目</span><br><span class="line">  -b, --bare                      创建项目时省略默认组件中的新手指导信息</span><br><span class="line">  -h, --help                      输出使用帮助信息</span><br></pre></td></tr></table></figure>
-
+<h2 id="Date类的简单实用"><a href="#Date类的简单实用" class="headerlink" title="Date类的简单实用"></a>Date类的简单实用</h2><blockquote>
+<p>SimpleDateFormat+Date类</p>
+</blockquote>
+<h2 id="内部类"><a href="#内部类" class="headerlink" title="内部类"></a>内部类</h2><blockquote>
+<p>内部类就是类里面嵌套了类</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>普通内部类</th>
+<th>静态内部类</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>异</td>
+<td>普通内部类只能由具体的外部类对象生成内部内对象，静态内部类则可以直接生成对象</td>
+</tr>
+<tr>
+<td>同</td>
+<td>在类的里面定义，引入有导入包+外部类名.内部类名两种方式</td>
+</tr>
+<tr>
+<td>同</td>
+<td>在内部类和其外部类中可以相互引用私有变量/方法，部手限制关键字影响</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>局部内部类</p>
+</blockquote>
+<p>1、使用场景，只出现一次，需要不确定的类型实现对象引用接口/父类方法<br>2、使用方式new +父类/接口名（）{}即可。<br><strong>限制</strong>：</p>
 <ul>
-<li>需要使用vue-init功能，安装@vue/cli-init包即可</li>
-<li>使用图像化创建项目<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">vue ui</span><br></pre></td></tr></table></figure></li>
+<li>使用局部变量需要final关键字（jdk1.8后可省略）</li>
+<li>声明只在定义的局部代码块中有效/可用，但对象地址可以传递出去——&gt;用对象实现方法调用（传递出去时返回类型使用父类声明即可）</li>
+</ul>
+<p><strong>应用</strong></p>
+<ul>
+<li>sort方法总的comparator接口对象</li>
 </ul>
 ]]></content>
-  </entry>
-  <entry>
-    <title>java-day4</title>
-    <url>/2020/09/13/java-day4/</url>
-    <content><![CDATA[<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>day4，主要讲了String类&amp;局部/全局变量&amp;Array常见方法使用&amp;递归&amp;BufferReader/FileReader/FileWriter&amp;混合变量后的类加载顺序</p>
-<a id="more"></a>
-
-<h2 id="混合变量类加载顺序"><a href="#混合变量类加载顺序" class="headerlink" title="混合变量类加载顺序"></a>混合变量类加载顺序</h2><blockquote>
-<p>Array.copyOf(original,newlength)<br>返回新数组，不改变原数组<br>新数组的长度可大于或小于原数组——&gt;数组的切割/增大容量</p>
-</blockquote>
-<blockquote>
-<p>类加载<br>1、将父类加载到方法区，并为其静态变量分配内存空间<br>2、将子类加载到方法区，并为其静态变量分配内存空间<br>3、为父类的静态变量赋值&amp;执行父类静态代码块（无先后顺序）<br>4、为子类的静态变量赋值&amp;执行子类静态代码块（无先后顺序）</p>
-</blockquote>
-<blockquote>
-<p>new新对象<br>5、在堆中创建父类对象，为父类成员变量分配内存<br>6、在堆中创建子类对象，为子类成员变量分配内存<br>7、为父类的成员变量赋值<br>8、执行父类的构造函数<br>9、为子类的成员变量赋值<br>10、执行子类的构造函数</p>
-</blockquote>
-<p>binarySearch+ArrayList？？？</p>
-]]></content>
-      <categories>
-        <category>java</category>
-        <category>javase</category>
-      </categories>
-      <tags>
-        <tag>fileOperation</tag>
-        <tag>String</tag>
-        <tag>Arrays</tag>
-      </tags>
   </entry>
   <entry>
     <title>java-day7</title>
@@ -1257,20 +1241,20 @@
       </tags>
   </entry>
   <entry>
-    <title>常用css设置</title>
-    <url>/2020/09/24/%E5%B8%B8%E7%94%A8css%E8%AE%BE%E7%BD%AE/</url>
-    <content><![CDATA[<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>列举常见的css命令，用于特定的功能。</p>
+    <title>vue-cli使用</title>
+    <url>/2020/09/26/vue-cli%E4%BD%BF%E7%94%A8/</url>
+    <content><![CDATA[<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>用于vue-cli的升级较快，记录下变化</p>
 <a id="more"></a>
 
-<h2 id="文本用超过使用…表示"><a href="#文本用超过使用…表示" class="headerlink" title="文本用超过使用…表示"></a>文本用超过使用…表示</h2><p>1、单行显示省略号</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">selector&#123;</span><br><span class="line">    overflow:hidden;</span><br><span class="line">    text-overflow:ellipsis;<span class="comment">//使用省略号代替截断文字</span></span><br><span class="line">    white-space:nowrap;<span class="comment">//不换行</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">全局安装</span></span><br><span class="line">npm install -g @vue/cli</span><br><span class="line"><span class="meta">#</span><span class="bash">升级项目中的cli相关模块</span></span><br><span class="line"><span class="meta">#</span><span class="bash">vue  upgrade [options] [plugin-name]</span></span><br><span class="line"><span class="meta">#</span><span class="bash">（试用）升级 Vue CLI 服务及插件</span></span><br><span class="line"><span class="meta">#</span><span class="bash">选项：</span></span><br><span class="line">  -t, --to &lt;version&gt;    升级 &lt;plugin-name&gt; 到指定的版本</span><br><span class="line">  -f, --from &lt;version&gt;  跳过本地版本检测，默认插件是从此处指定的版本升级上来</span><br><span class="line">  -r, --registry &lt;url&gt;  使用指定的 registry 地址安装依赖</span><br><span class="line">  --all                 升级所有的插件</span><br><span class="line">  --next                检查插件新版本时，包括 alpha/beta/rc 版本在内</span><br><span class="line">  -h, --help            输出帮助内容</span><br></pre></td></tr></table></figure>
 
-<p>2、多行显示（适用于chrome内核的浏览器）</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">selector&#123;</span><br><span class="line">    overflow:hidden;</span><br><span class="line">    text-overflow:ellipsis;</span><br><span class="line">    display:-webkit-box;<span class="comment">//显示格式为弹性伸缩盒子</span></span><br><span class="line">    -webkit-box-orient:vertical;<span class="comment">//元素内部排列方式</span></span><br><span class="line">    -webkit-line-clamp:<span class="number">2</span>;<span class="comment">//显示的文本行数（非标准属性，与上面两个属性结合才可使用）</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h2><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">vue create [options] &lt;app-name&gt;</span><br><span class="line"><span class="meta">#</span><span class="bash">创建一个由 `vue-cli-service` 提供支持的新项目</span></span><br><span class="line"><span class="meta">#</span><span class="bash">选项：</span></span><br><span class="line">  -p, --preset &lt;presetName&gt;       忽略提示符并使用已保存的或远程的预设选项</span><br><span class="line">  -d, --default                   忽略提示符并使用默认预设选项</span><br><span class="line">  -i, --inlinePreset &lt;json&gt;       忽略提示符并使用内联的 JSON 字符串预设选项</span><br><span class="line">  -m, --packageManager &lt;command&gt;  在安装依赖时使用指定的 npm 客户端</span><br><span class="line">  -r, --registry &lt;url&gt;            在安装依赖时使用指定的 npm registry</span><br><span class="line">  -g, --git [message]             强制 / 跳过 git 初始化，并可选的指定初始化提交信息</span><br><span class="line">  -n, --no-git                    跳过 git 初始化</span><br><span class="line">  -f, --force                     覆写目标目录可能存在的配置</span><br><span class="line">  -c, --clone                     使用 git clone 获取远程预设选项</span><br><span class="line">  -x, --proxy                     使用指定的代理创建项目</span><br><span class="line">  -b, --bare                      创建项目时省略默认组件中的新手指导信息</span><br><span class="line">  -h, --help                      输出使用帮助信息</span><br></pre></td></tr></table></figure>
 
-<h2 id="将元素设置为吸顶模式"><a href="#将元素设置为吸顶模式" class="headerlink" title="将元素设置为吸顶模式"></a>将元素设置为吸顶模式</h2><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">selector&#123;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="将元素设置为内敛模式"><a href="#将元素设置为内敛模式" class="headerlink" title="将元素设置为内敛模式"></a>将元素设置为内敛模式</h2><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">selector&#123;</span><br><span class="line">    box-sizing:content-box;默认</span><br><span class="line">    box-sizing:border-box;<span class="comment">//设置为内敛模式</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+<ul>
+<li>需要使用vue-init功能，安装@vue/cli-init包即可</li>
+<li>使用图像化创建项目<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">vue ui</span><br></pre></td></tr></table></figure></li>
+</ul>
+]]></content>
   </entry>
   <entry>
     <title>vue文档记录</title>
@@ -1287,5 +1271,21 @@
 <figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">...</span><br><span class="line">computed:&#123;</span><br><span class="line">    fullname:&#123;</span><br><span class="line">        <span class="keyword">get</span>:function()&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">this</span>.firstname+<span class="string">' '</span>+<span class="keyword">this</span>.lastname</span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="keyword">set</span>:function(newVal)&#123;</span><br><span class="line">            <span class="keyword">let</span> nameArr = newVal.split(<span class="string">' '</span>)</span><br><span class="line">            <span class="keyword">this</span>.firstname = nameArr[<span class="number">0</span>]</span><br><span class="line">            <span class="keyword">this</span>.lastname = nameArr[nameArr.length<span class="number">-1</span>]</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">...</span><br><span class="line"><span class="comment">//改变fullname则会调用setter方法</span></span><br><span class="line">vm.fullname = <span class="string">'jack ma'</span></span><br></pre></td></tr></table></figure>
 
 <h3 id=""><a href="#" class="headerlink" title=""></a></h3>]]></content>
+  </entry>
+  <entry>
+    <title>常用css设置</title>
+    <url>/2020/09/24/%E5%B8%B8%E7%94%A8css%E8%AE%BE%E7%BD%AE/</url>
+    <content><![CDATA[<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>列举常见的css命令，用于特定的功能。</p>
+<a id="more"></a>
+
+<h2 id="文本用超过使用…表示"><a href="#文本用超过使用…表示" class="headerlink" title="文本用超过使用…表示"></a>文本用超过使用…表示</h2><p>1、单行显示省略号</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">selector&#123;</span><br><span class="line">    overflow:hidden;</span><br><span class="line">    text-overflow:ellipsis;<span class="comment">//使用省略号代替截断文字</span></span><br><span class="line">    white-space:nowrap;<span class="comment">//不换行</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>2、多行显示（适用于chrome内核的浏览器）</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">selector&#123;</span><br><span class="line">    overflow:hidden;</span><br><span class="line">    text-overflow:ellipsis;</span><br><span class="line">    display:-webkit-box;<span class="comment">//显示格式为弹性伸缩盒子</span></span><br><span class="line">    -webkit-box-orient:vertical;<span class="comment">//元素内部排列方式</span></span><br><span class="line">    -webkit-line-clamp:<span class="number">2</span>;<span class="comment">//显示的文本行数（非标准属性，与上面两个属性结合才可使用）</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="将元素设置为吸顶模式"><a href="#将元素设置为吸顶模式" class="headerlink" title="将元素设置为吸顶模式"></a>将元素设置为吸顶模式</h2><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">selector&#123;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="将元素设置为内敛模式"><a href="#将元素设置为内敛模式" class="headerlink" title="将元素设置为内敛模式"></a>将元素设置为内敛模式</h2><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">selector&#123;</span><br><span class="line">    box-sizing:content-box;默认</span><br><span class="line">    box-sizing:border-box;<span class="comment">//设置为内敛模式</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
   </entry>
 </search>
