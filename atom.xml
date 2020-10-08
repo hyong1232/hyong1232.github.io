@@ -6,7 +6,7 @@
   <link href="http://yoursite.com/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2020-10-08T03:59:34.000Z</updated>
+  <updated>2020-10-08T16:17:16.000Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>java-day8</title>
+    <link href="http://yoursite.com/2020/10/09/java-day8/"/>
+    <id>http://yoursite.com/2020/10/09/java-day8/</id>
+    <published>2020-10-08T16:05:21.000Z</published>
+    <updated>2020-10-08T16:17:16.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>第八天，决心改掉恶习，加油！</p><a id="more"></a><h2 id="HashMap常用api"><a href="#HashMap常用api" class="headerlink" title="HashMap常用api"></a>HashMap常用api</h2><table><thead><tr><th>api</th><th>释义</th><th>返回值</th></tr></thead><tbody><tr><td>get(key)</td><td>获取指定键值对应的值，key为未保存的值时返回null值</td><td>正常指定键对应的值，key不存在返回null值</td></tr><tr><td>put(key,value)</td><td>添加指定的键值对，key和value均可为null值，重复保存相同的键而值不同则会覆盖</td><td>正常null，覆盖保存返回被覆盖的值</td></tr><tr><td>remove(key)</td><td>删除指定键值对，key为未保存的值时返回null值</td><td>被删除的值</td></tr><tr><td>size()</td><td>获取map存储的键值对个数</td><td>-</td></tr></tbody></table>]]></content>
+    
+    
+    <summary type="html">&lt;h2 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h2&gt;&lt;p&gt;第八天，决心改掉恶习，加油！&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="java" scheme="http://yoursite.com/categories/java/"/>
+    
+    <category term="Collection" scheme="http://yoursite.com/categories/java/Collection/"/>
+    
+    
+    <category term="java" scheme="http://yoursite.com/tags/java/"/>
+    
+    <category term="HashMap" scheme="http://yoursite.com/tags/HashMap/"/>
+    
+  </entry>
   
   <entry>
     <title>npm常用命令</title>
@@ -421,9 +446,9 @@
     <category term="前端开发" scheme="http://yoursite.com/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/"/>
     
     
-    <category term="css" scheme="http://yoursite.com/tags/css/"/>
-    
     <category term="css布局" scheme="http://yoursite.com/tags/css%E5%B8%83%E5%B1%80/"/>
+    
+    <category term="css" scheme="http://yoursite.com/tags/css/"/>
     
   </entry>
   
@@ -448,9 +473,9 @@
     <category term="css布局" scheme="http://yoursite.com/categories/css/css%E5%B8%83%E5%B1%80/"/>
     
     
-    <category term="css" scheme="http://yoursite.com/tags/css/"/>
-    
     <category term="css布局" scheme="http://yoursite.com/tags/css%E5%B8%83%E5%B1%80/"/>
+    
+    <category term="css" scheme="http://yoursite.com/tags/css/"/>
     
   </entry>
   
