@@ -421,9 +421,9 @@
     <category term="前端开发" scheme="http://yoursite.com/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/"/>
     
     
-    <category term="css布局" scheme="http://yoursite.com/tags/css%E5%B8%83%E5%B1%80/"/>
-    
     <category term="css" scheme="http://yoursite.com/tags/css/"/>
+    
+    <category term="css布局" scheme="http://yoursite.com/tags/css%E5%B8%83%E5%B1%80/"/>
     
   </entry>
   
@@ -448,9 +448,9 @@
     <category term="css布局" scheme="http://yoursite.com/categories/css/css%E5%B8%83%E5%B1%80/"/>
     
     
-    <category term="css布局" scheme="http://yoursite.com/tags/css%E5%B8%83%E5%B1%80/"/>
-    
     <category term="css" scheme="http://yoursite.com/tags/css/"/>
+    
+    <category term="css布局" scheme="http://yoursite.com/tags/css%E5%B8%83%E5%B1%80/"/>
     
   </entry>
   
