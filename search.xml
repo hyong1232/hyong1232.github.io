@@ -1441,4 +1441,149 @@
         <tag>HashMap</tag>
       </tags>
   </entry>
+  <entry>
+    <title>正则表达式</title>
+    <url>/2020/10/09/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/</url>
+    <content><![CDATA[<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>正则表达式的基本含义，常用语法的总结</p>
+<a id="more"></a>
+
+<h2 id="基本写法"><a href="#基本写法" class="headerlink" title="基本写法"></a>基本写法</h2><p>1、基本正则字符</p>
+<table>
+<thead>
+<tr>
+<th>表达式</th>
+<th>匹配字符</th>
+<th>等同写法</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>abc</td>
+<td>abc</td>
+<td>-</td>
+</tr>
+<tr>
+<td>[abc]</td>
+<td>a,b,c中的一个</td>
+<td>-</td>
+</tr>
+<tr>
+<td>[abc][123]</td>
+<td>a1,b1,c1,a2,b2,c2,a3,b3,c3中的一个</td>
+<td>-</td>
+</tr>
+<tr>
+<td>[^a-zA-Z]</td>
+<td>非英文字母</td>
+<td>-</td>
+</tr>
+<tr>
+<td>[\u4e00-\u9fa5]</td>
+<td>所有中文</td>
+<td>-</td>
+</tr>
+<tr>
+<td>\d</td>
+<td>数字</td>
+<td>[0-9]</td>
+</tr>
+<tr>
+<td>\D</td>
+<td>非数字</td>
+<td>[^0-9]</td>
+</tr>
+<tr>
+<td>\s</td>
+<td>空白字符</td>
+<td>-</td>
+</tr>
+<tr>
+<td>\S</td>
+<td>非空白字符</td>
+<td>-</td>
+</tr>
+<tr>
+<td>\w</td>
+<td>单词字符（包含下划线）</td>
+<td>[a-zA-Z_0-9]</td>
+</tr>
+<tr>
+<td>\W</td>
+<td>空白字符</td>
+<td>-</td>
+</tr>
+<tr>
+<td>.</td>
+<td>任意字符</td>
+<td>-</td>
+</tr>
+</tbody></table>
+<p>2、匹配字符数量</p>
+<table>
+<thead>
+<tr>
+<th>表达式</th>
+<th>匹配字符</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>?</td>
+<td>匹配1或0个字符</td>
+</tr>
+<tr>
+<td>+</td>
+<td>匹配起码&gt;=1个的字符</td>
+</tr>
+<tr>
+<td>*</td>
+<td>匹配任意数量字符</td>
+</tr>
+<tr>
+<td>expression1|expression2</td>
+<td>表达式1或表达式2成立都可算整个表达式成立</td>
+</tr>
+<tr>
+<td>{num,}/{num}</td>
+<td>指定匹配-大于num/num个字符（字符组合）</td>
+</tr>
+</tbody></table>
+<ul>
+<li>注意java的字符串中将/默认为转义字符，因此在定义正则时应该加双斜杠<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//错误</span></span><br><span class="line">String regex = <span class="string">"\d&#123;3&#125;|\(\d&#123;4&#125;\)\d&#123;6&#125;"</span>;</span><br><span class="line"><span class="comment">//正确</span></span><br><span class="line">String regex = <span class="string">"\\d&#123;3&#125;|\\(\\d&#123;4&#125;\\)\\d&#123;6&#125;"</span>;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h2 id="常用api（主要在String类中使用）"><a href="#常用api（主要在String类中使用）" class="headerlink" title="常用api（主要在String类中使用）"></a>常用api（主要在String类中使用）</h2><p>1、String对象的api</p>
+<table>
+<thead>
+<tr>
+<th>表达式</th>
+<th>释义</th>
+<th>返回值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>matches(regex)</td>
+<td>字符和正则规则比较</td>
+<td>Boolean值</td>
+</tr>
+<tr>
+<td>split(regex,[limitnum])</td>
+<td>按照正则规则切分字符，返回数组</td>
+<td>切分的数组</td>
+</tr>
+<tr>
+<td>replaceAll(regex,replacement)</td>
+<td>替换字符串中所有符合规则的字符</td>
+<td>替换后的字符串</td>
+</tr>
+</tbody></table>
+]]></content>
+      <categories>
+        <category>java</category>
+        <category>正则</category>
+      </categories>
+      <tags>
+        <tag>java</tag>
+        <tag>正则</tag>
+      </tags>
+  </entry>
 </search>
