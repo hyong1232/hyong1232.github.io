@@ -6,7 +6,7 @@
   <link href="http://yoursite.com/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2020-10-09T16:31:28.000Z</updated>
+  <updated>2020-10-11T16:05:38.000Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,85 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>python函数</title>
+    <link href="http://yoursite.com/2020/10/11/python%E5%87%BD%E6%95%B0/"/>
+    <id>http://yoursite.com/2020/10/11/python%E5%87%BD%E6%95%B0/</id>
+    <published>2020-10-11T03:12:06.000Z</published>
+    <updated>2020-10-11T16:05:38.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>介绍</p><a id="more"></a><h2 id="常用函数"><a href="#常用函数" class="headerlink" title="常用函数"></a>常用函数</h2><ul><li>默认会返回值是None不是null</li></ul><table><thead><tr><th>api</th><th>释义</th></tr></thead><tbody><tr><td>int(String)</td><td>将字符串转化成数字</td></tr><tr><td>abs(number)</td><td>将数字转换成绝对值</td></tr><tr><td>max(params1,params2….)</td><td>多个参数，返回最大值</td></tr><tr><td>instance(any)</td><td>返回字符的类型</td></tr></tbody></table><h2 id="函数的参数"><a href="#函数的参数" class="headerlink" title="函数的参数"></a>函数的参数</h2><blockquote><p>按照类型分为五类：必填参数、默认参数、可变参数、关键字参数、命名关键字参数，他们的<strong>组合顺序也是如此</strong></p></blockquote><ul><li><p>默认参数<br>  1、不可设置为可变变量（只能string/数字/None等），参数重加在不会重新赋值，会重复引用之前初始化定义的值（与es6区别）</p>  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#错误的写法</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">variable_paramter_func</span><span class="params">(l = [])</span>:</span></span><br><span class="line">    l.append(<span class="string">'end'</span>)</span><br><span class="line">    print(l)</span><br><span class="line"></span><br><span class="line"><span class="comment">#正确的写法</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">correct_variable_paramter_func</span><span class="params">(l=None)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> l:</span><br><span class="line">        l = []</span><br><span class="line">    l.append(<span class="string">'end'</span>)</span><br><span class="line">    print(l)</span><br><span class="line"></span><br><span class="line">variable_paramter_func()</span><br><span class="line">variable_paramter_func()</span><br><span class="line"><span class="comment">#打印结果['end'] ['end''end']</span></span><br><span class="line">correct_variable_paramter_func()</span><br><span class="line">correct_variable_paramter_func()</span><br><span class="line"><span class="comment">#打印结果['end'] ['end']</span></span><br></pre></td></tr></table></figure><p>  2、可为普通位置参数和命名关键字参数赋值，赋值后即可不传（使用默认值）</p></li><li><p>可变参数&amp;关键字参数的赋值分别使用<em>()|</em>[]和**{a:’a’}格式，且赋值会复制新的对象，不改变源数据</p></li><li><p>命名关键字再参数列表前必须要有<em>分割（可变参数或单独加一个\</em>参数），命名关键字也是函数调用时的必传值</p></li></ul><h2 id="递归"><a href="#递归" class="headerlink" title="递归"></a>递归</h2><ul><li>函数调用使用stack栈实现，调用一次栈增加一层，所以会有递归的栈溢出，使用尾递归优化方法（return时调用函数本身，将结算结果一并传入函数）<strong>pythong没有优化，使用不使用没区别</strong><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#尾递归优化：求100到1之和</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">recursion_factorial</span><span class="params">(num, res)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> num == <span class="number">0</span>:</span><br><span class="line">        <span class="keyword">return</span> res</span><br><span class="line">    <span class="keyword">return</span> recursion_factorial(num<span class="number">-1</span>, res+num)</span><br><span class="line">print(recursion_factorial(<span class="number">100</span>, <span class="number">0</span>))</span><br><span class="line"><span class="comment">#输出5050</span></span><br></pre></td></tr></table></figure></li></ul>]]></content>
+    
+    
+    <summary type="html">&lt;h2 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h2&gt;&lt;p&gt;介绍&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="python" scheme="http://yoursite.com/categories/python/"/>
+    
+    <category term="function" scheme="http://yoursite.com/categories/python/function/"/>
+    
+    
+    <category term="python" scheme="http://yoursite.com/tags/python/"/>
+    
+    <category term="function" scheme="http://yoursite.com/tags/function/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>python的list和tuple</title>
+    <link href="http://yoursite.com/2020/10/11/python%E7%9A%84list%E5%92%8Ctuple/"/>
+    <id>http://yoursite.com/2020/10/11/python%E7%9A%84list%E5%92%8Ctuple/</id>
+    <published>2020-10-10T16:29:18.000Z</published>
+    <updated>2020-10-11T03:30:28.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>python中的list和tuple对象的基本用法，及常用api</p><a id="more"></a><h2 id="list"><a href="#list" class="headerlink" title="list"></a>list</h2><ul><li>下标取/存值</li><li>pop([index])删除值（默认最后一位）</li><li>append(ele)添加元素至list末尾</li><li>insert(index,object)插入元素至指定位置</li></ul><h2 id="tuple"><a href="#tuple" class="headerlink" title="tuple"></a>tuple</h2><ul><li>定义了就不可修改（类似es6的const关键字定义变量？）</li><li>在函数中应用：返回值是省略了小括号的元组，因此可以返回多个值<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">return_multi_params</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span>,<span class="string">'jack'</span></span><br><span class="line">age,name = return_multi_params()</span><br><span class="line"><span class="comment">#name = 'jack',age=1</span></span><br></pre></td></tr></table></figure></li></ul><h2 id="条件判断"><a href="#条件判断" class="headerlink" title="条件判断"></a>条件判断</h2><ul><li>if x:简写，判定不为空值|空字符串|<strong>空的list</strong> </li><li>elif 是else if简写</li><li>input([‘输出string’])函数，接收用户输入信息</li><li>int(string)&amp;str(num)字符转整数&amp;整数转字符函数</li></ul><h2 id="循环"><a href="#循环" class="headerlink" title="循环"></a>循环</h2><ul><li>遍历每一个list，for variable in list:</li><li>while 条件:</li><li>break/continue</li></ul><h2 id="map"><a href="#map" class="headerlink" title="map"></a>map</h2><ul><li>初始化就是写一个json对</li><li>和list对比查找速度快，浪费空间（空间换时间）</li><li>pop([index])同list</li><li>get(key)==map[key]获取键对应值</li><li>key不可变（不能为list，可为string、整数）</li><li>储存的元素无序</li></ul><h2 id="set"><a href="#set" class="headerlink" title="set"></a>set</h2><ul><li>储存的元素无序</li><li>创建:set([ele]),元组里面放一个list</li><li>元素不可变（可变对象难以比较是否相等，无法保证元素唯一性）</li><li>remove(key)</li><li>add(key)</li></ul>]]></content>
+    
+    
+    <summary type="html">&lt;h2 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h2&gt;&lt;p&gt;python中的list和tuple对象的基本用法，及常用api&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="python" scheme="http://yoursite.com/categories/python/"/>
+    
+    <category term="list" scheme="http://yoursite.com/categories/python/list/"/>
+    
+    <category term="tuple" scheme="http://yoursite.com/categories/python/list/tuple/"/>
+    
+    
+    <category term="python" scheme="http://yoursite.com/tags/python/"/>
+    
+    <category term="list" scheme="http://yoursite.com/tags/list/"/>
+    
+    <category term="tuple" scheme="http://yoursite.com/tags/tuple/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>python基本数据类型</title>
+    <link href="http://yoursite.com/2020/10/10/python%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/"/>
+    <id>http://yoursite.com/2020/10/10/python%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/</id>
+    <published>2020-10-10T15:02:42.000Z</published>
+    <updated>2020-10-10T17:20:38.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>决心开始认真系统学习python，基本数据类型开始，记录自己感觉重要的知识点。</p><a id="more"></a><h2 id="整数"><a href="#整数" class="headerlink" title="整数"></a>整数</h2><ul><li><p>十六进制ox开头</p></li><li><p>允许使用_下划线分割多个0的大数据</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#等效写法</span></span><br><span class="line"><span class="number">100</span>_000_000 == <span class="number">100000000</span></span><br></pre></td></tr></table></figure></li><li><p>整数运算永远是精确计算（除法也是），浮点数计算会有四舍五入误差</p></li></ul><h2 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h2><ul><li><p>定义：使用单引号’’和双引号””包裹起来的数据</p></li><li><p>字符串和整数不可变，任何操作不会改变源数据，而是创建新的数据</p></li><li><p>使用’’’multi-line-string’’’包裹，表示多行字符串</p></li><li><p>默认会对包含\符号的字符转义转义，在字符串前加上r则不会转义</p></li><li><p><strong>字符串中的格式化处理</strong><br>  1、使用%占位符处理<br>  规则：字符串里面使用上述字符占位，在结尾使用%(replacement1,replacement2…)替换</p><table><thead><tr><th>字符</th><th>释义</th></tr></thead><tbody><tr><td>%s</td><td>普通字符</td></tr><tr><td>%f</td><td>浮点数</td></tr><tr><td>%d</td><td>整数</td></tr><tr><td>%x</td><td>十六进制数</td></tr></tbody></table><p>  示例：</p>  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">print(<span class="string">'%s is %d year\'s old,he have $%f'</span> %(<span class="string">'jack'</span>,<span class="number">23</span>,<span class="number">3456345643.234</span>))</span><br><span class="line"><span class="comment">#使用%%转义%</span></span><br><span class="line">print(<span class="string">'%%%d'</span>%<span class="number">25</span>)</span><br></pre></td></tr></table></figure><p>  <strong>在字符串中可加入整数/浮点数在%和特定字符间对数据输出位数处理</strong></p>  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#整数数字表示占位</span></span><br><span class="line">print(<span class="string">'%3d'</span>%<span class="number">23</span>)</span><br><span class="line"><span class="comment">#浮点数对浮点数的位数处理</span></span><br><span class="line">print(<span class="string">'%.2f'</span>%<span class="number">12.23453</span>)</span><br></pre></td></tr></table></figure><p>  2、使用string类型的format函数配合{}</p>  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(<span class="string">'&#123;&#125; is &#123;&#125; year\'s old,he have $&#123;&#125;'</span>.format(<span class="string">'jack'</span>,<span class="number">23</span>,<span class="number">3456345643.234</span>))</span><br></pre></td></tr></table></figure><p>  3、在字符串前加上f，然后使用{变量名}，自动替换字符串（类似es6中的反引号字符串）</p>  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">name = <span class="string">'jack'</span></span><br><span class="line">age = <span class="number">23</span></span><br><span class="line">money = <span class="number">3456345643.234</span></span><br><span class="line">print(<span class="string">f'<span class="subst">&#123;name&#125;</span> is <span class="subst">&#123;age&#125;</span> year\'s old,he have $<span class="subst">&#123;money&#125;</span>'</span>)</span><br></pre></td></tr></table></figure></li></ul><h2 id="布尔值Boolean"><a href="#布尔值Boolean" class="headerlink" title="布尔值Boolean"></a>布尔值Boolean</h2><ul><li>值表示是首字符大写<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">1==2---&gt;False</span><br><span class="line">1==1---&gt;True</span><br></pre></td></tr></table></figure></li></ul><h2 id="空置None"><a href="#空置None" class="headerlink" title="空置None"></a>空置None</h2><ul><li>与js的null区别开</li></ul><h2 id="变量-amp-amp-常量"><a href="#变量-amp-amp-常量" class="headerlink" title="变量&amp;&amp;常量"></a>变量&amp;&amp;常量</h2><ul><li>变量不必声明，常量的变量名称全部大写（说是常量其实随时可变）</li></ul><h2 id="注释"><a href="#注释" class="headerlink" title="注释"></a>注释</h2><ul><li><p>使用#做标志</p></li><li><p>通用注释</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#告诉python解释器（cpython用的最多）以utf-8格式读取文件</span></span><br><span class="line"><span class="comment">#-*- coding:utf-8 -*-</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#告诉Linux和mac是一个可执行的python文件（win不支持） </span></span><br><span class="line"><span class="comment">#!user/bin/env python3</span></span><br></pre></td></tr></table></figure></li></ul>]]></content>
+    
+    
+    <summary type="html">&lt;h2 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h2&gt;&lt;p&gt;决心开始认真系统学习python，基本数据类型开始，记录自己感觉重要的知识点。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="python" scheme="http://yoursite.com/categories/python/"/>
+    
+    <category term="基本数据类型" scheme="http://yoursite.com/categories/python/%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/"/>
+    
+    
+    <category term="python" scheme="http://yoursite.com/tags/python/"/>
+    
+    <category term="基本数据类型" scheme="http://yoursite.com/tags/%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/"/>
+    
+  </entry>
   
   <entry>
     <title>正则表达式</title>
@@ -409,71 +488,6 @@
     
     
     <category term="git" scheme="http://yoursite.com/tags/git/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>java-BigDecimal</title>
-    <link href="http://yoursite.com/2020/09/07/java-BigDecimal/"/>
-    <id>http://yoursite.com/2020/09/07/java-BigDecimal/</id>
-    <published>2020-09-07T13:58:12.000Z</published>
-    <updated>2020-09-10T14:34:50.000Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>daytwo，Java中的大数据精确计算使用BigInteger和BigDecimal分别尽心大整数和精确浮点数的计算</p><a id="more"></a><h2 id="java中的大数字运算"><a href="#java中的大数字运算" class="headerlink" title="java中的大数字运算"></a>java中的大数字运算</h2><h3 id="BigDecimal"><a href="#BigDecimal" class="headerlink" title="BigDecimal"></a>BigDecimal</h3><table><thead><tr><th>常用api</th><th>参数</th><th>释义</th></tr></thead><tbody><tr><td>a.multiply(b)</td><td>BigDecimal类对象</td><td>加法</td></tr><tr><td>a.subtract(b)</td><td>BigDecimal类对象</td><td>减法</td></tr><tr><td>a.multiply(b)</td><td>BigDecimal类对象</td><td>乘法</td></tr><tr><td>a.divide(b)</td><td>BigDecimal类对象,保留位数,舍入方式)</td><td>除法</td></tr><tr><td>(BigDecimal a).setScale</td><td>(保留位数,舍入方式)</td><td>BigDecimal类方法</td></tr></tbody></table><blockquote><p>BigDecimal类的舍入方式</p></blockquote><table><thead><tr><th>类型</th><th>释义</th></tr></thead><tbody><tr><td>BigDecimal.ROUND_HALF_EVEN</td><td>精确舍入</td></tr><tr><td>BigDecimal.ROUND_HALF_UP</td><td>四舍五入</td></tr><tr><td>BigDecimal.ROUND_HALF_DOWN</td><td>五舍六入</td></tr><tr><td>BigDecimal.ROUND_DOWN</td><td>向小数字取整</td></tr><tr><td>BigDecimal.ROUND_UP</td><td>向大数字取整</td></tr><tr><td>BigDecimal.ROUND_FLOOR</td><td>向下取整</td></tr><tr><td>BigDecimal.ROUND_CEILING</td><td>向上取整</td></tr></tbody></table><ul><li><strong>使用BigDecimal和BigInteger运算的结果是一个新的此类对象，使用int/doulb/…+Value()方法转换成不同数字变量</strong></li></ul><h3 id="BigInteger"><a href="#BigInteger" class="headerlink" title="BigInteger"></a>BigInteger</h3><table><thead><tr><th>常用api</th><th>参数</th><th>释义</th></tr></thead><tbody><tr><td>a.multiply(b)</td><td>BigInteger类对象</td><td>加法</td></tr><tr><td>a.subtract(b)</td><td>BigInteger类对象</td><td>减法</td></tr><tr><td>a.multiply(b)</td><td>BigInteger类对象</td><td>乘法</td></tr><tr><td>a.divide(b)</td><td>BigInteger类对象</td><td>除法</td></tr></tbody></table><blockquote><p>没有小数处理？暂不清楚其他api用法</p></blockquote><p>运算符优先级</p><blockquote><p>java大体分6种运算符，按照优先级顺序为:单目、算数、移位运算符、关系运算符、逻辑运算符、赋值运算符</p></blockquote><p>详见<a href="https://www.jianshu.com/p/9d2204712097" target="_blank" rel="noopener">Java运算符优先级</a> </p>]]></content>
-    
-    
-    <summary type="html">&lt;h2 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h2&gt;&lt;p&gt;daytwo，Java中的大数据精确计算使用BigInteger和BigDecimal分别尽心大整数和精确浮点数的计算&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="java" scheme="http://yoursite.com/categories/java/"/>
-    
-    
-    <category term="java,calculator" scheme="http://yoursite.com/tags/java-calculator/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>java-bitOperation</title>
-    <link href="http://yoursite.com/2020/09/07/java-bitOperation/"/>
-    <id>http://yoursite.com/2020/09/07/java-bitOperation/</id>
-    <published>2020-09-06T16:26:05.000Z</published>
-    <updated>2020-09-07T16:37:16.000Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>java继续学习了，上次学习还是去年，中间断断续续几乎停了,唉，加油，从位运算开始。</p><a id="more"></a><h2 id="常见位运算"><a href="#常见位运算" class="headerlink" title="常见位运算"></a>常见位运算</h2><table><thead><tr><th>符号</th><th>解释</th></tr></thead><tbody><tr><td>&amp;</td><td>位与，上面是1并且下面是1，结果才是1</td></tr><tr><td>|</td><td>位或，上面是1或者下面是1，结果才是1</td></tr><tr><td>^</td><td>异或，不同是1</td></tr><tr><td>~</td><td>求反，1变成0，0变成1</td></tr><tr><td>&gt;&gt;</td><td>带符号的位右移</td></tr><tr><td>&lt;&lt;</td><td>大夫好的左位移</td></tr><tr><td>&gt;&gt;&gt;</td><td>不带符号的右位移</td></tr></tbody></table>]]></content>
-    
-    
-    <summary type="html">&lt;h2 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h2&gt;&lt;p&gt;java继续学习了，上次学习还是去年，中间断断续续几乎停了,唉，加油，从位运算开始。&lt;/p&gt;</summary>
-    
-    
-    
-    
-  </entry>
-  
-  <entry>
-    <title>flex布局</title>
-    <link href="http://yoursite.com/2020/05/16/flex%E5%B8%83%E5%B1%80/"/>
-    <id>http://yoursite.com/2020/05/16/flex%E5%B8%83%E5%B1%80/</id>
-    <published>2020-05-16T10:07:12.000Z</published>
-    <updated>2020-10-07T03:46:00.000Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p><strong>感谢阮一峰先生的分享<a href="http://www.ruanyifeng.com/blog/2015/07/flex-examples.html" target="_blank" rel="noopener">flex-examples</a> 仅供个人学习</strong><br>2009年，W3C 提出了一种新的方案—-Flex 布局，可以简便、完整、响应式地实现各种页面布局。目前，它已经得到了所有浏览器的支持，这意味着，现在就能很安全地使用这项功能。<a id="more"></a></p><blockquote><ul><li>Flex 是 Flexible Box 的缩写，意为”弹性布局”，用来为盒状模型提供最大的灵活性。<br>任何一个容器都可以指定为 Flex 布局，行内元素也可以使用flex布局，跳帧位置。</li></ul></blockquote><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;*块级元素*&#x2F;</span><br><span class="line">display: flex;</span><br><span class="line">&#x2F;*行内元素*&#x2F;</span><br><span class="line">display: inline-flex;</span><br></pre></td></tr></table></figure><blockquote><ul><li>Webkit 内核的浏览器，必须加上-webkit前缀。</li></ul></blockquote><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">.box&#123;</span><br><span class="line">  display: -webkit-flex; &#x2F;* Safari *&#x2F;</span><br><span class="line">  display: flex;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p><strong><em>注意，设为 Flex 布局以后，子元素的float、clear和vertical-align属性将失效。</em></strong></p><blockquote><ul><li>flex布局的元素，称为flex container，他的所有子元素成为flex-items项目。</li></ul></blockquote><img src="http://www.ruanyifeng.com/blogimg/asset/2015/bg2015071004.png" class="" title="flex-container"><blockquote><p>其中main-axis称为主轴，across-axis称为交叉轴，所有flex-item默认沿着主轴排列。单个项目占据的主轴|交叉轴空间叫做main-size|across-size</p></blockquote><h2 id="浏览器支持"><a href="#浏览器支持" class="headerlink" title="浏览器支持"></a>浏览器支持</h2><img src="http://www.ruanyifeng.com/blogimg/asset/2015/bg2015071003.jpg" class="" title="browser Support"><h2 id="属性介绍"><a href="#属性介绍" class="headerlink" title="属性介绍"></a>属性介绍</h2><h3 id="flex-container属性"><a href="#flex-container属性" class="headerlink" title="flex-container属性"></a>flex-container属性</h3><h4 id="flex-direction"><a href="#flex-direction" class="headerlink" title="flex-direction"></a>flex-direction</h4><blockquote><p>决定主轴的方向，即项目的排列方向</p><ul><li>row（默认值）：主轴为水平方向，起点在左端。</li><li>row-reverse：主轴为水平方向，起点在右端。</li><li>column：主轴为垂直方向，起点在上沿。</li><li>column-reverse：主轴为垂直方向，起点在下沿。</li></ul><footer><strong>可选属性</strong></footer></blockquote><img src="http://www.ruanyifeng.com/blogimg/asset/2015/bg2015071005.png" class="" title="flex-dirction布局样式"><h4 id="flex-wrap"><a href="#flex-wrap" class="headerlink" title="flex-wrap"></a>flex-wrap</h4><blockquote><p>默认情况下所有flex-item都排列在主轴上，此属性规定超过了主轴长度后的项目排列方式<br>可选属性：nowrap（默认）|wrap换行|wrap-reverse换行并且换行的flex-item排列在上面<br>如下图所示<br>    <div style="display:flex;align-items:center;justify-content:center;"><br>        <div style="flex:1;"><img src="http://www.ruanyifeng.com/blogimg/asset/2015/bg2015071007.png" class="" title="flex-wrap:nowrap布局样式"></div><br>        <div style="flex:1;"><img src="http://www.ruanyifeng.com/blogimg/asset/2015/bg2015071008.jpg" class="" title="flex-wrap:wrap布局样式"></div><br>        <div style="flex:1;"><img src="http://www.ruanyifeng.com/blogimg/asset/2015/bg2015071009.jpg" class="" title="flex-wrap:wrap-reverse布局样式"></div><br>    </div></p></blockquote><h4 id="flex-flow"><a href="#flex-flow" class="headerlink" title="flex-flow"></a>flex-flow</h4><blockquote><p>是flex-direction和flex-wrap的简写形式</p></blockquote><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">flex-flow:&lt;flex-direction&gt; || &lt;flex-wrap&gt;</span><br></pre></td></tr></table></figure><h4 id="justify-content"><a href="#justify-content" class="headerlink" title="justify-content"></a>justify-content</h4><blockquote><p>定义了flex-item在主轴上的排列位置<br>可选属性：flex-start（默认）左对齐|flex-end右对齐|center居中|space-between两端对齐，项目间隔相等|space-around项目间隔相等，项目直接间隔是项目与flex-container边框间隔的2倍<br>    <div style="display:flex;align-items:center;justify-content:center;"><br>        <div style="flex:1;"><img src="/images/flex/flex-start.PNG" alt="flex-start"><br>            <p class="image-caption">flex-start</p><br>        </div><br>        <div style="flex:1;"><img src="/images/flex/flex-end.PNG" alt="flex-start"><br>            <p class="image-caption">flex-end</p><br>        </div><br>        <div style="flex:1;"><img src="/images/flex/center.PNG" alt="flex-start"><br>            <p class="image-caption">cener</p><br>        </div><br>    </div><br>    <div style="display:flex;align-items:center;justify-content:center;"><br>        <div style="flex:1;"><img src="/images/flex/space-between.PNG" alt="flex-start"><br>            <p class="image-caption">space-between</p><br>        </div><br>        <div style="flex:1;"><img src="/images/flex/space-around.PNG" alt="flex-start"><br>            <p class="image-caption">space-around</p><br>        </div><br>    </div></p></blockquote><h4 id="align-items"><a href="#align-items" class="headerlink" title="align-items"></a>align-items</h4><blockquote><p>定义了flex-item在交叉轴上的排列位置<br>可选属性：flex-start对齐交叉轴顶点|flex-end对齐交叉轴终点|center对齐交叉轴中心|stretch（默认）拉升高度至交叉轴高度|baseline所有的flex-items的第一行文字基线<br>    <div style="display:flex;align-items:center;justify-content:center;"><br>        <div style="flex:1;"><img src="/images/flex/ai-flex-start.PNG" alt="flex-start"><br>            <p class="image-caption">align-items:flex-start</p><br>        </div><br>        <div style="flex:1;"><img src="/images/flex/ai-flex-end.PNG" alt="flex-start"><br>            <p class="image-caption">align-items:flex-end</p><br>        </div><br>        <div style="flex:1;"><img src="/images/flex/ai-center.PNG" alt="flex-start"><br>            <p class="image-caption">align-items:cener</p><br>        </div><br>    </div><br>    <div style="display:flex;align-items:center;justify-content:center;"><br>        <div style="flex:1;"><img src="/images/flex/ai-stretch.PNG" alt="flex-start"><br>            <p class="image-caption">align-items:stretch</p><br>        </div><br>        <div style="flex:1;"><img src="/images/flex/ai-base-line.PNG" alt="flex-start"><br>            <p class="image-caption">align-items:baseline</p><br>        </div><br>    </div></p></blockquote><h4 id="align-content"><a href="#align-content" class="headerlink" title="align-content"></a>align-content</h4><blockquote><p>定义多轴线（多行？）的对齐方式，单一轴线不起作用<br>可选参数：flex-start|flex-end|center|space-bewteen|stretch|around</p></blockquote><img src="http://www.ruanyifeng.com/blogimg/asset/2015/bg2015071012.png" class="" width="280" title="align-content样式图"><h3 id="flex-items属性"><a href="#flex-items属性" class="headerlink" title="flex-items属性"></a>flex-items属性</h3><h4 id="order"><a href="#order" class="headerlink" title="order"></a>order</h4><blockquote><p>设置flex-item的显示位置，数字越小越靠前，类似于grid布局的grid-column|row-start|end属性设置<br><img src="/images/flex/fi-order.PNG" alt="browser-spport"></p></blockquote><p class="image-caption">设置第四个order数值最小</p><h4 id="flex-grow"><a href="#flex-grow" class="headerlink" title="flex-grow"></a>flex-grow</h4><blockquote><p>当以当主轴空间大于实际需要时，放大的比例，默认为0，即不放大<br>如果其他属性设置为1，当前设置为2，则当前项目是其他项目的两倍main-sie<br><img src="/images/flex/fi-flex-grow.PNG" alt="browser-spport"></p></blockquote><p class="image-caption">flex-grow:2的flex-item</p><h4 id="flex-shrink"><a href="#flex-shrink" class="headerlink" title="flex-shrink"></a>flex-shrink</h4><blockquote><p>定义当主轴空间不足时，flex-item的缩小比例<br>如果设置属性值为0，其他flex-item属性值为1则当空间不足时，不会缩小此flex-item<br><img src="/images/flex/fi-flex-shrink.PNG" alt="browser-spport"></p></blockquote><p class="image-caption">属性flex-shrink:0的flex-item不会缩小</p><h4 id="flex-basis"><a href="#flex-basis" class="headerlink" title="flex-basis"></a>flex-basis</h4><blockquote><p>规定再分配多余的空间之前，flex-item占据main-size的大小，浏览器根据占据的main-size计算是否长度充足<br>默认为auto，及项目本来大小，设置大小：n+px，flex-item将始终占据指定大小main-size</p></blockquote><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;*默认*&#x2F;</span><br><span class="line">flex-basis:auto;</span><br><span class="line">&#x2F;*自定义*&#x2F;</span><br><span class="line">flex-basis:300px;</span><br></pre></td></tr></table></figure><p><img src="/images/flex/fi-flex-basis.PNG" alt="browser-spport"></p><p class="image-caption">默认值auto，即为原本main-size</p><h4 id="flex"><a href="#flex" class="headerlink" title="flex"></a>flex</h4><blockquote><p>是flex-grow&amp;flex-shrink&amp;flex-basis的简写形式<br>特殊样例 auto = 1 1 auto &amp;&amp; none = 0 0 auto</p></blockquote><h4 id="align-self"><a href="#align-self" class="headerlink" title="align-self"></a>align-self</h4><blockquote><p>默认是auto，即继承inherit父类即align-items的设置，但是可以单独设置样式来覆盖父类样式，没有父元素则属性值为stretch<br>可选属性值与align-items相同，用法相同，作用域只限于当前的flex-item<br><img src="/images/flex/fi-align-self.PNG" alt="browser-spport"></p></blockquote><p class="image-caption">单独设置align-self:flex-end属性图</p>]]></content>
-    
-    
-    <summary type="html">&lt;h2 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;感谢阮一峰先生的分享&lt;a href=&quot;http://www.ruanyifeng.com/blog/2015/07/flex-examples.html&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;flex-examples&lt;/a&gt; 仅供个人学习&lt;/strong&gt;&lt;br&gt;2009年，W3C 提出了一种新的方案—-Flex 布局，可以简便、完整、响应式地实现各种页面布局。目前，它已经得到了所有浏览器的支持，这意味着，现在就能很安全地使用这项功能。</summary>
-    
-    
-    
-    <category term="css" scheme="http://yoursite.com/categories/css/"/>
-    
-    <category term="css布局" scheme="http://yoursite.com/categories/css/css%E5%B8%83%E5%B1%80/"/>
-    
-    <category term="前端开发" scheme="http://yoursite.com/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/"/>
-    
-    
-    <category term="css布局" scheme="http://yoursite.com/tags/css%E5%B8%83%E5%B1%80/"/>
-    
-    <category term="css" scheme="http://yoursite.com/tags/css/"/>
     
   </entry>
   
