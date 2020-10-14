@@ -1788,4 +1788,43 @@
         <tag>function</tag>
       </tags>
   </entry>
+  <entry>
+    <title>webpack和babel在项目中的应用</title>
+    <url>/2020/10/13/webpack%E5%92%8Cbabel%E5%9C%A8%E9%A1%B9%E7%9B%AE%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8/</url>
+    <content><![CDATA[<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>使用vue-cli简单不少，但要是单纯想使用es6的打包工具webpack和转换代码工具的babel进行项目的打包转换，麻烦不少</p>
+<a id="more"></a>
+
+<h2 id="初始化项目"><a href="#初始化项目" class="headerlink" title="初始化项目"></a>初始化项目</h2><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">//如果项目文件夹存在，可以省略项目名称</span></span><br><span class="line">npm init -y [项目名称]</span><br></pre></td></tr></table></figure>
+<p>使用上述命令生成package.json文件，此文件主要记录了项目的依赖，版本号等信息。当项目丢失部分依赖时可使用npm install依照此记录重新安装依赖。</p>
+<h2 id="安装依赖"><a href="#安装依赖" class="headerlink" title="安装依赖"></a>安装依赖</h2><p>webpack和babel的依赖包较多，且版本问题不兼容，很坑。直接使用固定版本命令安装</p>
+<ul>
+<li>安装babel的相关依赖</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">npm i -D babel-core@6.26.x babel-loader@7.0.0 babel-plugin-transform-runtime@6.23.x babel-preset-env@1.7.x babel-polyfill</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>安装webpack相关的依赖</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">npm i -D webpack@4.43.x webpack-cli@3.3.x webpack-dev-server@3.11.x html-webpack-plugin@4.3.x</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>安装css和字体文件相关的依赖</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> npm i -D node-sass@4.14.x sass-loader@8.0.x css-loader@3.5.x file-loader@6.0.x style-loader@1.2.x url-loader@4.1.x</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="配置wepack"><a href="#配置wepack" class="headerlink" title="配置wepack"></a>配置wepack</h2><p>配置需要使用的babel转换环境和wepack打包配置，项目入口生成文件存放路径等</p>
+<p>1、在项目的根目录下创建webpack.config.js文件</p>
+<p>2、在文件中写如下配置即可，项目运行时会自动读取此文件的配置</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">//commonjs 导入文件格式</span></span><br><span class="line"><span class="keyword">const</span> htmlwebpackplugin = <span class="built_in">require</span>(<span class="string">'html-webpack-plugin'</span>)</span><br><span class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">'path'</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> htmlwebplugin = <span class="keyword">new</span> htmlwebpackplugin(&#123;</span><br><span class="line">    filename:<span class="string">'index.html'</span>,</span><br><span class="line">    template:path.join(__dirname,<span class="string">'./src/index.html'</span>)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">//安装node-sass特殊命令npm install node-sass -D --sass-binary-site=http://npm.taobao.org/mirrors/node-sass</span></span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">    mode:<span class="string">'development'</span>,</span><br><span class="line">    plugins:[htmlwebplugin],</span><br><span class="line">    entry:<span class="string">'./src/main.js'</span>,</span><br><span class="line">    <span class="built_in">module</span>:&#123;</span><br><span class="line">        rules:[</span><br><span class="line">            &#123; </span><br><span class="line">                test: <span class="regexp">/.js$/</span>, </span><br><span class="line">                exclude:<span class="regexp">/node_modules/</span>,</span><br><span class="line">                use:&#123;</span><br><span class="line">                    loader:<span class="string">'babel-loader'</span>,</span><br><span class="line">                    options:&#123;</span><br><span class="line">                        presets:[<span class="string">'env'</span>,<span class="string">'babel-polyfill'</span>],</span><br><span class="line">                        plugins:[<span class="string">'transform-runtime'</span>],</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;,</span><br><span class="line">            &#125;,</span><br><span class="line">            &#123; <span class="attr">test</span>: <span class="regexp">/\.css$/</span>, <span class="attr">use</span>: [<span class="string">'style-loader'</span>, <span class="string">'css-loader'</span>] &#125;,</span><br><span class="line">            &#123;</span><br><span class="line">                test: <span class="regexp">/\.scss$/</span>, <span class="attr">use</span>: [<span class="string">'style-loader'</span>, &#123;</span><br><span class="line">                    loader: <span class="string">'css-loader'</span>,</span><br><span class="line">                    options: &#123;</span><br><span class="line">                        modules: &#123;</span><br><span class="line">                            localIdentName: <span class="string">'[path][name]-[local]-[hash:5]'</span></span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;, <span class="string">'sass-loader'</span>]</span><br><span class="line">            &#125;,</span><br><span class="line">            &#123; <span class="attr">test</span>: <span class="regexp">/\.ttf|woff|woff2|eot|svg$/</span>, <span class="attr">use</span>: <span class="string">'url-loader'</span> &#125;,</span><br><span class="line">            <span class="comment">// &#123;test:/\.css$/,use:['style-loader','css-loader?modules&amp;localIdentName=[path][name]-[local]-[hash:5]']&#125;</span></span><br><span class="line">        ],</span><br><span class="line">    &#125;,</span><br><span class="line">    resolve:&#123;</span><br><span class="line">        alias:&#123;</span><br><span class="line">            <span class="string">'@'</span>:path.join(__dirname,<span class="string">'./src'</span>),</span><br><span class="line">            <span class="string">'$'</span>:__dirname</span><br><span class="line">        &#125;,</span><br><span class="line">        extensions:[<span class="string">'.js'</span>,<span class="string">'.jsx'</span>,<span class="string">'.json'</span>]</span><br><span class="line">    &#125;,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>node</category>
+        <category>打包工具</category>
+      </categories>
+      <tags>
+        <tag>node</tag>
+        <tag>wepack,babel</tag>
+      </tags>
+  </entry>
 </search>
