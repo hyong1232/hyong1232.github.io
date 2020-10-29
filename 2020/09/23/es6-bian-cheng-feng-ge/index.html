@@ -312,7 +312,7 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('https://i.loli.net/2020/10/25/wN6yWomusUVdpqt.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://i.loli.net/2020/10/30/QBtyYLJdEGzHmNV.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
@@ -474,21 +474,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2020-10-25
+                    2020-10-30
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    757
+                    683
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    3 分
+                    2 分
                 </div>
                 
 
@@ -515,115 +515,102 @@
 <h2 id="赋值"><a href="#赋值" class="headerlink" title="赋值"></a>赋值</h2><blockquote>
 <p>尽量使用结构赋值，保证简洁明了</p>
 </blockquote>
-<pre><code>&#x2F;&#x2F;常用于
-&#x2F;&#x2F;1、数组赋值
-const arr &#x3D; [1,2,3]
-const [one,two] &#x3D; arr
-&#x2F;&#x2F;2、获取函数参数
-function everyfunc(params){
-    const {one,two} &#x3D; params
-}
-&#x2F;&#x2F;3、函数返回值&amp;&amp;获取函数返回值（尽量使用对象返回结构，便于添加和修改顺序）
-const {one,two} &#x3D; getReturnFunc()
-function getReturnFunc(){
-    return {one,two}
-}</code></pre>
-
+<pre class="line-numbers language-js"><code class="language-js"><span class="token comment" spellcheck="true">//常用于</span>
+<span class="token comment" spellcheck="true">//1、数组赋值</span>
+<span class="token keyword">const</span> arr <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">]</span>
+<span class="token keyword">const</span> <span class="token punctuation">[</span>one<span class="token punctuation">,</span>two<span class="token punctuation">]</span> <span class="token operator">=</span> arr
+<span class="token comment" spellcheck="true">//2、获取函数参数</span>
+<span class="token keyword">function</span> <span class="token function">everyfunc</span><span class="token punctuation">(</span>params<span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">const</span> <span class="token punctuation">{</span>one<span class="token punctuation">,</span>two<span class="token punctuation">}</span> <span class="token operator">=</span> params
+<span class="token punctuation">}</span>
+<span class="token comment" spellcheck="true">//3、函数返回值&amp;&amp;获取函数返回值（尽量使用对象返回结构，便于添加和修改顺序）</span>
+<span class="token keyword">const</span> <span class="token punctuation">{</span>one<span class="token punctuation">,</span>two<span class="token punctuation">}</span> <span class="token operator">=</span> <span class="token function">getReturnFunc</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token keyword">function</span> <span class="token function">getReturnFunc</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token punctuation">{</span>one<span class="token punctuation">,</span>two<span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h2 id="对象"><a href="#对象" class="headerlink" title="对象"></a>对象</h2><p>1、对象定义时，多行元素最后一个要加上‘,’，定义在一行上则不必</p>
-<pre><code>const obj &#x3D; {a:1,b:3}
-const obj &#x3D; {
-    a:1,
-    b:3,
-}</code></pre>
-
+<pre class="line-numbers language-js"><code class="language-js"><span class="token keyword">const</span> obj <span class="token operator">=</span> <span class="token punctuation">{</span>a<span class="token punctuation">:</span><span class="token number">1</span><span class="token punctuation">,</span>b<span class="token punctuation">:</span><span class="token number">3</span><span class="token punctuation">}</span>
+<span class="token keyword">const</span> obj <span class="token operator">=</span> <span class="token punctuation">{</span>
+    a<span class="token punctuation">:</span><span class="token number">1</span><span class="token punctuation">,</span>
+    b<span class="token punctuation">:</span><span class="token number">3</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>2、尽量不要修改，静态化，修改使用Object.assign(target,…origin)（可以有多个源对象）修改。</p>
-<pre><code>const target &#x3D; {
-    one:&#39;one&#39;
-}
-Object.assign(target,{two:&#39;two&#39;})&#x3D;&#x3D;&#x3D;&gt;target&#x3D;{one:&#39;one&#39;,two:&#39;two&#39;}</code></pre>
-
+<pre class="line-numbers language-js"><code class="language-js"><span class="token keyword">const</span> target <span class="token operator">=</span> <span class="token punctuation">{</span>
+    one<span class="token punctuation">:</span><span class="token string">'one'</span>
+<span class="token punctuation">}</span>
+Object<span class="token punctuation">.</span><span class="token function">assign</span><span class="token punctuation">(</span>target<span class="token punctuation">,</span><span class="token punctuation">{</span>two<span class="token punctuation">:</span><span class="token string">'two'</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token operator">===</span><span class="token operator">></span>target<span class="token operator">=</span><span class="token punctuation">{</span>one<span class="token punctuation">:</span><span class="token string">'one'</span><span class="token punctuation">,</span>two<span class="token punctuation">:</span><span class="token string">'two'</span><span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 <p>3、如果定义时元素名称不确定，使用属性表达式，即‘[要运算的表达式]’作为元素名称。</p>
-<pre><code>const obj &#x3D; {
-    [getName(&#39;key&#39;)]:&#39;jack&#39;
-}</code></pre>
-
+<pre class="line-numbers language-js"><code class="language-js"><span class="token keyword">const</span> obj <span class="token operator">=</span> <span class="token punctuation">{</span>
+    <span class="token punctuation">[</span><span class="token function">getName</span><span class="token punctuation">(</span><span class="token string">'key'</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">:</span><span class="token string">'jack'</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 <p>4、对象内部方法省略function关键字，同名键名称省略</p>
-<pre><code>const obj &#x3D; {
-    one,
-    get(){
-        ...
-    }
-}</code></pre>
-
+<pre class="line-numbers language-js"><code class="language-js"><span class="token keyword">const</span> obj <span class="token operator">=</span> <span class="token punctuation">{</span>
+    one<span class="token punctuation">,</span>
+    <span class="token keyword">get</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token operator">...</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h2 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h2><p>1、复制数组使用扩展运算符</p>
-<pre><code>let oldArr &#x3D; [1,2]
-let newArr &#x3D; [...oldArr]</code></pre>
-
+<pre class="line-numbers language-js"><code class="language-js"><span class="token keyword">let</span> oldArr <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">]</span>
+<span class="token keyword">let</span> newArr <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token operator">...</span>oldArr<span class="token punctuation">]</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <p>2、将类数组转换成数组使用Array.from(target)target需要是可迭代的对象（有length属性）</p>
-<pre><code>Array.from(document.querySelector(&#39;li&#39;))</code></pre>
-
+<pre class="line-numbers language-js"><code class="language-js">Array<span class="token punctuation">.</span><span class="token keyword">from</span><span class="token punctuation">(</span>document<span class="token punctuation">.</span><span class="token function">querySelector</span><span class="token punctuation">(</span><span class="token string">'li'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <h2 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h2><p>1、箭头函数</p>
 <ul>
 <li><p>简单的函数</p>
-<pre><code>;[1, 2, 3].map(x &#x3D;&gt; x * x)</code></pre>
+<pre class="line-numbers language-js"><code class="language-js"><span class="token punctuation">;</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span>x <span class="token operator">=</span><span class="token operator">></span> x <span class="token operator">*</span> x<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 </li>
 <li><p>绑定this值，代替使用（_self/that/_this）表示this</p>
-<pre><code>&#x2F;&#x2F; bad
-const self &#x3D; this;
-const boundMethod &#x3D; function(...params) {
-  return method.apply(self, params);
-}
-
-&#x2F;&#x2F; acceptable
-const boundMethod &#x3D; method.bind(this);
-
-&#x2F;&#x2F; best
-const boundMethod &#x3D; (...params) &#x3D;&gt; method.apply(this, params);</code></pre>
-
+<pre class="line-numbers language-js"><code class="language-js"><span class="token comment" spellcheck="true">// bad</span>
+<span class="token keyword">const</span> self <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> boundMethod <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token operator">...</span>params<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+<span class="token keyword">return</span> method<span class="token punctuation">.</span><span class="token function">apply</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> params<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token comment" spellcheck="true">// acceptable</span>
+<span class="token keyword">const</span> boundMethod <span class="token operator">=</span> method<span class="token punctuation">.</span><span class="token function">bind</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment" spellcheck="true">// best</span>
+<span class="token keyword">const</span> boundMethod <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token operator">...</span>params<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> method<span class="token punctuation">.</span><span class="token function">apply</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">,</span> params<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 </li>
 </ul>
 <p>2、参数</p>
 <ul>
 <li><p>不用argument关键字，获取参数使用（…params）直接获取参数数组</p>
-<pre><code>function(...params){
-    params.join(&#39;&#39;)
-}</code></pre>
+<pre class="line-numbers language-js"><code class="language-js"><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token operator">...</span>params<span class="token punctuation">)</span><span class="token punctuation">{</span>
+  params<span class="token punctuation">.</span><span class="token function">join</span><span class="token punctuation">(</span><span class="token string">''</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 </li>
 <li><p>在参数列表设置默认参数</p>
-<pre><code>function(params&#x3D;{}){
-
-}</code></pre>
-
+<pre class="line-numbers language-js"><code class="language-js"><span class="token keyword">function</span><span class="token punctuation">(</span>params<span class="token operator">=</span><span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+  anything<span class="token operator">...</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 </li>
 </ul>
 <h2 id="使用Map代替Object对象的使用"><a href="#使用Map代替Object对象的使用" class="headerlink" title="使用Map代替Object对象的使用"></a>使用Map代替Object对象的使用</h2><blockquote>
 <p>Map有key:value结构，有自己的遍历方法，object使用在具体业务特殊对象。</p>
 </blockquote>
-<pre><code>let map &#x3D; new Map(可迭代对象)
-let map &#x3D; new Map([[1,&#39;one&#39;],[2,&#39;two&#39;]])
-&#x2F;&#x2F;keys()便利key值
-for key of map.keys(){} ;
-&#x2F;&#x2F;values()便利值
+<pre class="line-numbers language-js"><code class="language-js"><span class="token keyword">let</span> map <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Map</span><span class="token punctuation">(</span>可迭代对象<span class="token punctuation">)</span>
+<span class="token keyword">let</span> map <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Map</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token string">'one'</span><span class="token punctuation">]</span><span class="token punctuation">,</span><span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token string">'two'</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+<span class="token comment" spellcheck="true">//keys()便利key值</span>
+<span class="token keyword">for</span> key <span class="token keyword">of</span> map<span class="token punctuation">.</span><span class="token function">keys</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span><span class="token punctuation">}</span> <span class="token punctuation">;</span>
+<span class="token comment" spellcheck="true">//values()便利值</span>
 
-&#x2F;&#x2F;entries()获取值和key值（为数组则是下标数值）</code></pre>
+<span class="token comment" spellcheck="true">//entries()获取值和key值（为数组则是下标数值）</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="class代替原有的直接操作Prototype属性，规范类定义使用"><a href="#class代替原有的直接操作Prototype属性，规范类定义使用" class="headerlink" title="class代替原有的直接操作Prototype属性，规范类定义使用"></a>class代替原有的直接操作Prototype属性，规范类定义使用</h2><pre class="line-numbers language-js"><code class="language-js"><span class="token comment" spellcheck="true">// bad</span>
+<span class="token keyword">const</span> inherits <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'inherits'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">function</span> <span class="token function">PeekableQueue</span><span class="token punctuation">(</span>contents<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  Queue<span class="token punctuation">.</span><span class="token function">apply</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">,</span> contents<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token function">inherits</span><span class="token punctuation">(</span>PeekableQueue<span class="token punctuation">,</span> Queue<span class="token punctuation">)</span><span class="token punctuation">;</span>
+PeekableQueue<span class="token punctuation">.</span>prototype<span class="token punctuation">.</span>peek <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">.</span>_queue<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 
-<h2 id="class代替原有的直接操作Prototype属性，规范类定义使用"><a href="#class代替原有的直接操作Prototype属性，规范类定义使用" class="headerlink" title="class代替原有的直接操作Prototype属性，规范类定义使用"></a>class代替原有的直接操作Prototype属性，规范类定义使用</h2><pre><code>&#x2F;&#x2F; bad
-const inherits &#x3D; require(&#39;inherits&#39;);
-function PeekableQueue(contents) {
-  Queue.apply(this, contents);
-}
-inherits(PeekableQueue, Queue);
-PeekableQueue.prototype.peek &#x3D; function() {
-  return this._queue[0];
-}
-
-&#x2F;&#x2F; good
-class PeekableQueue extends Queue {
-  peek() {
-    return this._queue[0];
-  }
-}</code></pre>
-
+<span class="token comment" spellcheck="true">// good</span>
+<span class="token keyword">class</span> <span class="token class-name">PeekableQueue</span> <span class="token keyword">extends</span> <span class="token class-name">Queue</span> <span class="token punctuation">{</span>
+  <span class="token function">peek</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">.</span>_queue<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h2 id="使用es6的模块化代替CommonJS的模块化引用"><a href="#使用es6的模块化代替CommonJS的模块化引用" class="headerlink" title="使用es6的模块化代替CommonJS的模块化引用"></a>使用es6的模块化代替CommonJS的模块化引用</h2>
             </div>
             <hr/>
@@ -1412,7 +1399,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">13.1k</span>&nbsp;字
+                class="white-color">12.9k</span>&nbsp;字
             
             
             
