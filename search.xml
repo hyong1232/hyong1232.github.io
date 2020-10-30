@@ -7,34 +7,28 @@
 <a id="more"></a>
 
 <h2 id="常用方法"><a href="#常用方法" class="headerlink" title="常用方法"></a>常用方法</h2><p>1、复制对象值，并返回新创建新对象</p>
-<pre><code>Objec
-t.assign({},{a:&#39;a&#39;},{b:&#39;b&#39;})</code></pre>
-
+<pre class="line-numbers language-js"><code class="language-js">Objec
+t<span class="token punctuation">.</span><span class="token function">assign</span><span class="token punctuation">(</span><span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span><span class="token punctuation">{</span>a<span class="token punctuation">:</span><span class="token string">'a'</span><span class="token punctuation">}</span><span class="token punctuation">,</span><span class="token punctuation">{</span>b<span class="token punctuation">:</span><span class="token string">'b'</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <p>2、为对象添加新属性</p>
-<pre><code>Object.assign(orgin,{add:&#39;add&#39;})</code></pre>
-
+<pre class="line-numbers language-js"><code class="language-js">Object<span class="token punctuation">.</span><span class="token function">assign</span><span class="token punctuation">(</span>orgin<span class="token punctuation">,</span><span class="token punctuation">{</span>add<span class="token punctuation">:</span><span class="token string">'add'</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>3、为对象添加新方法</p>
-<pre><code>const obj &#x3D; {
-    val:&#39;val&#39;,
-}
-Object.assign(obj.prototype,{
-    getName(){
-        ....
-    }
-})</code></pre>
-
+<pre class="line-numbers language-js"><code class="language-js"><span class="token keyword">const</span> obj <span class="token operator">=</span> <span class="token punctuation">{</span>
+    val<span class="token punctuation">:</span><span class="token string">'val'</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span>
+Object<span class="token punctuation">.</span><span class="token function">assign</span><span class="token punctuation">(</span>obj<span class="token punctuation">.</span>prototype<span class="token punctuation">,</span><span class="token punctuation">{</span>
+    <span class="token function">getName</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token operator">...</span><span class="token punctuation">.</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h3 id="特性："><a href="#特性：" class="headerlink" title="特性："></a>特性：</h3><p>1、由于Object.assign采用的是浅拷贝，因此源对象的属性值是对象时，只是复制了引用，再后面的复制中出现此对象的修改，则直接替换他的引用</p>
-<pre><code>const obj1 &#x3D; {a: {b: 1}};
-const obj2 &#x3D; Object.assign({}, obj1);
+<pre class="line-numbers language-js"><code class="language-js"><span class="token keyword">const</span> obj1 <span class="token operator">=</span> <span class="token punctuation">{</span>a<span class="token punctuation">:</span> <span class="token punctuation">{</span>b<span class="token punctuation">:</span> <span class="token number">1</span><span class="token punctuation">}</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> obj2 <span class="token operator">=</span> Object<span class="token punctuation">.</span><span class="token function">assign</span><span class="token punctuation">(</span><span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span> obj1<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-obj1.a.b &#x3D; 2;
-obj2.a.b &#x2F;&#x2F; 2</code></pre>
-
+obj1<span class="token punctuation">.</span>a<span class="token punctuation">.</span>b <span class="token operator">=</span> <span class="token number">2</span><span class="token punctuation">;</span>
+obj2<span class="token punctuation">.</span>a<span class="token punctuation">.</span>b <span class="token comment" spellcheck="true">// 2</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>2、不能复制origin源对象的继承属性，只能同通过Object.getPrototypeOf(origin)+Object.create()+origin方法，将其继承的方法单独调出来，然后合并</p>
-<pre><code>let originProto &#x3D; Object.getPrototypeOf(origin);
-return Object.assign(Object.create(originProto), origin);</code></pre>
-
-
+<pre class="line-numbers language-js"><code class="language-js"><span class="token keyword">let</span> originProto <span class="token operator">=</span> Object<span class="token punctuation">.</span><span class="token function">getPrototypeOf</span><span class="token punctuation">(</span>origin<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">return</span> Object<span class="token punctuation">.</span><span class="token function">assign</span><span class="token punctuation">(</span>Object<span class="token punctuation">.</span><span class="token function">create</span><span class="token punctuation">(</span>originProto<span class="token punctuation">)</span><span class="token punctuation">,</span> origin<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <p>3、target/orgin对象为非对象</p>
 <ul>
 <li> target为非对象，转换成对象，如果是null/undefined不可转换成对象的属性时，报错</li>
@@ -44,18 +38,18 @@ return Object.assign(Object.create(originProto), origin);</code></pre>
 <blockquote>
 <p>将数组当成对象处理，键值为index下标</p>
 </blockquote>
-<pre><code>Object.assign([1,2,3],[4,5])&#x3D;&gt;[4,5,3]</code></pre>
-
+<pre class="line-numbers language-js"><code class="language-js">Object<span class="token punctuation">.</span><span class="token function">assign</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">,</span><span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">,</span><span class="token number">5</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token operator">=</span><span class="token operator">></span><span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">,</span><span class="token number">5</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">]</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>5、取值函数处理（关键字get开头）</p>
 <blockquote>
 <p>直接取值，不会获取取值函数合并</p>
 </blockquote>
-<pre><code>const obj &#x3D; {
-    get name (){
-        return &#39;jack&#39;
-    }
-}
-Object.assign({},obj)&#x3D;&gt;{name:&#39;jack&#39;}</code></pre>]]></content>
+<pre class="line-numbers language-js"><code class="language-js"><span class="token keyword">const</span> obj <span class="token operator">=</span> <span class="token punctuation">{</span>
+    <span class="token keyword">get</span> name <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token string">'jack'</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+Object<span class="token punctuation">.</span><span class="token function">assign</span><span class="token punctuation">(</span><span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span>obj<span class="token punctuation">)</span><span class="token operator">=</span><span class="token operator">></span><span class="token punctuation">{</span>name<span class="token punctuation">:</span><span class="token string">'jack'</span><span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+]]></content>
       <categories>
         <category>es6</category>
         <category>Object操作</category>
@@ -74,76 +68,71 @@ Object.assign({},obj)&#x3D;&gt;{name:&#39;jack&#39;}</code></pre>]]></content>
 <h3 id="配置在项目中使用"><a href="#配置在项目中使用" class="headerlink" title="配置在项目中使用"></a>配置在项目中使用</h3><blockquote>
 <p>可使用配置文件.babelrc将常见配置写入文件中（放置在项目的根目录下），再webpack打包的过程中，会自动读取这个文件的配置，常见的配置写法如下:</p>
 </blockquote>
-<pre><code>{
-    &quot;presets&quot;:[&#39;es2015&#39;,&#39;env&#39;,&#39;stage-0&#39;],
-    &quot;plugins&quot;:[&#39;transform-runtime&#39;]
-}</code></pre>
-
+<pre class="line-numbers language-js"><code class="language-js"><span class="token punctuation">{</span>
+    <span class="token string">"presets"</span><span class="token punctuation">:</span><span class="token punctuation">[</span><span class="token string">'es2015'</span><span class="token punctuation">,</span><span class="token string">'env'</span><span class="token punctuation">,</span><span class="token string">'stage-0'</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+    <span class="token string">"plugins"</span><span class="token punctuation">:</span><span class="token punctuation">[</span><span class="token string">'transform-runtime'</span><span class="token punctuation">]</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>.babelrc文件整个就是一个对象，在对象{}中配置相应的属性即可</li>
 <li>常用的presets规则以及转换插件需要自行下载（npm命令即可）</li>
 </ul>
 <p><strong>babel配置也可以在webpack的配置文件中配置，即在module下的rules数组对象的规则对象的use属性中添加options属性中添加即可</strong></p>
-<pre><code>module:{
-    rules:[
-        {
-            test:&#x2F;\.js$&#x2F;,
-            exclude:&#x2F;node_modules&#x2F;,
-            use:{
-                loader:&#39;babel-loader&#39;,
-                options:{
-                    presets:[&#39;env&#39;],
-                    plugins:[&#39;transform-runtime&#39;]
-                }
-            }
-        }
-    ]
-}</code></pre>
+<pre class="line-numbers language-js"><code class="language-js">module<span class="token punctuation">:</span><span class="token punctuation">{</span>
+    rules<span class="token punctuation">:</span><span class="token punctuation">[</span>
+        <span class="token punctuation">{</span>
+            test<span class="token punctuation">:</span><span class="token regex">/\.js$/</span><span class="token punctuation">,</span>
+            exclude<span class="token punctuation">:</span><span class="token regex">/node_modules/</span><span class="token punctuation">,</span>
+            use<span class="token punctuation">:</span><span class="token punctuation">{</span>
+                loader<span class="token punctuation">:</span><span class="token string">'babel-loader'</span><span class="token punctuation">,</span>
+                options<span class="token punctuation">:</span><span class="token punctuation">{</span>
+                    presets<span class="token punctuation">:</span><span class="token punctuation">[</span><span class="token string">'env'</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+                    plugins<span class="token punctuation">:</span><span class="token punctuation">[</span><span class="token string">'transform-runtime'</span><span class="token punctuation">]</span>
+                <span class="token punctuation">}</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">]</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p><strong>关于转换规则stage-0/1/2…在新的webpack中不在推荐使用，避免过多使用</strong></p>
 <h3 id="命令行中直接转换"><a href="#命令行中直接转换" class="headerlink" title="命令行中直接转换"></a>命令行中直接转换</h3><blockquote>
 <p>除了在项目中使用还可以直接在命令行转换es6的代码</p>
 </blockquote>
 <p>1、安装@babel/cli</p>
-<pre><code>npm i -D @babel&#x2F;cli</code></pre>
+<pre class="line-numbers language-bash"><code class="language-bash"><span class="token function">npm</span> i -D @babel/cli<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>2、基本用法</p>
-<pre><code>&#x2F;&#x2F;转换单个es6语法的文件到指定文件夹
+<pre class="line-numbers language-bash"><code class="language-bash">//转换单个es6语法的文件到指定文件夹
 npx babel es6.js --out-file out.js
-&#x2F;&#x2F;简写为
+//简写为
 npx babel es6.js -o out.js
 
-&#x2F;&#x2F;转换文件夹至指定路径输出
+//转换文件夹至指定路径输出
 npx babel es6dir -out-dir outdir
-&#x2F;&#x2F;简写为
+//简写为
 npx babel es6dir -d outdir
 
-&#x2F;&#x2F;加上 -s参数生产source map文件
-npx babel es6dir -d outdir -s</code></pre>
+//加上 -s参数生产source map文件
+npx babel es6dir -d outdir -s<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>转换文件到目标文件/文件夹时，没有会自动创建</li>
 <li>文件夹转换是将源文件夹中的文件依次转换到对应的输出，出错则停止转换</li>
 <li>关于npx可见<blockquote><p>常见的npx使用方式</p>
 <footer><strong>阮一峰</strong><cite><a href="https://www.ruanyifeng.com/blog/2019/02/npx.html">npx使用教程</a></cite></footer></blockquote></li>
 <li>关于sourceMap可见<blockquote><p>sourceMap介绍</p>
-<footer><strong>阮一峰</strong><cite><a href="http://www.ruanyifeng.com/blog/2013/01/javascript_source_map.html">JavaScript Source Map 详解</a></cite></footer></blockquote>
-
-</li>
+<footer><strong>阮一峰</strong><cite><a href="http://www.ruanyifeng.com/blog/2013/01/javascript_source_map.html">JavaScript Source Map 详解</a></cite></footer></blockquote></li>
 </ul>
 <h3 id="babel-node的使用"><a href="#babel-node的使用" class="headerlink" title="@babel/node的使用"></a>@babel/node的使用</h3><blockquote>
 <p>安装了这个包就可以在命令行直接执行es6命令，或者直接运行es6文件</p>
 </blockquote>
-<pre><code>&#x2F;&#x2F;直接运行es6文件
-npx node-node es6.js</code></pre>
-
+<pre class="line-numbers language-bash"><code class="language-bash">//直接运行es6文件
+npx node-node es6.js<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <h3 id="babel-register"><a href="#babel-register" class="headerlink" title="@babel/register"></a>@babel/register</h3><blockquote>
 <p>这个包的作用是在文件中对通过require加载的文件进行实时转换</p>
 </blockquote>
-<pre><code>&#x2F;&#x2F;安装
-npm i @babel&#x2F;register -D
-&#x2F;&#x2F;使用（文件中）
-require(&#39;@babel&#x2F;register&#39;);
-require(&#39;.&#x2F;es6.js&#39;)
-&#x2F;&#x2F;上述代码会自动将加载的es6文件转换</code></pre>
-
+<pre class="line-numbers language-bash"><code class="language-bash">//安装
+<span class="token function">npm</span> i @babel/register -D
+//使用（文件中）
+require<span class="token punctuation">(</span><span class="token string">'@babel/register'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+require<span class="token punctuation">(</span><span class="token string">'./es6.js'</span><span class="token punctuation">)</span>
+//上述代码会自动将加载的es6文件转换<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>此包仅在运行时有效（适用于开发时使用）</li>
 <li>使用时要先加载此包，放在文件的顶部</li>
@@ -152,12 +141,11 @@ require(&#39;.&#x2F;es6.js&#39;)
 <h3 id="polyfill"><a href="#polyfill" class="headerlink" title="polyfill"></a>polyfill</h3><blockquote>
 <p>babel默认不会转换es6新的api，只会转换语法（syntax）例如Iterator、Generator、Set、Map、Proxy、Reflect、Symbol、Promies等全局对象，及部分全局对象的工具方法例如Array.from()方法。使用polyfill可解决这个问题</p>
 </blockquote>
-<pre><code>&#x2F;&#x2F;安装(regenerator是转换generator的包)
-npm i core-js regenerator-runtime -D
-&#x2F;&#x2F;使用（文件中）导入即可（require&#x2F;import）
-import &#39;core-js&#39;
-import &#39;regenerator-runtime&#x2F;runtime&#39;</code></pre>
-
+<pre class="line-numbers language-bash"><code class="language-bash">//安装<span class="token punctuation">(</span>regenerator是转换generator的包<span class="token punctuation">)</span>
+<span class="token function">npm</span> i core-js regenerator-runtime -D
+//使用（文件中）导入即可（require/import）
+<span class="token function">import</span> <span class="token string">'core-js'</span>
+<span class="token function">import</span> <span class="token string">'regenerator-runtime/runtime'</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 ]]></content>
       <categories>
         <category>es6</category>
@@ -166,127 +154,6 @@ import &#39;regenerator-runtime&#x2F;runtime&#39;</code></pre>
       <tags>
         <tag>es6</tag>
         <tag>babel</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>es6编程风格</title>
-    <url>/2020/09/23/es6-bian-cheng-feng-ge/</url>
-    <content><![CDATA[<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>由于现行js的使用版本不一致，导致老版js和es6混用，以及es6本身的使用不规范，造成代码的格式不标准，不便于代码的维护和修改，故参考行业先进规范以改正。</p>
-<a id="more"></a>
-
-<h2 id="变量定义关键字替换"><a href="#变量定义关键字替换" class="headerlink" title="变量定义关键字替换"></a>变量定义关键字替换</h2><p>1、使用let取代var</p>
-<ul>
-<li>没有了变量提升，更严谨（存在temporal dead zone暂时性死区）需要先定义再使用。</li>
-</ul>
-<p>2、使用const声明全局常量</p>
-<h2 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h2><p>统一使用单引号，有变量的成分就是用反引号。</p>
-<h2 id="赋值"><a href="#赋值" class="headerlink" title="赋值"></a>赋值</h2><blockquote>
-<p>尽量使用结构赋值，保证简洁明了</p>
-</blockquote>
-<pre class="line-numbers language-js"><code class="language-js"><span class="token comment" spellcheck="true">//常用于</span>
-<span class="token comment" spellcheck="true">//1、数组赋值</span>
-<span class="token keyword">const</span> arr <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">]</span>
-<span class="token keyword">const</span> <span class="token punctuation">[</span>one<span class="token punctuation">,</span>two<span class="token punctuation">]</span> <span class="token operator">=</span> arr
-<span class="token comment" spellcheck="true">//2、获取函数参数</span>
-<span class="token keyword">function</span> <span class="token function">everyfunc</span><span class="token punctuation">(</span>params<span class="token punctuation">)</span><span class="token punctuation">{</span>
-    <span class="token keyword">const</span> <span class="token punctuation">{</span>one<span class="token punctuation">,</span>two<span class="token punctuation">}</span> <span class="token operator">=</span> params
-<span class="token punctuation">}</span>
-<span class="token comment" spellcheck="true">//3、函数返回值&amp;&amp;获取函数返回值（尽量使用对象返回结构，便于添加和修改顺序）</span>
-<span class="token keyword">const</span> <span class="token punctuation">{</span>one<span class="token punctuation">,</span>two<span class="token punctuation">}</span> <span class="token operator">=</span> <span class="token function">getReturnFunc</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-<span class="token keyword">function</span> <span class="token function">getReturnFunc</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
-    <span class="token keyword">return</span> <span class="token punctuation">{</span>one<span class="token punctuation">,</span>two<span class="token punctuation">}</span>
-<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h2 id="对象"><a href="#对象" class="headerlink" title="对象"></a>对象</h2><p>1、对象定义时，多行元素最后一个要加上‘,’，定义在一行上则不必</p>
-<pre class="line-numbers language-js"><code class="language-js"><span class="token keyword">const</span> obj <span class="token operator">=</span> <span class="token punctuation">{</span>a<span class="token punctuation">:</span><span class="token number">1</span><span class="token punctuation">,</span>b<span class="token punctuation">:</span><span class="token number">3</span><span class="token punctuation">}</span>
-<span class="token keyword">const</span> obj <span class="token operator">=</span> <span class="token punctuation">{</span>
-    a<span class="token punctuation">:</span><span class="token number">1</span><span class="token punctuation">,</span>
-    b<span class="token punctuation">:</span><span class="token number">3</span><span class="token punctuation">,</span>
-<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>2、尽量不要修改，静态化，修改使用Object.assign(target,…origin)（可以有多个源对象）修改。</p>
-<pre class="line-numbers language-js"><code class="language-js"><span class="token keyword">const</span> target <span class="token operator">=</span> <span class="token punctuation">{</span>
-    one<span class="token punctuation">:</span><span class="token string">'one'</span>
-<span class="token punctuation">}</span>
-Object<span class="token punctuation">.</span><span class="token function">assign</span><span class="token punctuation">(</span>target<span class="token punctuation">,</span><span class="token punctuation">{</span>two<span class="token punctuation">:</span><span class="token string">'two'</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token operator">===</span><span class="token operator">></span>target<span class="token operator">=</span><span class="token punctuation">{</span>one<span class="token punctuation">:</span><span class="token string">'one'</span><span class="token punctuation">,</span>two<span class="token punctuation">:</span><span class="token string">'two'</span><span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-<p>3、如果定义时元素名称不确定，使用属性表达式，即‘[要运算的表达式]’作为元素名称。</p>
-<pre class="line-numbers language-js"><code class="language-js"><span class="token keyword">const</span> obj <span class="token operator">=</span> <span class="token punctuation">{</span>
-    <span class="token punctuation">[</span><span class="token function">getName</span><span class="token punctuation">(</span><span class="token string">'key'</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">:</span><span class="token string">'jack'</span>
-<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-<p>4、对象内部方法省略function关键字，同名键名称省略</p>
-<pre class="line-numbers language-js"><code class="language-js"><span class="token keyword">const</span> obj <span class="token operator">=</span> <span class="token punctuation">{</span>
-    one<span class="token punctuation">,</span>
-    <span class="token keyword">get</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
-        <span class="token operator">...</span>
-    <span class="token punctuation">}</span>
-<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h2 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h2><p>1、复制数组使用扩展运算符</p>
-<pre class="line-numbers language-js"><code class="language-js"><span class="token keyword">let</span> oldArr <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">]</span>
-<span class="token keyword">let</span> newArr <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token operator">...</span>oldArr<span class="token punctuation">]</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-<p>2、将类数组转换成数组使用Array.from(target)target需要是可迭代的对象（有length属性）</p>
-<pre class="line-numbers language-js"><code class="language-js">Array<span class="token punctuation">.</span><span class="token keyword">from</span><span class="token punctuation">(</span>document<span class="token punctuation">.</span><span class="token function">querySelector</span><span class="token punctuation">(</span><span class="token string">'li'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<h2 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h2><p>1、箭头函数</p>
-<ul>
-<li><p>简单的函数</p>
-<pre class="line-numbers language-js"><code class="language-js"><span class="token punctuation">;</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span>x <span class="token operator">=</span><span class="token operator">></span> x <span class="token operator">*</span> x<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-</li>
-<li><p>绑定this值，代替使用（_self/that/_this）表示this</p>
-<pre class="line-numbers language-js"><code class="language-js"><span class="token comment" spellcheck="true">// bad</span>
-<span class="token keyword">const</span> self <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">;</span>
-<span class="token keyword">const</span> boundMethod <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token operator">...</span>params<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-<span class="token keyword">return</span> method<span class="token punctuation">.</span><span class="token function">apply</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> params<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-<span class="token comment" spellcheck="true">// acceptable</span>
-<span class="token keyword">const</span> boundMethod <span class="token operator">=</span> method<span class="token punctuation">.</span><span class="token function">bind</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token comment" spellcheck="true">// best</span>
-<span class="token keyword">const</span> boundMethod <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token operator">...</span>params<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> method<span class="token punctuation">.</span><span class="token function">apply</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">,</span> params<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-</li>
-</ul>
-<p>2、参数</p>
-<ul>
-<li><p>不用argument关键字，获取参数使用（…params）直接获取参数数组</p>
-<pre class="line-numbers language-js"><code class="language-js"><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token operator">...</span>params<span class="token punctuation">)</span><span class="token punctuation">{</span>
-  params<span class="token punctuation">.</span><span class="token function">join</span><span class="token punctuation">(</span><span class="token string">''</span><span class="token punctuation">)</span>
-<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-</li>
-<li><p>在参数列表设置默认参数</p>
-<pre class="line-numbers language-js"><code class="language-js"><span class="token keyword">function</span><span class="token punctuation">(</span>params<span class="token operator">=</span><span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
-  anything<span class="token operator">...</span>
-<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-</li>
-</ul>
-<h2 id="使用Map代替Object对象的使用"><a href="#使用Map代替Object对象的使用" class="headerlink" title="使用Map代替Object对象的使用"></a>使用Map代替Object对象的使用</h2><blockquote>
-<p>Map有key:value结构，有自己的遍历方法，object使用在具体业务特殊对象。</p>
-</blockquote>
-<pre class="line-numbers language-js"><code class="language-js"><span class="token keyword">let</span> map <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Map</span><span class="token punctuation">(</span>可迭代对象<span class="token punctuation">)</span>
-<span class="token keyword">let</span> map <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Map</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token string">'one'</span><span class="token punctuation">]</span><span class="token punctuation">,</span><span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token string">'two'</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
-<span class="token comment" spellcheck="true">//keys()便利key值</span>
-<span class="token keyword">for</span> key <span class="token keyword">of</span> map<span class="token punctuation">.</span><span class="token function">keys</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span><span class="token punctuation">}</span> <span class="token punctuation">;</span>
-<span class="token comment" spellcheck="true">//values()便利值</span>
-
-<span class="token comment" spellcheck="true">//entries()获取值和key值（为数组则是下标数值）</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h2 id="class代替原有的直接操作Prototype属性，规范类定义使用"><a href="#class代替原有的直接操作Prototype属性，规范类定义使用" class="headerlink" title="class代替原有的直接操作Prototype属性，规范类定义使用"></a>class代替原有的直接操作Prototype属性，规范类定义使用</h2><pre class="line-numbers language-js"><code class="language-js"><span class="token comment" spellcheck="true">// bad</span>
-<span class="token keyword">const</span> inherits <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'inherits'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token keyword">function</span> <span class="token function">PeekableQueue</span><span class="token punctuation">(</span>contents<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-  Queue<span class="token punctuation">.</span><span class="token function">apply</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">,</span> contents<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-<span class="token function">inherits</span><span class="token punctuation">(</span>PeekableQueue<span class="token punctuation">,</span> Queue<span class="token punctuation">)</span><span class="token punctuation">;</span>
-PeekableQueue<span class="token punctuation">.</span>prototype<span class="token punctuation">.</span>peek <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-  <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">.</span>_queue<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-
-<span class="token comment" spellcheck="true">// good</span>
-<span class="token keyword">class</span> <span class="token class-name">PeekableQueue</span> <span class="token keyword">extends</span> <span class="token class-name">Queue</span> <span class="token punctuation">{</span>
-  <span class="token function">peek</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">.</span>_queue<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
-  <span class="token punctuation">}</span>
-<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h2 id="使用es6的模块化代替CommonJS的模块化引用"><a href="#使用es6的模块化代替CommonJS的模块化引用" class="headerlink" title="使用es6的模块化代替CommonJS的模块化引用"></a>使用es6的模块化代替CommonJS的模块化引用</h2>]]></content>
-      <categories>
-        <category>es6</category>
-        <category>编程风格/规范</category>
-      </categories>
-      <tags>
-        <tag>es6</tag>
-        <tag>编程风格</tag>
       </tags>
   </entry>
   <entry>
@@ -451,6 +318,127 @@ Promise<span class="token punctuation">.</span><span class="token function">all<
       </tags>
   </entry>
   <entry>
+    <title>es6编程风格</title>
+    <url>/2020/09/23/es6-bian-cheng-feng-ge/</url>
+    <content><![CDATA[<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>由于现行js的使用版本不一致，导致老版js和es6混用，以及es6本身的使用不规范，造成代码的格式不标准，不便于代码的维护和修改，故参考行业先进规范以改正。</p>
+<a id="more"></a>
+
+<h2 id="变量定义关键字替换"><a href="#变量定义关键字替换" class="headerlink" title="变量定义关键字替换"></a>变量定义关键字替换</h2><p>1、使用let取代var</p>
+<ul>
+<li>没有了变量提升，更严谨（存在temporal dead zone暂时性死区）需要先定义再使用。</li>
+</ul>
+<p>2、使用const声明全局常量</p>
+<h2 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h2><p>统一使用单引号，有变量的成分就是用反引号。</p>
+<h2 id="赋值"><a href="#赋值" class="headerlink" title="赋值"></a>赋值</h2><blockquote>
+<p>尽量使用结构赋值，保证简洁明了</p>
+</blockquote>
+<pre class="line-numbers language-js"><code class="language-js"><span class="token comment" spellcheck="true">//常用于</span>
+<span class="token comment" spellcheck="true">//1、数组赋值</span>
+<span class="token keyword">const</span> arr <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">]</span>
+<span class="token keyword">const</span> <span class="token punctuation">[</span>one<span class="token punctuation">,</span>two<span class="token punctuation">]</span> <span class="token operator">=</span> arr
+<span class="token comment" spellcheck="true">//2、获取函数参数</span>
+<span class="token keyword">function</span> <span class="token function">everyfunc</span><span class="token punctuation">(</span>params<span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">const</span> <span class="token punctuation">{</span>one<span class="token punctuation">,</span>two<span class="token punctuation">}</span> <span class="token operator">=</span> params
+<span class="token punctuation">}</span>
+<span class="token comment" spellcheck="true">//3、函数返回值&amp;&amp;获取函数返回值（尽量使用对象返回结构，便于添加和修改顺序）</span>
+<span class="token keyword">const</span> <span class="token punctuation">{</span>one<span class="token punctuation">,</span>two<span class="token punctuation">}</span> <span class="token operator">=</span> <span class="token function">getReturnFunc</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token keyword">function</span> <span class="token function">getReturnFunc</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token punctuation">{</span>one<span class="token punctuation">,</span>two<span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="对象"><a href="#对象" class="headerlink" title="对象"></a>对象</h2><p>1、对象定义时，多行元素最后一个要加上‘,’，定义在一行上则不必</p>
+<pre class="line-numbers language-js"><code class="language-js"><span class="token keyword">const</span> obj <span class="token operator">=</span> <span class="token punctuation">{</span>a<span class="token punctuation">:</span><span class="token number">1</span><span class="token punctuation">,</span>b<span class="token punctuation">:</span><span class="token number">3</span><span class="token punctuation">}</span>
+<span class="token keyword">const</span> obj <span class="token operator">=</span> <span class="token punctuation">{</span>
+    a<span class="token punctuation">:</span><span class="token number">1</span><span class="token punctuation">,</span>
+    b<span class="token punctuation">:</span><span class="token number">3</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>2、尽量不要修改，静态化，修改使用Object.assign(target,…origin)（可以有多个源对象）修改。</p>
+<pre class="line-numbers language-js"><code class="language-js"><span class="token keyword">const</span> target <span class="token operator">=</span> <span class="token punctuation">{</span>
+    one<span class="token punctuation">:</span><span class="token string">'one'</span>
+<span class="token punctuation">}</span>
+Object<span class="token punctuation">.</span><span class="token function">assign</span><span class="token punctuation">(</span>target<span class="token punctuation">,</span><span class="token punctuation">{</span>two<span class="token punctuation">:</span><span class="token string">'two'</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token operator">===</span><span class="token operator">></span>target<span class="token operator">=</span><span class="token punctuation">{</span>one<span class="token punctuation">:</span><span class="token string">'one'</span><span class="token punctuation">,</span>two<span class="token punctuation">:</span><span class="token string">'two'</span><span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<p>3、如果定义时元素名称不确定，使用属性表达式，即‘[要运算的表达式]’作为元素名称。</p>
+<pre class="line-numbers language-js"><code class="language-js"><span class="token keyword">const</span> obj <span class="token operator">=</span> <span class="token punctuation">{</span>
+    <span class="token punctuation">[</span><span class="token function">getName</span><span class="token punctuation">(</span><span class="token string">'key'</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">:</span><span class="token string">'jack'</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p>4、对象内部方法省略function关键字，同名键名称省略</p>
+<pre class="line-numbers language-js"><code class="language-js"><span class="token keyword">const</span> obj <span class="token operator">=</span> <span class="token punctuation">{</span>
+    one<span class="token punctuation">,</span>
+    <span class="token keyword">get</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token operator">...</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h2><p>1、复制数组使用扩展运算符</p>
+<pre class="line-numbers language-js"><code class="language-js"><span class="token keyword">let</span> oldArr <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">]</span>
+<span class="token keyword">let</span> newArr <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token operator">...</span>oldArr<span class="token punctuation">]</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p>2、将类数组转换成数组使用Array.from(target)target需要是可迭代的对象（有length属性）</p>
+<pre class="line-numbers language-js"><code class="language-js">Array<span class="token punctuation">.</span><span class="token keyword">from</span><span class="token punctuation">(</span>document<span class="token punctuation">.</span><span class="token function">querySelector</span><span class="token punctuation">(</span><span class="token string">'li'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h2 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h2><p>1、箭头函数</p>
+<ul>
+<li><p>简单的函数</p>
+<pre class="line-numbers language-js"><code class="language-js"><span class="token punctuation">;</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span>x <span class="token operator">=</span><span class="token operator">></span> x <span class="token operator">*</span> x<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+</li>
+<li><p>绑定this值，代替使用（_self/that/_this）表示this</p>
+<pre class="line-numbers language-js"><code class="language-js"><span class="token comment" spellcheck="true">// bad</span>
+<span class="token keyword">const</span> self <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> boundMethod <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token operator">...</span>params<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+<span class="token keyword">return</span> method<span class="token punctuation">.</span><span class="token function">apply</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> params<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token comment" spellcheck="true">// acceptable</span>
+<span class="token keyword">const</span> boundMethod <span class="token operator">=</span> method<span class="token punctuation">.</span><span class="token function">bind</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment" spellcheck="true">// best</span>
+<span class="token keyword">const</span> boundMethod <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token operator">...</span>params<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> method<span class="token punctuation">.</span><span class="token function">apply</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">,</span> params<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+</ul>
+<p>2、参数</p>
+<ul>
+<li><p>不用argument关键字，获取参数使用（…params）直接获取参数数组</p>
+<pre class="line-numbers language-js"><code class="language-js"><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token operator">...</span>params<span class="token punctuation">)</span><span class="token punctuation">{</span>
+  params<span class="token punctuation">.</span><span class="token function">join</span><span class="token punctuation">(</span><span class="token string">''</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><p>在参数列表设置默认参数</p>
+<pre class="line-numbers language-js"><code class="language-js"><span class="token keyword">function</span><span class="token punctuation">(</span>params<span class="token operator">=</span><span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+  anything<span class="token operator">...</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+</li>
+</ul>
+<h2 id="使用Map代替Object对象的使用"><a href="#使用Map代替Object对象的使用" class="headerlink" title="使用Map代替Object对象的使用"></a>使用Map代替Object对象的使用</h2><blockquote>
+<p>Map有key:value结构，有自己的遍历方法，object使用在具体业务特殊对象。</p>
+</blockquote>
+<pre class="line-numbers language-js"><code class="language-js"><span class="token keyword">let</span> map <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Map</span><span class="token punctuation">(</span>可迭代对象<span class="token punctuation">)</span>
+<span class="token keyword">let</span> map <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Map</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token string">'one'</span><span class="token punctuation">]</span><span class="token punctuation">,</span><span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token string">'two'</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+<span class="token comment" spellcheck="true">//keys()便利key值</span>
+<span class="token keyword">for</span> key <span class="token keyword">of</span> map<span class="token punctuation">.</span><span class="token function">keys</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span><span class="token punctuation">}</span> <span class="token punctuation">;</span>
+<span class="token comment" spellcheck="true">//values()便利值</span>
+
+<span class="token comment" spellcheck="true">//entries()获取值和key值（为数组则是下标数值）</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="class代替原有的直接操作Prototype属性，规范类定义使用"><a href="#class代替原有的直接操作Prototype属性，规范类定义使用" class="headerlink" title="class代替原有的直接操作Prototype属性，规范类定义使用"></a>class代替原有的直接操作Prototype属性，规范类定义使用</h2><pre class="line-numbers language-js"><code class="language-js"><span class="token comment" spellcheck="true">// bad</span>
+<span class="token keyword">const</span> inherits <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'inherits'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">function</span> <span class="token function">PeekableQueue</span><span class="token punctuation">(</span>contents<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  Queue<span class="token punctuation">.</span><span class="token function">apply</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">,</span> contents<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token function">inherits</span><span class="token punctuation">(</span>PeekableQueue<span class="token punctuation">,</span> Queue<span class="token punctuation">)</span><span class="token punctuation">;</span>
+PeekableQueue<span class="token punctuation">.</span>prototype<span class="token punctuation">.</span>peek <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">.</span>_queue<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment" spellcheck="true">// good</span>
+<span class="token keyword">class</span> <span class="token class-name">PeekableQueue</span> <span class="token keyword">extends</span> <span class="token class-name">Queue</span> <span class="token punctuation">{</span>
+  <span class="token function">peek</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">.</span>_queue<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="使用es6的模块化代替CommonJS的模块化引用"><a href="#使用es6的模块化代替CommonJS的模块化引用" class="headerlink" title="使用es6的模块化代替CommonJS的模块化引用"></a>使用es6的模块化代替CommonJS的模块化引用</h2>]]></content>
+      <categories>
+        <category>es6</category>
+        <category>编程风格/规范</category>
+      </categories>
+      <tags>
+        <tag>es6</tag>
+        <tag>编程风格</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>flex布局</title>
     <url>/2020/05/16/flex-bu-ju/</url>
     <content><![CDATA[<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p><strong>感谢阮一峰先生的分享<a href="http://www.ruanyifeng.com/blog/2015/07/flex-examples.html">flex-examples</a> 仅供个人学习</strong><br>2009年，W3C 提出了一种新的方案—-Flex 布局，可以简便、完整、响应式地实现各种页面布局。目前，它已经得到了所有浏览器的支持，这意味着，现在就能很安全地使用这项功能。<a id="more"></a></p>
@@ -459,20 +447,19 @@ Promise<span class="token punctuation">.</span><span class="token function">all<
 <li>Flex 是 Flexible Box 的缩写，意为”弹性布局”，用来为盒状模型提供最大的灵活性。<br>任何一个容器都可以指定为 Flex 布局，行内元素也可以使用flex布局，跳帧位置。</li>
 </ul>
 </blockquote>
-<pre><code>&#x2F;*块级元素*&#x2F;
-display: flex;
-&#x2F;*行内元素*&#x2F;
-display: inline-flex;</code></pre>
-
+<pre class="line-numbers language-css"><code class="language-css"><span class="token comment" spellcheck="true">/*块级元素*/</span>
+<span class="token property">display</span><span class="token punctuation">:</span> flex<span class="token punctuation">;</span>
+<span class="token comment" spellcheck="true">/*行内元素*/</span>
+<span class="token property">display</span><span class="token punctuation">:</span> inline-flex<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 <blockquote>
 <ul>
 <li>Webkit 内核的浏览器，必须加上-webkit前缀。</li>
 </ul>
 </blockquote>
-<pre><code>.box{
-  display: -webkit-flex; &#x2F;* Safari *&#x2F;
-  display: flex;
-}</code></pre>
+<pre class="line-numbers language-css"><code class="language-css"><span class="token selector"><span class="token class">.box</span></span><span class="token punctuation">{</span>
+  <span class="token property">display</span><span class="token punctuation">:</span> -webkit-flex<span class="token punctuation">;</span> <span class="token comment" spellcheck="true">/* Safari */</span>
+  <span class="token property">display</span><span class="token punctuation">:</span> flex<span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 <p><strong><em>注意，设为 Flex 布局以后，子元素的float、clear和vertical-align属性将失效。</em></strong></p>
 <blockquote>
 <ul>
@@ -485,68 +472,130 @@ display: inline-flex;</code></pre>
 </blockquote>
 <h2 id="浏览器支持"><a href="#浏览器支持" class="headerlink" title="浏览器支持"></a>浏览器支持</h2><img src="http://www.ruanyifeng.com/blogimg/asset/2015/bg2015071003.jpg" class="" title="browser Support">
 
-<h2 id="属性介绍"><a href="#属性介绍" class="headerlink" title="属性介绍"></a>属性介绍</h2><h3 id="flex-container属性"><a href="#flex-container属性" class="headerlink" title="flex-container属性"></a>flex-container属性</h3><h4 id="flex-direction"><a href="#flex-direction" class="headerlink" title="flex-direction"></a>flex-direction</h4><blockquote><p>决定主轴的方向，即项目的排列方向</p>
-<ul>
-<li>row（默认值）：主轴为水平方向，起点在左端。</li>
-<li>row-reverse：主轴为水平方向，起点在右端。</li>
-<li>column：主轴为垂直方向，起点在上沿。</li>
-<li>column-reverse：主轴为垂直方向，起点在下沿。</li>
-</ul>
-<footer><strong>可选属性</strong></footer></blockquote>
-
+<h2 id="属性介绍"><a href="#属性介绍" class="headerlink" title="属性介绍"></a>属性介绍</h2><h3 id="flex-container属性"><a href="#flex-container属性" class="headerlink" title="flex-container属性"></a>flex-container属性</h3><h4 id="flex-direction"><a href="#flex-direction" class="headerlink" title="flex-direction"></a>flex-direction</h4><blockquote>
+<p>可选属性，决定主轴的方向，即项目的排列方向</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>值</th>
+<th>释义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>row（默认值）</td>
+<td>主轴为水平方向，起点在左端</td>
+</tr>
+<tr>
+<td>row-reverse</td>
+<td>主轴为水平方向，起点在右端</td>
+</tr>
+<tr>
+<td>column</td>
+<td>主轴为垂直方向，起点在上沿</td>
+</tr>
+<tr>
+<td>column-reverse</td>
+<td>主轴为垂直方向，起点在下沿</td>
+</tr>
+</tbody></table>
 <img src="http://www.ruanyifeng.com/blogimg/asset/2015/bg2015071005.png" class="" title="flex-dirction布局样式">
 
 <h4 id="flex-wrap"><a href="#flex-wrap" class="headerlink" title="flex-wrap"></a>flex-wrap</h4><blockquote>
-<p>默认情况下所有flex-item都排列在主轴上，此属性规定超过了主轴长度后的项目排列方式<br>可选属性：nowrap（默认）|wrap换行|wrap-reverse换行并且换行的flex-item排列在上面<br>如下图所示<br>    <div style="display:flex;align-items:center;justify-content:center;"><br>        <div style="flex:1;"><img src="http://www.ruanyifeng.com/blogimg/asset/2015/bg2015071007.png" class="" title="flex-wrap:nowrap布局样式"></div><br>        <div style="flex:1;"><img src="http://www.ruanyifeng.com/blogimg/asset/2015/bg2015071008.jpg" class="" title="flex-wrap:wrap布局样式"></div><br>        <div style="flex:1;"><img src="http://www.ruanyifeng.com/blogimg/asset/2015/bg2015071009.jpg" class="" title="flex-wrap:wrap-reverse布局样式"></div><br>    </div></p>
+<p>1、 默认情况下所有flex-item都排列在主轴上，此属性规定超过了主轴长度后的项目排列方式<br>2、可选属性：nowrap（默认）|wrap换行|wrap-reverse换行并且换行的flex-item排列在上面<br>如下图所示</p>
 </blockquote>
-<h4 id="flex-flow"><a href="#flex-flow" class="headerlink" title="flex-flow"></a>flex-flow</h4><blockquote>
-<p>是flex-direction和flex-wrap的简写形式</p>
-</blockquote>
-<pre><code>flex-flow:&lt;flex-direction&gt; || &lt;flex-wrap&gt;</code></pre>
+<div style="display:flex;align-items:center;justify-content:center;">
+    <div style="flex:1;"><img src="http://www.ruanyifeng.com/blogimg/asset/2015/bg2015071007.png" class="" title="flex-wrap:nowrap布局样式"></div>
+    <div style="flex:1;"><img src="http://www.ruanyifeng.com/blogimg/asset/2015/bg2015071008.jpg" class="" title="flex-wrap:wrap布局样式"></div>
+    <div style="flex:1;"><img src="http://www.ruanyifeng.com/blogimg/asset/2015/bg2015071009.jpg" class="" title="flex-wrap:wrap-reverse布局样式"></div>
+</div>
+#### flex-flow
+>是flex-direction和flex-wrap的简写形式
+```css
+flex-flow:<flex-direction> || <flex-wrap>
+```
 
 <h4 id="justify-content"><a href="#justify-content" class="headerlink" title="justify-content"></a>justify-content</h4><blockquote>
-<p>定义了flex-item在主轴上的排列位置<br>可选属性：flex-start（默认）左对齐|flex-end右对齐|center居中|space-between两端对齐，项目间隔相等|space-around项目间隔相等，项目直接间隔是项目与flex-container边框间隔的2倍<br>    <div style="display:flex;align-items:center;justify-content:center;"><br>        <div style="flex:1;"><img src="/images/flex/flex-start.PNG" alt="flex-start"><br>            <p class="image-caption">flex-start</p><br>        </div><br>        <div style="flex:1;"><img src="/images/flex/flex-end.PNG" alt="flex-start"><br>            <p class="image-caption">flex-end</p><br>        </div><br>        <div style="flex:1;"><img src="/images/flex/center.PNG" alt="flex-start"><br>            <p class="image-caption">cener</p><br>        </div><br>    </div><br>    <div style="display:flex;align-items:center;justify-content:center;"><br>        <div style="flex:1;"><img src="/images/flex/space-between.PNG" alt="flex-start"><br>            <p class="image-caption">space-between</p><br>        </div><br>        <div style="flex:1;"><img src="/images/flex/space-around.PNG" alt="flex-start"><br>            <p class="image-caption">space-around</p><br>        </div><br>    </div></p>
+<p>1、定义了flex-item在主轴上的排列位置<br>2、可选属性：flex-start（默认）左对齐|flex-end右对齐|center居中|space-between两端对齐，项目间隔相等|space-around项目间隔相等，项目直接间隔是项目与flex-container边框间隔的2倍</p>
 </blockquote>
+<div style="display:flex;align-items:center;justify-content:center;">
+    <div style="flex:1;">![flex-start](/images/flex/flex-start.PNG)
+        <p class="image-caption">flex-start</p>
+    </div>
+    <div style="flex:1;">![flex-start](/images/flex/flex-end.PNG)
+        <p class="image-caption">flex-end</p>
+    </div>
+    <div style="flex:1;">![flex-start](/images/flex/center.PNG)
+        <p class="image-caption">cener</p>
+    </div>
+</div>
+<div style="display:flex;align-items:center;justify-content:center;">
+    <div style="flex:1;">![flex-start](/images/flex/space-between.PNG)
+        <p class="image-caption">space-between</p>
+    </div>
+    <div style="flex:1;">![flex-start](/images/flex/space-around.PNG)
+        <p class="image-caption">space-around</p>
+    </div>
+</div>
+
 <h4 id="align-items"><a href="#align-items" class="headerlink" title="align-items"></a>align-items</h4><blockquote>
-<p>定义了flex-item在交叉轴上的排列位置<br>可选属性：flex-start对齐交叉轴顶点|flex-end对齐交叉轴终点|center对齐交叉轴中心|stretch（默认）拉升高度至交叉轴高度|baseline所有的flex-items的第一行文字基线<br>    <div style="display:flex;align-items:center;justify-content:center;"><br>        <div style="flex:1;"><img src="/images/flex/ai-flex-start.PNG" alt="flex-start"><br>            <p class="image-caption">align-items:flex-start</p><br>        </div><br>        <div style="flex:1;"><img src="/images/flex/ai-flex-end.PNG" alt="flex-start"><br>            <p class="image-caption">align-items:flex-end</p><br>        </div><br>        <div style="flex:1;"><img src="/images/flex/ai-center.PNG" alt="flex-start"><br>            <p class="image-caption">align-items:cener</p><br>        </div><br>    </div><br>    <div style="display:flex;align-items:center;justify-content:center;"><br>        <div style="flex:1;"><img src="/images/flex/ai-stretch.PNG" alt="flex-start"><br>            <p class="image-caption">align-items:stretch</p><br>        </div><br>        <div style="flex:1;"><img src="/images/flex/ai-base-line.PNG" alt="flex-start"><br>            <p class="image-caption">align-items:baseline</p><br>        </div><br>    </div></p>
+<p>1、定义了flex-item在交叉轴上的排列位置<br>2、可选属性：flex-start对齐交叉轴顶点|flex-end对齐交叉轴终点|center对齐交叉轴中心|stretch（默认）拉升高度至交叉轴高度|baseline所有的flex-items的第一行文字基线</p>
 </blockquote>
-<h4 id="align-content"><a href="#align-content" class="headerlink" title="align-content"></a>align-content</h4><blockquote>
-<p>定义多轴线（多行？）的对齐方式，单一轴线不起作用<br>可选参数：flex-start|flex-end|center|space-bewteen|stretch|around</p>
-</blockquote>
+<div style="display:flex;align-items:center;justify-content:center;">
+    <div style="flex:1;">![flex-start](/images/flex/ai-flex-start.PNG)
+        <p class="image-caption">align-items:flex-start</p>
+    </div>
+    <div style="flex:1;">![flex-start](/images/flex/ai-flex-end.PNG)
+        <p class="image-caption">align-items:flex-end</p>
+    </div>
+    <div style="flex:1;">![flex-start](/images/flex/ai-center.PNG)
+        <p class="image-caption">align-items:cener</p>
+    </div>
+</div>
+<div style="display:flex;align-items:center;justify-content:center;">
+    <div style="flex:1;">![flex-start](/images/flex/ai-stretch.PNG)
+        <p class="image-caption">align-items:stretch</p>
+    </div>
+    <div style="flex:1;">![flex-start](/images/flex/ai-base-line.PNG)
+        <p class="image-caption">align-items:baseline</p>
+    </div>
+</div>
+#### align-content 
+>1、定义多轴线（多行？）的对齐方式，单一轴线不起作用
+>2、可选参数：flex-start|flex-end|center|space-bewteen|stretch|around
+
 <img src="http://www.ruanyifeng.com/blogimg/asset/2015/bg2015071012.png" class="" width="280" title="align-content样式图">
 
 <h3 id="flex-items属性"><a href="#flex-items属性" class="headerlink" title="flex-items属性"></a>flex-items属性</h3><h4 id="order"><a href="#order" class="headerlink" title="order"></a>order</h4><blockquote>
-<p>设置flex-item的显示位置，数字越小越靠前，类似于grid布局的grid-column|row-start|end属性设置<br><img src="/images/flex/fi-order.PNG" alt="browser-spport"></p>
+<p>设置flex-item的显示位置，数字越小越靠前，类似于grid布局的grid-column|row-start|end属性设置</p>
 </blockquote>
-<p class="image-caption">设置第四个order数值最小</p>
-
+<p><img src="/images/flex/fi-order.PNG" alt="设置第四个order数值最小"></p>
 <h4 id="flex-grow"><a href="#flex-grow" class="headerlink" title="flex-grow"></a>flex-grow</h4><blockquote>
-<p>当以当主轴空间大于实际需要时，放大的比例，默认为0，即不放大<br>如果其他属性设置为1，当前设置为2，则当前项目是其他项目的两倍main-sie<br><img src="/images/flex/fi-flex-grow.PNG" alt="browser-spport"></p>
+<p>1、当以当主轴空间大于实际需要时，放大的比例，默认为0，即不放大<br>2、如果其他属性设置为1，当前设置为2，则当前项目是其他项目的两倍main-sie</p>
 </blockquote>
-<p class="image-caption">flex-grow:2的flex-item</p>
-
+<p><img src="/images/flex/fi-flex-grow.PNG" alt="flex-grow:2的flex-item"></p>
 <h4 id="flex-shrink"><a href="#flex-shrink" class="headerlink" title="flex-shrink"></a>flex-shrink</h4><blockquote>
-<p>定义当主轴空间不足时，flex-item的缩小比例<br>如果设置属性值为0，其他flex-item属性值为1则当空间不足时，不会缩小此flex-item<br><img src="/images/flex/fi-flex-shrink.PNG" alt="browser-spport"></p>
+<p>1、定义当主轴空间不足时，flex-item的缩小比例<br>2、如果设置属性值为0，其他flex-item属性值为1则当空间不足时，不会缩小此flex-item</p>
 </blockquote>
+<p><img src="/images/flex/fi-flex-shrink.PNG" alt="browser-spport"></p>
 <p class="image-caption">属性flex-shrink:0的flex-item不会缩小</p>
 
 <h4 id="flex-basis"><a href="#flex-basis" class="headerlink" title="flex-basis"></a>flex-basis</h4><blockquote>
-<p>规定再分配多余的空间之前，flex-item占据main-size的大小，浏览器根据占据的main-size计算是否长度充足<br>默认为auto，及项目本来大小，设置大小：n+px，flex-item将始终占据指定大小main-size</p>
+<p>1、规定再分配多余的空间之前，flex-item占据main-size的大小，浏览器根据占据的main-size计算是否长度充足<br>2、默认为auto，及项目本来大小，设置大小：n+px，flex-item将始终占据指定大小main-size</p>
 </blockquote>
-<pre><code>&#x2F;*默认*&#x2F;
-flex-basis:auto;
-&#x2F;*自定义*&#x2F;
-flex-basis:300px;</code></pre>
-<p><img src="/images/flex/fi-flex-basis.PNG" alt="browser-spport"></p>
-<p class="image-caption">默认值auto，即为原本main-size</p>
-
+<pre class="line-numbers language-css"><code class="language-css"><span class="token comment" spellcheck="true">/*默认*/</span>
+<span class="token property">flex-basis</span><span class="token punctuation">:</span>auto<span class="token punctuation">;</span>
+<span class="token comment" spellcheck="true">/*自定义*/</span>
+<span class="token property">flex-basis</span><span class="token punctuation">:</span><span class="token number">300</span>px<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<p><img src="/images/flex/fi-flex-basis.PNG" alt="默认值auto，即为原本main-size"></p>
 <h4 id="flex"><a href="#flex" class="headerlink" title="flex"></a>flex</h4><blockquote>
-<p>是flex-grow&amp;flex-shrink&amp;flex-basis的简写形式<br>特殊样例 auto = 1 1 auto &amp;&amp; none = 0 0 auto</p>
+<p>1、是flex-grow&amp;flex-shrink&amp;flex-basis的简写形式<br>2、特殊样例 auto = 1 1 auto &amp;&amp; none = 0 0 auto</p>
 </blockquote>
 <h4 id="align-self"><a href="#align-self" class="headerlink" title="align-self"></a>align-self</h4><blockquote>
-<p>默认是auto，即继承inherit父类即align-items的设置，但是可以单独设置样式来覆盖父类样式，没有父元素则属性值为stretch<br>可选属性值与align-items相同，用法相同，作用域只限于当前的flex-item<br><img src="/images/flex/fi-align-self.PNG" alt="browser-spport"></p>
+<p>1、默认是auto，即继承inherit父类即align-items的设置，但是可以单独设置样式来覆盖父类样式，没有父元素则属性值为stretch<br>2、可选属性值与align-items相同，用法相同，作用域只限于当前的flex-item</p>
 </blockquote>
-<p class="image-caption">单独设置align-self:flex-end属性图</p>]]></content>
+<p><img src="/images/flex/fi-align-self.PNG" alt="单独设置align-self:flex-end属性图"></p>
+]]></content>
       <categories>
         <category>css</category>
         <category>css布局</category>
@@ -592,33 +641,33 @@ flex-basis:300px;</code></pre>
 <blockquote>
 <p>本地初始化</p>
 </blockquote>
-<pre><code>git init [project-name]</code></pre>
+<pre class="line-numbers language-git"><code class="language-git">git init [project-name]<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <ul>
 <li>本地新建一个代码库会新建一个.git隐藏文件</li>
 </ul>
 <blockquote>
 <p>clone仓库中已有的代码到本地</p>
 </blockquote>
-<pre><code>git clone url [project-name] [--depth&#x3D;num] </code></pre>
+<pre class="line-numbers language-git"><code class="language-git">git clone url [project-name] [--depth=num] <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <ul>
 <li>其中num为想要拷取的代码仓库深度，为1则表示最近一次的更新的最新代码</li>
 </ul>
 <h2 id="暂存区操作"><a href="#暂存区操作" class="headerlink" title="暂存区操作"></a>暂存区操作</h2><p>1、添加文件到暂存区</p>
-<pre><code>git add [file1] [file2] ...
+<pre class="line-numbers language-git"><code class="language-git">git add [file1] [file2] ...
 git add [dir]
-git add .</code></pre>
+git add .<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>其中 . 代表所有修改了的文件，最常用</li>
 </ul>
 <p>2、将文件删除/从暂存区删除</p>
-<pre><code>git rm [file1] [file2] ...
-git rm --cached [filename]</code></pre>
+<pre class="line-numbers language-git"><code class="language-git">git rm [file1] [file2] ...
+git rm --cached [filename]<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <ul>
 <li>其中–cached代表不删除工作区文件，只是从暂存区中删除</li>
 <li>只有在暂存区中的文件对其执行删除操作才有效</li>
 </ul>
 <p>3、修改文件名称，并将修改信息存入暂存区</p>
-<pre><code>git mv [file-origin-name] [file-new-name] </code></pre>
+<pre class="line-numbers language-git"><code class="language-git">git mv [file-origin-name] [file-new-name] <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <ul>
 <li>文件要先在暂存区中</li>
 </ul>
@@ -626,26 +675,23 @@ git rm --cached [filename]</code></pre>
 <p>提交操作都是需要写注释的，便于协作</p>
 </blockquote>
 <p>1、直接提交文件到仓库</p>
-<pre><code>#提交所有有修改记录的文件到仓库
-git commit -m &quot;message&quot;
+<pre class="line-numbers language-git"><code class="language-git"><span class="token comment" spellcheck="true">#提交所有有修改记录的文件到仓库</span>
+git commit -m <span class="token string">"message"</span>
 
-#指定要提交的提交文件
-git commit [file1] [file2]... -m &quot;message&quot; </code></pre>
-
+<span class="token comment" spellcheck="true">#指定要提交的提交文件</span>
+git commit [file1] [file2]... -m <span class="token string">"message"</span> <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>2、用本次提交覆盖上次的提交</p>
-<pre><code>#覆盖上次提交到仓库的内容，仓库中的文件修改一本次为准
-git commit --amend -m &quot;message&quot;
+<pre class="line-numbers language-git"><code class="language-git"><span class="token comment" spellcheck="true">#覆盖上次提交到仓库的内容，仓库中的文件修改一本次为准</span>
+git commit --amend -m <span class="token string">"message"</span>
 
-#指定要覆盖的仓库文件
-git commit --amend [file1] [file2]... -m &quot;message&quot; </code></pre>
-
+<span class="token comment" spellcheck="true">#指定要覆盖的仓库文件</span>
+git commit --amend [file1] [file2]... -m <span class="token string">"message"</span> <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>3、其他提交</p>
-<pre><code>#提交工作区自上次commit之后的变化，直接到仓库区(不包括新增文件&#x2F;文件夹)
+<pre class="line-numbers language-git"><code class="language-git"><span class="token comment" spellcheck="true">#提交工作区自上次commit之后的变化，直接到仓库区(不包括新增文件/文件夹)</span>
 git commit -a
 
-#提交时显示所有diff信息
-git commit -v</code></pre>
-
+<span class="token comment" spellcheck="true">#提交时显示所有diff信息</span>
+git commit -v<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h2 id="提交文件至远程仓库"><a href="#提交文件至远程仓库" class="headerlink" title="提交文件至远程仓库"></a>提交文件至远程仓库</h2><table>
 <thead>
 <tr>
@@ -687,46 +733,314 @@ git commit -v</code></pre>
 </tr>
 </tbody></table>
 <h2 id="分支"><a href="#分支" class="headerlink" title="分支"></a>分支</h2><p>1、新建分支&amp;切换工作区</p>
-<pre><code>#新建分支
+<pre class="line-numbers language-git"><code class="language-git"><span class="token comment" spellcheck="true">#新建分支</span>
 git branch [branch-name]
 
-#切换当前分支到指定分支
+<span class="token comment" spellcheck="true">#切换当前分支到指定分支</span>
 git checkout [branch-name]
 
-#新建分支并切换到该分支
+<span class="token comment" spellcheck="true">#新建分支并切换到该分支</span>
 git checkout -b [branch-name]
 
-#切换到最近切换的分支
+<span class="token comment" spellcheck="true">#切换到最近切换的分支</span>
 git checkout -
-</code></pre>
-
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>2、查看分支</p>
-<pre><code>#产看本地分支
+<pre class="line-numbers language-git"><code class="language-git"><span class="token comment" spellcheck="true">#产看本地分支</span>
 git branch
 
-#查看远程分支
+<span class="token comment" spellcheck="true">#查看远程分支</span>
 git branch -r
 
-#查看所有分支（本地加远程）
-git branch -a</code></pre>
-
+<span class="token comment" spellcheck="true">#查看所有分支（本地加远程）</span>
+git branch -a<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>3、删除分支</p>
-<pre><code>#删除本地分支
+<pre class="line-numbers language-git"><code class="language-git"><span class="token comment" spellcheck="true">#删除本地分支</span>
 git branch -d [branch-name]
 
-#删除远程分支
+<span class="token comment" spellcheck="true">#删除远程分支</span>
 git branch [remote-name] --delete [branch-name]
-git branch -dr [remote&#x2F;branch]</code></pre>
-
+git branch -dr [remote/branch]<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>4、合并分支</p>
-<pre><code>#合并指定分支到当前分支
-git merge [branch]</code></pre>]]></content>
+<pre class="line-numbers language-git"><code class="language-git"><span class="token comment" spellcheck="true">#合并指定分支到当前分支</span>
+git merge [branch]<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+]]></content>
       <categories>
         <category>git</category>
         <category>git常用操作</category>
       </categories>
       <tags>
         <tag>git</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>gird布局</title>
+    <url>/2020/05/14/grid-bu-ju/</url>
+    <content><![CDATA[<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p><strong>感谢阮一峰先生的分享<a href="http://www.ruanyifeng.com/blog/2019/03/grid-layout-tutorial.html">grid-layout-tutorial</a> 仅供个人学习。</strong></p>
+<p>网格布局（Grid）是最强大的 CSS 布局方案。</p>
+<p>它将网页划分成一个个网格，可以任意组合不同的网格，做出各种各样的布局。以前，只能通过复杂的 CSS 框架达到的效果，现在浏览器内置了。</p>
+<a id="more"></a>
+
+<img src="https://www.wangbase.com/blogimg/asset/201903/1_bg2019032501.png" class="" width="802" height="366" title="grid布局演示图片">
+
+<p>如上图所示，grid布局是一种类二维布局的css布局方式，与flex布局一样，极大的方便了网页布局。</p>
+<h2 id="浏览器支持"><a href="#浏览器支持" class="headerlink" title="浏览器支持"></a>浏览器支持</h2><p><img src="/images/browserSupport.PNG" alt="browser-spport"></p>
+<p class="image-caption">支持的浏览器及其版本</p>
+
+<h2 id="grid属性"><a href="#grid属性" class="headerlink" title="grid属性"></a>grid属性</h2><h3 id="display"><a href="#display" class="headerlink" title="display"></a>display</h3><blockquote>
+<p>可选参数 gird/inline-grid<br> 当参数为：gird时为块级元素、inline-grid则为行内元素</p>
+</blockquote>
+<h3 id="grid-template-columns"><a href="#grid-template-columns" class="headerlink" title="grid-template-columns"></a>grid-template-columns</h3><blockquote>
+<p>规定grid的列宽<br>example:</p>
+</blockquote>
+<pre class="line-numbers language-css"><code class="language-css"><span class="token property">grid-template-columns</span><span class="token punctuation">:</span><span class="token number">100</span>px <span class="token number">100</span>px <span class="token number">100</span>px<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h3 id="grid-template-rows"><a href="#grid-template-rows" class="headerlink" title="grid-template-rows"></a>grid-template-rows</h3><blockquote>
+<p>规定grid的行宽<br>example:</p>
+</blockquote>
+<pre class="line-numbers language-css"><code class="language-css"><span class="token property">grid-template-rows</span><span class="token punctuation">:</span><span class="token number">100</span>px <span class="token number">100</span>px <span class="token number">100</span>px<span class="token punctuation">;</span>
+<span class="token property">grid-template-rows</span><span class="token punctuation">:</span><span class="token number">33%</span> <span class="token number">33%</span> <span class="token number">33%</span><span class="token punctuation">;</span>
+<span class="token property">grid-template-rows</span><span class="token punctuation">:</span><span class="token function">repeat</span><span class="token punctuation">(</span><span class="token number">3</span>,<span class="token number">33%</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p><strong>grid函数设置宽高的函数</strong><br>这些函数都可以与百分比、px、fr特数字组合定义宽高</p>
+<p>固定100px的结果如下图所示</p>
+<img src="https://www.wangbase.com/blogimg/asset/201903/bg2019032506.png" class="" width="220" height="320" title="固定px的grid示例">
+
+<p>平分宽度|高度的可以设置== 百分比 ==，或者设置1fr-类似flex，结合repeat函数则为</p>
+<h4 id="repeat-循环次数，循环体"><a href="#repeat-循环次数，循环体" class="headerlink" title="repeat(循环次数，循环体)"></a>repeat(循环次数，循环体)</h4><p>参数：循环体可以为特殊关键字n+fr，与flex类似。</p>
+<blockquote>
+<p>循环次数可为特殊关键字auto-fill，表示使用循环体格式自动填充满整个grid布局 。</p>
+</blockquote>
+<pre class="line-numbers language-css"><code class="language-css"><span class="token property">grid-template-rows</span><span class="token punctuation">:</span><span class="token function">repeat</span><span class="token punctuation">(</span><span class="token number">3</span>,<span class="token number">1</span>fr<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token property">grid-template-rows</span><span class="token punctuation">:</span><span class="token function">repeat</span><span class="token punctuation">(</span><span class="token number">3</span>,<span class="token number">33%</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<blockquote>
+<p>特殊的循环体</p>
+</blockquote>
+<pre class="line-numbers language-css"><code class="language-css"><span class="token property">grid-template-columns</span><span class="token punctuation">:</span> <span class="token function">repeat</span><span class="token punctuation">(</span><span class="token number">2</span>, <span class="token number">100</span>px <span class="token number">20</span>px <span class="token number">80</span>px<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<img src="https://www.wangbase.com/blogimg/asset/201903/bg2019032507.png" class="" title="特殊循环体的repeat示例">
+
+<h4 id="minmax-min-max-函数"><a href="#minmax-min-max-函数" class="headerlink" title="minmax(min,max)函数"></a>minmax(min,max)函数</h4><blockquote>
+<p>参数：最大最小值，可以为px，fr，百分比<br>定义一个范围值，让宽高在这之中自适应</p>
+</blockquote>
+<pre class="line-numbers language-css"><code class="language-css"><span class="token property">grid-template-rows</span><span class="token punctuation">:</span><span class="token function">minmax</span><span class="token punctuation">(</span><span class="token number">100</span>px,<span class="token number">1</span>fr<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token property">grid-template-rows</span><span class="token punctuation">:</span><span class="token function">minmax</span><span class="token punctuation">(</span><span class="token number">100</span>px,<span class="token number">33%</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<h4 id="auto关键字"><a href="#auto关键字" class="headerlink" title="auto关键字"></a>auto关键字</h4><blockquote>
+<p>可在宽高定义时，与百分比，px，fr混用</p>
+</blockquote>
+<pre class="line-numbers language-css"><code class="language-css"><span class="token property">grid-template-columns</span><span class="token punctuation">:</span> <span class="token number">100</span>px auto <span class="token number">100</span>px<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<blockquote>
+<p>表示grid布局中，左右为100px，中间为自适应宽度</p>
+</blockquote>
+<h4 id="auto-fill关键字"><a href="#auto-fill关键字" class="headerlink" title="auto-fill关键字"></a>auto-fill关键字</h4><blockquote>
+<p>可以与百分比，fr，px混用，还可以代替repeat函数的循环次数，让他自适应，并换行，类似flex布局的</p>
+</blockquote>
+<pre class="line-numbers language-css"><code class="language-css"><span class="token property">flex-wrap</span><span class="token punctuation">:</span>wrap<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<blockquote>
+<p>自动换行：</p>
+</blockquote>
+<pre class="line-numbers language-css"><code class="language-css"><span class="token property">display</span><span class="token punctuation">:</span> grid<span class="token punctuation">;</span>
+<span class="token property">grid-template-columns</span><span class="token punctuation">:</span> <span class="token function">repeat</span><span class="token punctuation">(</span>auto-fill, <span class="token number">100</span>px<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<img src="https://www.wangbase.com/blogimg/asset/201903/bg2019032508.png" class="" title="auto-fill关键字+repeat函数自动换行示例">
+
+<h4 id="布局实用示例"><a href="#布局实用示例" class="headerlink" title="布局实用示例"></a>布局实用示例</h4><ul>
+<li>3:7两栏式布局<pre class="line-numbers language-css"><code class="language-css"><span class="token property">display</span><span class="token punctuation">:</span> grid<span class="token punctuation">;</span>
+<span class="token property">grid-template-columns</span><span class="token punctuation">:</span> <span class="token number">70%</span> <span class="token number">30%</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+</li>
+<li>十二网格布局<pre class="line-numbers language-css"><code class="language-css"><span class="token property">display</span><span class="token punctuation">:</span> grid<span class="token punctuation">;</span>
+<span class="token property">grid-template-columns</span><span class="token punctuation">:</span> <span class="token function">repeat</span><span class="token punctuation">(</span><span class="token number">12</span>,<span class="token number">1</span>fr<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+</li>
+</ul>
+<h3 id="grid-row-gap-amp-amp-grid-column-gap"><a href="#grid-row-gap-amp-amp-grid-column-gap" class="headerlink" title="grid-row-gap&amp;&amp;grid-column-gap"></a>grid-row-gap&amp;&amp;grid-column-gap</h3><blockquote>
+<p>两者可以结合写成</p>
+</blockquote>
+<pre class="line-numbers language-css"><code class="language-css"><span class="token property">gird-gap</span><span class="token punctuation">:</span>&lt;grid-row-gap> &lt;grid-column-gap><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<blockquote>
+<p>简写成gird-gap时，可以只写一个值，表示行间距与列间距相同</p>
+</blockquote>
+<pre class="line-numbers language-css"><code class="language-css"><span class="token property">grid-gap</span><span class="token punctuation">:</span> <span class="token number">20</span>px<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<blockquote>
+<p>新标准省略grid-字符，简写为</p>
+</blockquote>
+<pre class="line-numbers language-css"><code class="language-css"><span class="token property">gap</span><span class="token punctuation">:</span> <span class="token number">20</span>px<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<img src="https://www.wangbase.com/blogimg/asset/201903/bg2019032511.png" class="" width="280" title="gap间距为20px示例">
+
+<h3 id="grid-auto-flow"><a href="#grid-auto-flow" class="headerlink" title="grid-auto-flow"></a>grid-auto-flow</h3><blockquote>
+<p>规定grid布局的排列顺序，可选参数：row/column，默认为row，即优先从左到右的依次排列<br>可选参数row dense/column dense规定除了指定行列的布局外，其他grid单元的布局顺序</p>
+</blockquote>
+<pre class="line-numbers language-css"><code class="language-css"><span class="token property">display</span><span class="token punctuation">:</span>grid<span class="token punctuation">;</span>
+<span class="token property">grid-template-rows</span><span class="token punctuation">:</span><span class="token function">repeat</span><span class="token punctuation">(</span><span class="token number">3</span>,<span class="token number">100</span>px<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token property">grid-template-columns</span><span class="token punctuation">:</span><span class="token function">repeat</span><span class="token punctuation">(</span><span class="token number">3</span>,<span class="token number">100</span>px<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token property">grid-auto-flow</span><span class="token punctuation">:</span>row dense<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<blockquote>
+<p>指定grid-cell的列宽，左闭右开原则</p>
+</blockquote>
+<pre class="line-numbers language-css"><code class="language-css"><span class="token property">grid-column-start</span><span class="token punctuation">:</span><span class="token number">1</span><span class="token punctuation">;</span>
+<span class="token property">grid-column-end</span><span class="token punctuation">:</span><span class="token number">3</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<blockquote>
+<p>grid-column-start/end设置的数字单位为grid-cell面积，左闭右开，结果如下图所示：</p>
+</blockquote>
+<img src="https://www.wangbase.com/blogimg/asset/201903/bg2019032514.png" class="" width="280" title="指定单元格，其余row
+布局示例">
+
+<blockquote>
+<p>如果单独设置grid的大小要注意不要超过grid定义的gird-cell个数，否则自适应，如下图所示：</p>
+</blockquote>
+<p><img src="/images/overgridnumber.PNG" alt="自定义grid-cell范围超过初始化定义图"></p>
+<p>上图中7、8、9因为超过了初始设置的grid-cell范围，而自适应 <strong>解决办法</strong>：补足不足grid个数或调整布局 <strong>增加初始设置的行列即可</strong></p>
+<h3 id="align-items-amp-amp-justliy-items-amp-amp-place-items"><a href="#align-items-amp-amp-justliy-items-amp-amp-place-items" class="headerlink" title="align-items&amp;&amp;justliy-items&amp;&amp;place-items"></a>align-items&amp;&amp;justliy-items&amp;&amp;place-items</h3><blockquote>
+<p>规定grid-cell的位置，align表示高（上、中、下）、justlify表示宽（左、中、右）<br>可选属性：start|center|end|stretch——靠左|居中|靠右|自动填满<br>place-items是简写形式</p>
+</blockquote>
+<pre class="line-numbers language-css"><code class="language-css"><span class="token property">place-items</span><span class="token punctuation">:</span>&lt;align-items> &lt;justify-items><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<blockquote>
+<p>如果不写第二个参数则默认两个属性值相同</p>
+</blockquote>
+<pre class="line-numbers language-css"><code class="language-css"><span class="token property">align-items</span><span class="token punctuation">:</span>center<span class="token punctuation">;</span>
+<span class="token property">justify-items</span><span class="token punctuation">:</span>strech<span class="token punctuation">;</span>
+<span class="token comment" spellcheck="true">/* 简写 */</span>
+<span class="token property">place-items</span><span class="token punctuation">:</span>&lt;align-items> &lt;justify-items>
+<span class="token property">place-items</span><span class="token punctuation">:</span>stretch center<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>如下图所示<br><img src="/images/center-stretch.PNG" alt="place-items结果图"></p>
+<h3 id="align-self-amp-amp-justify-self-amp-amp-place-self"><a href="#align-self-amp-amp-justify-self-amp-amp-place-self" class="headerlink" title="align-self&amp;&amp;justify-self&amp;&amp;place-self"></a>align-self&amp;&amp;justify-self&amp;&amp;place-self</h3><blockquote>
+<p>与align|justify|place-items用法完全一致，但只作用于单个grid-cell</p>
+</blockquote>
+<pre class="line-numbers language-css"><code class="language-css"><span class="token selector"><span class="token class">.item-1</span> </span><span class="token punctuation">{</span>
+  <span class="token property">place-self</span><span class="token punctuation">:</span>stretch center<span class="token punctuation">;</span>
+  <span class="token property">background-color</span><span class="token punctuation">:</span> <span class="token hexcode">#ef342a</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span> <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<p><img src="/images/place-self.PNG" alt="place-self单个grid-cell作用域"></p>
+<h3 id="align-content-amp-amp-justify-content-amp-amp-place-content"><a href="#align-content-amp-amp-justify-content-amp-amp-place-content" class="headerlink" title="align-content&amp;&amp;justify-content&amp;&amp;place-content"></a>align-content&amp;&amp;justify-content&amp;&amp;place-content</h3><blockquote>
+<p>规定整个项目在grid-container中的位置<br>可选属性：start|center|space-between|space-evenly|space-around——between间隔在项目之间</p>
+</blockquote>
+<div style="display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:160px;grid-auto-rows:0;gap:10px">
+    <div style="grid-column-start:1;grid-row-start:1;"><img src="https://www.wangbase.com/blogimg/asset/201903/bg2019032522.png" class="" title="space-around"></div>
+    <div style="grid-column-start:2;grid-row-start:1;"><img src="https://www.wangbase.com/blogimg/asset/201903/bg2019032523.png" class="" title="space-between"></div>
+    <div style="grid-column-start:3;grid-row-start:1;"><img src="https://www.wangbase.com/blogimg/asset/201903/bg2019032524.png" class="" title="space-evenly"></div>
+</div>
+
+<h3 id="grid-auto-row-amp-amp-grid-auto-column"><a href="#grid-auto-row-amp-amp-grid-auto-column" class="headerlink" title="grid-auto-row&amp;&amp;grid-auto-column"></a>grid-auto-row&amp;&amp;grid-auto-column</h3><blockquote>
+<p>规定如果定义的grid-cell不在初始定义的grid-cell数量之内，扩展的grid-cell的列宽、行高</p>
+</blockquote>
+<pre class="line-numbers language-css"><code class="language-css">  <span class="token property">display</span><span class="token punctuation">:</span> grid<span class="token punctuation">;</span>
+  <span class="token property">grid-template-columns</span><span class="token punctuation">:</span> <span class="token number">100</span>px <span class="token number">100</span>px <span class="token number">100</span>px<span class="token punctuation">;</span>
+  <span class="token property">grid-template-rows</span><span class="token punctuation">:</span> <span class="token number">100</span>px <span class="token number">100</span>px <span class="token number">100</span>px<span class="token punctuation">;</span>
+  <span class="token property">grid-auto-rows</span><span class="token punctuation">:</span> <span class="token number">50</span>px<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<img src="https://www.wangbase.com/blogimg/asset/201903/bg2019032525.png" class="" width="280" title="grid-auto-row为50px">
+
+<h3 id="grid-template-amp-amp-grid"><a href="#grid-template-amp-amp-grid" class="headerlink" title="grid-template&amp;&amp;grid"></a>grid-template&amp;&amp;grid</h3><blockquote>
+<p>grid-template属性是grid-template-columns、grid-template-rows和grid-template-areas这三个属性的合并简写形式。</p>
+</blockquote>
+<pre class="line-numbers language-css"><code class="language-css"><span class="token property">grid-template</span><span class="token punctuation">:</span>&lt;grid-template-rows> &lt;grid-template-area> / &lt;grid-template-columns>
+example
+<span class="token property">grid-template</span><span class="token punctuation">:</span> [header-left] <span class="token string">"head head"</span> <span class="token number">30</span>px [header-right]
+                [main-left]   <span class="token string">"nav  main"</span> <span class="token number">1</span>fr  [main-right]
+                [footer-left] <span class="token string">"nav  foot"</span> <span class="token number">30</span>px [footer-right]
+                / <span class="token number">120</span>px <span class="token number">1</span>fr<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>等同于</p>
+<pre class="line-numbers language-css"><code class="language-css"><span class="token property">grid-template-rows</span><span class="token punctuation">:</span> [header-left] <span class="token number">30</span>px [header-right main-left] <span class="token number">1</span>fr [main-right footer-left] <span class="token number">30</span>px [footer-right]<span class="token punctuation">;</span>
+<span class="token property">grid-template-columns</span><span class="token punctuation">:</span> <span class="token number">120</span>px <span class="token number">1</span>fr<span class="token punctuation">;</span>
+<span class="token property">grid-template-areas</span><span class="token punctuation">:</span> <span class="token string">"head head"</span> <span class="token string">"nav main"</span> <span class="token string">"nav foot"</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p><img src="/images/grid-template.PNG" alt="grid-template简写结果图"></p>
+<blockquote>
+<p>grid属性是grid-template-rows、grid-template-columns、grid-template-areas、 grid-auto-rows、grid-auto-columns、grid-auto-flow这六个属性的合并简写形式。<br>从易读易写的角度考虑，还是建议不要合并属性，所以这里就不详细介绍这个属性了。</p>
+</blockquote>
+<h2 id="grid-cell属性"><a href="#grid-cell属性" class="headerlink" title="grid-cell属性"></a>grid-cell属性</h2><h3 id="grid-column-start-end-amp-amp-grid-row-start-end"><a href="#grid-column-start-end-amp-amp-grid-row-start-end" class="headerlink" title="grid-column-start|end&amp;&amp;grid-row-start|end"></a>grid-column-start|end&amp;&amp;grid-row-start|end</h3><blockquote>
+<p>1、属性值可为数字，与grid-auto-flow属性结合可以实现特定布局</p>
+</blockquote>
+<pre class="line-numbers language-css"><code class="language-css">  <span class="token property">grid-column-start</span><span class="token punctuation">:</span> <span class="token number">1</span><span class="token punctuation">;</span>
+  <span class="token property">grid-column-end</span><span class="token punctuation">:</span> <span class="token number">3</span><span class="token punctuation">;</span>
+  <span class="token property">grid-row-start</span><span class="token punctuation">:</span> <span class="token number">2</span><span class="token punctuation">;</span>
+  <span class="token property">grid-row-end</span><span class="token punctuation">:</span> <span class="token number">4</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<img src="https://www.wangbase.com/blogimg/asset/201903/bg2019032527.png" class="" width="280" title="数字方式定义grid-cell起始位置">
+<blockquote>
+<p>2、span参数结合使用，表示跨过多少个grid-cell，即可用在start，也可用在end</p>
+</blockquote>
+<pre class="line-numbers language-css"><code class="language-css"> <span class="token property">grid-column-end</span><span class="token punctuation">:</span> span <span class="token number">2</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<img src="https://www.wangbase.com/blogimg/asset/201903/bg2019032528.png" class="" width="280" title="数字方式定义grid-cell起始位置">
+<blockquote>
+<p>3、如果因为设置属性产生了重叠，可通过设置z-index调整</p>
+</blockquote>
+<h3 id="grid-column-amp-amp-grid-row"><a href="#grid-column-amp-amp-grid-row" class="headerlink" title="grid-column&amp;&amp;grid-row"></a>grid-column&amp;&amp;grid-row</h3><blockquote>
+<p>1、是grid-row-start|end和grid-column-start|end的简写</p>
+</blockquote>
+<pre class="line-numbers language-css"><code class="language-css"> <span class="token property">grid-row</span><span class="token punctuation">:</span>&lt;grid-row-start> &lt;grid-row-end><span class="token punctuation">;</span>
+ <span class="token property">grid-columns</span><span class="token punctuation">:</span>&lt;grid-columns-start> &lt;grid-columns-end><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<blockquote>
+<p>2、可以与span（宽行）联合使用</p>
+</blockquote>
+<pre class="line-numbers language-css"><code class="language-css">  <span class="token property">background</span><span class="token punctuation">:</span> <span class="token hexcode">#b03532</span><span class="token punctuation">;</span>
+  <span class="token property">grid-column</span><span class="token punctuation">:</span> <span class="token number">1</span> / <span class="token number">3</span><span class="token punctuation">;</span>
+  <span class="token property">grid-row</span><span class="token punctuation">:</span> <span class="token number">1</span> / <span class="token number">3</span><span class="token punctuation">;</span>
+<span class="token comment" spellcheck="true">/* 等同于 */</span>
+  <span class="token property">background</span><span class="token punctuation">:</span> <span class="token hexcode">#b03532</span><span class="token punctuation">;</span>
+  <span class="token property">grid-column</span><span class="token punctuation">:</span> <span class="token number">1</span> / span <span class="token number">2</span><span class="token punctuation">;</span>
+  <span class="token property">grid-row</span><span class="token punctuation">:</span> <span class="token number">1</span> / span <span class="token number">2</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<blockquote>
+<p>3、可以不写/end，默认是跨了一行</p>
+</blockquote>
+<pre class="line-numbers language-css"><code class="language-css">  <span class="token property">grid-column</span><span class="token punctuation">:</span> <span class="token number">1</span><span class="token punctuation">;</span>
+  <span class="token property">grid-row</span><span class="token punctuation">:</span> <span class="token number">1</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<blockquote>
+<p>上面代码表示第一个grid</p>
+</blockquote>
+<p><strong>简写时不可直接写span+n而不规定起/始位置！！！</strong></p>
+<h3 id="grid-template-areas"><a href="#grid-template-areas" class="headerlink" title="grid-template-areas"></a>grid-template-areas</h3><blockquote>
+<p>1、给grid命名并划分区域</p>
+</blockquote>
+<pre class="line-numbers language-css"><code class="language-css">  <span class="token property">display</span><span class="token punctuation">:</span> grid<span class="token punctuation">;</span>
+  <span class="token property">grid-template-columns</span><span class="token punctuation">:</span> <span class="token number">100</span>px <span class="token number">100</span>px <span class="token number">100</span>px<span class="token punctuation">;</span>
+  <span class="token property">grid-template-rows</span><span class="token punctuation">:</span> <span class="token number">100</span>px <span class="token number">100</span>px <span class="token number">100</span>px<span class="token punctuation">;</span>
+  <span class="token property">grid-template-areas</span><span class="token punctuation">:</span> <span class="token string">'a b c'</span>
+                       <span class="token string">'d e f'</span>
+                       <span class="token string">'g h i'</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<blockquote>
+<p>上面代码表示将grid划分为a~i的九个区域，相同命名就是同一个区域，结合grid-area可指定grid-cell大小</p>
+</blockquote>
+<blockquote>
+<p>2、不用利用的区域用’.’代替命名</p>
+</blockquote>
+<pre class="line-numbers language-css"><code class="language-css">    <span class="token property">display</span><span class="token punctuation">:</span> grid<span class="token punctuation">;</span>
+    <span class="token property">grid-template-columns</span><span class="token punctuation">:</span> <span class="token number">100</span>px <span class="token number">100</span>px <span class="token number">100</span>px<span class="token punctuation">;</span>
+    <span class="token property">grid-template-rows</span><span class="token punctuation">:</span> <span class="token number">100</span>px <span class="token number">100</span>px <span class="token number">100</span>px<span class="token punctuation">;</span>
+    <span class="token property">grid-template-areas</span><span class="token punctuation">:</span> <span class="token string">'a . c'</span>
+                        <span class="token string">'d . f'</span>
+                        <span class="token string">'g . i'</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<blockquote>
+<p>上面代码表示中间区域不使用,不属于任何区域</p>
+</blockquote>
+<blockquote>
+<p>3、区域的命名会影响到网格线。每个区域的起始网格线，会自动命名为 <strong>区域名-start</strong>，终止网格线自动命名为 <strong>区域名-end</strong>。如上面的a区域的起始网格线为a-start&amp;a-end</p>
+</blockquote>
+<h3 id="grid-area"><a href="#grid-area" class="headerlink" title="grid-area"></a>grid-area</h3><blockquote>
+<p>1、与grid-template-area结合使用，指定grid-cell位置</p>
+</blockquote>
+<pre class="line-numbers language-css"><code class="language-css"><span class="token selector"><span class="token class">.container</span></span><span class="token punctuation">{</span>
+  <span class="token property">display</span><span class="token punctuation">:</span> grid<span class="token punctuation">;</span>
+  <span class="token property">grid-template-columns</span><span class="token punctuation">:</span> <span class="token number">100</span>px <span class="token number">100</span>px <span class="token number">100</span>px<span class="token punctuation">;</span>
+  <span class="token property">grid-template-rows</span><span class="token punctuation">:</span> <span class="token number">100</span>px <span class="token number">100</span>px <span class="token number">100</span>px<span class="token punctuation">;</span>
+  <span class="token property">grid-template-areas</span><span class="token punctuation">:</span> <span class="token string">'a b c'</span>
+                     <span class="token string">'d e f'</span>
+                     <span class="token string">'g h i'</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token selector"><span class="token class">.item-1</span> </span><span class="token punctuation">{</span>
+  <span class="token property">background-color</span><span class="token punctuation">:</span> <span class="token hexcode">#ef342a</span><span class="token punctuation">;</span>
+  <span class="token property">grid-area</span><span class="token punctuation">:</span> e<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>       <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>如下图</p>
+<img src="https://www.wangbase.com/blogimg/asset/201903/bg2019032530.png" class="" width="280" title="grid-area指定grid-cell位置">
+
+<blockquote>
+<p>2、是grid-row|column-start|end的简写</p>
+</blockquote>
+<pre class="line-numbers language-css"><code class="language-css">    <span class="token property">grid-area</span><span class="token punctuation">:</span> &lt;row-start> / &lt;column-start> / &lt;row-end> / &lt;column-end><span class="token punctuation">;</span>
+    example
+    <span class="token property">gird</span><span class="token punctuation">:</span><span class="token number">1</span>/<span class="token number">1</span>/<span class="token number">3</span>/<span class="token number">3</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p>如下图所示，简写结果 <strong>不支持span结合使用</strong><br><img src="/images/grid-area.PNG" alt="grid-area简写结果图"></p>
+]]></content>
+      <categories>
+        <category>css</category>
+        <category>css布局</category>
+      </categories>
+      <tags>
+        <tag>css</tag>
+        <tag>css布局</tag>
       </tags>
   </entry>
   <entry>
@@ -854,315 +1168,6 @@ git merge [branch]</code></pre>]]></content>
       </categories>
       <tags>
         <tag>java,calculator</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>gird布局</title>
-    <url>/2020/05/14/grid-bu-ju/</url>
-    <content><![CDATA[<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p><strong>感谢阮一峰先生的分享<a href="http://www.ruanyifeng.com/blog/2019/03/grid-layout-tutorial.html">grid-layout-tutorial</a> 仅供个人学习。</strong></p>
-<p>网格布局（Grid）是最强大的 CSS 布局方案。</p>
-<p>它将网页划分成一个个网格，可以任意组合不同的网格，做出各种各样的布局。以前，只能通过复杂的 CSS 框架达到的效果，现在浏览器内置了。</p>
-<a id="more"></a>
-
-<img src="https://www.wangbase.com/blogimg/asset/201903/1_bg2019032501.png" class="" width="802" height="366" title="grid布局演示图片">
-
-<p>如上图所示，grid布局是一种类二维布局的css布局方式，与flex布局一样，极大的方便了网页布局。</p>
-<h2 id="浏览器支持"><a href="#浏览器支持" class="headerlink" title="浏览器支持"></a>浏览器支持</h2><p><img src="/images/browserSupport.PNG" alt="browser-spport"></p>
-<p class="image-caption">支持的浏览器及其版本</p>
-
-<h2 id="grid属性"><a href="#grid属性" class="headerlink" title="grid属性"></a>grid属性</h2><h3 id="display"><a href="#display" class="headerlink" title="display"></a>display</h3><blockquote>
-<p>可选参数 gird/inline-grid<br> 当参数为：gird时为块级元素、inline-grid则为行内元素</p>
-</blockquote>
-<h3 id="grid-template-columns"><a href="#grid-template-columns" class="headerlink" title="grid-template-columns"></a>grid-template-columns</h3><blockquote>
-<p>规定grid的列宽<br>example:</p>
-</blockquote>
-<pre><code>grid-template-columns:100px 100px 100px;</code></pre>
-
-<h3 id="grid-template-rows"><a href="#grid-template-rows" class="headerlink" title="grid-template-rows"></a>grid-template-rows</h3><blockquote>
-<p>规定grid的行宽<br>example:</p>
-</blockquote>
-<pre><code>grid-template-rows:100px 100px 100px;
-grid-template-rows:33% 33% 33%;
-grid-template-rows:repeat(3,33%);</code></pre>
-
-<blockquote><p><strong>grid函数设置宽高的函数</strong></p>
-<blockquote>
-<p>这些函数都可以与百分比、px、fr特数字组合定义宽高</p>
-</blockquote>
-<p>固定100px的结果如下图所示<br><img src="https://www.wangbase.com/blogimg/asset/201903/bg2019032506.png" class="" width="220" height="320" title="固定px的grid示例"></p>
-<p>平分宽度|高度的可以设置== 百分比 ==，或者设置1fr-类似flex，结合repeat函数则为</p>
-<h4 id="repeat-循环次数，循环体"><a href="#repeat-循环次数，循环体" class="headerlink" title="repeat(循环次数，循环体)"></a>repeat(循环次数，循环体)</h4><pre><code> 参数：循环体可以为特殊关键字n+fr，与flex类似。
-    &gt;循环次数可为特殊关键字auto-fill，表示使用循环体格式自动填充满整个grid布局 。
-
-    &lt;pre&gt;&lt;code&gt;grid-template-rows:repeat(3,1fr);</code></pre>
-<p>grid-template-rows:repeat(3,33%);</code></pre><br>        &gt;特殊的循环体<br>        <pre><code>grid-template-columns: repeat(2, 100px 20px 80px);</code></pre></p>
-<pre><code>    &lt;img src=&quot;https://www.wangbase.com/blogimg/asset/201903/bg2019032507.png&quot; class=&quot;&quot; title=&quot;特殊循环体的repeat示例&quot;&gt;</code></pre>
-<h4 id="minmax-min-max-函数"><a href="#minmax-min-max-函数" class="headerlink" title="minmax(min,max)函数"></a>minmax(min,max)函数</h4><pre><code>#### 参数：最大最小值，可以为px，fr，百分比
-#### 定义一个范围值，让宽高在这之中自适应
-&lt;pre&gt;&lt;code&gt;grid-template-rows:minmax(100px,1fr);</code></pre>
-<p>grid-template-rows:minmax(100px,33%);</code></pre></p>
-<h4 id="auto关键字"><a href="#auto关键字" class="headerlink" title="auto关键字"></a>auto关键字</h4><blockquote>
-<p>可在宽高定义时，与百分比，px，fr混用</p>
-</blockquote>
-<pre><code>grid-template-columns: 100px auto 100px;</code></pre>
-<blockquote>
-<p>表示grid布局中，左右为100px，中间为自适应宽度</p>
-</blockquote>
-<h4 id="auto-fill关键字"><a href="#auto-fill关键字" class="headerlink" title="auto-fill关键字"></a>auto-fill关键字</h4><blockquote>
-<p>可以与百分比，fr，px混用，还可以代替repeat函数的循环次数，让他自适应，并换行，类似flex布局的</p>
-</blockquote>
-<pre><code>flex-wrap:wrap;</code></pre>
-<blockquote>
-<p>自动换行：</p>
-</blockquote>
-<pre><code>display: grid;
-grid-template-columns: repeat(auto-fill, 100px);</code></pre>
-<img src="https://www.wangbase.com/blogimg/asset/201903/bg2019032508.png" class="" title="auto-fill关键字+repeat函数自动换行示例">
-
-<h4 id="布局实用示例"><a href="#布局实用示例" class="headerlink" title="布局实用示例"></a>布局实用示例</h4><pre><code>### 3:7两栏式布局
-&lt;pre&gt;&lt;code&gt;display: grid;</code></pre>
-<p>grid-template-columns: 70% 30%;</code></pre><br>    ### 十二网格布局<br>    <pre><code>display: grid;<br>grid-template-columns: repeat(12,1fr);</code></pre></p>
-</blockquote>
-
-<h3 id="grid-row-gap-amp-amp-grid-column-gap"><a href="#grid-row-gap-amp-amp-grid-column-gap" class="headerlink" title="grid-row-gap&amp;&amp;grid-column-gap"></a>grid-row-gap&amp;&amp;grid-column-gap</h3><blockquote>
-<p>两者可以结合写成</p>
-</blockquote>
-<pre><code>gird-gap:&lt;grid-row-gap&gt; &lt;grid-column-gap&gt;</code></pre>
-<blockquote>
-<p>简写成gird-gap时，可以只写一个值，表示行间距与列间距相同</p>
-</blockquote>
-<pre><code>grid-gap: 20px</code></pre>
-<blockquote>
-<p>新标准省略grid-字符，简写为</p>
-</blockquote>
-<pre><code>gap: 20px</code></pre>
-
-<img src="https://www.wangbase.com/blogimg/asset/201903/bg2019032511.png" class="" width="280" title="gap间距为20px示例">
-
-<h3 id="grid-auto-flow"><a href="#grid-auto-flow" class="headerlink" title="grid-auto-flow"></a>grid-auto-flow</h3><blockquote>
-<p>规定grid布局的排列顺序，可选参数：row/column，默认为row，即优先从左到右的依次排列<br>可选参数row dense/column dense规定除了指定行列的布局外，其他grid单元的布局顺序</p>
-</blockquote>
-<pre><code>display:grid;
-grid-template-rows:repeat(3,100px);
-grid-template-columns:repeat(3,100px);
-grid-auto-flow:row dense;</code></pre>
-
-<blockquote>
-<p>指定grid-cell的列宽，左闭右开原则</p>
-</blockquote>
-<pre><code>grid-column-start:1;
-grid-column-end:3;</code></pre>
-
-<blockquote>
-<p>grid-column-start/end设置的数字单位为grid-cell面积，左闭右开<br>结果如下</p>
-</blockquote>
-<img src="https://www.wangbase.com/blogimg/asset/201903/bg2019032514.png" class="" width="280" title="指定单元格，其余row
-布局示例">
-
-<blockquote>
-<p>如果单独设置grid的大小要注意不要超过grid定义的gird-cell个数，否则自适应<br><img src="/images/overgridnumber.PNG" alt="over-grid-number"></p>
-</blockquote>
-<p class="image-caption">自定义grid-cell范围超过初始化定义图</p>
-
-<p>上图中7、8、9因为超过了初始设置的grid-cell范围，而自适应 <strong>解决办法</strong>：补足不足grid个数或调整布局 <strong>增加初始设置的行列即可</strong></p>
-<h3 id="align-items-amp-amp-justliy-items-amp-amp-place-items"><a href="#align-items-amp-amp-justliy-items-amp-amp-place-items" class="headerlink" title="align-items&amp;&amp;justliy-items&amp;&amp;place-items"></a>align-items&amp;&amp;justliy-items&amp;&amp;place-items</h3><blockquote>
-<p>规定grid-cell的位置，align表示高（上、中、下）、justlify表示宽（左、中、右）<br>可选属性：start|center|end|stretch——靠左|居中|靠右|自动填满<br>place-items是简写形式</p>
-</blockquote>
-<pre><code>place-items:&lt;align-items&gt; &lt;justify-items&gt;</code></pre>
-<blockquote>
-<p>如果不写第二个参数则默认两个属性值相同</p>
-</blockquote>
-<pre><code>align-items:center;
-justify-items:strech;</code></pre>
-<blockquote>
-<p>可简写为</p>
-</blockquote>
-<pre><code>place-items:&lt;align-items&gt; &lt;justify-items&gt;
-place-items:stretch center;</code></pre>
-<blockquote>
-<p>如下图所示<br><img src="/images/center-stretch.PNG" alt="place-items"></p>
-</blockquote>
-<p class="image-caption">place-items结果图</p>
-
-<h3 id="align-self-amp-amp-justify-self-amp-amp-place-self"><a href="#align-self-amp-amp-justify-self-amp-amp-place-self" class="headerlink" title="align-self&amp;&amp;justify-self&amp;&amp;place-self"></a>align-self&amp;&amp;justify-self&amp;&amp;place-self</h3><blockquote>
-<p>与align|justify|place-items用法完全一致，但只作用于单个grid-cell</p>
-</blockquote>
-<pre><code>.item-1 {
-  place-self:stretch center;
-  background-color: #ef342a;
-} </code></pre>
-
-<p><img src="/images/place-self.PNG" alt="place-self"></p>
-<p class="image-caption">place-self单个grid-cell作用域</p>
-
-<h3 id="align-content-amp-amp-justify-content-amp-amp-place-content"><a href="#align-content-amp-amp-justify-content-amp-amp-place-content" class="headerlink" title="align-content&amp;&amp;justify-content&amp;&amp;place-content"></a>align-content&amp;&amp;justify-content&amp;&amp;place-content</h3><blockquote>
-<p>规定整个项目在grid-container中的位置<br>可选属性：start|center|space-between|space-evenly|space-around——between间隔在项目之间<br>    <div style="display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:160px;grid-auto-rows:0;gap:10px"><br>        <div style="grid-column-start:1;grid-row-start:1;"><img src="https://www.wangbase.com/blogimg/asset/201903/bg2019032522.png" class="" title="space-around"></div><br>        <div style="grid-column-start:2;grid-row-start:1;"><img src="https://www.wangbase.com/blogimg/asset/201903/bg2019032523.png" class="" title="space-between"></div><br>        <div style="grid-column-start:3;grid-row-start:1;"><img src="https://www.wangbase.com/blogimg/asset/201903/bg2019032524.png" class="" title="space-evenly"></div><br>    </div></p>
-</blockquote>
-<h3 id="grid-auto-row-amp-amp-grid-auto-column"><a href="#grid-auto-row-amp-amp-grid-auto-column" class="headerlink" title="grid-auto-row&amp;&amp;grid-auto-column"></a>grid-auto-row&amp;&amp;grid-auto-column</h3><blockquote>
-<p>规定如果定义的grid-cell不在初始定义的grid-cell数量之内，扩展的grid-cell的列宽、行高</p>
-</blockquote>
-<pre><code>display: grid;
-grid-template-columns: 100px 100px 100px;
-grid-template-rows: 100px 100px 100px;
-grid-auto-rows: 50px;</code></pre>
-
-<img src="https://www.wangbase.com/blogimg/asset/201903/bg2019032525.png" class="" width="280" title="grid-auto-row为50px">
-
-<h3 id="grid-template-amp-amp-grid"><a href="#grid-template-amp-amp-grid" class="headerlink" title="grid-template&amp;&amp;grid"></a>grid-template&amp;&amp;grid</h3><blockquote>
-<ul>
-<li>grid-template属性是grid-template-columns、grid-template-rows和grid-template-areas这三个属性的合并简写形式。</li>
-</ul>
-</blockquote>
-<pre><code>grid-template:&lt;grid-template-rows&gt; &lt;grid-template-area&gt; &#x2F; &lt;grid-template-columns&gt;
-example
-grid-template: [header-left] &quot;head head&quot; 30px [header-right]
-                [main-left]   &quot;nav  main&quot; 1fr  [main-right]
-                [footer-left] &quot;nav  foot&quot; 30px [footer-right]
-                &#x2F; 120px 1fr;</code></pre>                
-<blockquote>
-<p>等同于</p>
-</blockquote>
-<pre><code>grid-template-rows: [header-left] 30px [header-right main-left] 1fr [main-right footer-left] 30px [footer-right];
-grid-template-columns: 120px 1fr;
-grid-template-areas: &quot;head head&quot; &quot;nav main&quot; &quot;nav foot&quot;;</code></pre>
-<blockquote>
-<p>结果图<br><img src="/images/grid-template.PNG" alt="grid-template"></p>
-</blockquote>
-<p class="image-caption">grid-template简写结果图</p>
-
-<blockquote>
-<ul>
-<li>grid属性是grid-template-rows、grid-template-columns、grid-template-areas、 grid-auto-rows、grid-auto-columns、grid-auto-flow这六个属性的合并简写形式。<br>从易读易写的角度考虑，还是建议不要合并属性，所以这里就不详细介绍这个属性了。</li>
-</ul>
-</blockquote>
-<h2 id="grid-cell属性"><a href="#grid-cell属性" class="headerlink" title="grid-cell属性"></a>grid-cell属性</h2><h3 id="grid-column-start-end-amp-amp-grid-row-start-end"><a href="#grid-column-start-end-amp-amp-grid-row-start-end" class="headerlink" title="grid-column-start|end&amp;&amp;grid-row-start|end"></a>grid-column-start|end&amp;&amp;grid-row-start|end</h3><blockquote>
-<ul>
-<li>属性值可为数字，与grid-auto-flow属性结合可以实现特定布局</li>
-</ul>
-</blockquote>
-<pre><code>grid-column-start: 1;
-grid-column-end: 3;
-grid-row-start: 2;
-grid-row-end: 4;</code></pre>
-
-<img src="https://www.wangbase.com/blogimg/asset/201903/bg2019032527.png" class="" width="280" title="数字方式定义grid-cell起始位置">
-<blockquote>
-<ul>
-<li>span参数结合使用，表示跨过多少个grid-cell，即可用在start，也可用在end</li>
-</ul>
-</blockquote>
-<pre><code>grid-column-end: span 2;</code></pre>
-
-<img src="https://www.wangbase.com/blogimg/asset/201903/bg2019032528.png" class="" width="280" title="数字方式定义grid-cell起始位置">
-<blockquote>
-<ul>
-<li>如果因为设置属性产生了重叠，可通过设置z-index调整</li>
-</ul>
-</blockquote>
-<h3 id="grid-column-amp-amp-grid-row"><a href="#grid-column-amp-amp-grid-row" class="headerlink" title="grid-column&amp;&amp;grid-row"></a>grid-column&amp;&amp;grid-row</h3><blockquote>
-<ul>
-<li>是grid-row-start|end和grid-column-start|end的简写</li>
-</ul>
-</blockquote>
-<pre><code>grid-row:&lt;grid-row-start&gt; &lt;grid-row-end&gt;;
-grid-columns:&lt;grid-columns-start&gt; &lt;grid-columns-end&gt;;</code></pre>
-
-<blockquote>
-<ul>
-<li>可以与span（宽行）联合使用</li>
-</ul>
-</blockquote>
-<pre><code>  background: #b03532;
-  grid-column: 1 &#x2F; 3;
-  grid-row: 1 &#x2F; 3;
-&#x2F;* 等同于 *&#x2F;
-  background: #b03532;
-  grid-column: 1 &#x2F; span 2;
-  grid-row: 1 &#x2F; span 2;</code></pre>
-<blockquote>
-<ul>
-<li>可以不写/end，默认是跨了一行</li>
-</ul>
-</blockquote>
-<pre><code>grid-column: 1;
-grid-row: 1;</code></pre>
-<blockquote>
-<p>上面代码表示第一个grid<br><strong>简写时不可直接写span+n而不规定起/始位置</strong></p>
-</blockquote>
-<h3 id="grid-template-areas"><a href="#grid-template-areas" class="headerlink" title="grid-template-areas"></a>grid-template-areas</h3><blockquote>
-<ul>
-<li>给grid命名并划分区域</li>
-</ul>
-</blockquote>
-<pre><code>display: grid;
-grid-template-columns: 100px 100px 100px;
-grid-template-rows: 100px 100px 100px;
-grid-template-areas: &#39;a b c&#39;
-                     &#39;d e f&#39;
-                     &#39;g h i&#39;;</code></pre>
-<blockquote>
-<p>上面代码表示将grid划分为a~i的九个区域，相同命名就是同一个区域，结合grid-area可指定grid-cell大小</p>
-</blockquote>
-<blockquote>
-<ul>
-<li>不用利用的区域用’.’代替命名</li>
-</ul>
-</blockquote>
-<pre><code>display: grid;
-grid-template-columns: 100px 100px 100px;
-grid-template-rows: 100px 100px 100px;
-grid-template-areas: &#39;a . c&#39;
-                    &#39;d . f&#39;
-                    &#39;g . i&#39;;</code></pre>
-<blockquote>
-<p>上面代码表示中间区域不使用,不属于任何区域</p>
-</blockquote>
-<blockquote>
-<ul>
-<li>区域的命名会影响到网格线。每个区域的起始网格线，会自动命名为 <strong>区域名-start</strong>，终止网格线自动命名为 <strong>区域名-end</strong>。如上面的a区域的起始网格线为a-start&amp;a-end</li>
-</ul>
-</blockquote>
-<h3 id="grid-area"><a href="#grid-area" class="headerlink" title="grid-area"></a>grid-area</h3><blockquote>
-<ul>
-<li>与grid-template-area结合使用，指定grid-cell位置</li>
-</ul>
-</blockquote>
-<pre><code>.container{
-  display: grid;
-  grid-template-columns: 100px 100px 100px;
-  grid-template-rows: 100px 100px 100px;
-  grid-template-areas: &#39;a b c&#39;
-                     &#39;d e f&#39;
-                     &#39;g h i&#39;;
-}
-.item-1 {
-  background-color: #ef342a;
-  grid-area: e;
-}       </code></pre>
-<blockquote>
-<p>如下图</p>
-</blockquote>
-<img src="https://www.wangbase.com/blogimg/asset/201903/bg2019032530.png" class="" width="280" title="grid-area指定grid-cell位置">
-
-<blockquote>
-<ul>
-<li>是grid-row|column-start|end的简写</li>
-</ul>
-</blockquote>
-<pre><code>grid-area: &lt;row-start&gt; &#x2F; &lt;column-start&gt; &#x2F; &lt;row-end&gt; &#x2F; &lt;column-end&gt;;
-example
-gird:1&#x2F;1&#x2F;3&#x2F;3</code></pre>
-<blockquote>
-<p>如下图所示，简写结果 <strong>不支持span结合使用</strong><br><img src="/images/grid-area.PNG" alt="grid-area简写"></p>
-</blockquote>
-<p class="image-caption">gird-area简写</p>]]></content>
-      <categories>
-        <category>css</category>
-        <category>css布局</category>
-      </categories>
-      <tags>
-        <tag>css</tag>
-        <tag>css布局</tag>
       </tags>
   </entry>
   <entry>
@@ -1654,13 +1659,13 @@ gird:1&#x2F;1&#x2F;3&#x2F;3</code></pre>
 <p>依赖包的后面可接版本号，通常格式为；包名+特殊字符+版本号[major, minor, patch]</p>
 </blockquote>
 <p>1、特殊字符^<br>详见**二不挂五先生的文章<a href="https://zhuanlan.zhihu.com/p/66039729">npm install 版本号^的坑</a>**，简单点来说就是^标识的范围是版本号[major, minor, patch]中从左到右第一个非0位开始，小于此非零位+1的版本号</p>
-<pre><code>^1.2.3版本包括：&gt;&#x3D; 1.2.3 并且 &lt; 2.0.0
-^0.2.3版本包括：&gt;&#x3D; 0.2.3 并且 &lt; 0.3.0
-^0.0.3版本包括：&gt;&#x3D; 0.0.3 并且 &lt; 0.0.4</code></pre>
+<pre class="line-numbers language-bash"><code class="language-bash">^1.2.3版本包括：<span class="token operator">>=</span> 1.2.3 并且 <span class="token operator">&lt;</span> 2.0.0
+^0.2.3版本包括：<span class="token operator">>=</span> 0.2.3 并且 <span class="token operator">&lt;</span> 0.3.0
+^0.0.3版本包括：<span class="token operator">>=</span> 0.0.3 并且 <span class="token operator">&lt;</span> 0.0.4<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 <p>2、特殊字符~<br>与^类似，~字符则指定匹配版本号[major, minor, patch]中最新的patch位包依赖（方便修复小bug后依然适用于代码）</p>
-<pre><code>~1.2.3版本包括：&gt;&#x3D; 1.2.3 并且 &lt; 1.3.0
-~0.2.3版本包括：&gt;&#x3D; 0.2.3 并且 &lt; 0.3.0
-~0.0.3版本包括：&gt;&#x3D; 0.0.3 并且 &lt; 0.1.0</code></pre>
+<pre class="line-numbers language-bash"><code class="language-bash">~1.2.3版本包括：<span class="token operator">>=</span> 1.2.3 并且 <span class="token operator">&lt;</span> 1.3.0
+~0.2.3版本包括：<span class="token operator">>=</span> 0.2.3 并且 <span class="token operator">&lt;</span> 0.3.0
+~0.0.3版本包括：<span class="token operator">>=</span> 0.0.3 并且 <span class="token operator">&lt;</span> 0.1.0<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 <p>3、特殊字符@<br>在@后面可以添加具体的版本号，以指定依赖包的确切版本，@latest表示安装最新的依赖包</p>
 ]]></content>
       <categories>
@@ -1670,108 +1675,6 @@ gird:1&#x2F;1&#x2F;3&#x2F;3</code></pre>
       <tags>
         <tag>node</tag>
         <tag>npm</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>python基本数据类型</title>
-    <url>/2020/10/10/python-ji-ben-shu-ju-lei-xing/</url>
-    <content><![CDATA[<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>决心开始认真系统学习python，基本数据类型开始，记录自己感觉重要的知识点。</p>
-<a id="more"></a>
-<h2 id="整数"><a href="#整数" class="headerlink" title="整数"></a>整数</h2><ul>
-<li><p>十六进制ox开头</p>
-</li>
-<li><p>允许使用_下划线分割多个0的大数据</p>
-<pre><code>#等效写法
-100_000_000 &#x3D;&#x3D; 100000000</code></pre>
-</li>
-<li><p>整数运算永远是精确计算（除法也是），浮点数计算会有四舍五入误差</p>
-</li>
-</ul>
-<h2 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h2><ul>
-<li><p>定义：使用单引号’’和双引号””包裹起来的数据</p>
-</li>
-<li><p>字符串和整数不可变，任何操作不会改变源数据，而是创建新的数据</p>
-</li>
-<li><p>使用’’’multi-line-string’’’包裹，表示多行字符串</p>
-</li>
-<li><p>默认会对包含\符号的字符转义转义，在字符串前加上r则不会转义</p>
-</li>
-<li><p><strong>字符串中的格式化处理</strong><br>  1、使用%占位符处理<br>  规则：字符串里面使用上述字符占位，在结尾使用%(replacement1,replacement2…)替换</p>
-<table>
-<thead>
-<tr>
-<th>字符</th>
-<th>释义</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>%s</td>
-<td>普通字符</td>
-</tr>
-<tr>
-<td>%f</td>
-<td>浮点数</td>
-</tr>
-<tr>
-<td>%d</td>
-<td>整数</td>
-</tr>
-<tr>
-<td>%x</td>
-<td>十六进制数</td>
-</tr>
-</tbody></table>
-<p>  示例：</p>
-  <pre><code>print(&#39;%s is %d year\&#39;s old,he have $%f&#39; %(&#39;jack&#39;,23,3456345643.234))
-#使用%%转义%
-print(&#39;%%%d&#39;%25)</code></pre>
-<p>  <strong>在字符串中可加入整数/浮点数在%和特定字符间对数据输出位数处理</strong></p>
-  <pre><code>#整数数字表示占位
-print(&#39;%3d&#39;%23)
-#浮点数对浮点数的位数处理
-print(&#39;%.2f&#39;%12.23453)</code></pre>
-
-<p>  2、使用string类型的format函数配合{}</p>
-  <pre><code>print(&#39;{} is {} year\&#39;s old,he have ${}&#39;.format(&#39;jack&#39;,23,3456345643.234))</code></pre>
-
-<p>  3、在字符串前加上f，然后使用{变量名}，自动替换字符串（类似es6中的反引号字符串）</p>
-  <pre><code>name &#x3D; &#39;jack&#39;
-age &#x3D; 23
-money &#x3D; 3456345643.234
-print(f&#39;{name} is {age} year\&#39;s old,he have ${money}&#39;)</code></pre>
-
-</li>
-</ul>
-<h2 id="布尔值Boolean"><a href="#布尔值Boolean" class="headerlink" title="布尔值Boolean"></a>布尔值Boolean</h2><ul>
-<li>值表示是首字符大写<pre><code>1&#x3D;&#x3D;2---&gt;False
-1&#x3D;&#x3D;1---&gt;True</code></pre>
-
-</li>
-</ul>
-<h2 id="空置None"><a href="#空置None" class="headerlink" title="空置None"></a>空置None</h2><ul>
-<li>与js的null区别开</li>
-</ul>
-<h2 id="变量-amp-amp-常量"><a href="#变量-amp-amp-常量" class="headerlink" title="变量&amp;&amp;常量"></a>变量&amp;&amp;常量</h2><ul>
-<li>变量不必声明，常量的变量名称全部大写（说是常量其实随时可变）</li>
-</ul>
-<h2 id="注释"><a href="#注释" class="headerlink" title="注释"></a>注释</h2><ul>
-<li><p>使用#做标志</p>
-</li>
-<li><p>通用注释</p>
-<pre><code>#告诉python解释器（cpython用的最多）以utf-8格式读取文件
-#-*- coding:utf-8 -*-
-
-#告诉Linux和mac是一个可执行的python文件（win不支持） 
-#!user&#x2F;bin&#x2F;env python3</code></pre></li>
-</ul>
-]]></content>
-      <categories>
-        <category>python</category>
-        <category>基本数据类型</category>
-      </categories>
-      <tags>
-        <tag>python</tag>
-        <tag>基本数据类型</tag>
       </tags>
   </entry>
   <entry>
@@ -1812,25 +1715,24 @@ print(f&#39;{name} is {age} year\&#39;s old,he have ${money}&#39;)</code></pre>
 </blockquote>
 <ul>
 <li><p>默认参数<br>  1、不可设置为可变变量（只能string/数字/None等），参数重加在不会重新赋值，会重复引用之前初始化定义的值（与es6区别）</p>
-  <pre><code>#错误的写法
-def variable_paramter_func(l &#x3D; []):
-    l.append(&#39;end&#39;)
-    print(l)
+<pre class="line-numbers language-python"><code class="language-python"><span class="token comment" spellcheck="true">#错误的写法</span>
+<span class="token keyword">def</span> <span class="token function">variable_paramter_func</span><span class="token punctuation">(</span>l <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    l<span class="token punctuation">.</span>append<span class="token punctuation">(</span><span class="token string">'end'</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>l<span class="token punctuation">)</span>
 
-#正确的写法
-def correct_variable_paramter_func(l&#x3D;None):
-    if not l:
-        l &#x3D; []
-    l.append(&#39;end&#39;)
-    print(l)
+<span class="token comment" spellcheck="true">#正确的写法</span>
+<span class="token keyword">def</span> <span class="token function">correct_variable_paramter_func</span><span class="token punctuation">(</span>l<span class="token operator">=</span>None<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">if</span> <span class="token operator">not</span> l<span class="token punctuation">:</span>
+        l <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+    l<span class="token punctuation">.</span>append<span class="token punctuation">(</span><span class="token string">'end'</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>l<span class="token punctuation">)</span>
 
-variable_paramter_func()
-variable_paramter_func()
-#打印结果[&#39;end&#39;] [&#39;end&#39;&#39;end&#39;]
-correct_variable_paramter_func()
-correct_variable_paramter_func()
-#打印结果[&#39;end&#39;] [&#39;end&#39;]</code></pre>
-
+variable_paramter_func<span class="token punctuation">(</span><span class="token punctuation">)</span>
+variable_paramter_func<span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token comment" spellcheck="true">#打印结果['end'] ['end''end']</span>
+correct_variable_paramter_func<span class="token punctuation">(</span><span class="token punctuation">)</span>
+correct_variable_paramter_func<span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token comment" spellcheck="true">#打印结果['end'] ['end']</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>  2、可为普通位置参数和命名关键字参数赋值，赋值后即可不传（使用默认值）</p>
 </li>
 <li><p>可变参数&amp;关键字参数的赋值分别使用*()|<em>[]和\</em>*{a:’a’}格式，且赋值会复制新的对象，不改变源数据</p>
@@ -1839,13 +1741,14 @@ correct_variable_paramter_func()
 </li>
 </ul>
 <h2 id="递归"><a href="#递归" class="headerlink" title="递归"></a>递归</h2><ul>
-<li>函数调用使用stack栈实现，调用一次栈增加一层，所以会有递归的栈溢出，使用尾递归优化方法（return时调用函数本身，将结算结果一并传入函数）<strong>pythong没有优化，使用不使用没区别</strong><pre><code>#尾递归优化：求100到1之和
-def recursion_factorial(num, res):
-    if num &#x3D;&#x3D; 0:
-        return res
-    return recursion_factorial(num-1, res+num)
-print(recursion_factorial(100, 0))
-#输出5050</code></pre></li>
+<li>函数调用使用stack栈实现，调用一次栈增加一层，所以会有递归的栈溢出，使用尾递归优化方法（return时调用函数本身，将结算结果一并传入函数）<strong>pythong没有优化，使用不使用没区别</strong><pre class="line-numbers language-python"><code class="language-python"><span class="token comment" spellcheck="true">#尾递归优化：求100到1之和</span>
+<span class="token keyword">def</span> <span class="token function">recursion_factorial</span><span class="token punctuation">(</span>num<span class="token punctuation">,</span> res<span class="token punctuation">)</span><span class="token punctuation">:</span>
+  <span class="token keyword">if</span> num <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">:</span>
+      <span class="token keyword">return</span> res
+  <span class="token keyword">return</span> recursion_factorial<span class="token punctuation">(</span>num<span class="token number">-1</span><span class="token punctuation">,</span> res<span class="token operator">+</span>num<span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>recursion_factorial<span class="token punctuation">(</span><span class="token number">100</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token comment" spellcheck="true">#输出5050</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
 </ul>
 ]]></content>
       <categories>
@@ -1855,6 +1758,104 @@ print(recursion_factorial(100, 0))
       <tags>
         <tag>python</tag>
         <tag>function</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>python基本数据类型</title>
+    <url>/2020/10/10/python-ji-ben-shu-ju-lei-xing/</url>
+    <content><![CDATA[<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>决心开始认真系统学习python，基本数据类型开始，记录自己感觉重要的知识点。</p>
+<a id="more"></a>
+<h2 id="整数"><a href="#整数" class="headerlink" title="整数"></a>整数</h2><ul>
+<li><p>十六进制ox开头</p>
+</li>
+<li><p>允许使用_下划线分割多个0的大数据</p>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token comment" spellcheck="true">#等效写法</span>
+100_000_000 <span class="token operator">==</span> <span class="token number">100000000</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+</li>
+<li><p>整数运算永远是精确计算（除法也是），浮点数计算会有四舍五入误差</p>
+</li>
+</ul>
+<h2 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h2><ul>
+<li><p>定义：使用单引号’’和双引号””包裹起来的数据</p>
+</li>
+<li><p>字符串和整数不可变，任何操作不会改变源数据，而是创建新的数据</p>
+</li>
+<li><p>使用’’’multi-line-string’’’包裹，表示多行字符串</p>
+</li>
+<li><p>默认会对包含\符号的字符转义转义，在字符串前加上r则不会转义</p>
+</li>
+<li><p><strong>字符串中的格式化处理</strong><br>  1、使用%占位符处理<br>  规则：字符串里面使用上述字符占位，在结尾使用%(replacement1,replacement2…)替换</p>
+<table>
+<thead>
+<tr>
+<th>字符</th>
+<th>释义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>%s</td>
+<td>普通字符</td>
+</tr>
+<tr>
+<td>%f</td>
+<td>浮点数</td>
+</tr>
+<tr>
+<td>%d</td>
+<td>整数</td>
+</tr>
+<tr>
+<td>%x</td>
+<td>十六进制数</td>
+</tr>
+</tbody></table>
+<p>  示例：</p>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'%s is %d year\'s old,he have $%f'</span> <span class="token operator">%</span><span class="token punctuation">(</span><span class="token string">'jack'</span><span class="token punctuation">,</span><span class="token number">23</span><span class="token punctuation">,</span><span class="token number">3456345643.234</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token comment" spellcheck="true">#使用%%转义%</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'%%%d'</span><span class="token operator">%</span><span class="token number">25</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p>  <strong>在字符串中可加入整数/浮点数在%和特定字符间对数据输出位数处理</strong></p>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token comment" spellcheck="true">#整数数字表示占位</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'%3d'</span><span class="token operator">%</span><span class="token number">23</span><span class="token punctuation">)</span>
+<span class="token comment" spellcheck="true">#浮点数对浮点数的位数处理</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'%.2f'</span><span class="token operator">%</span><span class="token number">12.23453</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<p>  2、使用string类型的format函数配合{}</p>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'{} is {} year\'s old,he have ${}'</span><span class="token punctuation">.</span>format<span class="token punctuation">(</span><span class="token string">'jack'</span><span class="token punctuation">,</span><span class="token number">23</span><span class="token punctuation">,</span><span class="token number">3456345643.234</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>  3、在字符串前加上f，然后使用{变量名}，自动替换字符串（类似es6中的反引号字符串）</p>
+<pre class="line-numbers language-python"><code class="language-python">name <span class="token operator">=</span> <span class="token string">'jack'</span>
+age <span class="token operator">=</span> <span class="token number">23</span>
+money <span class="token operator">=</span> <span class="token number">3456345643.234</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>f<span class="token string">'{name} is {age} year\'s old,he have ${money}'</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+</ul>
+<h2 id="布尔值Boolean"><a href="#布尔值Boolean" class="headerlink" title="布尔值Boolean"></a>布尔值Boolean</h2><ul>
+<li>值表示是首字符大写<pre class="line-numbers language-python"><code class="language-python"><span class="token number">1</span><span class="token operator">==</span><span class="token number">2</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">></span><span class="token boolean">False</span>
+<span class="token number">1</span><span class="token operator">==</span><span class="token number">1</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">></span><span class="token boolean">True</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+</li>
+</ul>
+<h2 id="空置None"><a href="#空置None" class="headerlink" title="空置None"></a>空置None</h2><ul>
+<li>与js的null区别开</li>
+</ul>
+<h2 id="变量-amp-amp-常量"><a href="#变量-amp-amp-常量" class="headerlink" title="变量&amp;&amp;常量"></a>变量&amp;&amp;常量</h2><ul>
+<li>变量不必声明，常量的变量名称全部大写（说是常量其实随时可变）</li>
+</ul>
+<h2 id="注释"><a href="#注释" class="headerlink" title="注释"></a>注释</h2><ul>
+<li><p>使用#做标志</p>
+</li>
+<li><p>通用注释</p>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token comment" spellcheck="true">#告诉python解释器（cpython用的最多）以utf-8格式读取文件</span>
+<span class="token comment" spellcheck="true">#-*- coding:utf-8 -*-</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+</li>
+</ul>
+<p>#告诉Linux和mac是一个可执行的python文件（win不支持）<br>#!user/bin/env python3<br>```</p>
+]]></content>
+      <categories>
+        <category>python</category>
+        <category>基本数据类型</category>
+      </categories>
+      <tags>
+        <tag>python</tag>
+        <tag>基本数据类型</tag>
       </tags>
   </entry>
   <entry>
@@ -1870,11 +1871,10 @@ print(recursion_factorial(100, 0))
 </ul>
 <h2 id="tuple"><a href="#tuple" class="headerlink" title="tuple"></a>tuple</h2><ul>
 <li>定义了就不可修改（类似es6的const关键字定义变量？）</li>
-<li>在函数中应用：返回值是省略了小括号的元组，因此可以返回多个值<pre><code>def return_multi_params():
-    return 1,&#39;jack&#39;
-age,name &#x3D; return_multi_params()
-#name &#x3D; &#39;jack&#39;,age&#x3D;1</code></pre>
-
+<li>在函数中应用：返回值是省略了小括号的元组，因此可以返回多个值<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">return_multi_params</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+  <span class="token keyword">return</span> <span class="token number">1</span><span class="token punctuation">,</span><span class="token string">'jack'</span>
+age<span class="token punctuation">,</span>name <span class="token operator">=</span> return_multi_params<span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token comment" spellcheck="true">#name = 'jack',age=1</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 </li>
 </ul>
 <h2 id="条件判断"><a href="#条件判断" class="headerlink" title="条件判断"></a>条件判断</h2><ul>
@@ -1942,38 +1942,37 @@ age,name &#x3D; return_multi_params()
     <content><![CDATA[<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>用于vue-cli的升级较快，记录下变化</p>
 <a id="more"></a>
 
-<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><pre><code>#全局安装
-npm install -g @vue&#x2F;cli
-#升级项目中的cli相关模块
-#vue  upgrade [options] [plugin-name]
-#（试用）升级 Vue CLI 服务及插件
-#选项：
-  -t, --to &lt;version&gt;    升级 &lt;plugin-name&gt; 到指定的版本
-  -f, --from &lt;version&gt;  跳过本地版本检测，默认插件是从此处指定的版本升级上来
-  -r, --registry &lt;url&gt;  使用指定的 registry 地址安装依赖
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><pre class="line-numbers language-bash"><code class="language-bash"><span class="token comment" spellcheck="true">#全局安装</span>
+<span class="token function">npm</span> <span class="token function">install</span> -g @vue/cli
+<span class="token comment" spellcheck="true">#升级项目中的cli相关模块</span>
+<span class="token comment" spellcheck="true">#vue  upgrade [options] [plugin-name]</span>
+<span class="token comment" spellcheck="true">#（试用）升级 Vue CLI 服务及插件</span>
+<span class="token comment" spellcheck="true">#选项：</span>
+  -t, --to <span class="token operator">&lt;</span>version<span class="token operator">></span>    升级 <span class="token operator">&lt;</span>plugin-name<span class="token operator">></span> 到指定的版本
+  -f, --from <span class="token operator">&lt;</span>version<span class="token operator">></span>  跳过本地版本检测，默认插件是从此处指定的版本升级上来
+  -r, --registry <span class="token operator">&lt;</span>url<span class="token operator">></span>  使用指定的 registry 地址安装依赖
   --all                 升级所有的插件
-  --next                检查插件新版本时，包括 alpha&#x2F;beta&#x2F;rc 版本在内
-  -h, --help            输出帮助内容</code></pre>
-
-<h2 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h2><pre><code>vue create [options] &lt;app-name&gt;
-#创建一个由 &#96;vue-cli-service&#96; 提供支持的新项目
-#选项：
-  -p, --preset &lt;presetName&gt;       忽略提示符并使用已保存的或远程的预设选项
+  --next                检查插件新版本时，包括 alpha/beta/rc 版本在内
+  -h, --help            输出帮助内容<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h2><pre class="line-numbers language-bash"><code class="language-bash">vue create <span class="token punctuation">[</span>options<span class="token punctuation">]</span> <span class="token operator">&lt;</span>app-name<span class="token operator">></span>
+<span class="token comment" spellcheck="true">#创建一个由 `vue-cli-service` 提供支持的新项目</span>
+<span class="token comment" spellcheck="true">#选项：</span>
+  -p, --preset <span class="token operator">&lt;</span>presetName<span class="token operator">></span>       忽略提示符并使用已保存的或远程的预设选项
   -d, --default                   忽略提示符并使用默认预设选项
-  -i, --inlinePreset &lt;json&gt;       忽略提示符并使用内联的 JSON 字符串预设选项
-  -m, --packageManager &lt;command&gt;  在安装依赖时使用指定的 npm 客户端
-  -r, --registry &lt;url&gt;            在安装依赖时使用指定的 npm registry
-  -g, --git [message]             强制 &#x2F; 跳过 git 初始化，并可选的指定初始化提交信息
-  -n, --no-git                    跳过 git 初始化
+  -i, --inlinePreset <span class="token operator">&lt;</span>json<span class="token operator">></span>       忽略提示符并使用内联的 JSON 字符串预设选项
+  -m, --packageManager <span class="token operator">&lt;</span>command<span class="token operator">></span>  在安装依赖时使用指定的 <span class="token function">npm</span> 客户端
+  -r, --registry <span class="token operator">&lt;</span>url<span class="token operator">></span>            在安装依赖时使用指定的 <span class="token function">npm</span> registry
+  -g, --git <span class="token punctuation">[</span>message<span class="token punctuation">]</span>             强制 / 跳过 <span class="token function">git</span> 初始化，并可选的指定初始化提交信息
+  -n, --no-git                    跳过 <span class="token function">git</span> 初始化
   -f, --force                     覆写目标目录可能存在的配置
-  -c, --clone                     使用 git clone 获取远程预设选项
+  -c, --clone                     使用 <span class="token function">git</span> clone 获取远程预设选项
   -x, --proxy                     使用指定的代理创建项目
   -b, --bare                      创建项目时省略默认组件中的新手指导信息
-  -h, --help                      输出使用帮助信息</code></pre>
-
+  -h, --help                      输出使用帮助信息<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>需要使用vue-init功能，安装@vue/cli-init包即可</li>
-<li>使用图像化创建项目<pre><code>vue ui</code></pre></li>
+<li>使用图像化创建项目<pre class="line-numbers language-bash"><code class="language-bash">vue ui<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+</li>
 </ul>
 ]]></content>
       <categories>
@@ -1993,40 +1992,8 @@ npm install -g @vue&#x2F;cli
 
 <h3 id="计算属性computed"><a href="#计算属性computed" class="headerlink" title="计算属性computed"></a>计算属性computed</h3><p>1、使用场景：模板内表达式的复杂计算</p>
 <p>2、特性：响应式计算（不重复计算相同值，缓存响应式的依赖，即data中的值改变才重新计算，否则使用缓存值）优于方法和watch监听属性</p>
-<p>示例：</p>
-<pre><code>var vm &#x3D; new Vue({
-    data:{
-        firstname:&#39;foo&#39;,
-        lastname:&#39;bar&#39;
-    },
-    computed:{
-        fullname(){
-            return this.firstname+&#39;  &#39;+this.lastname
-        }
-    },
-    template:&#96;
-        &lt;div&gt;&lt;&#x2F;div&gt;
-    &#96;
-}).$mount(&#39;#app&#39;)</code></pre>
-
-<p>3、自定义setter方法：一般计算属性默认只有getter方法，但支持添加setter方法，example</p>
-<pre><code>...
-computed:{
-    fullname:{
-        get:function(){
-            return this.firstname+&#39; &#39;+this.lastname
-        },
-        set:function(newVal){
-            let nameArr &#x3D; newVal.split(&#39; &#39;)
-            this.firstname &#x3D; nameArr[0]
-            this.lastname &#x3D; nameArr[nameArr.length-1]
-        }
-    }
-}
-...
-&#x2F;&#x2F;改变fullname则会调用setter方法
-vm.fullname &#x3D; &#39;jack ma&#39;</code></pre>
-
+<p>示例：<br>···js<br>var vm = new Vue({<br>    data:{<br>        firstname:’foo’,<br>        lastname:’bar’<br>    },<br>    computed:{<br>        fullname(){<br>            return this.firstname+’  ‘+this.lastname<br>        }<br>    },<br>    template:<code>        &lt;div&gt;&#123;&#123;fullname&#125;&#125;&lt;/div&gt;    </code><br>}).$mount(‘#app’)<br>···</p>
+<p>3、自定义setter方法：一般计算属性默认只有getter方法，但支持添加setter方法，example<br>···js<br>…<br>computed:{<br>    fullname:{<br>        get:function(){<br>            return this.firstname+’ ‘+this.lastname<br>        },<br>        set:function(newVal){<br>            let nameArr = newVal.split(‘ ‘)<br>            this.firstname = nameArr[0]<br>            this.lastname = nameArr[nameArr.length-1]<br>        }<br>    }<br>}<br>…<br>//改变fullname则会调用setter方法<br>vm.fullname = ‘jack ma’<br>···</p>
 <h3 id=""><a href="#" class="headerlink" title=""></a></h3>]]></content>
       <categories>
         <category>vue</category>
@@ -2129,29 +2096,27 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <a id="more"></a>
 
 <h2 id="文本用超过使用…表示"><a href="#文本用超过使用…表示" class="headerlink" title="文本用超过使用…表示"></a>文本用超过使用…表示</h2><p>1、单行显示省略号</p>
-<pre><code>selector{
-    overflow:hidden;
-    text-overflow:ellipsis;&#x2F;&#x2F;使用省略号代替截断文字
-    white-space:nowrap;&#x2F;&#x2F;不换行
-}</code></pre>
-
+<pre class="line-numbers language-css"><code class="language-css"><span class="token selector">selector</span><span class="token punctuation">{</span>
+    <span class="token property">overflow</span><span class="token punctuation">:</span>hidden<span class="token punctuation">;</span>
+    <span class="token property">text-overflow</span><span class="token punctuation">:</span>ellipsis<span class="token punctuation">;</span>//使用省略号代替截断文字
+    <span class="token property">white-space</span><span class="token punctuation">:</span>nowrap<span class="token punctuation">;</span>//不换行
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>2、多行显示（适用于chrome内核的浏览器）</p>
-<pre><code>selector{
-    overflow:hidden;
-    text-overflow:ellipsis;
-    display:-webkit-box;&#x2F;&#x2F;显示格式为弹性伸缩盒子
-    -webkit-box-orient:vertical;&#x2F;&#x2F;元素内部排列方式
-    -webkit-line-clamp:2;&#x2F;&#x2F;显示的文本行数（非标准属性，与上面两个属性结合才可使用）
-}</code></pre>
+<pre class="line-numbers language-css"><code class="language-css"><span class="token selector">selector</span><span class="token punctuation">{</span>
+    <span class="token property">overflow</span><span class="token punctuation">:</span>hidden<span class="token punctuation">;</span>
+    <span class="token property">text-overflow</span><span class="token punctuation">:</span>ellipsis<span class="token punctuation">;</span>
+    <span class="token property">display</span><span class="token punctuation">:</span>-webkit-box<span class="token punctuation">;</span>//显示格式为弹性伸缩盒子
+    <span class="token property">-webkit-box-orient</span><span class="token punctuation">:</span>vertical<span class="token punctuation">;</span>//元素内部排列方式
+    <span class="token property">-webkit-line-clamp</span><span class="token punctuation">:</span><span class="token number">2</span><span class="token punctuation">;</span>//显示的文本行数（非标准属性，与上面两个属性结合才可使用）
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="将元素设置为吸顶模式"><a href="#将元素设置为吸顶模式" class="headerlink" title="将元素设置为吸顶模式"></a>将元素设置为吸顶模式</h2><pre class="line-numbers language-css"><code class="language-css"><span class="token selector">selector</span><span class="token punctuation">{</span>
 
-<h2 id="将元素设置为吸顶模式"><a href="#将元素设置为吸顶模式" class="headerlink" title="将元素设置为吸顶模式"></a>将元素设置为吸顶模式</h2><pre><code>selector{
-    
-}</code></pre>
-
-<h2 id="将元素设置为内敛模式"><a href="#将元素设置为内敛模式" class="headerlink" title="将元素设置为内敛模式"></a>将元素设置为内敛模式</h2><pre><code>selector{
-    box-sizing:content-box;默认
-    box-sizing:border-box;&#x2F;&#x2F;设置为内敛模式
-}</code></pre>]]></content>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<h2 id="将元素设置为内敛模式"><a href="#将元素设置为内敛模式" class="headerlink" title="将元素设置为内敛模式"></a>将元素设置为内敛模式</h2><pre class="line-numbers language-css"><code class="language-css"><span class="token selector">selector</span><span class="token punctuation">{</span>
+    <span class="token property">box-sizing</span><span class="token punctuation">:</span>content-box<span class="token punctuation">;</span>默认
+    <span class="token property">box-sizing</span><span class="token punctuation">:</span>border-box<span class="token punctuation">;</span>//设置为内敛模式
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+]]></content>
       <categories>
         <category>css</category>
         <category>css常用设置</category>
@@ -2267,11 +2232,10 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 </tr>
 </tbody></table>
 <ul>
-<li>注意java的字符串中将/默认为转义字符，因此在定义正则时应该加双斜杠<pre><code>&#x2F;&#x2F;错误
-String regex &#x3D; &quot;\d{3}|\(\d{4}\)\d{6}&quot;;
-&#x2F;&#x2F;正确
-String regex &#x3D; &quot;\\d{3}|\\(\\d{4}\\)\\d{6}&quot;;</code></pre>
-
+<li>注意java的字符串中将/默认为转义字符，因此在定义正则时应该加双斜杠<pre class="line-numbers language-java"><code class="language-java"><span class="token comment" spellcheck="true">//错误</span>
+String regex <span class="token operator">=</span> <span class="token string">"\d{3}|\(\d{4}\)\d{6}"</span><span class="token punctuation">;</span>
+<span class="token comment" spellcheck="true">//正确</span>
+String regex <span class="token operator">=</span> <span class="token string">"\\d{3}|\\(\\d{4}\\)\\d{6}"</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 </li>
 </ul>
 <h2 id="常用api（主要在String类中使用）"><a href="#常用api（主要在String类中使用）" class="headerlink" title="常用api（主要在String类中使用）"></a>常用api（主要在String类中使用）</h2><p>1、String对象的api</p>

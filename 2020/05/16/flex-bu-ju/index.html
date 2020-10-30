@@ -35,6 +35,16 @@
 
 
 
+   <style>
+    body{
+       background-image: url(https://i.loli.net/2020/10/30/ABaPb6r7yUmvIQ4.jpg);
+       background-repeat:no-repeat;
+       background-size:cover;
+       background-attachment:fixed;
+    }
+</style>
+
+
 
 <body>
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><header class="navbar-fixed">
@@ -309,6 +319,19 @@
 </header>
 
     
+<script src="/libs/cryptojs/crypto-js.min.js"></script>
+<script>
+    (function() {
+        let pwd = '';
+        if (pwd && pwd.length > 0) {
+            if (pwd !== CryptoJS.SHA256(prompt('请输入访问本文章的密码')).toString(CryptoJS.enc.Hex)) {
+                alert('密码错误，将返回主页！');
+                location.href = '/';
+            }
+        }
+    })();
+</script>
+
 
 
 
@@ -386,7 +409,7 @@
     }
 
     #toc-content .toc-link:hover {
-        color: #42b983;
+        color: #b94294;
         font-weight: 700;
         text-decoration: underline;
     }
@@ -398,6 +421,10 @@
         position: absolute;
         right: 23.5vw;
         display: block;
+    }
+
+    .is-active-li{
+        border-left: 2px solid #b94294;
     }
 
     #toc-content .is-active-link {
@@ -474,14 +501,14 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2020-10-25
+                    2020-10-31
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1k
+                    1.1k
                 </div>
                 
 
@@ -509,20 +536,19 @@
 <li>Flex 是 Flexible Box 的缩写，意为”弹性布局”，用来为盒状模型提供最大的灵活性。<br>任何一个容器都可以指定为 Flex 布局，行内元素也可以使用flex布局，跳帧位置。</li>
 </ul>
 </blockquote>
-<pre><code>&#x2F;*块级元素*&#x2F;
-display: flex;
-&#x2F;*行内元素*&#x2F;
-display: inline-flex;</code></pre>
-
+<pre class="line-numbers language-css"><code class="language-css"><span class="token comment" spellcheck="true">/*块级元素*/</span>
+<span class="token property">display</span><span class="token punctuation">:</span> flex<span class="token punctuation">;</span>
+<span class="token comment" spellcheck="true">/*行内元素*/</span>
+<span class="token property">display</span><span class="token punctuation">:</span> inline-flex<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 <blockquote>
 <ul>
 <li>Webkit 内核的浏览器，必须加上-webkit前缀。</li>
 </ul>
 </blockquote>
-<pre><code>.box{
-  display: -webkit-flex; &#x2F;* Safari *&#x2F;
-  display: flex;
-}</code></pre>
+<pre class="line-numbers language-css"><code class="language-css"><span class="token selector"><span class="token class">.box</span></span><span class="token punctuation">{</span>
+  <span class="token property">display</span><span class="token punctuation">:</span> -webkit-flex<span class="token punctuation">;</span> <span class="token comment" spellcheck="true">/* Safari */</span>
+  <span class="token property">display</span><span class="token punctuation">:</span> flex<span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 <p><strong><em>注意，设为 Flex 布局以后，子元素的float、clear和vertical-align属性将失效。</em></strong></p>
 <blockquote>
 <ul>
@@ -535,68 +561,130 @@ display: inline-flex;</code></pre>
 </blockquote>
 <h2 id="浏览器支持"><a href="#浏览器支持" class="headerlink" title="浏览器支持"></a>浏览器支持</h2><img src="http://www.ruanyifeng.com/blogimg/asset/2015/bg2015071003.jpg" class="" title="browser Support">
 
-<h2 id="属性介绍"><a href="#属性介绍" class="headerlink" title="属性介绍"></a>属性介绍</h2><h3 id="flex-container属性"><a href="#flex-container属性" class="headerlink" title="flex-container属性"></a>flex-container属性</h3><h4 id="flex-direction"><a href="#flex-direction" class="headerlink" title="flex-direction"></a>flex-direction</h4><blockquote><p>决定主轴的方向，即项目的排列方向</p>
-<ul>
-<li>row（默认值）：主轴为水平方向，起点在左端。</li>
-<li>row-reverse：主轴为水平方向，起点在右端。</li>
-<li>column：主轴为垂直方向，起点在上沿。</li>
-<li>column-reverse：主轴为垂直方向，起点在下沿。</li>
-</ul>
-<footer><strong>可选属性</strong></footer></blockquote>
-
+<h2 id="属性介绍"><a href="#属性介绍" class="headerlink" title="属性介绍"></a>属性介绍</h2><h3 id="flex-container属性"><a href="#flex-container属性" class="headerlink" title="flex-container属性"></a>flex-container属性</h3><h4 id="flex-direction"><a href="#flex-direction" class="headerlink" title="flex-direction"></a>flex-direction</h4><blockquote>
+<p>可选属性，决定主轴的方向，即项目的排列方向</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>值</th>
+<th>释义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>row（默认值）</td>
+<td>主轴为水平方向，起点在左端</td>
+</tr>
+<tr>
+<td>row-reverse</td>
+<td>主轴为水平方向，起点在右端</td>
+</tr>
+<tr>
+<td>column</td>
+<td>主轴为垂直方向，起点在上沿</td>
+</tr>
+<tr>
+<td>column-reverse</td>
+<td>主轴为垂直方向，起点在下沿</td>
+</tr>
+</tbody></table>
 <img src="http://www.ruanyifeng.com/blogimg/asset/2015/bg2015071005.png" class="" title="flex-dirction布局样式">
 
 <h4 id="flex-wrap"><a href="#flex-wrap" class="headerlink" title="flex-wrap"></a>flex-wrap</h4><blockquote>
-<p>默认情况下所有flex-item都排列在主轴上，此属性规定超过了主轴长度后的项目排列方式<br>可选属性：nowrap（默认）|wrap换行|wrap-reverse换行并且换行的flex-item排列在上面<br>如下图所示<br>    <div style="display:flex;align-items:center;justify-content:center;"><br>        <div style="flex:1;"><img src="http://www.ruanyifeng.com/blogimg/asset/2015/bg2015071007.png" class="" title="flex-wrap:nowrap布局样式"></div><br>        <div style="flex:1;"><img src="http://www.ruanyifeng.com/blogimg/asset/2015/bg2015071008.jpg" class="" title="flex-wrap:wrap布局样式"></div><br>        <div style="flex:1;"><img src="http://www.ruanyifeng.com/blogimg/asset/2015/bg2015071009.jpg" class="" title="flex-wrap:wrap-reverse布局样式"></div><br>    </div></p>
+<p>1、 默认情况下所有flex-item都排列在主轴上，此属性规定超过了主轴长度后的项目排列方式<br>2、可选属性：nowrap（默认）|wrap换行|wrap-reverse换行并且换行的flex-item排列在上面<br>如下图所示</p>
 </blockquote>
-<h4 id="flex-flow"><a href="#flex-flow" class="headerlink" title="flex-flow"></a>flex-flow</h4><blockquote>
-<p>是flex-direction和flex-wrap的简写形式</p>
-</blockquote>
-<pre><code>flex-flow:&lt;flex-direction&gt; || &lt;flex-wrap&gt;</code></pre>
+<div style="display:flex;align-items:center;justify-content:center;">
+    <div style="flex:1;"><img src="http://www.ruanyifeng.com/blogimg/asset/2015/bg2015071007.png" class="" title="flex-wrap:nowrap布局样式"></div>
+    <div style="flex:1;"><img src="http://www.ruanyifeng.com/blogimg/asset/2015/bg2015071008.jpg" class="" title="flex-wrap:wrap布局样式"></div>
+    <div style="flex:1;"><img src="http://www.ruanyifeng.com/blogimg/asset/2015/bg2015071009.jpg" class="" title="flex-wrap:wrap-reverse布局样式"></div>
+</div>
+#### flex-flow
+>是flex-direction和flex-wrap的简写形式
+```css
+flex-flow:<flex-direction> || <flex-wrap>
+```
 
 <h4 id="justify-content"><a href="#justify-content" class="headerlink" title="justify-content"></a>justify-content</h4><blockquote>
-<p>定义了flex-item在主轴上的排列位置<br>可选属性：flex-start（默认）左对齐|flex-end右对齐|center居中|space-between两端对齐，项目间隔相等|space-around项目间隔相等，项目直接间隔是项目与flex-container边框间隔的2倍<br>    <div style="display:flex;align-items:center;justify-content:center;"><br>        <div style="flex:1;"><img src="/images/flex/flex-start.PNG" alt="flex-start"><br>            <p class="image-caption">flex-start</p><br>        </div><br>        <div style="flex:1;"><img src="/images/flex/flex-end.PNG" alt="flex-start"><br>            <p class="image-caption">flex-end</p><br>        </div><br>        <div style="flex:1;"><img src="/images/flex/center.PNG" alt="flex-start"><br>            <p class="image-caption">cener</p><br>        </div><br>    </div><br>    <div style="display:flex;align-items:center;justify-content:center;"><br>        <div style="flex:1;"><img src="/images/flex/space-between.PNG" alt="flex-start"><br>            <p class="image-caption">space-between</p><br>        </div><br>        <div style="flex:1;"><img src="/images/flex/space-around.PNG" alt="flex-start"><br>            <p class="image-caption">space-around</p><br>        </div><br>    </div></p>
+<p>1、定义了flex-item在主轴上的排列位置<br>2、可选属性：flex-start（默认）左对齐|flex-end右对齐|center居中|space-between两端对齐，项目间隔相等|space-around项目间隔相等，项目直接间隔是项目与flex-container边框间隔的2倍</p>
 </blockquote>
+<div style="display:flex;align-items:center;justify-content:center;">
+    <div style="flex:1;">![flex-start](/images/flex/flex-start.PNG)
+        <p class="image-caption">flex-start</p>
+    </div>
+    <div style="flex:1;">![flex-start](/images/flex/flex-end.PNG)
+        <p class="image-caption">flex-end</p>
+    </div>
+    <div style="flex:1;">![flex-start](/images/flex/center.PNG)
+        <p class="image-caption">cener</p>
+    </div>
+</div>
+<div style="display:flex;align-items:center;justify-content:center;">
+    <div style="flex:1;">![flex-start](/images/flex/space-between.PNG)
+        <p class="image-caption">space-between</p>
+    </div>
+    <div style="flex:1;">![flex-start](/images/flex/space-around.PNG)
+        <p class="image-caption">space-around</p>
+    </div>
+</div>
+
 <h4 id="align-items"><a href="#align-items" class="headerlink" title="align-items"></a>align-items</h4><blockquote>
-<p>定义了flex-item在交叉轴上的排列位置<br>可选属性：flex-start对齐交叉轴顶点|flex-end对齐交叉轴终点|center对齐交叉轴中心|stretch（默认）拉升高度至交叉轴高度|baseline所有的flex-items的第一行文字基线<br>    <div style="display:flex;align-items:center;justify-content:center;"><br>        <div style="flex:1;"><img src="/images/flex/ai-flex-start.PNG" alt="flex-start"><br>            <p class="image-caption">align-items:flex-start</p><br>        </div><br>        <div style="flex:1;"><img src="/images/flex/ai-flex-end.PNG" alt="flex-start"><br>            <p class="image-caption">align-items:flex-end</p><br>        </div><br>        <div style="flex:1;"><img src="/images/flex/ai-center.PNG" alt="flex-start"><br>            <p class="image-caption">align-items:cener</p><br>        </div><br>    </div><br>    <div style="display:flex;align-items:center;justify-content:center;"><br>        <div style="flex:1;"><img src="/images/flex/ai-stretch.PNG" alt="flex-start"><br>            <p class="image-caption">align-items:stretch</p><br>        </div><br>        <div style="flex:1;"><img src="/images/flex/ai-base-line.PNG" alt="flex-start"><br>            <p class="image-caption">align-items:baseline</p><br>        </div><br>    </div></p>
+<p>1、定义了flex-item在交叉轴上的排列位置<br>2、可选属性：flex-start对齐交叉轴顶点|flex-end对齐交叉轴终点|center对齐交叉轴中心|stretch（默认）拉升高度至交叉轴高度|baseline所有的flex-items的第一行文字基线</p>
 </blockquote>
-<h4 id="align-content"><a href="#align-content" class="headerlink" title="align-content"></a>align-content</h4><blockquote>
-<p>定义多轴线（多行？）的对齐方式，单一轴线不起作用<br>可选参数：flex-start|flex-end|center|space-bewteen|stretch|around</p>
-</blockquote>
+<div style="display:flex;align-items:center;justify-content:center;">
+    <div style="flex:1;">![flex-start](/images/flex/ai-flex-start.PNG)
+        <p class="image-caption">align-items:flex-start</p>
+    </div>
+    <div style="flex:1;">![flex-start](/images/flex/ai-flex-end.PNG)
+        <p class="image-caption">align-items:flex-end</p>
+    </div>
+    <div style="flex:1;">![flex-start](/images/flex/ai-center.PNG)
+        <p class="image-caption">align-items:cener</p>
+    </div>
+</div>
+<div style="display:flex;align-items:center;justify-content:center;">
+    <div style="flex:1;">![flex-start](/images/flex/ai-stretch.PNG)
+        <p class="image-caption">align-items:stretch</p>
+    </div>
+    <div style="flex:1;">![flex-start](/images/flex/ai-base-line.PNG)
+        <p class="image-caption">align-items:baseline</p>
+    </div>
+</div>
+#### align-content 
+>1、定义多轴线（多行？）的对齐方式，单一轴线不起作用
+>2、可选参数：flex-start|flex-end|center|space-bewteen|stretch|around
+
 <img src="http://www.ruanyifeng.com/blogimg/asset/2015/bg2015071012.png" class="" width="280" title="align-content样式图">
 
 <h3 id="flex-items属性"><a href="#flex-items属性" class="headerlink" title="flex-items属性"></a>flex-items属性</h3><h4 id="order"><a href="#order" class="headerlink" title="order"></a>order</h4><blockquote>
-<p>设置flex-item的显示位置，数字越小越靠前，类似于grid布局的grid-column|row-start|end属性设置<br><img src="/images/flex/fi-order.PNG" alt="browser-spport"></p>
+<p>设置flex-item的显示位置，数字越小越靠前，类似于grid布局的grid-column|row-start|end属性设置</p>
 </blockquote>
-<p class="image-caption">设置第四个order数值最小</p>
-
+<p><img src="/images/flex/fi-order.PNG" alt="设置第四个order数值最小"></p>
 <h4 id="flex-grow"><a href="#flex-grow" class="headerlink" title="flex-grow"></a>flex-grow</h4><blockquote>
-<p>当以当主轴空间大于实际需要时，放大的比例，默认为0，即不放大<br>如果其他属性设置为1，当前设置为2，则当前项目是其他项目的两倍main-sie<br><img src="/images/flex/fi-flex-grow.PNG" alt="browser-spport"></p>
+<p>1、当以当主轴空间大于实际需要时，放大的比例，默认为0，即不放大<br>2、如果其他属性设置为1，当前设置为2，则当前项目是其他项目的两倍main-sie</p>
 </blockquote>
-<p class="image-caption">flex-grow:2的flex-item</p>
-
+<p><img src="/images/flex/fi-flex-grow.PNG" alt="flex-grow:2的flex-item"></p>
 <h4 id="flex-shrink"><a href="#flex-shrink" class="headerlink" title="flex-shrink"></a>flex-shrink</h4><blockquote>
-<p>定义当主轴空间不足时，flex-item的缩小比例<br>如果设置属性值为0，其他flex-item属性值为1则当空间不足时，不会缩小此flex-item<br><img src="/images/flex/fi-flex-shrink.PNG" alt="browser-spport"></p>
+<p>1、定义当主轴空间不足时，flex-item的缩小比例<br>2、如果设置属性值为0，其他flex-item属性值为1则当空间不足时，不会缩小此flex-item</p>
 </blockquote>
+<p><img src="/images/flex/fi-flex-shrink.PNG" alt="browser-spport"></p>
 <p class="image-caption">属性flex-shrink:0的flex-item不会缩小</p>
 
 <h4 id="flex-basis"><a href="#flex-basis" class="headerlink" title="flex-basis"></a>flex-basis</h4><blockquote>
-<p>规定再分配多余的空间之前，flex-item占据main-size的大小，浏览器根据占据的main-size计算是否长度充足<br>默认为auto，及项目本来大小，设置大小：n+px，flex-item将始终占据指定大小main-size</p>
+<p>1、规定再分配多余的空间之前，flex-item占据main-size的大小，浏览器根据占据的main-size计算是否长度充足<br>2、默认为auto，及项目本来大小，设置大小：n+px，flex-item将始终占据指定大小main-size</p>
 </blockquote>
-<pre><code>&#x2F;*默认*&#x2F;
-flex-basis:auto;
-&#x2F;*自定义*&#x2F;
-flex-basis:300px;</code></pre>
-<p><img src="/images/flex/fi-flex-basis.PNG" alt="browser-spport"></p>
-<p class="image-caption">默认值auto，即为原本main-size</p>
-
+<pre class="line-numbers language-css"><code class="language-css"><span class="token comment" spellcheck="true">/*默认*/</span>
+<span class="token property">flex-basis</span><span class="token punctuation">:</span>auto<span class="token punctuation">;</span>
+<span class="token comment" spellcheck="true">/*自定义*/</span>
+<span class="token property">flex-basis</span><span class="token punctuation">:</span><span class="token number">300</span>px<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<p><img src="/images/flex/fi-flex-basis.PNG" alt="默认值auto，即为原本main-size"></p>
 <h4 id="flex"><a href="#flex" class="headerlink" title="flex"></a>flex</h4><blockquote>
-<p>是flex-grow&amp;flex-shrink&amp;flex-basis的简写形式<br>特殊样例 auto = 1 1 auto &amp;&amp; none = 0 0 auto</p>
+<p>1、是flex-grow&amp;flex-shrink&amp;flex-basis的简写形式<br>2、特殊样例 auto = 1 1 auto &amp;&amp; none = 0 0 auto</p>
 </blockquote>
 <h4 id="align-self"><a href="#align-self" class="headerlink" title="align-self"></a>align-self</h4><blockquote>
-<p>默认是auto，即继承inherit父类即align-items的设置，但是可以单独设置样式来覆盖父类样式，没有父元素则属性值为stretch<br>可选属性值与align-items相同，用法相同，作用域只限于当前的flex-item<br><img src="/images/flex/fi-align-self.PNG" alt="browser-spport"></p>
+<p>1、默认是auto，即继承inherit父类即align-items的设置，但是可以单独设置样式来覆盖父类样式，没有父元素则属性值为stretch<br>2、可选属性值与align-items相同，用法相同，作用域只限于当前的flex-item</p>
 </blockquote>
-<p class="image-caption">单独设置align-self:flex-end属性图</p>
+<p><img src="/images/flex/fi-align-self.PNG" alt="单独设置align-self:flex-end属性图"></p>
+
             </div>
             <hr/>
 
@@ -814,6 +902,33 @@ flex-basis:300px;</code></pre>
             
         </div>
     </div>
+
+    
+        <link rel="stylesheet" href="/libs/gitalk/gitalk.css">
+<link rel="stylesheet" href="/css/my-gitalk.css">
+
+<div class="card gitalk-card" data-aos="fade-up">
+    <div class="comment_headling" style="font-size: 20px; font-weight: 700; position: relative; padding-left: 20px; top: 15px; padding-bottom: 5px;">
+        <i class="fas fa-comments fa-fw" aria-hidden="true"></i>
+        <span>评论</span>
+    </div>
+    <div id="gitalk-container" class="card-content"></div>
+</div>
+
+<script src="/libs/gitalk/gitalk.min.js"></script>
+<script>
+    let gitalk = new Gitalk({
+        clientID: '233c3d6584fef3a9b154',
+        clientSecret: 'cbeda6bdd3c32c0dc7edcd78e9c64f342c2cd627',
+        repo: 'hyong1232.github.io',
+        owner: 'hyong1232',
+        admin: "hyong1232",
+        id: '2020-05-16T18-07-12',
+        distractionFreeMode: false  // Facebook-like distraction free mode
+    });
+
+    gitalk.render('gitalk-container');
+</script>
 
     
 
@@ -1386,7 +1501,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">12.9k</span>&nbsp;字
+                class="white-color">12.6k</span>&nbsp;字
             
             
             
@@ -1470,7 +1585,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
 
 
 
-    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1181062873" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 1181062873" data-position="top" data-delay="50">
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=498015507" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 498015507" data-position="top" data-delay="50">
         <i class="fab fa-qq"></i>
     </a>
 
@@ -1479,10 +1594,6 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
 
 
 
-
-    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
-        <i class="fas fa-rss"></i>
-    </a>
 
 </div>
     </div>
@@ -1524,6 +1635,17 @@ $(function () {
     <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
     <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
     <script src="/js/matery.js"></script>
+
+    <script type="text/javascript">
+        var OriginTitile = document.title,
+            st;
+        document.addEventListener("visibilitychange", function () {
+            document.hidden ? (document.title = "溜了溜了~🏃", clearTimeout(st)) : (document.title =
+                "(๑•̀ㅂ•́) ✧嘻嘻～", st = setTimeout(function () {
+                    document.title = OriginTitile
+                }, 3e3))
+        })
+    </script>
 
     <!-- Baidu Analytics -->
 

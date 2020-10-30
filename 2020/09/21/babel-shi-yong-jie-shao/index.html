@@ -35,6 +35,16 @@
 
 
 
+   <style>
+    body{
+       background-image: url(https://i.loli.net/2020/10/30/ABaPb6r7yUmvIQ4.jpg);
+       background-repeat:no-repeat;
+       background-size:cover;
+       background-attachment:fixed;
+    }
+</style>
+
+
 
 <body>
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><header class="navbar-fixed">
@@ -309,6 +319,19 @@
 </header>
 
     
+<script src="/libs/cryptojs/crypto-js.min.js"></script>
+<script>
+    (function() {
+        let pwd = '';
+        if (pwd && pwd.length > 0) {
+            if (pwd !== CryptoJS.SHA256(prompt('请输入访问本文章的密码')).toString(CryptoJS.enc.Hex)) {
+                alert('密码错误，将返回主页！');
+                location.href = '/';
+            }
+        }
+    })();
+</script>
+
 
 
 
@@ -386,7 +409,7 @@
     }
 
     #toc-content .toc-link:hover {
-        color: #42b983;
+        color: #b94294;
         font-weight: 700;
         text-decoration: underline;
     }
@@ -398,6 +421,10 @@
         position: absolute;
         right: 23.5vw;
         display: block;
+    }
+
+    .is-active-li{
+        border-left: 2px solid #b94294;
     }
 
     #toc-content .is-active-link {
@@ -474,21 +501,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2020-10-25
+                    2020-10-31
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    764
+                    706
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    3 分
+                    2 分
                 </div>
                 
 
@@ -509,76 +536,71 @@
 <h3 id="配置在项目中使用"><a href="#配置在项目中使用" class="headerlink" title="配置在项目中使用"></a>配置在项目中使用</h3><blockquote>
 <p>可使用配置文件.babelrc将常见配置写入文件中（放置在项目的根目录下），再webpack打包的过程中，会自动读取这个文件的配置，常见的配置写法如下:</p>
 </blockquote>
-<pre><code>{
-    &quot;presets&quot;:[&#39;es2015&#39;,&#39;env&#39;,&#39;stage-0&#39;],
-    &quot;plugins&quot;:[&#39;transform-runtime&#39;]
-}</code></pre>
-
+<pre class="line-numbers language-js"><code class="language-js"><span class="token punctuation">{</span>
+    <span class="token string">"presets"</span><span class="token punctuation">:</span><span class="token punctuation">[</span><span class="token string">'es2015'</span><span class="token punctuation">,</span><span class="token string">'env'</span><span class="token punctuation">,</span><span class="token string">'stage-0'</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+    <span class="token string">"plugins"</span><span class="token punctuation">:</span><span class="token punctuation">[</span><span class="token string">'transform-runtime'</span><span class="token punctuation">]</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>.babelrc文件整个就是一个对象，在对象{}中配置相应的属性即可</li>
 <li>常用的presets规则以及转换插件需要自行下载（npm命令即可）</li>
 </ul>
 <p><strong>babel配置也可以在webpack的配置文件中配置，即在module下的rules数组对象的规则对象的use属性中添加options属性中添加即可</strong></p>
-<pre><code>module:{
-    rules:[
-        {
-            test:&#x2F;\.js$&#x2F;,
-            exclude:&#x2F;node_modules&#x2F;,
-            use:{
-                loader:&#39;babel-loader&#39;,
-                options:{
-                    presets:[&#39;env&#39;],
-                    plugins:[&#39;transform-runtime&#39;]
-                }
-            }
-        }
-    ]
-}</code></pre>
+<pre class="line-numbers language-js"><code class="language-js">module<span class="token punctuation">:</span><span class="token punctuation">{</span>
+    rules<span class="token punctuation">:</span><span class="token punctuation">[</span>
+        <span class="token punctuation">{</span>
+            test<span class="token punctuation">:</span><span class="token regex">/\.js$/</span><span class="token punctuation">,</span>
+            exclude<span class="token punctuation">:</span><span class="token regex">/node_modules/</span><span class="token punctuation">,</span>
+            use<span class="token punctuation">:</span><span class="token punctuation">{</span>
+                loader<span class="token punctuation">:</span><span class="token string">'babel-loader'</span><span class="token punctuation">,</span>
+                options<span class="token punctuation">:</span><span class="token punctuation">{</span>
+                    presets<span class="token punctuation">:</span><span class="token punctuation">[</span><span class="token string">'env'</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+                    plugins<span class="token punctuation">:</span><span class="token punctuation">[</span><span class="token string">'transform-runtime'</span><span class="token punctuation">]</span>
+                <span class="token punctuation">}</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">]</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p><strong>关于转换规则stage-0/1/2…在新的webpack中不在推荐使用，避免过多使用</strong></p>
 <h3 id="命令行中直接转换"><a href="#命令行中直接转换" class="headerlink" title="命令行中直接转换"></a>命令行中直接转换</h3><blockquote>
 <p>除了在项目中使用还可以直接在命令行转换es6的代码</p>
 </blockquote>
 <p>1、安装@babel/cli</p>
-<pre><code>npm i -D @babel&#x2F;cli</code></pre>
+<pre class="line-numbers language-bash"><code class="language-bash"><span class="token function">npm</span> i -D @babel/cli<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>2、基本用法</p>
-<pre><code>&#x2F;&#x2F;转换单个es6语法的文件到指定文件夹
+<pre class="line-numbers language-bash"><code class="language-bash">//转换单个es6语法的文件到指定文件夹
 npx babel es6.js --out-file out.js
-&#x2F;&#x2F;简写为
+//简写为
 npx babel es6.js -o out.js
 
-&#x2F;&#x2F;转换文件夹至指定路径输出
+//转换文件夹至指定路径输出
 npx babel es6dir -out-dir outdir
-&#x2F;&#x2F;简写为
+//简写为
 npx babel es6dir -d outdir
 
-&#x2F;&#x2F;加上 -s参数生产source map文件
-npx babel es6dir -d outdir -s</code></pre>
+//加上 -s参数生产source map文件
+npx babel es6dir -d outdir -s<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>转换文件到目标文件/文件夹时，没有会自动创建</li>
 <li>文件夹转换是将源文件夹中的文件依次转换到对应的输出，出错则停止转换</li>
 <li>关于npx可见<blockquote><p>常见的npx使用方式</p>
 <footer><strong>阮一峰</strong><cite><a target="_blank" rel="noopener" href="https://www.ruanyifeng.com/blog/2019/02/npx.html">npx使用教程</a></cite></footer></blockquote></li>
 <li>关于sourceMap可见<blockquote><p>sourceMap介绍</p>
-<footer><strong>阮一峰</strong><cite><a target="_blank" rel="noopener" href="http://www.ruanyifeng.com/blog/2013/01/javascript_source_map.html">JavaScript Source Map 详解</a></cite></footer></blockquote>
-
-</li>
+<footer><strong>阮一峰</strong><cite><a target="_blank" rel="noopener" href="http://www.ruanyifeng.com/blog/2013/01/javascript_source_map.html">JavaScript Source Map 详解</a></cite></footer></blockquote></li>
 </ul>
 <h3 id="babel-node的使用"><a href="#babel-node的使用" class="headerlink" title="@babel/node的使用"></a>@babel/node的使用</h3><blockquote>
 <p>安装了这个包就可以在命令行直接执行es6命令，或者直接运行es6文件</p>
 </blockquote>
-<pre><code>&#x2F;&#x2F;直接运行es6文件
-npx node-node es6.js</code></pre>
-
+<pre class="line-numbers language-bash"><code class="language-bash">//直接运行es6文件
+npx node-node es6.js<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <h3 id="babel-register"><a href="#babel-register" class="headerlink" title="@babel/register"></a>@babel/register</h3><blockquote>
 <p>这个包的作用是在文件中对通过require加载的文件进行实时转换</p>
 </blockquote>
-<pre><code>&#x2F;&#x2F;安装
-npm i @babel&#x2F;register -D
-&#x2F;&#x2F;使用（文件中）
-require(&#39;@babel&#x2F;register&#39;);
-require(&#39;.&#x2F;es6.js&#39;)
-&#x2F;&#x2F;上述代码会自动将加载的es6文件转换</code></pre>
-
+<pre class="line-numbers language-bash"><code class="language-bash">//安装
+<span class="token function">npm</span> i @babel/register -D
+//使用（文件中）
+require<span class="token punctuation">(</span><span class="token string">'@babel/register'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+require<span class="token punctuation">(</span><span class="token string">'./es6.js'</span><span class="token punctuation">)</span>
+//上述代码会自动将加载的es6文件转换<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>此包仅在运行时有效（适用于开发时使用）</li>
 <li>使用时要先加载此包，放在文件的顶部</li>
@@ -587,12 +609,11 @@ require(&#39;.&#x2F;es6.js&#39;)
 <h3 id="polyfill"><a href="#polyfill" class="headerlink" title="polyfill"></a>polyfill</h3><blockquote>
 <p>babel默认不会转换es6新的api，只会转换语法（syntax）例如Iterator、Generator、Set、Map、Proxy、Reflect、Symbol、Promies等全局对象，及部分全局对象的工具方法例如Array.from()方法。使用polyfill可解决这个问题</p>
 </blockquote>
-<pre><code>&#x2F;&#x2F;安装(regenerator是转换generator的包)
-npm i core-js regenerator-runtime -D
-&#x2F;&#x2F;使用（文件中）导入即可（require&#x2F;import）
-import &#39;core-js&#39;
-import &#39;regenerator-runtime&#x2F;runtime&#39;</code></pre>
-
+<pre class="line-numbers language-bash"><code class="language-bash">//安装<span class="token punctuation">(</span>regenerator是转换generator的包<span class="token punctuation">)</span>
+<span class="token function">npm</span> i core-js regenerator-runtime -D
+//使用（文件中）导入即可（require/import）
+<span class="token function">import</span> <span class="token string">'core-js'</span>
+<span class="token function">import</span> <span class="token string">'regenerator-runtime/runtime'</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
             </div>
             <hr/>
@@ -811,6 +832,33 @@ import &#39;regenerator-runtime&#x2F;runtime&#39;</code></pre>
             
         </div>
     </div>
+
+    
+        <link rel="stylesheet" href="/libs/gitalk/gitalk.css">
+<link rel="stylesheet" href="/css/my-gitalk.css">
+
+<div class="card gitalk-card" data-aos="fade-up">
+    <div class="comment_headling" style="font-size: 20px; font-weight: 700; position: relative; padding-left: 20px; top: 15px; padding-bottom: 5px;">
+        <i class="fas fa-comments fa-fw" aria-hidden="true"></i>
+        <span>评论</span>
+    </div>
+    <div id="gitalk-container" class="card-content"></div>
+</div>
+
+<script src="/libs/gitalk/gitalk.min.js"></script>
+<script>
+    let gitalk = new Gitalk({
+        clientID: '233c3d6584fef3a9b154',
+        clientSecret: 'cbeda6bdd3c32c0dc7edcd78e9c64f342c2cd627',
+        repo: 'hyong1232.github.io',
+        owner: 'hyong1232',
+        admin: "hyong1232",
+        id: '2020-09-21T15-08-19',
+        distractionFreeMode: false  // Facebook-like distraction free mode
+    });
+
+    gitalk.render('gitalk-container');
+</script>
 
     
 
@@ -1381,7 +1429,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">12.9k</span>&nbsp;字
+                class="white-color">12.6k</span>&nbsp;字
             
             
             
@@ -1465,7 +1513,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
 
 
 
-    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1181062873" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 1181062873" data-position="top" data-delay="50">
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=498015507" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 498015507" data-position="top" data-delay="50">
         <i class="fab fa-qq"></i>
     </a>
 
@@ -1474,10 +1522,6 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
 
 
 
-
-    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
-        <i class="fas fa-rss"></i>
-    </a>
 
 </div>
     </div>
@@ -1519,6 +1563,17 @@ $(function () {
     <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
     <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
     <script src="/js/matery.js"></script>
+
+    <script type="text/javascript">
+        var OriginTitile = document.title,
+            st;
+        document.addEventListener("visibilitychange", function () {
+            document.hidden ? (document.title = "溜了溜了~🏃", clearTimeout(st)) : (document.title =
+                "(๑•̀ㅂ•́) ✧嘻嘻～", st = setTimeout(function () {
+                    document.title = OriginTitile
+                }, 3e3))
+        })
+    </script>
 
     <!-- Baidu Analytics -->
 

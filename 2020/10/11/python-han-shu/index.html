@@ -35,6 +35,16 @@
 
 
 
+   <style>
+    body{
+       background-image: url(https://i.loli.net/2020/10/30/ABaPb6r7yUmvIQ4.jpg);
+       background-repeat:no-repeat;
+       background-size:cover;
+       background-attachment:fixed;
+    }
+</style>
+
+
 
 <body>
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><header class="navbar-fixed">
@@ -309,6 +319,19 @@
 </header>
 
     
+<script src="/libs/cryptojs/crypto-js.min.js"></script>
+<script>
+    (function() {
+        let pwd = '';
+        if (pwd && pwd.length > 0) {
+            if (pwd !== CryptoJS.SHA256(prompt('请输入访问本文章的密码')).toString(CryptoJS.enc.Hex)) {
+                alert('密码错误，将返回主页！');
+                location.href = '/';
+            }
+        }
+    })();
+</script>
+
 
 
 
@@ -386,7 +409,7 @@
     }
 
     #toc-content .toc-link:hover {
-        color: #42b983;
+        color: #b94294;
         font-weight: 700;
         text-decoration: underline;
     }
@@ -398,6 +421,10 @@
         position: absolute;
         right: 23.5vw;
         display: block;
+    }
+
+    .is-active-li{
+        border-left: 2px solid #b94294;
     }
 
     #toc-content .is-active-link {
@@ -474,14 +501,14 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2020-10-25
+                    2020-10-30
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    447
+                    428
                 </div>
                 
 
@@ -538,25 +565,24 @@
 </blockquote>
 <ul>
 <li><p>默认参数<br>  1、不可设置为可变变量（只能string/数字/None等），参数重加在不会重新赋值，会重复引用之前初始化定义的值（与es6区别）</p>
-  <pre><code>#错误的写法
-def variable_paramter_func(l &#x3D; []):
-    l.append(&#39;end&#39;)
-    print(l)
+<pre class="line-numbers language-python"><code class="language-python"><span class="token comment" spellcheck="true">#错误的写法</span>
+<span class="token keyword">def</span> <span class="token function">variable_paramter_func</span><span class="token punctuation">(</span>l <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    l<span class="token punctuation">.</span>append<span class="token punctuation">(</span><span class="token string">'end'</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>l<span class="token punctuation">)</span>
 
-#正确的写法
-def correct_variable_paramter_func(l&#x3D;None):
-    if not l:
-        l &#x3D; []
-    l.append(&#39;end&#39;)
-    print(l)
+<span class="token comment" spellcheck="true">#正确的写法</span>
+<span class="token keyword">def</span> <span class="token function">correct_variable_paramter_func</span><span class="token punctuation">(</span>l<span class="token operator">=</span>None<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">if</span> <span class="token operator">not</span> l<span class="token punctuation">:</span>
+        l <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+    l<span class="token punctuation">.</span>append<span class="token punctuation">(</span><span class="token string">'end'</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>l<span class="token punctuation">)</span>
 
-variable_paramter_func()
-variable_paramter_func()
-#打印结果[&#39;end&#39;] [&#39;end&#39;&#39;end&#39;]
-correct_variable_paramter_func()
-correct_variable_paramter_func()
-#打印结果[&#39;end&#39;] [&#39;end&#39;]</code></pre>
-
+variable_paramter_func<span class="token punctuation">(</span><span class="token punctuation">)</span>
+variable_paramter_func<span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token comment" spellcheck="true">#打印结果['end'] ['end''end']</span>
+correct_variable_paramter_func<span class="token punctuation">(</span><span class="token punctuation">)</span>
+correct_variable_paramter_func<span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token comment" spellcheck="true">#打印结果['end'] ['end']</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>  2、可为普通位置参数和命名关键字参数赋值，赋值后即可不传（使用默认值）</p>
 </li>
 <li><p>可变参数&amp;关键字参数的赋值分别使用*()|<em>[]和\</em>*{a:’a’}格式，且赋值会复制新的对象，不改变源数据</p>
@@ -565,13 +591,14 @@ correct_variable_paramter_func()
 </li>
 </ul>
 <h2 id="递归"><a href="#递归" class="headerlink" title="递归"></a>递归</h2><ul>
-<li>函数调用使用stack栈实现，调用一次栈增加一层，所以会有递归的栈溢出，使用尾递归优化方法（return时调用函数本身，将结算结果一并传入函数）<strong>pythong没有优化，使用不使用没区别</strong><pre><code>#尾递归优化：求100到1之和
-def recursion_factorial(num, res):
-    if num &#x3D;&#x3D; 0:
-        return res
-    return recursion_factorial(num-1, res+num)
-print(recursion_factorial(100, 0))
-#输出5050</code></pre></li>
+<li>函数调用使用stack栈实现，调用一次栈增加一层，所以会有递归的栈溢出，使用尾递归优化方法（return时调用函数本身，将结算结果一并传入函数）<strong>pythong没有优化，使用不使用没区别</strong><pre class="line-numbers language-python"><code class="language-python"><span class="token comment" spellcheck="true">#尾递归优化：求100到1之和</span>
+<span class="token keyword">def</span> <span class="token function">recursion_factorial</span><span class="token punctuation">(</span>num<span class="token punctuation">,</span> res<span class="token punctuation">)</span><span class="token punctuation">:</span>
+  <span class="token keyword">if</span> num <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">:</span>
+      <span class="token keyword">return</span> res
+  <span class="token keyword">return</span> recursion_factorial<span class="token punctuation">(</span>num<span class="token number">-1</span><span class="token punctuation">,</span> res<span class="token operator">+</span>num<span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>recursion_factorial<span class="token punctuation">(</span><span class="token number">100</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token comment" spellcheck="true">#输出5050</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
 </ul>
 
             </div>
@@ -791,6 +818,33 @@ print(recursion_factorial(100, 0))
             
         </div>
     </div>
+
+    
+        <link rel="stylesheet" href="/libs/gitalk/gitalk.css">
+<link rel="stylesheet" href="/css/my-gitalk.css">
+
+<div class="card gitalk-card" data-aos="fade-up">
+    <div class="comment_headling" style="font-size: 20px; font-weight: 700; position: relative; padding-left: 20px; top: 15px; padding-bottom: 5px;">
+        <i class="fas fa-comments fa-fw" aria-hidden="true"></i>
+        <span>评论</span>
+    </div>
+    <div id="gitalk-container" class="card-content"></div>
+</div>
+
+<script src="/libs/gitalk/gitalk.min.js"></script>
+<script>
+    let gitalk = new Gitalk({
+        clientID: '233c3d6584fef3a9b154',
+        clientSecret: 'cbeda6bdd3c32c0dc7edcd78e9c64f342c2cd627',
+        repo: 'hyong1232.github.io',
+        owner: 'hyong1232',
+        admin: "hyong1232",
+        id: '2020-10-11T11-12-06',
+        distractionFreeMode: false  // Facebook-like distraction free mode
+    });
+
+    gitalk.render('gitalk-container');
+</script>
 
     
 
@@ -1385,7 +1439,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">12.9k</span>&nbsp;字
+                class="white-color">12.6k</span>&nbsp;字
             
             
             
@@ -1469,7 +1523,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
 
 
 
-    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1181062873" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 1181062873" data-position="top" data-delay="50">
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=498015507" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 498015507" data-position="top" data-delay="50">
         <i class="fab fa-qq"></i>
     </a>
 
@@ -1478,10 +1532,6 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
 
 
 
-
-    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
-        <i class="fas fa-rss"></i>
-    </a>
 
 </div>
     </div>
@@ -1523,6 +1573,17 @@ $(function () {
     <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
     <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
     <script src="/js/matery.js"></script>
+
+    <script type="text/javascript">
+        var OriginTitile = document.title,
+            st;
+        document.addEventListener("visibilitychange", function () {
+            document.hidden ? (document.title = "溜了溜了~🏃", clearTimeout(st)) : (document.title =
+                "(๑•̀ㅂ•́) ✧嘻嘻～", st = setTimeout(function () {
+                    document.title = OriginTitile
+                }, 3e3))
+        })
+    </script>
 
     <!-- Baidu Analytics -->
 

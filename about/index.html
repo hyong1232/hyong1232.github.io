@@ -35,6 +35,16 @@
 
 
 
+   <style>
+    body{
+       background-image: url(https://i.loli.net/2020/10/30/ABaPb6r7yUmvIQ4.jpg);
+       background-repeat:no-repeat;
+       background-size:cover;
+       background-attachment:fixed;
+    }
+</style>
+
+
 
 <body>
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><header class="navbar-fixed">
@@ -436,7 +446,7 @@
 
 
 
-    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1181062873" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 1181062873" data-position="top" data-delay="50">
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=498015507" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 498015507" data-position="top" data-delay="50">
         <i class="fab fa-qq"></i>
     </a>
 
@@ -445,10 +455,6 @@
 
 
 
-
-    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
-        <i class="fas fa-rss"></i>
-    </a>
 
 
                                 </div>
@@ -474,7 +480,7 @@
 
 
 
-    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1181062873" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 1181062873" data-position="top" data-delay="50">
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=498015507" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 498015507" data-position="top" data-delay="50">
         <i class="fab fa-qq"></i>
     </a>
 
@@ -483,10 +489,6 @@
 
 
 
-
-    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
-        <i class="fas fa-rss"></i>
-    </a>
 
 
                         </div>
@@ -596,7 +598,7 @@
                 type: 'pie',
                 radius: '50%',
                 color: ['#6772e5', '#ff9e0f', '#fa755a', '#3ecf8e', '#82d3f4', '#ab47bc', '#525f7f', '#f51c47', '#26A69A'],
-                data: [{"name":"es6","value":4},{"name":"CommonJS模块化加载","value":1},{"name":"Object操作","value":1},{"name":"css","value":3},{"name":"git","value":1},{"name":"babel","value":1},{"name":"java","value":6},{"name":"编程风格/规范","value":1},{"name":"css布局","value":2},{"name":"node","value":2},{"name":"python","value":3},{"name":"git常用操作","value":1},{"name":"javascript","value":1},{"name":"vue","value":2},{"name":"css常用设置","value":1},{"name":"正则","value":1},{"name":"javase","value":2},{"name":"Collection","value":1},{"name":"npm","value":1},{"name":"基本数据类型","value":1},{"name":"function","value":1},{"name":"list&tuple","value":1},{"name":"css","value":1},{"name":"vue-cli","value":1},{"name":"vue文档","value":1},{"name":"打包工具","value":1}],
+                data: [{"name":"es6","value":4},{"name":"编程风格/规范","value":1},{"name":"Object操作","value":1},{"name":"css","value":3},{"name":"git","value":1},{"name":"babel","value":1},{"name":"java","value":6},{"name":"CommonJS模块化加载","value":1},{"name":"css布局","value":2},{"name":"node","value":2},{"name":"python","value":3},{"name":"git常用操作","value":1},{"name":"javascript","value":1},{"name":"vue","value":2},{"name":"css常用设置","value":1},{"name":"正则","value":1},{"name":"javase","value":2},{"name":"Collection","value":1},{"name":"npm","value":1},{"name":"function","value":1},{"name":"基本数据类型","value":1},{"name":"list&tuple","value":1},{"name":"css","value":1},{"name":"vue-cli","value":1},{"name":"vue文档","value":1},{"name":"打包工具","value":1}],
                 itemStyle: {
                     emphasis: {
                         shadowBlur: 10,
@@ -620,7 +622,7 @@
         xAxis: [
             {
                 type: 'category',
-                data: ["es6","css","node","java","python","css布局","vue","Object操作","babel","编程风格"]
+                data: ["es6","css","node","java","python","css布局","vue","Object操作","babel","CommonJS模块化加载"]
             }
         ],
         yAxis: [
@@ -783,7 +785,7 @@
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">12.9k</span>&nbsp;字
+                class="white-color">12.6k</span>&nbsp;字
             
             
             
@@ -867,7 +869,7 @@
 
 
 
-    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1181062873" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 1181062873" data-position="top" data-delay="50">
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=498015507" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 498015507" data-position="top" data-delay="50">
         <i class="fab fa-qq"></i>
     </a>
 
@@ -876,10 +878,6 @@
 
 
 
-
-    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
-        <i class="fas fa-rss"></i>
-    </a>
 
 </div>
     </div>
@@ -921,6 +919,17 @@ $(function () {
     <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
     <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
     <script src="/js/matery.js"></script>
+
+    <script type="text/javascript">
+        var OriginTitile = document.title,
+            st;
+        document.addEventListener("visibilitychange", function () {
+            document.hidden ? (document.title = "溜了溜了~🏃", clearTimeout(st)) : (document.title =
+                "(๑•̀ㅂ•́) ✧嘻嘻～", st = setTimeout(function () {
+                    document.title = OriginTitile
+                }, 3e3))
+        })
+    </script>
 
     <!-- Baidu Analytics -->
 

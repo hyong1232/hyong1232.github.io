@@ -35,6 +35,16 @@
 
 
 
+   <style>
+    body{
+       background-image: url(https://i.loli.net/2020/10/30/ABaPb6r7yUmvIQ4.jpg);
+       background-repeat:no-repeat;
+       background-size:cover;
+       background-attachment:fixed;
+    }
+</style>
+
+
 
 <body>
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><header class="navbar-fixed">
@@ -309,6 +319,19 @@
 </header>
 
     
+<script src="/libs/cryptojs/crypto-js.min.js"></script>
+<script>
+    (function() {
+        let pwd = '';
+        if (pwd && pwd.length > 0) {
+            if (pwd !== CryptoJS.SHA256(prompt('请输入访问本文章的密码')).toString(CryptoJS.enc.Hex)) {
+                alert('密码错误，将返回主页！');
+                location.href = '/';
+            }
+        }
+    })();
+</script>
+
 
 
 
@@ -386,7 +409,7 @@
     }
 
     #toc-content .toc-link:hover {
-        color: #42b983;
+        color: #b94294;
         font-weight: 700;
         text-decoration: underline;
     }
@@ -398,6 +421,10 @@
         position: absolute;
         right: 23.5vw;
         display: block;
+    }
+
+    .is-active-li{
+        border-left: 2px solid #b94294;
     }
 
     #toc-content .is-active-link {
@@ -470,14 +497,14 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2020-10-25
+                    2020-10-31
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    904
+                    893
                 </div>
                 
 
@@ -532,33 +559,33 @@
 <blockquote>
 <p>本地初始化</p>
 </blockquote>
-<pre><code>git init [project-name]</code></pre>
+<pre class="line-numbers language-git"><code class="language-git">git init [project-name]<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <ul>
 <li>本地新建一个代码库会新建一个.git隐藏文件</li>
 </ul>
 <blockquote>
 <p>clone仓库中已有的代码到本地</p>
 </blockquote>
-<pre><code>git clone url [project-name] [--depth&#x3D;num] </code></pre>
+<pre class="line-numbers language-git"><code class="language-git">git clone url [project-name] [--depth=num] <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <ul>
 <li>其中num为想要拷取的代码仓库深度，为1则表示最近一次的更新的最新代码</li>
 </ul>
 <h2 id="暂存区操作"><a href="#暂存区操作" class="headerlink" title="暂存区操作"></a>暂存区操作</h2><p>1、添加文件到暂存区</p>
-<pre><code>git add [file1] [file2] ...
+<pre class="line-numbers language-git"><code class="language-git">git add [file1] [file2] ...
 git add [dir]
-git add .</code></pre>
+git add .<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>其中 . 代表所有修改了的文件，最常用</li>
 </ul>
 <p>2、将文件删除/从暂存区删除</p>
-<pre><code>git rm [file1] [file2] ...
-git rm --cached [filename]</code></pre>
+<pre class="line-numbers language-git"><code class="language-git">git rm [file1] [file2] ...
+git rm --cached [filename]<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <ul>
 <li>其中–cached代表不删除工作区文件，只是从暂存区中删除</li>
 <li>只有在暂存区中的文件对其执行删除操作才有效</li>
 </ul>
 <p>3、修改文件名称，并将修改信息存入暂存区</p>
-<pre><code>git mv [file-origin-name] [file-new-name] </code></pre>
+<pre class="line-numbers language-git"><code class="language-git">git mv [file-origin-name] [file-new-name] <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <ul>
 <li>文件要先在暂存区中</li>
 </ul>
@@ -566,26 +593,23 @@ git rm --cached [filename]</code></pre>
 <p>提交操作都是需要写注释的，便于协作</p>
 </blockquote>
 <p>1、直接提交文件到仓库</p>
-<pre><code>#提交所有有修改记录的文件到仓库
-git commit -m &quot;message&quot;
+<pre class="line-numbers language-git"><code class="language-git"><span class="token comment" spellcheck="true">#提交所有有修改记录的文件到仓库</span>
+git commit -m <span class="token string">"message"</span>
 
-#指定要提交的提交文件
-git commit [file1] [file2]... -m &quot;message&quot; </code></pre>
-
+<span class="token comment" spellcheck="true">#指定要提交的提交文件</span>
+git commit [file1] [file2]... -m <span class="token string">"message"</span> <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>2、用本次提交覆盖上次的提交</p>
-<pre><code>#覆盖上次提交到仓库的内容，仓库中的文件修改一本次为准
-git commit --amend -m &quot;message&quot;
+<pre class="line-numbers language-git"><code class="language-git"><span class="token comment" spellcheck="true">#覆盖上次提交到仓库的内容，仓库中的文件修改一本次为准</span>
+git commit --amend -m <span class="token string">"message"</span>
 
-#指定要覆盖的仓库文件
-git commit --amend [file1] [file2]... -m &quot;message&quot; </code></pre>
-
+<span class="token comment" spellcheck="true">#指定要覆盖的仓库文件</span>
+git commit --amend [file1] [file2]... -m <span class="token string">"message"</span> <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>3、其他提交</p>
-<pre><code>#提交工作区自上次commit之后的变化，直接到仓库区(不包括新增文件&#x2F;文件夹)
+<pre class="line-numbers language-git"><code class="language-git"><span class="token comment" spellcheck="true">#提交工作区自上次commit之后的变化，直接到仓库区(不包括新增文件/文件夹)</span>
 git commit -a
 
-#提交时显示所有diff信息
-git commit -v</code></pre>
-
+<span class="token comment" spellcheck="true">#提交时显示所有diff信息</span>
+git commit -v<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h2 id="提交文件至远程仓库"><a href="#提交文件至远程仓库" class="headerlink" title="提交文件至远程仓库"></a>提交文件至远程仓库</h2><table>
 <thead>
 <tr>
@@ -627,40 +651,38 @@ git commit -v</code></pre>
 </tr>
 </tbody></table>
 <h2 id="分支"><a href="#分支" class="headerlink" title="分支"></a>分支</h2><p>1、新建分支&amp;切换工作区</p>
-<pre><code>#新建分支
+<pre class="line-numbers language-git"><code class="language-git"><span class="token comment" spellcheck="true">#新建分支</span>
 git branch [branch-name]
 
-#切换当前分支到指定分支
+<span class="token comment" spellcheck="true">#切换当前分支到指定分支</span>
 git checkout [branch-name]
 
-#新建分支并切换到该分支
+<span class="token comment" spellcheck="true">#新建分支并切换到该分支</span>
 git checkout -b [branch-name]
 
-#切换到最近切换的分支
+<span class="token comment" spellcheck="true">#切换到最近切换的分支</span>
 git checkout -
-</code></pre>
-
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>2、查看分支</p>
-<pre><code>#产看本地分支
+<pre class="line-numbers language-git"><code class="language-git"><span class="token comment" spellcheck="true">#产看本地分支</span>
 git branch
 
-#查看远程分支
+<span class="token comment" spellcheck="true">#查看远程分支</span>
 git branch -r
 
-#查看所有分支（本地加远程）
-git branch -a</code></pre>
-
+<span class="token comment" spellcheck="true">#查看所有分支（本地加远程）</span>
+git branch -a<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>3、删除分支</p>
-<pre><code>#删除本地分支
+<pre class="line-numbers language-git"><code class="language-git"><span class="token comment" spellcheck="true">#删除本地分支</span>
 git branch -d [branch-name]
 
-#删除远程分支
+<span class="token comment" spellcheck="true">#删除远程分支</span>
 git branch [remote-name] --delete [branch-name]
-git branch -dr [remote&#x2F;branch]</code></pre>
-
+git branch -dr [remote/branch]<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>4、合并分支</p>
-<pre><code>#合并指定分支到当前分支
-git merge [branch]</code></pre>
+<pre class="line-numbers language-git"><code class="language-git"><span class="token comment" spellcheck="true">#合并指定分支到当前分支</span>
+git merge [branch]<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
             </div>
             <hr/>
 
@@ -874,6 +896,33 @@ git merge [branch]</code></pre>
             
         </div>
     </div>
+
+    
+        <link rel="stylesheet" href="/libs/gitalk/gitalk.css">
+<link rel="stylesheet" href="/css/my-gitalk.css">
+
+<div class="card gitalk-card" data-aos="fade-up">
+    <div class="comment_headling" style="font-size: 20px; font-weight: 700; position: relative; padding-left: 20px; top: 15px; padding-bottom: 5px;">
+        <i class="fas fa-comments fa-fw" aria-hidden="true"></i>
+        <span>评论</span>
+    </div>
+    <div id="gitalk-container" class="card-content"></div>
+</div>
+
+<script src="/libs/gitalk/gitalk.min.js"></script>
+<script>
+    let gitalk = new Gitalk({
+        clientID: '233c3d6584fef3a9b154',
+        clientSecret: 'cbeda6bdd3c32c0dc7edcd78e9c64f342c2cd627',
+        repo: 'hyong1232.github.io',
+        owner: 'hyong1232',
+        admin: "hyong1232",
+        id: '2020-09-08T13-57-23',
+        distractionFreeMode: false  // Facebook-like distraction free mode
+    });
+
+    gitalk.render('gitalk-container');
+</script>
 
     
 
@@ -1460,7 +1509,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">12.9k</span>&nbsp;字
+                class="white-color">12.6k</span>&nbsp;字
             
             
             
@@ -1544,7 +1593,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
 
 
 
-    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1181062873" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 1181062873" data-position="top" data-delay="50">
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=498015507" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 498015507" data-position="top" data-delay="50">
         <i class="fab fa-qq"></i>
     </a>
 
@@ -1553,10 +1602,6 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
 
 
 
-
-    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
-        <i class="fas fa-rss"></i>
-    </a>
 
 </div>
     </div>
@@ -1598,6 +1643,17 @@ $(function () {
     <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
     <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
     <script src="/js/matery.js"></script>
+
+    <script type="text/javascript">
+        var OriginTitile = document.title,
+            st;
+        document.addEventListener("visibilitychange", function () {
+            document.hidden ? (document.title = "溜了溜了~🏃", clearTimeout(st)) : (document.title =
+                "(๑•̀ㅂ•́) ✧嘻嘻～", st = setTimeout(function () {
+                    document.title = OriginTitile
+                }, 3e3))
+        })
+    </script>
 
     <!-- Baidu Analytics -->
 

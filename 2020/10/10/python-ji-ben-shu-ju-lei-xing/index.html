@@ -35,6 +35,16 @@
 
 
 
+   <style>
+    body{
+       background-image: url(https://i.loli.net/2020/10/30/ABaPb6r7yUmvIQ4.jpg);
+       background-repeat:no-repeat;
+       background-size:cover;
+       background-attachment:fixed;
+    }
+</style>
+
+
 
 <body>
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><header class="navbar-fixed">
@@ -309,6 +319,19 @@
 </header>
 
     
+<script src="/libs/cryptojs/crypto-js.min.js"></script>
+<script>
+    (function() {
+        let pwd = '';
+        if (pwd && pwd.length > 0) {
+            if (pwd !== CryptoJS.SHA256(prompt('请输入访问本文章的密码')).toString(CryptoJS.enc.Hex)) {
+                alert('密码错误，将返回主页！');
+                location.href = '/';
+            }
+        }
+    })();
+</script>
+
 
 
 
@@ -386,7 +409,7 @@
     }
 
     #toc-content .toc-link:hover {
-        color: #42b983;
+        color: #b94294;
         font-weight: 700;
         text-decoration: underline;
     }
@@ -398,6 +421,10 @@
         position: absolute;
         right: 23.5vw;
         display: block;
+    }
+
+    .is-active-li{
+        border-left: 2px solid #b94294;
     }
 
     #toc-content .is-active-link {
@@ -474,14 +501,14 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2020-10-25
+                    2020-10-30
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    551
+                    517
                 </div>
                 
 
@@ -509,8 +536,8 @@
 <li><p>十六进制ox开头</p>
 </li>
 <li><p>允许使用_下划线分割多个0的大数据</p>
-<pre><code>#等效写法
-100_000_000 &#x3D;&#x3D; 100000000</code></pre>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token comment" spellcheck="true">#等效写法</span>
+100_000_000 <span class="token operator">==</span> <span class="token number">100000000</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 </li>
 <li><p>整数运算永远是精确计算（除法也是），浮点数计算会有四舍五入误差</p>
 </li>
@@ -550,30 +577,26 @@
 </tr>
 </tbody></table>
 <p>  示例：</p>
-  <pre><code>print(&#39;%s is %d year\&#39;s old,he have $%f&#39; %(&#39;jack&#39;,23,3456345643.234))
-#使用%%转义%
-print(&#39;%%%d&#39;%25)</code></pre>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'%s is %d year\'s old,he have $%f'</span> <span class="token operator">%</span><span class="token punctuation">(</span><span class="token string">'jack'</span><span class="token punctuation">,</span><span class="token number">23</span><span class="token punctuation">,</span><span class="token number">3456345643.234</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token comment" spellcheck="true">#使用%%转义%</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'%%%d'</span><span class="token operator">%</span><span class="token number">25</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 <p>  <strong>在字符串中可加入整数/浮点数在%和特定字符间对数据输出位数处理</strong></p>
-  <pre><code>#整数数字表示占位
-print(&#39;%3d&#39;%23)
-#浮点数对浮点数的位数处理
-print(&#39;%.2f&#39;%12.23453)</code></pre>
-
+<pre class="line-numbers language-python"><code class="language-python"><span class="token comment" spellcheck="true">#整数数字表示占位</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'%3d'</span><span class="token operator">%</span><span class="token number">23</span><span class="token punctuation">)</span>
+<span class="token comment" spellcheck="true">#浮点数对浮点数的位数处理</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'%.2f'</span><span class="token operator">%</span><span class="token number">12.23453</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 <p>  2、使用string类型的format函数配合{}</p>
-  <pre><code>print(&#39;{} is {} year\&#39;s old,he have ${}&#39;.format(&#39;jack&#39;,23,3456345643.234))</code></pre>
-
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'{} is {} year\'s old,he have ${}'</span><span class="token punctuation">.</span>format<span class="token punctuation">(</span><span class="token string">'jack'</span><span class="token punctuation">,</span><span class="token number">23</span><span class="token punctuation">,</span><span class="token number">3456345643.234</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>  3、在字符串前加上f，然后使用{变量名}，自动替换字符串（类似es6中的反引号字符串）</p>
-  <pre><code>name &#x3D; &#39;jack&#39;
-age &#x3D; 23
-money &#x3D; 3456345643.234
-print(f&#39;{name} is {age} year\&#39;s old,he have ${money}&#39;)</code></pre>
-
+<pre class="line-numbers language-python"><code class="language-python">name <span class="token operator">=</span> <span class="token string">'jack'</span>
+age <span class="token operator">=</span> <span class="token number">23</span>
+money <span class="token operator">=</span> <span class="token number">3456345643.234</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>f<span class="token string">'{name} is {age} year\'s old,he have ${money}'</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 </li>
 </ul>
 <h2 id="布尔值Boolean"><a href="#布尔值Boolean" class="headerlink" title="布尔值Boolean"></a>布尔值Boolean</h2><ul>
-<li>值表示是首字符大写<pre><code>1&#x3D;&#x3D;2---&gt;False
-1&#x3D;&#x3D;1---&gt;True</code></pre>
-
+<li>值表示是首字符大写<pre class="line-numbers language-python"><code class="language-python"><span class="token number">1</span><span class="token operator">==</span><span class="token number">2</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">></span><span class="token boolean">False</span>
+<span class="token number">1</span><span class="token operator">==</span><span class="token number">1</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">></span><span class="token boolean">True</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 </li>
 </ul>
 <h2 id="空置None"><a href="#空置None" class="headerlink" title="空置None"></a>空置None</h2><ul>
@@ -586,12 +609,12 @@ print(f&#39;{name} is {age} year\&#39;s old,he have ${money}&#39;)</code></pre>
 <li><p>使用#做标志</p>
 </li>
 <li><p>通用注释</p>
-<pre><code>#告诉python解释器（cpython用的最多）以utf-8格式读取文件
-#-*- coding:utf-8 -*-
-
-#告诉Linux和mac是一个可执行的python文件（win不支持） 
-#!user&#x2F;bin&#x2F;env python3</code></pre></li>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token comment" spellcheck="true">#告诉python解释器（cpython用的最多）以utf-8格式读取文件</span>
+<span class="token comment" spellcheck="true">#-*- coding:utf-8 -*-</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+</li>
 </ul>
+<p>#告诉Linux和mac是一个可执行的python文件（win不支持）<br>#!user/bin/env python3<br>```</p>
 
             </div>
             <hr/>
@@ -810,6 +833,33 @@ print(f&#39;{name} is {age} year\&#39;s old,he have ${money}&#39;)</code></pre>
             
         </div>
     </div>
+
+    
+        <link rel="stylesheet" href="/libs/gitalk/gitalk.css">
+<link rel="stylesheet" href="/css/my-gitalk.css">
+
+<div class="card gitalk-card" data-aos="fade-up">
+    <div class="comment_headling" style="font-size: 20px; font-weight: 700; position: relative; padding-left: 20px; top: 15px; padding-bottom: 5px;">
+        <i class="fas fa-comments fa-fw" aria-hidden="true"></i>
+        <span>评论</span>
+    </div>
+    <div id="gitalk-container" class="card-content"></div>
+</div>
+
+<script src="/libs/gitalk/gitalk.min.js"></script>
+<script>
+    let gitalk = new Gitalk({
+        clientID: '233c3d6584fef3a9b154',
+        clientSecret: 'cbeda6bdd3c32c0dc7edcd78e9c64f342c2cd627',
+        repo: 'hyong1232.github.io',
+        owner: 'hyong1232',
+        admin: "hyong1232",
+        id: '2020-10-10T23-02-42',
+        distractionFreeMode: false  // Facebook-like distraction free mode
+    });
+
+    gitalk.render('gitalk-container');
+</script>
 
     
 
@@ -1404,7 +1454,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">12.9k</span>&nbsp;字
+                class="white-color">12.6k</span>&nbsp;字
             
             
             
@@ -1488,7 +1538,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
 
 
 
-    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1181062873" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 1181062873" data-position="top" data-delay="50">
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=498015507" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 498015507" data-position="top" data-delay="50">
         <i class="fab fa-qq"></i>
     </a>
 
@@ -1497,10 +1547,6 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
 
 
 
-
-    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
-        <i class="fas fa-rss"></i>
-    </a>
 
 </div>
     </div>
@@ -1542,6 +1588,17 @@ $(function () {
     <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
     <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
     <script src="/js/matery.js"></script>
+
+    <script type="text/javascript">
+        var OriginTitile = document.title,
+            st;
+        document.addEventListener("visibilitychange", function () {
+            document.hidden ? (document.title = "溜了溜了~🏃", clearTimeout(st)) : (document.title =
+                "(๑•̀ㅂ•́) ✧嘻嘻～", st = setTimeout(function () {
+                    document.title = OriginTitile
+                }, 3e3))
+        })
+    </script>
 
     <!-- Baidu Analytics -->
 

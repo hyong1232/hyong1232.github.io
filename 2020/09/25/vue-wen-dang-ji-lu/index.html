@@ -35,6 +35,16 @@
 
 
 
+   <style>
+    body{
+       background-image: url(https://i.loli.net/2020/10/30/ABaPb6r7yUmvIQ4.jpg);
+       background-repeat:no-repeat;
+       background-size:cover;
+       background-attachment:fixed;
+    }
+</style>
+
+
 
 <body>
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><header class="navbar-fixed">
@@ -309,6 +319,19 @@
 </header>
 
     
+<script src="/libs/cryptojs/crypto-js.min.js"></script>
+<script>
+    (function() {
+        let pwd = '';
+        if (pwd && pwd.length > 0) {
+            if (pwd !== CryptoJS.SHA256(prompt('请输入访问本文章的密码')).toString(CryptoJS.enc.Hex)) {
+                alert('密码错误，将返回主页！');
+                location.href = '/';
+            }
+        }
+    })();
+</script>
+
 
 
 
@@ -386,7 +409,7 @@
     }
 
     #toc-content .toc-link:hover {
-        color: #42b983;
+        color: #b94294;
         font-weight: 700;
         text-decoration: underline;
     }
@@ -398,6 +421,10 @@
         position: absolute;
         right: 23.5vw;
         display: block;
+    }
+
+    .is-active-li{
+        border-left: 2px solid #b94294;
     }
 
     #toc-content .is-active-link {
@@ -474,14 +501,14 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2020-10-25
+                    2020-10-30
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    219
+                    200
                 </div>
                 
 
@@ -508,40 +535,8 @@
 
 <h3 id="计算属性computed"><a href="#计算属性computed" class="headerlink" title="计算属性computed"></a>计算属性computed</h3><p>1、使用场景：模板内表达式的复杂计算</p>
 <p>2、特性：响应式计算（不重复计算相同值，缓存响应式的依赖，即data中的值改变才重新计算，否则使用缓存值）优于方法和watch监听属性</p>
-<p>示例：</p>
-<pre><code>var vm &#x3D; new Vue({
-    data:{
-        firstname:&#39;foo&#39;,
-        lastname:&#39;bar&#39;
-    },
-    computed:{
-        fullname(){
-            return this.firstname+&#39;  &#39;+this.lastname
-        }
-    },
-    template:&#96;
-        &lt;div&gt;&lt;&#x2F;div&gt;
-    &#96;
-}).$mount(&#39;#app&#39;)</code></pre>
-
-<p>3、自定义setter方法：一般计算属性默认只有getter方法，但支持添加setter方法，example</p>
-<pre><code>...
-computed:{
-    fullname:{
-        get:function(){
-            return this.firstname+&#39; &#39;+this.lastname
-        },
-        set:function(newVal){
-            let nameArr &#x3D; newVal.split(&#39; &#39;)
-            this.firstname &#x3D; nameArr[0]
-            this.lastname &#x3D; nameArr[nameArr.length-1]
-        }
-    }
-}
-...
-&#x2F;&#x2F;改变fullname则会调用setter方法
-vm.fullname &#x3D; &#39;jack ma&#39;</code></pre>
-
+<p>示例：<br>···js<br>var vm = new Vue({<br>    data:{<br>        firstname:’foo’,<br>        lastname:’bar’<br>    },<br>    computed:{<br>        fullname(){<br>            return this.firstname+’  ‘+this.lastname<br>        }<br>    },<br>    template:<code>        &lt;div&gt;&#123;&#123;fullname&#125;&#125;&lt;/div&gt;    </code><br>}).$mount(‘#app’)<br>···</p>
+<p>3、自定义setter方法：一般计算属性默认只有getter方法，但支持添加setter方法，example<br>···js<br>…<br>computed:{<br>    fullname:{<br>        get:function(){<br>            return this.firstname+’ ‘+this.lastname<br>        },<br>        set:function(newVal){<br>            let nameArr = newVal.split(‘ ‘)<br>            this.firstname = nameArr[0]<br>            this.lastname = nameArr[nameArr.length-1]<br>        }<br>    }<br>}<br>…<br>//改变fullname则会调用setter方法<br>vm.fullname = ‘jack ma’<br>···</p>
 <h3 id=""><a href="#" class="headerlink" title=""></a></h3>
             </div>
             <hr/>
@@ -760,6 +755,33 @@ vm.fullname &#x3D; &#39;jack ma&#39;</code></pre>
             
         </div>
     </div>
+
+    
+        <link rel="stylesheet" href="/libs/gitalk/gitalk.css">
+<link rel="stylesheet" href="/css/my-gitalk.css">
+
+<div class="card gitalk-card" data-aos="fade-up">
+    <div class="comment_headling" style="font-size: 20px; font-weight: 700; position: relative; padding-left: 20px; top: 15px; padding-bottom: 5px;">
+        <i class="fas fa-comments fa-fw" aria-hidden="true"></i>
+        <span>评论</span>
+    </div>
+    <div id="gitalk-container" class="card-content"></div>
+</div>
+
+<script src="/libs/gitalk/gitalk.min.js"></script>
+<script>
+    let gitalk = new Gitalk({
+        clientID: '233c3d6584fef3a9b154',
+        clientSecret: 'cbeda6bdd3c32c0dc7edcd78e9c64f342c2cd627',
+        repo: 'hyong1232.github.io',
+        owner: 'hyong1232',
+        admin: "hyong1232",
+        id: '2020-09-25T10-51-57',
+        distractionFreeMode: false  // Facebook-like distraction free mode
+    });
+
+    gitalk.render('gitalk-container');
+</script>
 
     
 
@@ -1350,7 +1372,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">12.9k</span>&nbsp;字
+                class="white-color">12.6k</span>&nbsp;字
             
             
             
@@ -1434,7 +1456,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
 
 
 
-    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1181062873" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 1181062873" data-position="top" data-delay="50">
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=498015507" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 498015507" data-position="top" data-delay="50">
         <i class="fab fa-qq"></i>
     </a>
 
@@ -1443,10 +1465,6 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
 
 
 
-
-    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
-        <i class="fas fa-rss"></i>
-    </a>
 
 </div>
     </div>
@@ -1488,6 +1506,17 @@ $(function () {
     <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
     <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
     <script src="/js/matery.js"></script>
+
+    <script type="text/javascript">
+        var OriginTitile = document.title,
+            st;
+        document.addEventListener("visibilitychange", function () {
+            document.hidden ? (document.title = "溜了溜了~🏃", clearTimeout(st)) : (document.title =
+                "(๑•̀ㅂ•́) ✧嘻嘻～", st = setTimeout(function () {
+                    document.title = OriginTitile
+                }, 3e3))
+        })
+    </script>
 
     <!-- Baidu Analytics -->
 

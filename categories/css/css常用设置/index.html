@@ -35,6 +35,16 @@
 
 
 
+   <style>
+    body{
+       background-image: url(https://i.loli.net/2020/10/30/ABaPb6r7yUmvIQ4.jpg);
+       background-repeat:no-repeat;
+       background-size:cover;
+       background-attachment:fixed;
+    }
+</style>
+
+
 
 <body>
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><header class="navbar-fixed">
@@ -373,10 +383,10 @@
                 </a>
                 
                 
-                <a href="/categories/es6/CommonJS%E6%A8%A1%E5%9D%97%E5%8C%96%E5%8A%A0%E8%BD%BD/" title="CommonJS模块化加载: 1">
+                <a href="/categories/es6/%E7%BC%96%E7%A8%8B%E9%A3%8E%E6%A0%BC-%E8%A7%84%E8%8C%83/" title="编程风格/规范: 1">
                     <span class="chip center-align waves-effect waves-light
                              chip-default "
-                            style="background-color: #F5EEF8;">CommonJS模块化加载
+                            style="background-color: #F5EEF8;">编程风格/规范
                         <span class="tag-length">1</span>
                     </span>
                 </a>
@@ -427,10 +437,10 @@
                 </a>
                 
                 
-                <a href="/categories/es6/%E7%BC%96%E7%A8%8B%E9%A3%8E%E6%A0%BC-%E8%A7%84%E8%8C%83/" title="编程风格/规范: 1">
+                <a href="/categories/es6/CommonJS%E6%A8%A1%E5%9D%97%E5%8C%96%E5%8A%A0%E8%BD%BD/" title="CommonJS模块化加载: 1">
                     <span class="chip center-align waves-effect waves-light
                              chip-default "
-                            style="background-color: #D7BDE2;">编程风格/规范
+                            style="background-color: #D7BDE2;">CommonJS模块化加载
                         <span class="tag-length">1</span>
                     </span>
                 </a>
@@ -535,19 +545,19 @@
                 </a>
                 
                 
-                <a href="/categories/python/%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" title="基本数据类型: 1">
+                <a href="/categories/python/function/" title="function: 1">
                     <span class="chip center-align waves-effect waves-light
                              chip-default "
-                            style="background-color: #E8F8F5;">基本数据类型
+                            style="background-color: #F8C471;">function
                         <span class="tag-length">1</span>
                     </span>
                 </a>
                 
                 
-                <a href="/categories/python/function/" title="function: 1">
+                <a href="/categories/python/%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" title="基本数据类型: 1">
                     <span class="chip center-align waves-effect waves-light
                              chip-default "
-                            style="background-color: #F8C471;">function
+                            style="background-color: #E8F8F5;">基本数据类型
                         <span class="tag-length">1</span>
                     </span>
                 </a>
@@ -628,7 +638,8 @@
 文本用超过使用…表示1、单行显示省略号
 selector{
     overflow:hidden;
-    text-overflow:ellipsis;&#x2F;&#x2F;使用省略号代
+    text-overflow:ellipsis;//使用省略号代替截断文字
+    
                             
                         </div>
                         <div class="publish-info">
@@ -741,7 +752,7 @@ selector{
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">12.9k</span>&nbsp;字
+                class="white-color">12.6k</span>&nbsp;字
             
             
             
@@ -825,7 +836,7 @@ selector{
 
 
 
-    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1181062873" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 1181062873" data-position="top" data-delay="50">
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=498015507" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 498015507" data-position="top" data-delay="50">
         <i class="fab fa-qq"></i>
     </a>
 
@@ -834,10 +845,6 @@ selector{
 
 
 
-
-    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
-        <i class="fas fa-rss"></i>
-    </a>
 
 </div>
     </div>
@@ -879,6 +886,17 @@ $(function () {
     <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
     <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
     <script src="/js/matery.js"></script>
+
+    <script type="text/javascript">
+        var OriginTitile = document.title,
+            st;
+        document.addEventListener("visibilitychange", function () {
+            document.hidden ? (document.title = "溜了溜了~🏃", clearTimeout(st)) : (document.title =
+                "(๑•̀ㅂ•́) ✧嘻嘻～", st = setTimeout(function () {
+                    document.title = OriginTitile
+                }, 3e3))
+        })
+    </script>
 
     <!-- Baidu Analytics -->
 

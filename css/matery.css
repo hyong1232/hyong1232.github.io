@@ -1096,6 +1096,10 @@ article .article-tags .chip {
     background: #bf3065;
 }
 
+.toc-list-item{
+    border: 2px solid transparent;
+}
+
 #artDetail .post-cate {
     float: right;
     color: #b9429a;

@@ -35,6 +35,16 @@
 
 
 
+   <style>
+    body{
+       background-image: url(https://i.loli.net/2020/10/30/ABaPb6r7yUmvIQ4.jpg);
+       background-repeat:no-repeat;
+       background-size:cover;
+       background-attachment:fixed;
+    }
+</style>
+
+
 
 <body>
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><header class="navbar-fixed">
@@ -309,6 +319,19 @@
 </header>
 
     
+<script src="/libs/cryptojs/crypto-js.min.js"></script>
+<script>
+    (function() {
+        let pwd = '';
+        if (pwd && pwd.length > 0) {
+            if (pwd !== CryptoJS.SHA256(prompt('请输入访问本文章的密码')).toString(CryptoJS.enc.Hex)) {
+                alert('密码错误，将返回主页！');
+                location.href = '/';
+            }
+        }
+    })();
+</script>
+
 
 
 
@@ -386,7 +409,7 @@
     }
 
     #toc-content .toc-link:hover {
-        color: #42b983;
+        color: #b94294;
         font-weight: 700;
         text-decoration: underline;
     }
@@ -398,6 +421,10 @@
         position: absolute;
         right: 23.5vw;
         display: block;
+    }
+
+    .is-active-li{
+        border-left: 2px solid #b94294;
     }
 
     #toc-content .is-active-link {
@@ -474,14 +501,14 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2020-10-25
+                    2020-10-30
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    386
+                    362
                 </div>
                 
 
@@ -507,34 +534,28 @@
 <a id="more"></a>
 
 <h2 id="常用方法"><a href="#常用方法" class="headerlink" title="常用方法"></a>常用方法</h2><p>1、复制对象值，并返回新创建新对象</p>
-<pre><code>Objec
-t.assign({},{a:&#39;a&#39;},{b:&#39;b&#39;})</code></pre>
-
+<pre class="line-numbers language-js"><code class="language-js">Objec
+t<span class="token punctuation">.</span><span class="token function">assign</span><span class="token punctuation">(</span><span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span><span class="token punctuation">{</span>a<span class="token punctuation">:</span><span class="token string">'a'</span><span class="token punctuation">}</span><span class="token punctuation">,</span><span class="token punctuation">{</span>b<span class="token punctuation">:</span><span class="token string">'b'</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <p>2、为对象添加新属性</p>
-<pre><code>Object.assign(orgin,{add:&#39;add&#39;})</code></pre>
-
+<pre class="line-numbers language-js"><code class="language-js">Object<span class="token punctuation">.</span><span class="token function">assign</span><span class="token punctuation">(</span>orgin<span class="token punctuation">,</span><span class="token punctuation">{</span>add<span class="token punctuation">:</span><span class="token string">'add'</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>3、为对象添加新方法</p>
-<pre><code>const obj &#x3D; {
-    val:&#39;val&#39;,
-}
-Object.assign(obj.prototype,{
-    getName(){
-        ....
-    }
-})</code></pre>
-
+<pre class="line-numbers language-js"><code class="language-js"><span class="token keyword">const</span> obj <span class="token operator">=</span> <span class="token punctuation">{</span>
+    val<span class="token punctuation">:</span><span class="token string">'val'</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span>
+Object<span class="token punctuation">.</span><span class="token function">assign</span><span class="token punctuation">(</span>obj<span class="token punctuation">.</span>prototype<span class="token punctuation">,</span><span class="token punctuation">{</span>
+    <span class="token function">getName</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token operator">...</span><span class="token punctuation">.</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h3 id="特性："><a href="#特性：" class="headerlink" title="特性："></a>特性：</h3><p>1、由于Object.assign采用的是浅拷贝，因此源对象的属性值是对象时，只是复制了引用，再后面的复制中出现此对象的修改，则直接替换他的引用</p>
-<pre><code>const obj1 &#x3D; {a: {b: 1}};
-const obj2 &#x3D; Object.assign({}, obj1);
+<pre class="line-numbers language-js"><code class="language-js"><span class="token keyword">const</span> obj1 <span class="token operator">=</span> <span class="token punctuation">{</span>a<span class="token punctuation">:</span> <span class="token punctuation">{</span>b<span class="token punctuation">:</span> <span class="token number">1</span><span class="token punctuation">}</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> obj2 <span class="token operator">=</span> Object<span class="token punctuation">.</span><span class="token function">assign</span><span class="token punctuation">(</span><span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span> obj1<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-obj1.a.b &#x3D; 2;
-obj2.a.b &#x2F;&#x2F; 2</code></pre>
-
+obj1<span class="token punctuation">.</span>a<span class="token punctuation">.</span>b <span class="token operator">=</span> <span class="token number">2</span><span class="token punctuation">;</span>
+obj2<span class="token punctuation">.</span>a<span class="token punctuation">.</span>b <span class="token comment" spellcheck="true">// 2</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>2、不能复制origin源对象的继承属性，只能同通过Object.getPrototypeOf(origin)+Object.create()+origin方法，将其继承的方法单独调出来，然后合并</p>
-<pre><code>let originProto &#x3D; Object.getPrototypeOf(origin);
-return Object.assign(Object.create(originProto), origin);</code></pre>
-
-
+<pre class="line-numbers language-js"><code class="language-js"><span class="token keyword">let</span> originProto <span class="token operator">=</span> Object<span class="token punctuation">.</span><span class="token function">getPrototypeOf</span><span class="token punctuation">(</span>origin<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">return</span> Object<span class="token punctuation">.</span><span class="token function">assign</span><span class="token punctuation">(</span>Object<span class="token punctuation">.</span><span class="token function">create</span><span class="token punctuation">(</span>originProto<span class="token punctuation">)</span><span class="token punctuation">,</span> origin<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <p>3、target/orgin对象为非对象</p>
 <ul>
 <li> target为非对象，转换成对象，如果是null/undefined不可转换成对象的属性时，报错</li>
@@ -544,18 +565,18 @@ return Object.assign(Object.create(originProto), origin);</code></pre>
 <blockquote>
 <p>将数组当成对象处理，键值为index下标</p>
 </blockquote>
-<pre><code>Object.assign([1,2,3],[4,5])&#x3D;&gt;[4,5,3]</code></pre>
-
+<pre class="line-numbers language-js"><code class="language-js">Object<span class="token punctuation">.</span><span class="token function">assign</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">,</span><span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">,</span><span class="token number">5</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token operator">=</span><span class="token operator">></span><span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">,</span><span class="token number">5</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">]</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>5、取值函数处理（关键字get开头）</p>
 <blockquote>
 <p>直接取值，不会获取取值函数合并</p>
 </blockquote>
-<pre><code>const obj &#x3D; {
-    get name (){
-        return &#39;jack&#39;
-    }
-}
-Object.assign({},obj)&#x3D;&gt;{name:&#39;jack&#39;}</code></pre>
+<pre class="line-numbers language-js"><code class="language-js"><span class="token keyword">const</span> obj <span class="token operator">=</span> <span class="token punctuation">{</span>
+    <span class="token keyword">get</span> name <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token string">'jack'</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+Object<span class="token punctuation">.</span><span class="token function">assign</span><span class="token punctuation">(</span><span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span>obj<span class="token punctuation">)</span><span class="token operator">=</span><span class="token operator">></span><span class="token punctuation">{</span>name<span class="token punctuation">:</span><span class="token string">'jack'</span><span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
             </div>
             <hr/>
 
@@ -773,6 +794,33 @@ Object.assign({},obj)&#x3D;&gt;{name:&#39;jack&#39;}</code></pre>
             
         </div>
     </div>
+
+    
+        <link rel="stylesheet" href="/libs/gitalk/gitalk.css">
+<link rel="stylesheet" href="/css/my-gitalk.css">
+
+<div class="card gitalk-card" data-aos="fade-up">
+    <div class="comment_headling" style="font-size: 20px; font-weight: 700; position: relative; padding-left: 20px; top: 15px; padding-bottom: 5px;">
+        <i class="fas fa-comments fa-fw" aria-hidden="true"></i>
+        <span>评论</span>
+    </div>
+    <div id="gitalk-container" class="card-content"></div>
+</div>
+
+<script src="/libs/gitalk/gitalk.min.js"></script>
+<script>
+    let gitalk = new Gitalk({
+        clientID: '233c3d6584fef3a9b154',
+        clientSecret: 'cbeda6bdd3c32c0dc7edcd78e9c64f342c2cd627',
+        repo: 'hyong1232.github.io',
+        owner: 'hyong1232',
+        admin: "hyong1232",
+        id: '2020-09-23T17-05-02',
+        distractionFreeMode: false  // Facebook-like distraction free mode
+    });
+
+    gitalk.render('gitalk-container');
+</script>
 
     
 
@@ -1117,7 +1165,7 @@ Object.assign({},obj)&#x3D;&gt;{name:&#39;jack&#39;}</code></pre>
                 <a href="/2020/09/23/es6-bian-cheng-feng-ge/">
                     <div class="card-image">
                         
-                        <img src="https://i.loli.net/2020/10/30/QBtyYLJdEGzHmNV.jpg" class="responsive-img" alt="es6编程风格">
+                        <img src="https://i.loli.net/2020/10/25/4WIBAmYPD5vraVQ.jpg" class="responsive-img" alt="es6编程风格">
                         
                         <span class="card-title">es6编程风格</span>
                     </div>
@@ -1363,7 +1411,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">12.9k</span>&nbsp;字
+                class="white-color">12.6k</span>&nbsp;字
             
             
             
@@ -1447,7 +1495,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
 
 
 
-    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1181062873" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 1181062873" data-position="top" data-delay="50">
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=498015507" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 498015507" data-position="top" data-delay="50">
         <i class="fab fa-qq"></i>
     </a>
 
@@ -1456,10 +1504,6 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
 
 
 
-
-    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
-        <i class="fas fa-rss"></i>
-    </a>
 
 </div>
     </div>
@@ -1501,6 +1545,17 @@ $(function () {
     <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
     <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
     <script src="/js/matery.js"></script>
+
+    <script type="text/javascript">
+        var OriginTitile = document.title,
+            st;
+        document.addEventListener("visibilitychange", function () {
+            document.hidden ? (document.title = "溜了溜了~🏃", clearTimeout(st)) : (document.title =
+                "(๑•̀ㅂ•́) ✧嘻嘻～", st = setTimeout(function () {
+                    document.title = OriginTitile
+                }, 3e3))
+        })
+    </script>
 
     <!-- Baidu Analytics -->
 
