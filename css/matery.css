@@ -36,7 +36,7 @@
 body {
     background-color: #eaeaea;
     margin: 0;
-    color: #34495e;
+    color: #c15582;
     overflow-x: hidden;
     overflow-y: auto;
 }
@@ -283,7 +283,7 @@ mark {
     position: fixed;
     bottom: 0;
     z-index: 300;
-    background: linear-gradient(to right, #4cbf30 0%, #0f9d58 100%);
+    background: linear-gradient(to right, #bf3065 0%, #690f9d 100%);
     opacity: 0.8;
 }
 
@@ -1197,6 +1197,7 @@ article .article-tags .chip {
     margin: 2px 2px 10px;
     font-size: 1.05rem;
     line-height: 1.85rem;
+    color: #000000;
 }
 
 #articleContent blockquote p {
@@ -1256,6 +1257,7 @@ article .article-tags .chip {
     border-collapse: collapse;
     border-spacing: 0;
     overflow: auto;
+    color:#000;
 }
 
 /**
