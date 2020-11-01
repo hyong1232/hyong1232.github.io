@@ -512,7 +512,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1.2k
+                    1.4k
                 </div>
                 
 
@@ -540,7 +540,7 @@
 <h2 id="CommonJS模块化加载"><a href="#CommonJS模块化加载" class="headerlink" title="CommonJS模块化加载"></a>CommonJS模块化加载</h2><blockquote>
 <p>只有在运行时才会加载（同步加载），而且是加载整个路径的文件生成一个对象，然后再从这个对象中解构赋值给要查找的属性,例如：</p>
 </blockquote>
-<pre class="line-numbers language-js"><code class="language-js"><span class="token keyword">let</span> <span class="token punctuation">{</span>a<span class="token punctuation">,</span>b<span class="token punctuation">}</span> <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'fs'</span><span class="token punctuation">)</span>
+<pre class="line-numbers language-js"><code class="language-js"><span class="token keyword">let</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>a<span class="token punctuation">,</span>b<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span> <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'fs'</span><span class="token punctuation">)</span>
 <span class="token comment" spellcheck="true">//等同于</span>
 <span class="token keyword">let</span> _fs <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'fs'</span><span class="token punctuation">)</span>
 <span class="token keyword">let</span> a <span class="token operator">=</span>  _fs<span class="token punctuation">.</span>a
@@ -550,7 +550,7 @@
 <h2 id="ES6模块化加载"><a href="#ES6模块化加载" class="headerlink" title="ES6模块化加载"></a>ES6模块化加载</h2><blockquote>
 <p>静态化思想，<strong>编译时</strong>就确定模块关系，即在模块内就指定要加载模块，运行时使用import加载指定的模块 </p>
 </blockquote>
-<pre class="line-numbers language-js"><code class="language-js"><span class="token comment" spellcheck="true">//import {a,b} from 'fs'</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre class="line-numbers language-js"><code class="language-js"><span class="token comment" spellcheck="true">//import &amp;#123;a,b&amp;#125; from 'fs'</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p><strong>fs文件可以不写后缀需要在webpack中配置说明</strong></p>
 <h3 id="export命令"><a href="#export命令" class="headerlink" title="export命令"></a>export命令</h3><blockquote>
 <p>常见写法</p>
@@ -560,19 +560,19 @@
 <span class="token comment" spellcheck="true">//相当于</span>
 <span class="token keyword">var</span> a <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
 <span class="token keyword">var</span> b <span class="token operator">=</span> <span class="token string">'jack'</span>
-<span class="token keyword">export</span> <span class="token punctuation">{</span>a<span class="token punctuation">,</span>b<span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token keyword">export</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>a<span class="token punctuation">,</span>b<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">;</span>
 <span class="token comment" spellcheck="true">//函数或类</span>
-<span class="token keyword">export</span> <span class="token keyword">function</span> <span class="token function">exportFunc</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span><span class="token operator">...</span><span class="token punctuation">}</span>
-<span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">exportClass</span> <span class="token punctuation">{</span><span class="token operator">...</span><span class="token punctuation">}</span>
+<span class="token keyword">export</span> <span class="token keyword">function</span> <span class="token function">exportFunc</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span><span class="token operator">...</span><span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+<span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">exportClass</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span><span class="token operator">...</span><span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
 <span class="token comment" spellcheck="true">//使用as关键字为导出变量重命名,同一个导出变量可有多个不同名称的输出</span>
 <span class="token keyword">var</span> a <span class="token operator">=</span> <span class="token string">'jack'</span>
-<span class="token keyword">export</span> <span class="token punctuation">{</span>a <span class="token keyword">as</span> summer<span class="token punctuation">,</span>a <span class="token keyword">as</span> peter<span class="token punctuation">}</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token keyword">export</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>a <span class="token keyword">as</span> summer<span class="token punctuation">,</span>a <span class="token keyword">as</span> peter<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li><p>通过export与import关键字进行导入导出，实际上就是导出了代码的引用到对应位置，因此他的数据是可变的（实时的）</p>
 <pre class="line-numbers language-js"><code class="language-js"><span class="token comment" spellcheck="true">//100ms之后导出的a的值会变成'change'</span>
 <span class="token keyword">var</span> a <span class="token operator">=</span> <span class="token string">'origin'</span>
-<span class="token function">setTimeout</span><span class="token punctuation">(</span>_<span class="token operator">=</span><span class="token operator">></span><span class="token punctuation">{</span>a <span class="token operator">=</span> <span class="token string">'change'</span><span class="token punctuation">}</span><span class="token punctuation">,</span><span class="token number">100</span><span class="token punctuation">)</span>
-<span class="token keyword">export</span> <span class="token punctuation">{</span>a<span class="token punctuation">}</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token function">setTimeout</span><span class="token punctuation">(</span>_<span class="token operator">=</span><span class="token operator">></span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>a <span class="token operator">=</span> <span class="token string">'change'</span><span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">,</span><span class="token number">100</span><span class="token punctuation">)</span>
+<span class="token keyword">export</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>a<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 </li>
 <li><p>因为静态时确定模块导入/出关系，export关键字不可放在函数中，导出/导入表达式中不可有运行之后才有明确结果的变量成分</p>
 </li>
@@ -582,18 +582,18 @@
 <h3 id="import关键字"><a href="#import关键字" class="headerlink" title="import关键字"></a>import关键字</h3><blockquote>
 <p>常见写法</p>
 </blockquote>
-<pre class="line-numbers language-js"><code class="language-js"><span class="token keyword">import</span> <span class="token punctuation">{</span>a<span class="token punctuation">,</span>b<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'./exprot.js'</span>
+<pre class="line-numbers language-js"><code class="language-js"><span class="token keyword">import</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>a<span class="token punctuation">,</span>b<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span> <span class="token keyword">from</span> <span class="token string">'./exprot.js'</span>
 <span class="token comment" spellcheck="true">//可为导入的成员重新命名</span>
-<span class="token keyword">import</span> <span class="token punctuation">{</span>a <span class="token keyword">as</span> c<span class="token punctuation">,</span>b <span class="token keyword">as</span> d<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'./exprot.js'</span>
+<span class="token keyword">import</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>a <span class="token keyword">as</span> c<span class="token punctuation">,</span>b <span class="token keyword">as</span> d<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span> <span class="token keyword">from</span> <span class="token string">'./exprot.js'</span>
 <span class="token comment" spellcheck="true">//导出变量如果不是对象，不可赋值（只读），是对象也不推荐赋值，影响代码维护</span>
-<span class="token keyword">import</span> <span class="token punctuation">{</span> a<span class="token punctuation">}</span> form <span class="token string">'export.js'</span>
+<span class="token keyword">import</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span> a<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span> form <span class="token string">'export.js'</span>
 a <span class="token operator">=</span> XXX——错误（不推荐）的写法<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li><p>多次调用一个导入文件，等同于引用一个导出的多个被选引用，会自动合并相同引用例如</p>
-<pre class="line-numbers language-js"><code class="language-js"><span class="token keyword">import</span> <span class="token punctuation">{</span> foo <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'my_module'</span><span class="token punctuation">;</span>
-<span class="token keyword">import</span> <span class="token punctuation">{</span> bar <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'my_module'</span><span class="token punctuation">;</span>
+<pre class="line-numbers language-js"><code class="language-js"><span class="token keyword">import</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span> foo <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span> <span class="token keyword">from</span> <span class="token string">'my_module'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span> bar <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span> <span class="token keyword">from</span> <span class="token string">'my_module'</span><span class="token punctuation">;</span>
 <span class="token comment" spellcheck="true">// 等同于</span>
-<span class="token keyword">import</span> <span class="token punctuation">{</span> foo<span class="token punctuation">,</span> bar <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'my_module'</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token keyword">import</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span> foo<span class="token punctuation">,</span> bar <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span> <span class="token keyword">from</span> <span class="token string">'my_module'</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 </li>
 <li><p>不要和CommonJS的模块加载混用，CommonJS是运行时加载会出问题</p>
 </li>
@@ -602,50 +602,50 @@ a <span class="token operator">=</span> XXX——错误（不推荐）的写法<
 <pre class="line-numbers language-js"><code class="language-js"><span class="token keyword">import</span> <span class="token operator">*</span> <span class="token keyword">as</span> circle <span class="token keyword">from</span> <span class="token string">'./circle'</span><span class="token punctuation">;</span>
 <span class="token comment" spellcheck="true">// 下面两行都是不允许的</span>
 circle<span class="token punctuation">.</span>foo <span class="token operator">=</span> <span class="token string">'hello'</span><span class="token punctuation">;</span>
-circle<span class="token punctuation">.</span>area <span class="token operator">=</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+circle<span class="token punctuation">.</span>area <span class="token operator">=</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span><span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 <p>2、默认导入关键字default——导出default名称的变量，导入时可自由命名，不用使用as</p>
 <blockquote>
 <p>常见写法</p>
 </blockquote>
 <pre class="line-numbers language-js"><code class="language-js"><span class="token comment" spellcheck="true">//导出命名函数——同导出匿名函数一样，名称无用，导入时自用命名</span>
-exprot <span class="token keyword">default</span> <span class="token keyword">function</span> <span class="token function">f</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span><span class="token operator">...</span><span class="token punctuation">}</span>
+exprot <span class="token keyword">default</span> <span class="token keyword">function</span> <span class="token function">f</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span><span class="token operator">...</span><span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
 <span class="token comment" spellcheck="true">//等同于</span>
-exprot <span class="token keyword">default</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span><span class="token operator">...</span><span class="token punctuation">}</span>
-<span class="token comment" spellcheck="true">//导入时不用加{}</span>
+exprot <span class="token keyword">default</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span><span class="token operator">...</span><span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+<span class="token comment" spellcheck="true">//导入时不用加&amp;#123;&amp;#125;</span>
 <span class="token keyword">import</span> anyname <span class="token keyword">from</span> <span class="token string">'default.js'</span>
 
 <span class="token comment" spellcheck="true">//上述操作等同于</span>
 <span class="token keyword">var</span> something<span class="token operator">=</span> <span class="token string">'...'</span>
-exprot <span class="token punctuation">{</span>something <span class="token keyword">as</span> <span class="token keyword">default</span><span class="token punctuation">}</span> 
-<span class="token keyword">import</span> <span class="token punctuation">{</span><span class="token keyword">default</span> <span class="token keyword">as</span> anyname<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+exprot <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>something <span class="token keyword">as</span> <span class="token keyword">default</span><span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span> 
+<span class="token keyword">import</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span><span class="token keyword">default</span> <span class="token keyword">as</span> anyname<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>默认导入/导出可与导出对象叠加使用<pre class="line-numbers language-js"><code class="language-js"><span class="token comment" spellcheck="true">//导出</span>
-eport <span class="token keyword">default</span> <span class="token keyword">function</span> <span class="token punctuation">(</span>obj<span class="token punctuation">)</span> <span class="token punctuation">{</span>···<span class="token punctuation">}</span>
-<span class="token keyword">export</span> <span class="token keyword">function</span> <span class="token function">each</span><span class="token punctuation">(</span>obj<span class="token punctuation">,</span> iterator<span class="token punctuation">,</span> context<span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token operator">...</span><span class="token punctuation">}</span>
-<span class="token keyword">export</span> <span class="token punctuation">{</span> each <span class="token keyword">as</span> forEach <span class="token punctuation">}</span><span class="token punctuation">;</span>
+eport <span class="token keyword">default</span> <span class="token keyword">function</span> <span class="token punctuation">(</span>obj<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>···<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+<span class="token keyword">export</span> <span class="token keyword">function</span> <span class="token function">each</span><span class="token punctuation">(</span>obj<span class="token punctuation">,</span> iterator<span class="token punctuation">,</span> context<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span><span class="token operator">...</span><span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+<span class="token keyword">export</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span> each <span class="token keyword">as</span> forEach <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">;</span>
 <span class="token comment" spellcheck="true">//导入</span>
-<span class="token keyword">import</span> _<span class="token punctuation">,</span> <span class="token punctuation">{</span> each<span class="token punctuation">,</span> forEach <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'export.js'</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token keyword">import</span> _<span class="token punctuation">,</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span> each<span class="token punctuation">,</span> forEach <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span> <span class="token keyword">from</span> <span class="token string">'export.js'</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 </li>
 </ul>
 <p>3、合并import+export做转发or重命名or模块继承（添加完善）</p>
 <pre class="line-numbers language-js"><code class="language-js"><span class="token comment" spellcheck="true">//模块转发</span>
-<span class="token keyword">export</span> <span class="token punctuation">{</span> foo<span class="token punctuation">,</span> bar <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'my_module'</span><span class="token punctuation">;</span>
+<span class="token keyword">export</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span> foo<span class="token punctuation">,</span> bar <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span> <span class="token keyword">from</span> <span class="token string">'my_module'</span><span class="token punctuation">;</span>
 <span class="token comment" spellcheck="true">// 可以简单理解为</span>
-<span class="token keyword">import</span> <span class="token punctuation">{</span> foo<span class="token punctuation">,</span> bar <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'my_module'</span><span class="token punctuation">;</span>
-<span class="token keyword">export</span> <span class="token punctuation">{</span> foo<span class="token punctuation">,</span> bar <span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span> foo<span class="token punctuation">,</span> bar <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span> <span class="token keyword">from</span> <span class="token string">'my_module'</span><span class="token punctuation">;</span>
+<span class="token keyword">export</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span> foo<span class="token punctuation">,</span> bar <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">;</span>
 
 <span class="token comment" spellcheck="true">//模块转发并重命名</span>
 <span class="token keyword">export</span> <span class="token operator">*</span> <span class="token keyword">as</span> ns <span class="token keyword">from</span> <span class="token string">"mod"</span><span class="token punctuation">;</span>
 <span class="token comment" spellcheck="true">// 等同于</span>
 <span class="token keyword">import</span> <span class="token operator">*</span> <span class="token keyword">as</span> ns <span class="token keyword">from</span> <span class="token string">"mod"</span><span class="token punctuation">;</span>
-<span class="token keyword">export</span> <span class="token punctuation">{</span>ns<span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token keyword">export</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>ns<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">;</span>
 
 <span class="token comment" spellcheck="true">//模块继承（*号表示非默认default导出的对象）</span>
 <span class="token keyword">export</span> <span class="token operator">*</span> <span class="token keyword">from</span> <span class="token string">'circle'</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//不包括default默认导出</span>
 <span class="token keyword">export</span> <span class="token keyword">var</span> e <span class="token operator">=</span> <span class="token number">2.71828182846</span><span class="token punctuation">;</span>
-<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token keyword">function</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token keyword">function</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
   <span class="token keyword">return</span> Math<span class="token punctuation">.</span><span class="token function">exp</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
+<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
 
 <span class="token comment" spellcheck="true">//引用修改（加强）的模块</span>
 <span class="token keyword">import</span> <span class="token operator">*</span> <span class="token keyword">as</span> math <span class="token keyword">from</span> <span class="token string">'circleplus'</span><span class="token punctuation">;</span>
@@ -660,24 +660,24 @@ Promise<span class="token punctuation">.</span><span class="token function">all<
   <span class="token keyword">import</span><span class="token punctuation">(</span><span class="token string">'./module2.js'</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
   <span class="token keyword">import</span><span class="token punctuation">(</span><span class="token string">'./module3.js'</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
 <span class="token punctuation">]</span><span class="token punctuation">)</span>
-<span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">[</span>module1<span class="token punctuation">,</span> module2<span class="token punctuation">,</span> module3<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+<span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">[</span>module1<span class="token punctuation">,</span> module2<span class="token punctuation">,</span> module3<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
    ···
-<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token comment" spellcheck="true">//导入模块后直接解构获取值</span>
 <span class="token keyword">import</span><span class="token punctuation">(</span><span class="token string">'./myModule.js'</span><span class="token punctuation">)</span>
-<span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">{</span>export1<span class="token punctuation">,</span> export2<span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+<span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>export1<span class="token punctuation">,</span> export2<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
   <span class="token comment" spellcheck="true">// ...·</span>
-<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token comment" spellcheck="true">//获取默认导出</span>
 <span class="token keyword">import</span><span class="token punctuation">(</span><span class="token string">'./myModule.js'</span><span class="token punctuation">)</span>
-<span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span>myModule <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+<span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span>myModule <span class="token operator">=</span><span class="token operator">></span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
   console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>myModule<span class="token punctuation">.</span><span class="token keyword">default</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token comment" spellcheck="true">//默认导出的具名形式</span>
 <span class="token keyword">import</span><span class="token punctuation">(</span><span class="token string">'./myModule.js'</span><span class="token punctuation">)</span>
-<span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">{</span><span class="token keyword">default</span><span class="token punctuation">:</span> theDefault<span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+<span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span><span class="token keyword">default</span><span class="token punctuation">:</span> theDefault<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
   console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>theDefault<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <blockquote>
 <p>总结特点：1、加载路径可变，动态加载引用2、可在函数内使用3、异步加载</p>
 </blockquote>
@@ -1446,7 +1446,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">15.9k</span>&nbsp;字
+                class="white-color">16.4k</span>&nbsp;字
             
             
             
@@ -1573,7 +1573,7 @@ $(function () {
     </a>
 </div>
 
-
+    <script src="/live2d-widget/autoload.js"></script>
     <script src="/libs/materialize/materialize.min.js"></script>
     <script src="/libs/masonry/masonry.pkgd.min.js"></script>
     <script src="/libs/aos/aos.js"></script>
@@ -1653,9 +1653,9 @@ $(function () {
     
 
     
-    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    <script src="/libs/instantpage/instantpage.js" type="module"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
     
 
-<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":300,"height":600},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script><!-- hexo-inject:begin --><!-- hexo-inject:end --></body>
+</body>
 
 </html>
