@@ -1,18 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-  <title>Mr.H&#39;s blog</title>
+  <title></title>
   
-  <subtitle>ambition</subtitle>
+  <subtitle>hope</subtitle>
   <link href="https://hyong1232.github.io/atom.xml" rel="self"/>
   
   <link href="https://hyong1232.github.io/"/>
   <updated>2020-10-31T18:03:34.000Z</updated>
   <id>https://hyong1232.github.io/</id>
-  
-  <author>
-    <name>Mr.H</name>
-    
-  </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
   
