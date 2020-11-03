@@ -2574,6 +2574,46 @@ module<span class="token punctuation">.</span>exports <span class="token operato
         extensions<span class="token punctuation">:</span><span class="token punctuation">[</span><span class="token string">'.js'</span><span class="token punctuation">,</span><span class="token string">'.jsx'</span><span class="token punctuation">,</span><span class="token string">'.json'</span><span class="token punctuation">]</span>
     <span class="token punctuation">}</span><span class="token punctuation">,</span>
 <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="附上完整的package-json文件"><a href="#附上完整的package-json文件" class="headerlink" title="附上完整的package.json文件"></a>附上完整的package.json文件</h2><pre class="line-numbers language-json"><code class="language-json"><span class="token punctuation">{</span>
+  <span class="token property">"name"</span><span class="token operator">:</span> <span class="token string">"demo"</span><span class="token punctuation">,</span>
+  <span class="token property">"version"</span><span class="token operator">:</span> <span class="token string">"1.0.0"</span><span class="token punctuation">,</span>
+  <span class="token property">"description"</span><span class="token operator">:</span> <span class="token string">""</span><span class="token punctuation">,</span>
+  <span class="token property">"main"</span><span class="token operator">:</span> <span class="token string">"index.js"</span><span class="token punctuation">,</span>
+  <span class="token property">"scripts"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token property">"test"</span><span class="token operator">:</span> <span class="token string">"echo \"Error: no test specified\" &amp;&amp; exit 1"</span><span class="token punctuation">,</span>
+    <span class="token property">"serve"</span><span class="token operator">:</span> <span class="token string">"webpack-dev-server --open --port 8080 --hot --host 127.0.0.1"</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token property">"keywords"</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+  <span class="token property">"author"</span><span class="token operator">:</span> <span class="token string">""</span><span class="token punctuation">,</span>
+  <span class="token property">"license"</span><span class="token operator">:</span> <span class="token string">"ISC"</span><span class="token punctuation">,</span>
+  <span class="token property">"devDependencies"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token property">"babel-core"</span><span class="token operator">:</span> <span class="token string">"^6.26.3"</span><span class="token punctuation">,</span>
+    <span class="token property">"babel-loader"</span><span class="token operator">:</span> <span class="token string">"^7.0.0"</span><span class="token punctuation">,</span>
+    <span class="token property">"babel-plugin-transform-runtime"</span><span class="token operator">:</span> <span class="token string">"^6.23.0"</span><span class="token punctuation">,</span>
+    <span class="token property">"babel-preset-env"</span><span class="token operator">:</span> <span class="token string">"^1.7.0"</span><span class="token punctuation">,</span>
+    <span class="token property">"babel-preset-react"</span><span class="token operator">:</span> <span class="token string">"^6.24.1"</span><span class="token punctuation">,</span>
+    <span class="token property">"babel-preset-stage-0"</span><span class="token operator">:</span> <span class="token string">"^6.24.1"</span><span class="token punctuation">,</span>
+    <span class="token property">"bootstrap"</span><span class="token operator">:</span> <span class="token string">"^4.5.0"</span><span class="token punctuation">,</span>
+    <span class="token property">"create-react-class"</span><span class="token operator">:</span> <span class="token string">"^15.6.3"</span><span class="token punctuation">,</span>
+    <span class="token property">"css-loader"</span><span class="token operator">:</span> <span class="token string">"^3.5.3"</span><span class="token punctuation">,</span>
+    <span class="token property">"file-loader"</span><span class="token operator">:</span> <span class="token string">"^6.0.0"</span><span class="token punctuation">,</span>
+    <span class="token property">"html-webpack-plugin"</span><span class="token operator">:</span> <span class="token string">"^4.3.0"</span><span class="token punctuation">,</span>
+    <span class="token property">"jquery"</span><span class="token operator">:</span> <span class="token string">"^3.5.1"</span><span class="token punctuation">,</span>
+    <span class="token property">"prop-types"</span><span class="token operator">:</span> <span class="token string">"^15.7.2"</span><span class="token punctuation">,</span>
+    <span class="token property">"sass-loader"</span><span class="token operator">:</span> <span class="token string">"^8.0.2"</span><span class="token punctuation">,</span>
+    <span class="token property">"style-loader"</span><span class="token operator">:</span> <span class="token string">"^1.2.1"</span><span class="token punctuation">,</span>
+    <span class="token property">"url-loader"</span><span class="token operator">:</span> <span class="token string">"^4.1.0"</span><span class="token punctuation">,</span>
+    <span class="token property">"webpack"</span><span class="token operator">:</span> <span class="token string">"^4.43.0"</span><span class="token punctuation">,</span>
+    <span class="token property">"webpack-cli"</span><span class="token operator">:</span> <span class="token string">"^3.3.11"</span><span class="token punctuation">,</span>
+    <span class="token property">"webpack-dev-server"</span><span class="token operator">:</span> <span class="token string">"^3.11.0"</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token property">"dependencies"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token property">"node-sass"</span><span class="token operator">:</span> <span class="token string">"^4.14.1"</span><span class="token punctuation">,</span>
+    <span class="token property">"react"</span><span class="token operator">:</span> <span class="token string">"^16.13.1"</span><span class="token punctuation">,</span>
+    <span class="token property">"react-dom"</span><span class="token operator">:</span> <span class="token string">"^16.13.1"</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 ]]></content>
       <categories>
         <category>node</category>
