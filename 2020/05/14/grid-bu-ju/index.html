@@ -515,7 +515,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    7 分
+                    8 分
                 </div>
                 
 
@@ -655,10 +655,10 @@
 <h3 id="align-self-amp-amp-justify-self-amp-amp-place-self"><a href="#align-self-amp-amp-justify-self-amp-amp-place-self" class="headerlink" title="align-self&amp;&amp;justify-self&amp;&amp;place-self"></a>align-self&amp;&amp;justify-self&amp;&amp;place-self</h3><blockquote>
 <p>与align|justify|place-items用法完全一致，但只作用于单个grid-cell</p>
 </blockquote>
-<pre class="line-numbers language-css"><code class="language-css"><span class="token selector"><span class="token class">.item-1</span> </span><span class="token punctuation">{</span>
+<pre class="line-numbers language-css"><code class="language-css"><span class="token number">.</span>item-<span class="token number">1</span> &amp;<span class="token hexcode">#123</span><span class="token punctuation">;</span>
   <span class="token property">place-self</span><span class="token punctuation">:</span>stretch center<span class="token punctuation">;</span>
   <span class="token property">background-color</span><span class="token punctuation">:</span> <span class="token hexcode">#ef342a</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span> <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+&amp;<span class="token hexcode">#125</span><span class="token punctuation">;</span> <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 <p><img src="/images/place-self.PNG" alt="place-self单个grid-cell作用域"></p>
 <h3 id="align-content-amp-amp-justify-content-amp-amp-place-content"><a href="#align-content-amp-amp-justify-content-amp-amp-place-content" class="headerlink" title="align-content&amp;&amp;justify-content&amp;&amp;place-content"></a>align-content&amp;&amp;justify-content&amp;&amp;place-content</h3><blockquote>
 <p>规定整个项目在grid-container中的位置<br>可选属性：start|center|space-between|space-evenly|space-around——between间隔在项目之间</p>
@@ -765,18 +765,18 @@ example
 <h3 id="grid-area"><a href="#grid-area" class="headerlink" title="grid-area"></a>grid-area</h3><blockquote>
 <p>1、与grid-template-area结合使用，指定grid-cell位置</p>
 </blockquote>
-<pre class="line-numbers language-css"><code class="language-css"><span class="token selector"><span class="token class">.container</span></span><span class="token punctuation">{</span>
+<pre class="line-numbers language-css"><code class="language-css"><span class="token number">.</span>container&amp;<span class="token hexcode">#123</span><span class="token punctuation">;</span>
   <span class="token property">display</span><span class="token punctuation">:</span> grid<span class="token punctuation">;</span>
   <span class="token property">grid-template-columns</span><span class="token punctuation">:</span> <span class="token number">100</span>px <span class="token number">100</span>px <span class="token number">100</span>px<span class="token punctuation">;</span>
   <span class="token property">grid-template-rows</span><span class="token punctuation">:</span> <span class="token number">100</span>px <span class="token number">100</span>px <span class="token number">100</span>px<span class="token punctuation">;</span>
   <span class="token property">grid-template-areas</span><span class="token punctuation">:</span> <span class="token string">'a b c'</span>
                      <span class="token string">'d e f'</span>
                      <span class="token string">'g h i'</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-<span class="token selector"><span class="token class">.item-1</span> </span><span class="token punctuation">{</span>
+&amp;<span class="token hexcode">#125</span><span class="token punctuation">;</span>
+<span class="token number">.</span>item-<span class="token number">1</span> &amp;<span class="token hexcode">#123</span><span class="token punctuation">;</span>
   <span class="token property">background-color</span><span class="token punctuation">:</span> <span class="token hexcode">#ef342a</span><span class="token punctuation">;</span>
   <span class="token property">grid-area</span><span class="token punctuation">:</span> e<span class="token punctuation">;</span>
-<span class="token punctuation">}</span>       <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+&amp;<span class="token hexcode">#125</span><span class="token punctuation">;</span>       <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>如下图</p>
 <img src="https://www.wangbase.com/blogimg/asset/201903/bg2019032530.png" class="" width="280" title="grid-area指定grid-cell位置">
 
@@ -1571,7 +1571,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">16k</span>&nbsp;字
+                class="white-color">16.6k</span>&nbsp;字
             
             
             

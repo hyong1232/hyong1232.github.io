@@ -508,14 +508,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    683
+                    771
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    2 分
+                    3 分
                 </div>
                 
 
@@ -547,36 +547,36 @@
 <span class="token keyword">const</span> arr <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">]</span>
 <span class="token keyword">const</span> <span class="token punctuation">[</span>one<span class="token punctuation">,</span>two<span class="token punctuation">]</span> <span class="token operator">=</span> arr
 <span class="token comment" spellcheck="true">//2、获取函数参数</span>
-<span class="token keyword">function</span> <span class="token function">everyfunc</span><span class="token punctuation">(</span>params<span class="token punctuation">)</span><span class="token punctuation">{</span>
-    <span class="token keyword">const</span> <span class="token punctuation">{</span>one<span class="token punctuation">,</span>two<span class="token punctuation">}</span> <span class="token operator">=</span> params
-<span class="token punctuation">}</span>
+<span class="token keyword">function</span> <span class="token function">everyfunc</span><span class="token punctuation">(</span>params<span class="token punctuation">)</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token keyword">const</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>one<span class="token punctuation">,</span>two<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span> <span class="token operator">=</span> params
+<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
 <span class="token comment" spellcheck="true">//3、函数返回值&amp;&amp;获取函数返回值（尽量使用对象返回结构，便于添加和修改顺序）</span>
-<span class="token keyword">const</span> <span class="token punctuation">{</span>one<span class="token punctuation">,</span>two<span class="token punctuation">}</span> <span class="token operator">=</span> <span class="token function">getReturnFunc</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-<span class="token keyword">function</span> <span class="token function">getReturnFunc</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
-    <span class="token keyword">return</span> <span class="token punctuation">{</span>one<span class="token punctuation">,</span>two<span class="token punctuation">}</span>
-<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token keyword">const</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>one<span class="token punctuation">,</span>two<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span> <span class="token operator">=</span> <span class="token function">getReturnFunc</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token keyword">function</span> <span class="token function">getReturnFunc</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>one<span class="token punctuation">,</span>two<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h2 id="对象"><a href="#对象" class="headerlink" title="对象"></a>对象</h2><p>1、对象定义时，多行元素最后一个要加上‘,’，定义在一行上则不必</p>
-<pre class="line-numbers language-js"><code class="language-js"><span class="token keyword">const</span> obj <span class="token operator">=</span> <span class="token punctuation">{</span>a<span class="token punctuation">:</span><span class="token number">1</span><span class="token punctuation">,</span>b<span class="token punctuation">:</span><span class="token number">3</span><span class="token punctuation">}</span>
-<span class="token keyword">const</span> obj <span class="token operator">=</span> <span class="token punctuation">{</span>
+<pre class="line-numbers language-js"><code class="language-js"><span class="token keyword">const</span> obj <span class="token operator">=</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>a<span class="token punctuation">:</span><span class="token number">1</span><span class="token punctuation">,</span>b<span class="token punctuation">:</span><span class="token number">3</span><span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> obj <span class="token operator">=</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
     a<span class="token punctuation">:</span><span class="token number">1</span><span class="token punctuation">,</span>
     b<span class="token punctuation">:</span><span class="token number">3</span><span class="token punctuation">,</span>
-<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>2、尽量不要修改，静态化，修改使用Object.assign(target,…origin)（可以有多个源对象）修改。</p>
-<pre class="line-numbers language-js"><code class="language-js"><span class="token keyword">const</span> target <span class="token operator">=</span> <span class="token punctuation">{</span>
+<pre class="line-numbers language-js"><code class="language-js"><span class="token keyword">const</span> target <span class="token operator">=</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
     one<span class="token punctuation">:</span><span class="token string">'one'</span>
-<span class="token punctuation">}</span>
-Object<span class="token punctuation">.</span><span class="token function">assign</span><span class="token punctuation">(</span>target<span class="token punctuation">,</span><span class="token punctuation">{</span>two<span class="token punctuation">:</span><span class="token string">'two'</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token operator">===</span><span class="token operator">></span>target<span class="token operator">=</span><span class="token punctuation">{</span>one<span class="token punctuation">:</span><span class="token string">'one'</span><span class="token punctuation">,</span>two<span class="token punctuation">:</span><span class="token string">'two'</span><span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+Object<span class="token punctuation">.</span><span class="token function">assign</span><span class="token punctuation">(</span>target<span class="token punctuation">,</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>two<span class="token punctuation">:</span><span class="token string">'two'</span><span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">)</span><span class="token operator">===</span><span class="token operator">></span>target<span class="token operator">=</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>one<span class="token punctuation">:</span><span class="token string">'one'</span><span class="token punctuation">,</span>two<span class="token punctuation">:</span><span class="token string">'two'</span><span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 <p>3、如果定义时元素名称不确定，使用属性表达式，即‘[要运算的表达式]’作为元素名称。</p>
-<pre class="line-numbers language-js"><code class="language-js"><span class="token keyword">const</span> obj <span class="token operator">=</span> <span class="token punctuation">{</span>
+<pre class="line-numbers language-js"><code class="language-js"><span class="token keyword">const</span> obj <span class="token operator">=</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
     <span class="token punctuation">[</span><span class="token function">getName</span><span class="token punctuation">(</span><span class="token string">'key'</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">:</span><span class="token string">'jack'</span>
-<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 <p>4、对象内部方法省略function关键字，同名键名称省略</p>
-<pre class="line-numbers language-js"><code class="language-js"><span class="token keyword">const</span> obj <span class="token operator">=</span> <span class="token punctuation">{</span>
+<pre class="line-numbers language-js"><code class="language-js"><span class="token keyword">const</span> obj <span class="token operator">=</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
     one<span class="token punctuation">,</span>
-    <span class="token keyword">get</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">get</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
         <span class="token operator">...</span>
-    <span class="token punctuation">}</span>
-<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h2 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h2><p>1、复制数组使用扩展运算符</p>
 <pre class="line-numbers language-js"><code class="language-js"><span class="token keyword">let</span> oldArr <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">]</span>
 <span class="token keyword">let</span> newArr <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token operator">...</span>oldArr<span class="token punctuation">]</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
@@ -590,9 +590,9 @@ Object<span class="token punctuation">.</span><span class="token function">assig
 <li><p>绑定this值，代替使用（_self/that/_this）表示this</p>
 <pre class="line-numbers language-js"><code class="language-js"><span class="token comment" spellcheck="true">// bad</span>
 <span class="token keyword">const</span> self <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">;</span>
-<span class="token keyword">const</span> boundMethod <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token operator">...</span>params<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+<span class="token keyword">const</span> boundMethod <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token operator">...</span>params<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
 <span class="token keyword">return</span> method<span class="token punctuation">.</span><span class="token function">apply</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> params<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
+<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
 <span class="token comment" spellcheck="true">// acceptable</span>
 <span class="token keyword">const</span> boundMethod <span class="token operator">=</span> method<span class="token punctuation">.</span><span class="token function">bind</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token comment" spellcheck="true">// best</span>
@@ -602,14 +602,14 @@ Object<span class="token punctuation">.</span><span class="token function">assig
 <p>2、参数</p>
 <ul>
 <li><p>不用argument关键字，获取参数使用（…params）直接获取参数数组</p>
-<pre class="line-numbers language-js"><code class="language-js"><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token operator">...</span>params<span class="token punctuation">)</span><span class="token punctuation">{</span>
+<pre class="line-numbers language-js"><code class="language-js"><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token operator">...</span>params<span class="token punctuation">)</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
   params<span class="token punctuation">.</span><span class="token function">join</span><span class="token punctuation">(</span><span class="token string">''</span><span class="token punctuation">)</span>
-<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 </li>
 <li><p>在参数列表设置默认参数</p>
-<pre class="line-numbers language-js"><code class="language-js"><span class="token keyword">function</span><span class="token punctuation">(</span>params<span class="token operator">=</span><span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+<pre class="line-numbers language-js"><code class="language-js"><span class="token keyword">function</span><span class="token punctuation">(</span>params<span class="token operator">=</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span><span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">)</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
   anything<span class="token operator">...</span>
-<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 </li>
 </ul>
 <h2 id="使用Map代替Object对象的使用"><a href="#使用Map代替Object对象的使用" class="headerlink" title="使用Map代替Object对象的使用"></a>使用Map代替Object对象的使用</h2><blockquote>
@@ -618,26 +618,26 @@ Object<span class="token punctuation">.</span><span class="token function">assig
 <pre class="line-numbers language-js"><code class="language-js"><span class="token keyword">let</span> map <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Map</span><span class="token punctuation">(</span>可迭代对象<span class="token punctuation">)</span>
 <span class="token keyword">let</span> map <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Map</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token string">'one'</span><span class="token punctuation">]</span><span class="token punctuation">,</span><span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token string">'two'</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
 <span class="token comment" spellcheck="true">//keys()便利key值</span>
-<span class="token keyword">for</span> key <span class="token keyword">of</span> map<span class="token punctuation">.</span><span class="token function">keys</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span><span class="token punctuation">}</span> <span class="token punctuation">;</span>
+<span class="token keyword">for</span> key <span class="token keyword">of</span> map<span class="token punctuation">.</span><span class="token function">keys</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span><span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span> <span class="token punctuation">;</span>
 <span class="token comment" spellcheck="true">//values()便利值</span>
 
 <span class="token comment" spellcheck="true">//entries()获取值和key值（为数组则是下标数值）</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h2 id="class代替原有的直接操作Prototype属性，规范类定义使用"><a href="#class代替原有的直接操作Prototype属性，规范类定义使用" class="headerlink" title="class代替原有的直接操作Prototype属性，规范类定义使用"></a>class代替原有的直接操作Prototype属性，规范类定义使用</h2><pre class="line-numbers language-js"><code class="language-js"><span class="token comment" spellcheck="true">// bad</span>
 <span class="token keyword">const</span> inherits <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'inherits'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token keyword">function</span> <span class="token function">PeekableQueue</span><span class="token punctuation">(</span>contents<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+<span class="token keyword">function</span> <span class="token function">PeekableQueue</span><span class="token punctuation">(</span>contents<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
   Queue<span class="token punctuation">.</span><span class="token function">apply</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">,</span> contents<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
+<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
 <span class="token function">inherits</span><span class="token punctuation">(</span>PeekableQueue<span class="token punctuation">,</span> Queue<span class="token punctuation">)</span><span class="token punctuation">;</span>
-PeekableQueue<span class="token punctuation">.</span>prototype<span class="token punctuation">.</span>peek <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+PeekableQueue<span class="token punctuation">.</span>prototype<span class="token punctuation">.</span>peek <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
   <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">.</span>_queue<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
+<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
 
 <span class="token comment" spellcheck="true">// good</span>
-<span class="token keyword">class</span> <span class="token class-name">PeekableQueue</span> <span class="token keyword">extends</span> <span class="token class-name">Queue</span> <span class="token punctuation">{</span>
-  <span class="token function">peek</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+<span class="token keyword">class</span> <span class="token class-name">PeekableQueue</span> <span class="token keyword">extends</span> <span class="token class-name">Queue</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+  <span class="token function">peek</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
     <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">.</span>_queue<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
-  <span class="token punctuation">}</span>
-<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h2 id="使用es6的模块化代替CommonJS的模块化引用"><a href="#使用es6的模块化代替CommonJS的模块化引用" class="headerlink" title="使用es6的模块化代替CommonJS的模块化引用"></a>使用es6的模块化代替CommonJS的模块化引用</h2>
             </div>
             <hr/>
@@ -1399,7 +1399,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">16k</span>&nbsp;字
+                class="white-color">16.6k</span>&nbsp;字
             
             
             

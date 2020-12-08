@@ -508,7 +508,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    660
+                    736
                 </div>
                 
 
@@ -556,65 +556,65 @@
 <span class="token keyword">const</span> htmlwebpackplugin <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'html-webpack-plugin'</span><span class="token punctuation">)</span>
 <span class="token keyword">const</span> path <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'path'</span><span class="token punctuation">)</span>
 
-<span class="token keyword">const</span> htmlwebplugin <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">htmlwebpackplugin</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+<span class="token keyword">const</span> htmlwebplugin <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">htmlwebpackplugin</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
     filename<span class="token punctuation">:</span><span class="token string">'index.html'</span><span class="token punctuation">,</span>
     template<span class="token punctuation">:</span>path<span class="token punctuation">.</span><span class="token function">join</span><span class="token punctuation">(</span>__dirname<span class="token punctuation">,</span><span class="token string">'./src/index.html'</span><span class="token punctuation">)</span>
-<span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">)</span>
 
 <span class="token comment" spellcheck="true">//安装node-sass特殊命令npm install node-sass -D --sass-binary-site=http://npm.taobao.org/mirrors/node-sass</span>
-module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
     mode<span class="token punctuation">:</span><span class="token string">'development'</span><span class="token punctuation">,</span>
     plugins<span class="token punctuation">:</span><span class="token punctuation">[</span>htmlwebplugin<span class="token punctuation">]</span><span class="token punctuation">,</span>
     entry<span class="token punctuation">:</span><span class="token string">'./src/main.js'</span><span class="token punctuation">,</span>
-    module<span class="token punctuation">:</span><span class="token punctuation">{</span>
+    module<span class="token punctuation">:</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
         rules<span class="token punctuation">:</span><span class="token punctuation">[</span>
-            <span class="token punctuation">{</span> 
+            <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span> 
                 test<span class="token punctuation">:</span> <span class="token regex">/.js$/</span><span class="token punctuation">,</span> 
                 exclude<span class="token punctuation">:</span><span class="token regex">/node_modules/</span><span class="token punctuation">,</span>
-                use<span class="token punctuation">:</span><span class="token punctuation">{</span>
+                use<span class="token punctuation">:</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
                     loader<span class="token punctuation">:</span><span class="token string">'babel-loader'</span><span class="token punctuation">,</span>
-                    options<span class="token punctuation">:</span><span class="token punctuation">{</span>
+                    options<span class="token punctuation">:</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
                         presets<span class="token punctuation">:</span><span class="token punctuation">[</span><span class="token string">'env'</span><span class="token punctuation">,</span><span class="token string">'babel-polyfill'</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
                         plugins<span class="token punctuation">:</span><span class="token punctuation">[</span><span class="token string">'transform-runtime'</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
-                    <span class="token punctuation">}</span>
-                <span class="token punctuation">}</span><span class="token punctuation">,</span>
-            <span class="token punctuation">}</span><span class="token punctuation">,</span>
-            <span class="token punctuation">{</span> test<span class="token punctuation">:</span> <span class="token regex">/\.css$/</span><span class="token punctuation">,</span> use<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token string">'style-loader'</span><span class="token punctuation">,</span> <span class="token string">'css-loader'</span><span class="token punctuation">]</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
-            <span class="token punctuation">{</span>
-                test<span class="token punctuation">:</span> <span class="token regex">/\.scss$/</span><span class="token punctuation">,</span> use<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token string">'style-loader'</span><span class="token punctuation">,</span> <span class="token punctuation">{</span>
+                    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+                <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">,</span>
+            <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">,</span>
+            <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span> test<span class="token punctuation">:</span> <span class="token regex">/\.css$/</span><span class="token punctuation">,</span> use<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token string">'style-loader'</span><span class="token punctuation">,</span> <span class="token string">'css-loader'</span><span class="token punctuation">]</span> <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">,</span>
+            <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+                test<span class="token punctuation">:</span> <span class="token regex">/\.scss$/</span><span class="token punctuation">,</span> use<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token string">'style-loader'</span><span class="token punctuation">,</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
                     loader<span class="token punctuation">:</span> <span class="token string">'css-loader'</span><span class="token punctuation">,</span>
-                    options<span class="token punctuation">:</span> <span class="token punctuation">{</span>
-                        modules<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+                    options<span class="token punctuation">:</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+                        modules<span class="token punctuation">:</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
                             localIdentName<span class="token punctuation">:</span> <span class="token string">'[path][name]-[local]-[hash:5]'</span>
-                        <span class="token punctuation">}</span>
-                    <span class="token punctuation">}</span>
-                <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token string">'sass-loader'</span><span class="token punctuation">]</span>
-            <span class="token punctuation">}</span><span class="token punctuation">,</span>
-            <span class="token punctuation">{</span> test<span class="token punctuation">:</span> <span class="token regex">/\.ttf|woff|woff2|eot|svg$/</span><span class="token punctuation">,</span> use<span class="token punctuation">:</span> <span class="token string">'url-loader'</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
-            <span class="token comment" spellcheck="true">// {test:/\.css$/,use:['style-loader','css-loader?modules&amp;localIdentName=[path][name]-[local]-[hash:5]']}</span>
+                        <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+                    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+                <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">,</span> <span class="token string">'sass-loader'</span><span class="token punctuation">]</span>
+            <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">,</span>
+            <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span> test<span class="token punctuation">:</span> <span class="token regex">/\.ttf|woff|woff2|eot|svg$/</span><span class="token punctuation">,</span> use<span class="token punctuation">:</span> <span class="token string">'url-loader'</span> <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">,</span>
+            <span class="token comment" spellcheck="true">// &amp;#123;test:/\.css$/,use:['style-loader','css-loader?modules&amp;localIdentName=[path][name]-[local]-[hash:5]']&amp;#125;</span>
         <span class="token punctuation">]</span><span class="token punctuation">,</span>
-    <span class="token punctuation">}</span><span class="token punctuation">,</span>
-    resolve<span class="token punctuation">:</span><span class="token punctuation">{</span>
-        alias<span class="token punctuation">:</span><span class="token punctuation">{</span>
+    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">,</span>
+    resolve<span class="token punctuation">:</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+        alias<span class="token punctuation">:</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
             <span class="token string">'@'</span><span class="token punctuation">:</span>path<span class="token punctuation">.</span><span class="token function">join</span><span class="token punctuation">(</span>__dirname<span class="token punctuation">,</span><span class="token string">'./src'</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
             <span class="token string">'$'</span><span class="token punctuation">:</span>__dirname
-        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">,</span>
         extensions<span class="token punctuation">:</span><span class="token punctuation">[</span><span class="token string">'.js'</span><span class="token punctuation">,</span><span class="token string">'.jsx'</span><span class="token punctuation">,</span><span class="token string">'.json'</span><span class="token punctuation">]</span>
-    <span class="token punctuation">}</span><span class="token punctuation">,</span>
-<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h2 id="附上完整的package-json文件"><a href="#附上完整的package-json文件" class="headerlink" title="附上完整的package.json文件"></a>附上完整的package.json文件</h2><pre class="line-numbers language-json"><code class="language-json"><span class="token punctuation">{</span>
+    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">,</span>
+<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="附上完整的package-json文件"><a href="#附上完整的package-json文件" class="headerlink" title="附上完整的package.json文件"></a>附上完整的package.json文件</h2><pre class="line-numbers language-json"><code class="language-json">&amp;#<span class="token number">123</span><span class="token punctuation">;</span>
   <span class="token property">"name"</span><span class="token operator">:</span> <span class="token string">"demo"</span><span class="token punctuation">,</span>
   <span class="token property">"version"</span><span class="token operator">:</span> <span class="token string">"1.0.0"</span><span class="token punctuation">,</span>
   <span class="token property">"description"</span><span class="token operator">:</span> <span class="token string">""</span><span class="token punctuation">,</span>
   <span class="token property">"main"</span><span class="token operator">:</span> <span class="token string">"index.js"</span><span class="token punctuation">,</span>
-  <span class="token property">"scripts"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+  <span class="token property">"scripts"</span><span class="token operator">:</span> &amp;#<span class="token number">123</span><span class="token punctuation">;</span>
     <span class="token property">"test"</span><span class="token operator">:</span> <span class="token string">"echo \"Error: no test specified\" &amp;&amp; exit 1"</span><span class="token punctuation">,</span>
     <span class="token property">"serve"</span><span class="token operator">:</span> <span class="token string">"webpack-dev-server --open --port 8080 --hot --host 127.0.0.1"</span>
-  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  &amp;#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">,</span>
   <span class="token property">"keywords"</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
   <span class="token property">"author"</span><span class="token operator">:</span> <span class="token string">""</span><span class="token punctuation">,</span>
   <span class="token property">"license"</span><span class="token operator">:</span> <span class="token string">"ISC"</span><span class="token punctuation">,</span>
-  <span class="token property">"devDependencies"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+  <span class="token property">"devDependencies"</span><span class="token operator">:</span> &amp;#<span class="token number">123</span><span class="token punctuation">;</span>
     <span class="token property">"babel-core"</span><span class="token operator">:</span> <span class="token string">"^6.26.3"</span><span class="token punctuation">,</span>
     <span class="token property">"babel-loader"</span><span class="token operator">:</span> <span class="token string">"^7.0.0"</span><span class="token punctuation">,</span>
     <span class="token property">"babel-plugin-transform-runtime"</span><span class="token operator">:</span> <span class="token string">"^6.23.0"</span><span class="token punctuation">,</span>
@@ -634,13 +634,13 @@ module<span class="token punctuation">.</span>exports <span class="token operato
     <span class="token property">"webpack"</span><span class="token operator">:</span> <span class="token string">"^4.43.0"</span><span class="token punctuation">,</span>
     <span class="token property">"webpack-cli"</span><span class="token operator">:</span> <span class="token string">"^3.3.11"</span><span class="token punctuation">,</span>
     <span class="token property">"webpack-dev-server"</span><span class="token operator">:</span> <span class="token string">"^3.11.0"</span>
-  <span class="token punctuation">}</span><span class="token punctuation">,</span>
-  <span class="token property">"dependencies"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+  &amp;#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">,</span>
+  <span class="token property">"dependencies"</span><span class="token operator">:</span> &amp;#<span class="token number">123</span><span class="token punctuation">;</span>
     <span class="token property">"node-sass"</span><span class="token operator">:</span> <span class="token string">"^4.14.1"</span><span class="token punctuation">,</span>
     <span class="token property">"react"</span><span class="token operator">:</span> <span class="token string">"^16.13.1"</span><span class="token punctuation">,</span>
     <span class="token property">"react-dom"</span><span class="token operator">:</span> <span class="token string">"^16.13.1"</span>
-  <span class="token punctuation">}</span>
-<span class="token punctuation">}</span>
+  &amp;#<span class="token number">125</span><span class="token punctuation">;</span>
+&amp;#<span class="token number">125</span><span class="token punctuation">;</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
             </div>
@@ -1423,7 +1423,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">16k</span>&nbsp;字
+                class="white-color">16.6k</span>&nbsp;字
             
             
             
