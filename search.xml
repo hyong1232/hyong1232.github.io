@@ -1,6 +1,103 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>babel使用介绍</title>
+    <url>/2020/09/21/babel-shi-yong-jie-shao/</url>
+    <content><![CDATA[<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>babel+webpack作为es6必用的工具，配置和使用较为麻烦，小节了一下常见的使用和配置。</p>
+<a id="more"></a>
+
+<h3 id="配置在项目中使用"><a href="#配置在项目中使用" class="headerlink" title="配置在项目中使用"></a>配置在项目中使用</h3><blockquote>
+<p>可使用配置文件.babelrc将常见配置写入文件中（放置在项目的根目录下），再webpack打包的过程中，会自动读取这个文件的配置，常见的配置写法如下:</p>
+</blockquote>
+<pre class="line-numbers language-js"><code class="language-js"><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token string">"presets"</span><span class="token punctuation">:</span><span class="token punctuation">[</span><span class="token string">'es2015'</span><span class="token punctuation">,</span><span class="token string">'env'</span><span class="token punctuation">,</span><span class="token string">'stage-0'</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+    <span class="token string">"plugins"</span><span class="token punctuation">:</span><span class="token punctuation">[</span><span class="token string">'transform-runtime'</span><span class="token punctuation">]</span>
+<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<ul>
+<li>.babelrc文件整个就是一个对象，在对象{}中配置相应的属性即可</li>
+<li>常用的presets规则以及转换插件需要自行下载（npm命令即可）</li>
+</ul>
+<p><strong>babel配置也可以在webpack的配置文件中配置，即在module下的rules数组对象的规则对象的use属性中添加options属性中添加即可</strong></p>
+<pre class="line-numbers language-js"><code class="language-js">module<span class="token punctuation">:</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    rules<span class="token punctuation">:</span><span class="token punctuation">[</span>
+        <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+            test<span class="token punctuation">:</span><span class="token regex">/\.js$/</span><span class="token punctuation">,</span>
+            exclude<span class="token punctuation">:</span><span class="token regex">/node_modules/</span><span class="token punctuation">,</span>
+            use<span class="token punctuation">:</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+                loader<span class="token punctuation">:</span><span class="token string">'babel-loader'</span><span class="token punctuation">,</span>
+                options<span class="token punctuation">:</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+                    presets<span class="token punctuation">:</span><span class="token punctuation">[</span><span class="token string">'env'</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+                    plugins<span class="token punctuation">:</span><span class="token punctuation">[</span><span class="token string">'transform-runtime'</span><span class="token punctuation">]</span>
+                <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+            <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+        <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+    <span class="token punctuation">]</span>
+<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><strong>关于转换规则stage-0/1/2…在新的webpack中不在推荐使用，避免过多使用</strong></p>
+<h3 id="命令行中直接转换"><a href="#命令行中直接转换" class="headerlink" title="命令行中直接转换"></a>命令行中直接转换</h3><blockquote>
+<p>除了在项目中使用还可以直接在命令行转换es6的代码</p>
+</blockquote>
+<p>1、安装@babel/cli</p>
+<pre class="line-numbers language-bash"><code class="language-bash"><span class="token function">npm</span> i -D @babel/cli<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>2、基本用法</p>
+<pre class="line-numbers language-bash"><code class="language-bash">//转换单个es6语法的文件到指定文件夹
+npx babel es6.js --out-file out.js
+//简写为
+npx babel es6.js -o out.js
+
+//转换文件夹至指定路径输出
+npx babel es6dir -out-dir outdir
+//简写为
+npx babel es6dir -d outdir
+
+//加上 -s参数生产source map文件
+npx babel es6dir -d outdir -s<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<ul>
+<li>转换文件到目标文件/文件夹时，没有会自动创建</li>
+<li>文件夹转换是将源文件夹中的文件依次转换到对应的输出，出错则停止转换</li>
+<li>关于npx可见<blockquote><p>常见的npx使用方式</p>
+<footer><strong>阮一峰</strong><cite><a href="https://www.ruanyifeng.com/blog/2019/02/npx.html">npx使用教程</a></cite></footer></blockquote></li>
+<li>关于sourceMap可见<blockquote><p>sourceMap介绍</p>
+<footer><strong>阮一峰</strong><cite><a href="http://www.ruanyifeng.com/blog/2013/01/javascript_source_map.html">JavaScript Source Map 详解</a></cite></footer></blockquote></li>
+</ul>
+<h3 id="babel-node的使用"><a href="#babel-node的使用" class="headerlink" title="@babel/node的使用"></a>@babel/node的使用</h3><blockquote>
+<p>安装了这个包就可以在命令行直接执行es6命令，或者直接运行es6文件</p>
+</blockquote>
+<pre class="line-numbers language-bash"><code class="language-bash">//直接运行es6文件
+npx node-node es6.js<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<h3 id="babel-register"><a href="#babel-register" class="headerlink" title="@babel/register"></a>@babel/register</h3><blockquote>
+<p>这个包的作用是在文件中对通过require加载的文件进行实时转换</p>
+</blockquote>
+<pre class="line-numbers language-bash"><code class="language-bash">//安装
+<span class="token function">npm</span> i @babel/register -D
+//使用（文件中）
+require<span class="token punctuation">(</span><span class="token string">'@babel/register'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+require<span class="token punctuation">(</span><span class="token string">'./es6.js'</span><span class="token punctuation">)</span>
+//上述代码会自动将加载的es6文件转换<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<ul>
+<li>此包仅在运行时有效（适用于开发时使用）</li>
+<li>使用时要先加载此包，放在文件的顶部</li>
+<li>当前文件不会自动转换，只会转换require加载的文件（加一个钩子）</li>
+</ul>
+<h3 id="polyfill"><a href="#polyfill" class="headerlink" title="polyfill"></a>polyfill</h3><blockquote>
+<p>babel默认不会转换es6新的api，只会转换语法（syntax）例如Iterator、Generator、Set、Map、Proxy、Reflect、Symbol、Promies等全局对象，及部分全局对象的工具方法例如Array.from()方法。使用polyfill可解决这个问题</p>
+</blockquote>
+<pre class="line-numbers language-bash"><code class="language-bash">//安装<span class="token punctuation">(</span>regenerator是转换generator的包<span class="token punctuation">)</span>
+<span class="token function">npm</span> i core-js regenerator-runtime -D
+//使用（文件中）导入即可（require/import）
+<span class="token function">import</span> <span class="token string">'core-js'</span>
+<span class="token function">import</span> <span class="token string">'regenerator-runtime/runtime'</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+]]></content>
+      <categories>
+        <category>es6</category>
+        <category>babel</category>
+      </categories>
+      <tags>
+        <tag>es6</tag>
+        <tag>babel</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Object.assign函数</title>
     <url>/2020/09/23/object-assign-han-shu/</url>
     <content><![CDATA[<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>**Object.assign()**方法使用target的setter方法和origin对象的getter方法，复制对象可枚举的属性值，适用于很多的object操作。</p>
@@ -218,116 +315,6 @@ Promise<span class="token punctuation">.</span><span class="token function">all<
         <tag>es6</tag>
         <tag>node</tag>
         <tag>CommonJS模块化加载</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>dom垂直居中</title>
-    <url>/2020/12/08/dom-chui-zhi-ju-zhong/</url>
-    <content><![CDATA[<h2 id="flex布局实现垂直居中"><a href="#flex布局实现垂直居中" class="headerlink" title="flex布局实现垂直居中"></a>flex布局实现垂直居中</h2> <iframe id="cp_embed_YzGWgKX" src="//codepen.io/hyong1232/embed/YzGWgKX?height=300&theme-id=dark&slug-hash=YzGWgKX&default-tab=result" scrolling="no" frameborder="no" height="300" allowTransparency="true" allowfullscreen="true" class="cp_embed_iframe" style="width: 100%; overflow: hidden;"></iframe>]]></content>
-      <categories>
-        <category>css</category>
-        <category>layout</category>
-      </categories>
-      <tags>
-        <tag>css</tag>
-        <tag>layout</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>babel使用介绍</title>
-    <url>/2020/09/21/babel-shi-yong-jie-shao/</url>
-    <content><![CDATA[<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>babel+webpack作为es6必用的工具，配置和使用较为麻烦，小节了一下常见的使用和配置。</p>
-<a id="more"></a>
-
-<h3 id="配置在项目中使用"><a href="#配置在项目中使用" class="headerlink" title="配置在项目中使用"></a>配置在项目中使用</h3><blockquote>
-<p>可使用配置文件.babelrc将常见配置写入文件中（放置在项目的根目录下），再webpack打包的过程中，会自动读取这个文件的配置，常见的配置写法如下:</p>
-</blockquote>
-<pre class="line-numbers language-js"><code class="language-js"><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
-    <span class="token string">"presets"</span><span class="token punctuation">:</span><span class="token punctuation">[</span><span class="token string">'es2015'</span><span class="token punctuation">,</span><span class="token string">'env'</span><span class="token punctuation">,</span><span class="token string">'stage-0'</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
-    <span class="token string">"plugins"</span><span class="token punctuation">:</span><span class="token punctuation">[</span><span class="token string">'transform-runtime'</span><span class="token punctuation">]</span>
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-<ul>
-<li>.babelrc文件整个就是一个对象，在对象{}中配置相应的属性即可</li>
-<li>常用的presets规则以及转换插件需要自行下载（npm命令即可）</li>
-</ul>
-<p><strong>babel配置也可以在webpack的配置文件中配置，即在module下的rules数组对象的规则对象的use属性中添加options属性中添加即可</strong></p>
-<pre class="line-numbers language-js"><code class="language-js">module<span class="token punctuation">:</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
-    rules<span class="token punctuation">:</span><span class="token punctuation">[</span>
-        <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
-            test<span class="token punctuation">:</span><span class="token regex">/\.js$/</span><span class="token punctuation">,</span>
-            exclude<span class="token punctuation">:</span><span class="token regex">/node_modules/</span><span class="token punctuation">,</span>
-            use<span class="token punctuation">:</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
-                loader<span class="token punctuation">:</span><span class="token string">'babel-loader'</span><span class="token punctuation">,</span>
-                options<span class="token punctuation">:</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
-                    presets<span class="token punctuation">:</span><span class="token punctuation">[</span><span class="token string">'env'</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
-                    plugins<span class="token punctuation">:</span><span class="token punctuation">[</span><span class="token string">'transform-runtime'</span><span class="token punctuation">]</span>
-                <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
-            <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
-        <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
-    <span class="token punctuation">]</span>
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p><strong>关于转换规则stage-0/1/2…在新的webpack中不在推荐使用，避免过多使用</strong></p>
-<h3 id="命令行中直接转换"><a href="#命令行中直接转换" class="headerlink" title="命令行中直接转换"></a>命令行中直接转换</h3><blockquote>
-<p>除了在项目中使用还可以直接在命令行转换es6的代码</p>
-</blockquote>
-<p>1、安装@babel/cli</p>
-<pre class="line-numbers language-bash"><code class="language-bash"><span class="token function">npm</span> i -D @babel/cli<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p>2、基本用法</p>
-<pre class="line-numbers language-bash"><code class="language-bash">//转换单个es6语法的文件到指定文件夹
-npx babel es6.js --out-file out.js
-//简写为
-npx babel es6.js -o out.js
-
-//转换文件夹至指定路径输出
-npx babel es6dir -out-dir outdir
-//简写为
-npx babel es6dir -d outdir
-
-//加上 -s参数生产source map文件
-npx babel es6dir -d outdir -s<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<ul>
-<li>转换文件到目标文件/文件夹时，没有会自动创建</li>
-<li>文件夹转换是将源文件夹中的文件依次转换到对应的输出，出错则停止转换</li>
-<li>关于npx可见<blockquote><p>常见的npx使用方式</p>
-<footer><strong>阮一峰</strong><cite><a href="https://www.ruanyifeng.com/blog/2019/02/npx.html">npx使用教程</a></cite></footer></blockquote></li>
-<li>关于sourceMap可见<blockquote><p>sourceMap介绍</p>
-<footer><strong>阮一峰</strong><cite><a href="http://www.ruanyifeng.com/blog/2013/01/javascript_source_map.html">JavaScript Source Map 详解</a></cite></footer></blockquote></li>
-</ul>
-<h3 id="babel-node的使用"><a href="#babel-node的使用" class="headerlink" title="@babel/node的使用"></a>@babel/node的使用</h3><blockquote>
-<p>安装了这个包就可以在命令行直接执行es6命令，或者直接运行es6文件</p>
-</blockquote>
-<pre class="line-numbers language-bash"><code class="language-bash">//直接运行es6文件
-npx node-node es6.js<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-<h3 id="babel-register"><a href="#babel-register" class="headerlink" title="@babel/register"></a>@babel/register</h3><blockquote>
-<p>这个包的作用是在文件中对通过require加载的文件进行实时转换</p>
-</blockquote>
-<pre class="line-numbers language-bash"><code class="language-bash">//安装
-<span class="token function">npm</span> i @babel/register -D
-//使用（文件中）
-require<span class="token punctuation">(</span><span class="token string">'@babel/register'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-require<span class="token punctuation">(</span><span class="token string">'./es6.js'</span><span class="token punctuation">)</span>
-//上述代码会自动将加载的es6文件转换<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<ul>
-<li>此包仅在运行时有效（适用于开发时使用）</li>
-<li>使用时要先加载此包，放在文件的顶部</li>
-<li>当前文件不会自动转换，只会转换require加载的文件（加一个钩子）</li>
-</ul>
-<h3 id="polyfill"><a href="#polyfill" class="headerlink" title="polyfill"></a>polyfill</h3><blockquote>
-<p>babel默认不会转换es6新的api，只会转换语法（syntax）例如Iterator、Generator、Set、Map、Proxy、Reflect、Symbol、Promies等全局对象，及部分全局对象的工具方法例如Array.from()方法。使用polyfill可解决这个问题</p>
-</blockquote>
-<pre class="line-numbers language-bash"><code class="language-bash">//安装<span class="token punctuation">(</span>regenerator是转换generator的包<span class="token punctuation">)</span>
-<span class="token function">npm</span> i core-js regenerator-runtime -D
-//使用（文件中）导入即可（require/import）
-<span class="token function">import</span> <span class="token string">'core-js'</span>
-<span class="token function">import</span> <span class="token string">'regenerator-runtime/runtime'</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-]]></content>
-      <categories>
-        <category>es6</category>
-        <category>babel</category>
-      </categories>
-      <tags>
-        <tag>es6</tag>
-        <tag>babel</tag>
       </tags>
   </entry>
   <entry>
@@ -619,171 +606,27 @@ flex-flow:<flex-direction> || <flex-wrap>
       </tags>
   </entry>
   <entry>
-    <title>git-operations</title>
-    <url>/2020/09/08/git-operations/</url>
-    <content><![CDATA[<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p><strong>感谢阮一峰先生的分享<a href="http://www.ruanyifeng.com/blog/2015/12/git-cheat-sheet.html">常用git命令清单</a> 仅供个人学习。</strong><br>关于git的常见操作命令，和对版本，分支的处理还有git的工作流程的解释说明。</p>
-<a id="more"></a>
-<p>常用的6个git命令可以用下面的一张图表示：</p>
-<img src="/images/git.png" class="" title="常用git命令图">
+    <title>dom垂直居中</title>
+    <url>/2020/12/08/dom-chui-zhi-ju-zhong/</url>
+    <content><![CDATA[<h2 id="flex布局实现垂直居中"><a href="#flex布局实现垂直居中" class="headerlink" title="flex布局实现垂直居中"></a>flex布局实现垂直居中</h2><iframe id="cp_embed_YzGWgKX" src="//codepen.io/hyong1232/embed/YzGWgKX?height=360&theme-id=dark&slug-hash=YzGWgKX&default-tab=css,result" scrolling="no" frameborder="no" height="360" allowTransparency="true" allowfullscreen="true" class="cp_embed_iframe" style="width: 100%; overflow: hidden;"></iframe>
 
-<table>
-<thead>
-<tr>
-<th>名称</th>
-<th>释义</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>workspace</td>
-<td>工作区，即自己写代码的文件夹</td>
-</tr>
-<tr>
-<td>Index</td>
-<td>暂存区，可以撤销保存，适用于大型项目文件的提交修改</td>
-</tr>
-<tr>
-<td>Remote</td>
-<td>可以是自己的服务器或者是github或者gitee这样的第三方工作仓库。</td>
-</tr>
-<tr>
-<td>Repository</td>
-<td>指的是自己的本地仓库，就是在以.git结尾的文件夹中的文件</td>
-</tr>
-</tbody></table>
-<h2 id="新建代码库"><a href="#新建代码库" class="headerlink" title="新建代码库"></a>新建代码库</h2><p> 初始化一个代码库 </p>
-<blockquote>
-<p>本地初始化</p>
-</blockquote>
-<pre class="line-numbers language-git"><code class="language-git">git init [project-name]<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<ul>
-<li>本地新建一个代码库会新建一个.git隐藏文件</li>
-</ul>
-<blockquote>
-<p>clone仓库中已有的代码到本地</p>
-</blockquote>
-<pre class="line-numbers language-git"><code class="language-git">git clone url [project-name] [--depth=num] <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<ul>
-<li>其中num为想要拷取的代码仓库深度，为1则表示最近一次的更新的最新代码</li>
-</ul>
-<h2 id="暂存区操作"><a href="#暂存区操作" class="headerlink" title="暂存区操作"></a>暂存区操作</h2><p>1、添加文件到暂存区</p>
-<pre class="line-numbers language-git"><code class="language-git">git add [file1] [file2] ...
-git add [dir]
-git add .<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-<ul>
-<li>其中 . 代表所有修改了的文件，最常用</li>
-</ul>
-<p>2、将文件删除/从暂存区删除</p>
-<pre class="line-numbers language-git"><code class="language-git">git rm [file1] [file2] ...
-git rm --cached [filename]<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-<ul>
-<li>其中–cached代表不删除工作区文件，只是从暂存区中删除</li>
-<li>只有在暂存区中的文件对其执行删除操作才有效</li>
-</ul>
-<p>3、修改文件名称，并将修改信息存入暂存区</p>
-<pre class="line-numbers language-git"><code class="language-git">git mv [file-origin-name] [file-new-name] <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<ul>
-<li>文件要先在暂存区中</li>
-</ul>
-<h2 id="提交文件到本地仓库"><a href="#提交文件到本地仓库" class="headerlink" title="提交文件到本地仓库"></a>提交文件到本地仓库</h2><blockquote>
-<p>提交操作都是需要写注释的，便于协作</p>
-</blockquote>
-<p>1、直接提交文件到仓库</p>
-<pre class="line-numbers language-git"><code class="language-git"><span class="token comment" spellcheck="true">#提交所有有修改记录的文件到仓库</span>
-git commit -m <span class="token string">"message"</span>
+<h2 id="position-transfrom实现垂直居中"><a href="#position-transfrom实现垂直居中" class="headerlink" title="position+transfrom实现垂直居中"></a>position+transfrom实现垂直居中</h2><iframe id="cp_embed_yLaazGz" src="//codepen.io/hyong1232/embed/yLaazGz?height=360&theme-id=dark&slug-hash=yLaazGz&default-tab=css,result" scrolling="no" frameborder="no" height="360" allowTransparency="true" allowfullscreen="true" class="cp_embed_iframe" style="width: 100%; overflow: hidden;"></iframe>
 
-<span class="token comment" spellcheck="true">#指定要提交的提交文件</span>
-git commit [file1] [file2]... -m <span class="token string">"message"</span> <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>2、用本次提交覆盖上次的提交</p>
-<pre class="line-numbers language-git"><code class="language-git"><span class="token comment" spellcheck="true">#覆盖上次提交到仓库的内容，仓库中的文件修改一本次为准</span>
-git commit --amend -m <span class="token string">"message"</span>
+<h2 id="margin实现垂直居中"><a href="#margin实现垂直居中" class="headerlink" title="margin实现垂直居中"></a>margin实现垂直居中</h2><iframe id="cp_embed_wvzzPEp" src="//codepen.io/hyong1232/embed/wvzzPEp?height=360&theme-id=dark&slug-hash=wvzzPEp&default-tab=css,result" scrolling="no" frameborder="no" height="360" allowTransparency="true" allowfullscreen="true" class="cp_embed_iframe" style="width: 100%; overflow: hidden;"></iframe>
 
-<span class="token comment" spellcheck="true">#指定要覆盖的仓库文件</span>
-git commit --amend [file1] [file2]... -m <span class="token string">"message"</span> <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>3、其他提交</p>
-<pre class="line-numbers language-git"><code class="language-git"><span class="token comment" spellcheck="true">#提交工作区自上次commit之后的变化，直接到仓库区(不包括新增文件/文件夹)</span>
-git commit -a
+<h2 id="line-height-vertical实现垂直居中（仅适用于图片文字）"><a href="#line-height-vertical实现垂直居中（仅适用于图片文字）" class="headerlink" title="line-height+vertical实现垂直居中（仅适用于图片文字）"></a>line-height+vertical实现垂直居中（仅适用于图片文字）</h2><iframe id="cp_embed_bGwwaEx" src="//codepen.io/hyong1232/embed/bGwwaEx?height=360&theme-id=dark&slug-hash=bGwwaEx&default-tab=css,result" scrolling="no" frameborder="no" height="360" allowTransparency="true" allowfullscreen="true" class="cp_embed_iframe" style="width: 100%; overflow: hidden;"></iframe>
 
-<span class="token comment" spellcheck="true">#提交时显示所有diff信息</span>
-git commit -v<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h2 id="提交文件至远程仓库"><a href="#提交文件至远程仓库" class="headerlink" title="提交文件至远程仓库"></a>提交文件至远程仓库</h2><table>
-<thead>
-<tr>
-<th>命令</th>
-<th>含义</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>git fetch [remote]</td>
-<td>更新指定远程仓库的所有修改到本地仓库中</td>
-</tr>
-<tr>
-<td>git remote -v</td>
-<td>显示所有的远程的别名&amp;地址</td>
-</tr>
-<tr>
-<td>git remote show remote-name</td>
-<td>显示别名仓库地址的信息</td>
-</tr>
-<tr>
-<td>git remote add remote-name url</td>
-<td>添加新的远程仓库地址，并命名</td>
-</tr>
-<tr>
-<td>git pull [remote] [branch]</td>
-<td>将远程仓库中的内容与指定分支合并</td>
-</tr>
-<tr>
-<td>git push [remote] [branch]</td>
-<td>将本地指定分支推送到远程仓库</td>
-</tr>
-<tr>
-<td>git push [remote] –force</td>
-<td>将本地分支强行推送到远程仓库，忽略冲突</td>
-</tr>
-<tr>
-<td>git push [remote] –all</td>
-<td>将所有分支推送到远程仓库</td>
-</tr>
-</tbody></table>
-<h2 id="分支"><a href="#分支" class="headerlink" title="分支"></a>分支</h2><p>1、新建分支&amp;切换工作区</p>
-<pre class="line-numbers language-git"><code class="language-git"><span class="token comment" spellcheck="true">#新建分支</span>
-git branch [branch-name]
+<h2 id="display-table实现垂直居中"><a href="#display-table实现垂直居中" class="headerlink" title="display:table实现垂直居中"></a>display:table实现垂直居中</h2><iframe id="cp_embed_gOwwoLe" src="//codepen.io/hyong1232/embed/gOwwoLe?height=360&theme-id=dark&slug-hash=gOwwoLe&default-tab=css,result" scrolling="no" frameborder="no" height="360" allowTransparency="true" allowfullscreen="true" class="cp_embed_iframe" style="width: 100%; overflow: hidden;"></iframe>
 
-<span class="token comment" spellcheck="true">#切换当前分支到指定分支</span>
-git checkout [branch-name]
-
-<span class="token comment" spellcheck="true">#新建分支并切换到该分支</span>
-git checkout -b [branch-name]
-
-<span class="token comment" spellcheck="true">#切换到最近切换的分支</span>
-git checkout -
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>2、查看分支</p>
-<pre class="line-numbers language-git"><code class="language-git"><span class="token comment" spellcheck="true">#产看本地分支</span>
-git branch
-
-<span class="token comment" spellcheck="true">#查看远程分支</span>
-git branch -r
-
-<span class="token comment" spellcheck="true">#查看所有分支（本地加远程）</span>
-git branch -a<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>3、删除分支</p>
-<pre class="line-numbers language-git"><code class="language-git"><span class="token comment" spellcheck="true">#删除本地分支</span>
-git branch -d [branch-name]
-
-<span class="token comment" spellcheck="true">#删除远程分支</span>
-git branch [remote-name] --delete [branch-name]
-git branch -dr [remote/branch]<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>4、合并分支</p>
-<pre class="line-numbers language-git"><code class="language-git"><span class="token comment" spellcheck="true">#合并指定分支到当前分支</span>
-git merge [branch]<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<h2 id="grid布局实现垂直居中"><a href="#grid布局实现垂直居中" class="headerlink" title="grid布局实现垂直居中"></a>grid布局实现垂直居中</h2><iframe id="cp_embed_PoGGEJB" src="//codepen.io/hyong1232/embed/PoGGEJB?height=360&theme-id=dark&slug-hash=PoGGEJB&default-tab=css,result" scrolling="no" frameborder="no" height="360" allowTransparency="true" allowfullscreen="true" class="cp_embed_iframe" style="width: 100%; overflow: hidden;"></iframe>
 ]]></content>
       <categories>
-        <category>git</category>
-        <category>git常用操作</category>
+        <category>css</category>
+        <category>layout</category>
       </categories>
       <tags>
-        <tag>git</tag>
+        <tag>css</tag>
+        <tag>layout</tag>
       </tags>
   </entry>
   <entry>
@@ -1057,6 +900,174 @@ example
       </tags>
   </entry>
   <entry>
+    <title>git-operations</title>
+    <url>/2020/09/08/git-operations/</url>
+    <content><![CDATA[<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p><strong>感谢阮一峰先生的分享<a href="http://www.ruanyifeng.com/blog/2015/12/git-cheat-sheet.html">常用git命令清单</a> 仅供个人学习。</strong><br>关于git的常见操作命令，和对版本，分支的处理还有git的工作流程的解释说明。</p>
+<a id="more"></a>
+<p>常用的6个git命令可以用下面的一张图表示：</p>
+<img src="/images/git.png" class="" title="常用git命令图">
+
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>释义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>workspace</td>
+<td>工作区，即自己写代码的文件夹</td>
+</tr>
+<tr>
+<td>Index</td>
+<td>暂存区，可以撤销保存，适用于大型项目文件的提交修改</td>
+</tr>
+<tr>
+<td>Remote</td>
+<td>可以是自己的服务器或者是github或者gitee这样的第三方工作仓库。</td>
+</tr>
+<tr>
+<td>Repository</td>
+<td>指的是自己的本地仓库，就是在以.git结尾的文件夹中的文件</td>
+</tr>
+</tbody></table>
+<h2 id="新建代码库"><a href="#新建代码库" class="headerlink" title="新建代码库"></a>新建代码库</h2><p> 初始化一个代码库 </p>
+<blockquote>
+<p>本地初始化</p>
+</blockquote>
+<pre class="line-numbers language-git"><code class="language-git">git init [project-name]<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<ul>
+<li>本地新建一个代码库会新建一个.git隐藏文件</li>
+</ul>
+<blockquote>
+<p>clone仓库中已有的代码到本地</p>
+</blockquote>
+<pre class="line-numbers language-git"><code class="language-git">git clone url [project-name] [--depth=num] <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<ul>
+<li>其中num为想要拷取的代码仓库深度，为1则表示最近一次的更新的最新代码</li>
+</ul>
+<h2 id="暂存区操作"><a href="#暂存区操作" class="headerlink" title="暂存区操作"></a>暂存区操作</h2><p>1、添加文件到暂存区</p>
+<pre class="line-numbers language-git"><code class="language-git">git add [file1] [file2] ...
+git add [dir]
+git add .<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<ul>
+<li>其中 . 代表所有修改了的文件，最常用</li>
+</ul>
+<p>2、将文件删除/从暂存区删除</p>
+<pre class="line-numbers language-git"><code class="language-git">git rm [file1] [file2] ...
+git rm --cached [filename]<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<ul>
+<li>其中–cached代表不删除工作区文件，只是从暂存区中删除</li>
+<li>只有在暂存区中的文件对其执行删除操作才有效</li>
+</ul>
+<p>3、修改文件名称，并将修改信息存入暂存区</p>
+<pre class="line-numbers language-git"><code class="language-git">git mv [file-origin-name] [file-new-name] <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<ul>
+<li>文件要先在暂存区中</li>
+</ul>
+<h2 id="提交文件到本地仓库"><a href="#提交文件到本地仓库" class="headerlink" title="提交文件到本地仓库"></a>提交文件到本地仓库</h2><blockquote>
+<p>提交操作都是需要写注释的，便于协作</p>
+</blockquote>
+<p>1、直接提交文件到仓库</p>
+<pre class="line-numbers language-git"><code class="language-git"><span class="token comment" spellcheck="true">#提交所有有修改记录的文件到仓库</span>
+git commit -m <span class="token string">"message"</span>
+
+<span class="token comment" spellcheck="true">#指定要提交的提交文件</span>
+git commit [file1] [file2]... -m <span class="token string">"message"</span> <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>2、用本次提交覆盖上次的提交</p>
+<pre class="line-numbers language-git"><code class="language-git"><span class="token comment" spellcheck="true">#覆盖上次提交到仓库的内容，仓库中的文件修改一本次为准</span>
+git commit --amend -m <span class="token string">"message"</span>
+
+<span class="token comment" spellcheck="true">#指定要覆盖的仓库文件</span>
+git commit --amend [file1] [file2]... -m <span class="token string">"message"</span> <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>3、其他提交</p>
+<pre class="line-numbers language-git"><code class="language-git"><span class="token comment" spellcheck="true">#提交工作区自上次commit之后的变化，直接到仓库区(不包括新增文件/文件夹)</span>
+git commit -a
+
+<span class="token comment" spellcheck="true">#提交时显示所有diff信息</span>
+git commit -v<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="提交文件至远程仓库"><a href="#提交文件至远程仓库" class="headerlink" title="提交文件至远程仓库"></a>提交文件至远程仓库</h2><table>
+<thead>
+<tr>
+<th>命令</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>git fetch [remote]</td>
+<td>更新指定远程仓库的所有修改到本地仓库中</td>
+</tr>
+<tr>
+<td>git remote -v</td>
+<td>显示所有的远程的别名&amp;地址</td>
+</tr>
+<tr>
+<td>git remote show remote-name</td>
+<td>显示别名仓库地址的信息</td>
+</tr>
+<tr>
+<td>git remote add remote-name url</td>
+<td>添加新的远程仓库地址，并命名</td>
+</tr>
+<tr>
+<td>git pull [remote] [branch]</td>
+<td>将远程仓库中的内容与指定分支合并</td>
+</tr>
+<tr>
+<td>git push [remote] [branch]</td>
+<td>将本地指定分支推送到远程仓库</td>
+</tr>
+<tr>
+<td>git push [remote] –force</td>
+<td>将本地分支强行推送到远程仓库，忽略冲突</td>
+</tr>
+<tr>
+<td>git push [remote] –all</td>
+<td>将所有分支推送到远程仓库</td>
+</tr>
+</tbody></table>
+<h2 id="分支"><a href="#分支" class="headerlink" title="分支"></a>分支</h2><p>1、新建分支&amp;切换工作区</p>
+<pre class="line-numbers language-git"><code class="language-git"><span class="token comment" spellcheck="true">#新建分支</span>
+git branch [branch-name]
+
+<span class="token comment" spellcheck="true">#切换当前分支到指定分支</span>
+git checkout [branch-name]
+
+<span class="token comment" spellcheck="true">#新建分支并切换到该分支</span>
+git checkout -b [branch-name]
+
+<span class="token comment" spellcheck="true">#切换到最近切换的分支</span>
+git checkout -
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>2、查看分支</p>
+<pre class="line-numbers language-git"><code class="language-git"><span class="token comment" spellcheck="true">#产看本地分支</span>
+git branch
+
+<span class="token comment" spellcheck="true">#查看远程分支</span>
+git branch -r
+
+<span class="token comment" spellcheck="true">#查看所有分支（本地加远程）</span>
+git branch -a<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>3、删除分支</p>
+<pre class="line-numbers language-git"><code class="language-git"><span class="token comment" spellcheck="true">#删除本地分支</span>
+git branch -d [branch-name]
+
+<span class="token comment" spellcheck="true">#删除远程分支</span>
+git branch [remote-name] --delete [branch-name]
+git branch -dr [remote/branch]<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>4、合并分支</p>
+<pre class="line-numbers language-git"><code class="language-git"><span class="token comment" spellcheck="true">#合并指定分支到当前分支</span>
+git merge [branch]<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+]]></content>
+      <categories>
+        <category>git</category>
+        <category>git常用操作</category>
+      </categories>
+      <tags>
+        <tag>git</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>java-BigDecimal</title>
     <url>/2020/09/07/java-bigdecimal/</url>
     <content><![CDATA[<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>daytwo，Java中的大数据精确计算使用BigInteger和BigDecimal分别尽心大整数和精确浮点数的计算</p>
@@ -1228,33 +1239,6 @@ example
 ]]></content>
   </entry>
   <entry>
-    <title>java-day4</title>
-    <url>/2020/09/13/java-day4/</url>
-    <content><![CDATA[<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>day4，主要讲了String类&amp;局部/全局变量&amp;Array常见方法使用&amp;递归&amp;BufferReader/FileReader/FileWriter&amp;混合变量后的类加载顺序</p>
-<a id="more"></a>
-
-<h2 id="混合变量类加载顺序"><a href="#混合变量类加载顺序" class="headerlink" title="混合变量类加载顺序"></a>混合变量类加载顺序</h2><blockquote>
-<p>Array.copyOf(original,newlength)<br>返回新数组，不改变原数组<br>新数组的长度可大于或小于原数组——&gt;数组的切割/增大容量</p>
-</blockquote>
-<blockquote>
-<p>类加载<br>1、将父类加载到方法区，并为其静态变量分配内存空间<br>2、将子类加载到方法区，并为其静态变量分配内存空间<br>3、为父类的静态变量赋值&amp;执行父类静态代码块（无先后顺序）<br>4、为子类的静态变量赋值&amp;执行子类静态代码块（无先后顺序）</p>
-</blockquote>
-<blockquote>
-<p>new新对象<br>5、在堆中创建父类对象，为父类成员变量分配内存<br>6、在堆中创建子类对象，为子类成员变量分配内存<br>7、为父类的成员变量赋值<br>8、执行父类的构造函数<br>9、为子类的成员变量赋值<br>10、执行子类的构造函数</p>
-</blockquote>
-<p>binarySearch+ArrayList？？？</p>
-]]></content>
-      <categories>
-        <category>java</category>
-        <category>javase</category>
-      </categories>
-      <tags>
-        <tag>fileOperation</tag>
-        <tag>String</tag>
-        <tag>Arrays</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>java-day3</title>
     <url>/2020/09/08/java-day3/</url>
     <content><![CDATA[<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>daythree，Java中的final变量，JVM堆栈区，binarysearch&amp;ArrayList的add方法，静态资源调用，代码块执行顺序<br>1、代码块执行顺序<br>2、重写listarray，并用cellction.binarysearch方法依次插入数据<br>3、输入整数，转换成byte数组，保存，查看使用静态代码块初始化</p>
@@ -1349,6 +1333,33 @@ example
       </tags>
   </entry>
   <entry>
+    <title>java-day4</title>
+    <url>/2020/09/13/java-day4/</url>
+    <content><![CDATA[<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>day4，主要讲了String类&amp;局部/全局变量&amp;Array常见方法使用&amp;递归&amp;BufferReader/FileReader/FileWriter&amp;混合变量后的类加载顺序</p>
+<a id="more"></a>
+
+<h2 id="混合变量类加载顺序"><a href="#混合变量类加载顺序" class="headerlink" title="混合变量类加载顺序"></a>混合变量类加载顺序</h2><blockquote>
+<p>Array.copyOf(original,newlength)<br>返回新数组，不改变原数组<br>新数组的长度可大于或小于原数组——&gt;数组的切割/增大容量</p>
+</blockquote>
+<blockquote>
+<p>类加载<br>1、将父类加载到方法区，并为其静态变量分配内存空间<br>2、将子类加载到方法区，并为其静态变量分配内存空间<br>3、为父类的静态变量赋值&amp;执行父类静态代码块（无先后顺序）<br>4、为子类的静态变量赋值&amp;执行子类静态代码块（无先后顺序）</p>
+</blockquote>
+<blockquote>
+<p>new新对象<br>5、在堆中创建父类对象，为父类成员变量分配内存<br>6、在堆中创建子类对象，为子类成员变量分配内存<br>7、为父类的成员变量赋值<br>8、执行父类的构造函数<br>9、为子类的成员变量赋值<br>10、执行子类的构造函数</p>
+</blockquote>
+<p>binarySearch+ArrayList？？？</p>
+]]></content>
+      <categories>
+        <category>java</category>
+        <category>javase</category>
+      </categories>
+      <tags>
+        <tag>fileOperation</tag>
+        <tag>String</tag>
+        <tag>Arrays</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>java-day6</title>
     <url>/2020/09/15/java-day6/</url>
     <content><![CDATA[<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>day6，upup~</p>
@@ -1393,51 +1404,6 @@ example
 <li>sort方法总的comparator接口对象</li>
 </ul>
 ]]></content>
-  </entry>
-  <entry>
-    <title>java-day8</title>
-    <url>/2020/10/09/java-day8/</url>
-    <content><![CDATA[<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>第八天，决心改掉恶习，加油！</p>
-<a id="more"></a>
-
-<h2 id="HashMap常用api"><a href="#HashMap常用api" class="headerlink" title="HashMap常用api"></a>HashMap常用api</h2><table>
-<thead>
-<tr>
-<th>api</th>
-<th>释义</th>
-<th>返回值</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>get(key)</td>
-<td>获取指定键值对应的值，key为未保存的值时返回null值</td>
-<td>正常指定键对应的值，key不存在返回null值</td>
-</tr>
-<tr>
-<td>put(key,value)</td>
-<td>添加指定的键值对，key和value均可为null值，重复保存相同的键而值不同则会覆盖</td>
-<td>正常null，覆盖保存返回被覆盖的值</td>
-</tr>
-<tr>
-<td>remove(key)</td>
-<td>删除指定键值对，key为未保存的值时返回null值</td>
-<td>被删除的值</td>
-</tr>
-<tr>
-<td>size()</td>
-<td>获取map存储的键值对个数</td>
-<td>-</td>
-</tr>
-</tbody></table>
-]]></content>
-      <categories>
-        <category>java</category>
-        <category>Collection</category>
-      </categories>
-      <tags>
-        <tag>java</tag>
-        <tag>HashMap</tag>
-      </tags>
   </entry>
   <entry>
     <title>java-day7</title>
@@ -1578,116 +1544,48 @@ example
 ]]></content>
   </entry>
   <entry>
-    <title>npm常用命令</title>
-    <url>/2020/10/07/npm-chang-yong-ming-ling/</url>
-    <content><![CDATA[<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>npm包管理工具的命令较多，记录下常用的命令</p>
+    <title>java-day8</title>
+    <url>/2020/10/09/java-day8/</url>
+    <content><![CDATA[<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>第八天，决心改掉恶习，加油！</p>
 <a id="more"></a>
 
-<h3 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h3><p>详见 <strong><a href="http://www.ruanyifeng.com/blog/2016/10/npm_scripts.html">npm使用指南</a></strong> 阮一峰先生写的npm原理很清楚，通俗易懂。总结起来就是在运行npm run+关键字的命令时，npm会自动创建一个shell，同时将/node_moudles/.bin文件加到Path路径下，从而执行.bin文件里面的脚本代码（支持所有shell脚本，不仅是node的脚本）</p>
-<h3 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h3><table>
+<h2 id="HashMap常用api"><a href="#HashMap常用api" class="headerlink" title="HashMap常用api"></a>HashMap常用api</h2><table>
 <thead>
 <tr>
-<th>命令</th>
+<th>api</th>
 <th>释义</th>
-<th>简写</th>
+<th>返回值</th>
 </tr>
 </thead>
 <tbody><tr>
-<td>npm install</td>
-<td>初始化项目/安装项目的依赖</td>
-<td>-</td>
+<td>get(key)</td>
+<td>获取指定键值对应的值，key为未保存的值时返回null值</td>
+<td>正常指定键对应的值，key不存在返回null值</td>
 </tr>
 <tr>
-<td>npm install -y</td>
-<td>初始化项目，创建package.json文件（执行默认选项）</td>
-<td>-</td>
+<td>put(key,value)</td>
+<td>添加指定的键值对，key和value均可为null值，重复保存相同的键而值不同则会覆盖</td>
+<td>正常null，覆盖保存返回被覆盖的值</td>
 </tr>
 <tr>
-<td>npm install [包名@版本号] [--global]</td>
-<td>安装指定名称的依赖（可指定以来的版本），首次安装会自动创建node_modules文件夹（所有依赖均安装至此），global关键字指定是否是全局安装</td>
-<td>npm i -g [包名@版本号]</td>
+<td>remove(key)</td>
+<td>删除指定键值对，key为未保存的值时返回null值</td>
+<td>被删除的值</td>
 </tr>
 <tr>
-<td>npm run [script]</td>
-<td>执行package.json文件中指定的脚本</td>
-<td>-</td>
-</tr>
-<tr>
-<td>npm install –save-dev [包名@版本号]</td>
-<td>安装依赖并只在开发阶段使用，会在packjson的devDependencies属性下做标识（不加--save会在dependencies属性下做标识）</td>
-<td>npm i -D [包名@版本号]</td>
-</tr>
-<tr>
-<td>npm help</td>
-<td>查询所有的npm命令</td>
-<td>-</td>
-</tr>
-<tr>
-<td>npm uninstall –save [包名@版本号]</td>
-<td>卸载依赖，并清除package.json中的文本中dependencies属性下记录的依赖信息</td>
-<td>npm un -S [包名@版本号]</td>
-</tr>
-<tr>
-<td>npm uninstall –save-dev [包名@版本号]</td>
-<td>卸载node_moudles下的依赖文件，并清除devDependencies属性下记录的依赖信息</td>
-<td>npm un -D [包名@版本号]</td>
-</tr>
-<tr>
-<td>npm update [-g] [包名@版本号]</td>
-<td>升级依赖包（可升级全局安装的依赖）</td>
-<td>-</td>
-</tr>
-<tr>
-<td>npm i -g cnpm</td>
-<td>安装淘宝npm镜像</td>
-<td>-</td>
-</tr>
-<tr>
-<td>npm i -S [包名@版本号] –registry=<a href="https://registry.npm.taobao.org/">https://registry.npm.taobao.org</a></td>
-<td>从淘宝镜像源安装依赖</td>
-<td>-</td>
-</tr>
-<tr>
-<td>npm confit set registry <a href="https://registry.npm.taobao.org/">https://registry.npm.taobao.org</a></td>
-<td>设置npm安装依赖的路径为淘宝镜像源</td>
-<td>-</td>
-</tr>
-<tr>
-<td>npm config list</td>
-<td>显示npm配置列表</td>
-<td>-</td>
-</tr>
-<tr>
-<td>npm config ls -l</td>
-<td>显示所有npm配置列表</td>
+<td>size()</td>
+<td>获取map存储的键值对个数</td>
 <td>-</td>
 </tr>
 </tbody></table>
-<ul>
-<li>关于npx可见<strong>阮一峰先生的教程<a href="https://www.ruanyifeng.com/blog/2019/02/npx.html">npx使用教程</a></strong></li>
-<li>安装多个依赖使用空格隔开依赖包名称即可</li>
-<li>使用&amp;链接多个npm命令——不分先后同时执行，使用&amp;&amp;链接多个npm命令——依次执行npm命令</li>
-</ul>
-<h3 id="依赖包版本号中的特殊字符"><a href="#依赖包版本号中的特殊字符" class="headerlink" title="依赖包版本号中的特殊字符"></a>依赖包版本号中的特殊字符</h3><blockquote>
-<p>依赖包的后面可接版本号，通常格式为；包名+特殊字符+版本号[major, minor, patch]</p>
-</blockquote>
-<p>1、特殊字符^<br>详见**二不挂五先生的文章<a href="https://zhuanlan.zhihu.com/p/66039729">npm install 版本号^的坑</a>**，简单点来说就是^标识的范围是版本号[major, minor, patch]中从左到右第一个非0位开始，小于此非零位+1的版本号</p>
-<pre class="line-numbers language-bash"><code class="language-bash">^1.2.3版本包括：<span class="token operator">>=</span> 1.2.3 并且 <span class="token operator">&lt;</span> 2.0.0
-^0.2.3版本包括：<span class="token operator">>=</span> 0.2.3 并且 <span class="token operator">&lt;</span> 0.3.0
-^0.0.3版本包括：<span class="token operator">>=</span> 0.0.3 并且 <span class="token operator">&lt;</span> 0.0.4<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-<p>2、特殊字符~<br>与^类似，~字符则指定匹配版本号[major, minor, patch]中最新的patch位包依赖（方便修复小bug后依然适用于代码）</p>
-<pre class="line-numbers language-bash"><code class="language-bash">~1.2.3版本包括：<span class="token operator">>=</span> 1.2.3 并且 <span class="token operator">&lt;</span> 1.3.0
-~0.2.3版本包括：<span class="token operator">>=</span> 0.2.3 并且 <span class="token operator">&lt;</span> 0.3.0
-~0.0.3版本包括：<span class="token operator">>=</span> 0.0.3 并且 <span class="token operator">&lt;</span> 0.1.0<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-<p>3、特殊字符@<br>在@后面可以添加具体的版本号，以指定依赖包的确切版本，@latest表示安装最新的依赖包</p>
 ]]></content>
       <categories>
-        <category>node</category>
-        <category>npm</category>
+        <category>java</category>
+        <category>Collection</category>
       </categories>
       <tags>
-        <tag>node</tag>
-        <tag>npm</tag>
+        <tag>java</tag>
+        <tag>HashMap</tag>
       </tags>
   </entry>
   <entry>
@@ -2186,6 +2084,119 @@ arr <span class="token keyword">instanceof</span> <span class="token class-name"
       </tags>
   </entry>
   <entry>
+    <title>npm常用命令</title>
+    <url>/2020/10/07/npm-chang-yong-ming-ling/</url>
+    <content><![CDATA[<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>npm包管理工具的命令较多，记录下常用的命令</p>
+<a id="more"></a>
+
+<h3 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h3><p>详见 <strong><a href="http://www.ruanyifeng.com/blog/2016/10/npm_scripts.html">npm使用指南</a></strong> 阮一峰先生写的npm原理很清楚，通俗易懂。总结起来就是在运行npm run+关键字的命令时，npm会自动创建一个shell，同时将/node_moudles/.bin文件加到Path路径下，从而执行.bin文件里面的脚本代码（支持所有shell脚本，不仅是node的脚本）</p>
+<h3 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h3><table>
+<thead>
+<tr>
+<th>命令</th>
+<th>释义</th>
+<th>简写</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>npm install</td>
+<td>初始化项目/安装项目的依赖</td>
+<td>-</td>
+</tr>
+<tr>
+<td>npm install -y</td>
+<td>初始化项目，创建package.json文件（执行默认选项）</td>
+<td>-</td>
+</tr>
+<tr>
+<td>npm install [包名@版本号] [--global]</td>
+<td>安装指定名称的依赖（可指定以来的版本），首次安装会自动创建node_modules文件夹（所有依赖均安装至此），global关键字指定是否是全局安装</td>
+<td>npm i -g [包名@版本号]</td>
+</tr>
+<tr>
+<td>npm run [script]</td>
+<td>执行package.json文件中指定的脚本</td>
+<td>-</td>
+</tr>
+<tr>
+<td>npm install –save-dev [包名@版本号]</td>
+<td>安装依赖并只在开发阶段使用，会在packjson的devDependencies属性下做标识（不加--save会在dependencies属性下做标识）</td>
+<td>npm i -D [包名@版本号]</td>
+</tr>
+<tr>
+<td>npm help</td>
+<td>查询所有的npm命令</td>
+<td>-</td>
+</tr>
+<tr>
+<td>npm uninstall –save [包名@版本号]</td>
+<td>卸载依赖，并清除package.json中的文本中dependencies属性下记录的依赖信息</td>
+<td>npm un -S [包名@版本号]</td>
+</tr>
+<tr>
+<td>npm uninstall –save-dev [包名@版本号]</td>
+<td>卸载node_moudles下的依赖文件，并清除devDependencies属性下记录的依赖信息</td>
+<td>npm un -D [包名@版本号]</td>
+</tr>
+<tr>
+<td>npm update [-g] [包名@版本号]</td>
+<td>升级依赖包（可升级全局安装的依赖）</td>
+<td>-</td>
+</tr>
+<tr>
+<td>npm i -g cnpm</td>
+<td>安装淘宝npm镜像</td>
+<td>-</td>
+</tr>
+<tr>
+<td>npm i -S [包名@版本号] –registry=<a href="https://registry.npm.taobao.org/">https://registry.npm.taobao.org</a></td>
+<td>从淘宝镜像源安装依赖</td>
+<td>-</td>
+</tr>
+<tr>
+<td>npm confit set registry <a href="https://registry.npm.taobao.org/">https://registry.npm.taobao.org</a></td>
+<td>设置npm安装依赖的路径为淘宝镜像源</td>
+<td>-</td>
+</tr>
+<tr>
+<td>npm config list</td>
+<td>显示npm配置列表</td>
+<td>-</td>
+</tr>
+<tr>
+<td>npm config ls -l</td>
+<td>显示所有npm配置列表</td>
+<td>-</td>
+</tr>
+</tbody></table>
+<ul>
+<li>关于npx可见<strong>阮一峰先生的教程<a href="https://www.ruanyifeng.com/blog/2019/02/npx.html">npx使用教程</a></strong></li>
+<li>安装多个依赖使用空格隔开依赖包名称即可</li>
+<li>使用&amp;链接多个npm命令——不分先后同时执行，使用&amp;&amp;链接多个npm命令——依次执行npm命令</li>
+</ul>
+<h3 id="依赖包版本号中的特殊字符"><a href="#依赖包版本号中的特殊字符" class="headerlink" title="依赖包版本号中的特殊字符"></a>依赖包版本号中的特殊字符</h3><blockquote>
+<p>依赖包的后面可接版本号，通常格式为；包名+特殊字符+版本号[major, minor, patch]</p>
+</blockquote>
+<p>1、特殊字符^<br>详见**二不挂五先生的文章<a href="https://zhuanlan.zhihu.com/p/66039729">npm install 版本号^的坑</a>**，简单点来说就是^标识的范围是版本号[major, minor, patch]中从左到右第一个非0位开始，小于此非零位+1的版本号</p>
+<pre class="line-numbers language-bash"><code class="language-bash">^1.2.3版本包括：<span class="token operator">>=</span> 1.2.3 并且 <span class="token operator">&lt;</span> 2.0.0
+^0.2.3版本包括：<span class="token operator">>=</span> 0.2.3 并且 <span class="token operator">&lt;</span> 0.3.0
+^0.0.3版本包括：<span class="token operator">>=</span> 0.0.3 并且 <span class="token operator">&lt;</span> 0.0.4<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p>2、特殊字符~<br>与^类似，~字符则指定匹配版本号[major, minor, patch]中最新的patch位包依赖（方便修复小bug后依然适用于代码）</p>
+<pre class="line-numbers language-bash"><code class="language-bash">~1.2.3版本包括：<span class="token operator">>=</span> 1.2.3 并且 <span class="token operator">&lt;</span> 1.3.0
+~0.2.3版本包括：<span class="token operator">>=</span> 0.2.3 并且 <span class="token operator">&lt;</span> 0.3.0
+~0.0.3版本包括：<span class="token operator">>=</span> 0.0.3 并且 <span class="token operator">&lt;</span> 0.1.0<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p>3、特殊字符@<br>在@后面可以添加具体的版本号，以指定依赖包的确切版本，@latest表示安装最新的依赖包</p>
+]]></content>
+      <categories>
+        <category>node</category>
+        <category>npm</category>
+      </categories>
+      <tags>
+        <tag>node</tag>
+        <tag>npm</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>python函数</title>
     <url>/2020/10/11/python-han-shu/</url>
     <content><![CDATA[<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>介绍</p>
@@ -2513,6 +2524,131 @@ age<span class="token punctuation">,</span>name <span class="token operator">=</
       </tags>
   </entry>
   <entry>
+    <title>webpack和babel在项目中的应用</title>
+    <url>/2020/10/13/webpack-he-babel-zai-xiang-mu-zhong-de-ying-yong/</url>
+    <content><![CDATA[<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>使用vue-cli简单不少，但要是单纯想使用es6的打包工具webpack和转换代码工具的babel进行项目的打包转换，麻烦不少</p>
+<a id="more"></a>
+
+<h2 id="初始化项目"><a href="#初始化项目" class="headerlink" title="初始化项目"></a>初始化项目</h2><pre class="line-numbers language-bash"><code class="language-bash">//如果项目文件夹存在，可以省略项目名称
+<span class="token function">npm</span> init -y <span class="token punctuation">[</span>项目名称<span class="token punctuation">]</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p>使用上述命令生成package.json文件，此文件主要记录了项目的依赖，版本号等信息。当项目丢失部分依赖时可使用npm install依照此记录重新安装依赖。</p>
+<h2 id="安装依赖"><a href="#安装依赖" class="headerlink" title="安装依赖"></a>安装依赖</h2><p>webpack和babel的依赖包较多，且版本问题不兼容，很坑。直接使用固定版本命令安装</p>
+<ul>
+<li>安装babel的相关依赖</li>
+</ul>
+<pre class="line-numbers language-bash"><code class="language-bash"><span class="token function">npm</span> i -D babel-core@6.26.x babel-loader@7.0.0 babel-plugin-transform-runtime@6.23.x babel-preset-env@1.7.x babel-polyfill<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<ul>
+<li>安装webpack相关的依赖</li>
+</ul>
+<pre class="line-numbers language-bash"><code class="language-bash"><span class="token function">npm</span> i -D webpack@4.43.x webpack-cli@3.3.x webpack-dev-server@3.11.x html-webpack-plugin@4.3.x<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<ul>
+<li>安装css和字体文件相关的依赖</li>
+</ul>
+<pre class="line-numbers language-bash"><code class="language-bash">$ <span class="token function">npm</span> i -D node-sass@4.14.x sass-loader@8.0.x css-loader@3.5.x file-loader@6.0.x style-loader@1.2.x url-loader@4.1.x<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h2 id="配置wepack"><a href="#配置wepack" class="headerlink" title="配置wepack"></a>配置wepack</h2><p>配置需要使用的babel转换环境和wepack打包配置，项目入口生成文件存放路径等</p>
+<p>1、在项目的根目录下创建webpack.config.js文件</p>
+<p>2、在文件中写如下配置即可，项目运行时会自动读取此文件的配置</p>
+<pre class="line-numbers language-js"><code class="language-js"><span class="token comment" spellcheck="true">//commonjs 导入文件格式</span>
+<span class="token keyword">const</span> htmlwebpackplugin <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'html-webpack-plugin'</span><span class="token punctuation">)</span>
+<span class="token keyword">const</span> path <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'path'</span><span class="token punctuation">)</span>
+
+<span class="token keyword">const</span> htmlwebplugin <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">htmlwebpackplugin</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    filename<span class="token punctuation">:</span><span class="token string">'index.html'</span><span class="token punctuation">,</span>
+    template<span class="token punctuation">:</span>path<span class="token punctuation">.</span><span class="token function">join</span><span class="token punctuation">(</span>__dirname<span class="token punctuation">,</span><span class="token string">'./src/index.html'</span><span class="token punctuation">)</span>
+<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">)</span>
+
+<span class="token comment" spellcheck="true">//安装node-sass特殊命令npm install node-sass -D --sass-binary-site=http://npm.taobao.org/mirrors/node-sass</span>
+module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    mode<span class="token punctuation">:</span><span class="token string">'development'</span><span class="token punctuation">,</span>
+    plugins<span class="token punctuation">:</span><span class="token punctuation">[</span>htmlwebplugin<span class="token punctuation">]</span><span class="token punctuation">,</span>
+    entry<span class="token punctuation">:</span><span class="token string">'./src/main.js'</span><span class="token punctuation">,</span>
+    module<span class="token punctuation">:</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+        rules<span class="token punctuation">:</span><span class="token punctuation">[</span>
+            <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span> 
+                test<span class="token punctuation">:</span> <span class="token regex">/.js$/</span><span class="token punctuation">,</span> 
+                exclude<span class="token punctuation">:</span><span class="token regex">/node_modules/</span><span class="token punctuation">,</span>
+                use<span class="token punctuation">:</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+                    loader<span class="token punctuation">:</span><span class="token string">'babel-loader'</span><span class="token punctuation">,</span>
+                    options<span class="token punctuation">:</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+                        presets<span class="token punctuation">:</span><span class="token punctuation">[</span><span class="token string">'env'</span><span class="token punctuation">,</span><span class="token string">'babel-polyfill'</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+                        plugins<span class="token punctuation">:</span><span class="token punctuation">[</span><span class="token string">'transform-runtime'</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+                    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+                <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">,</span>
+            <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">,</span>
+            <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span> test<span class="token punctuation">:</span> <span class="token regex">/\.css$/</span><span class="token punctuation">,</span> use<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token string">'style-loader'</span><span class="token punctuation">,</span> <span class="token string">'css-loader'</span><span class="token punctuation">]</span> <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">,</span>
+            <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+                test<span class="token punctuation">:</span> <span class="token regex">/\.scss$/</span><span class="token punctuation">,</span> use<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token string">'style-loader'</span><span class="token punctuation">,</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+                    loader<span class="token punctuation">:</span> <span class="token string">'css-loader'</span><span class="token punctuation">,</span>
+                    options<span class="token punctuation">:</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+                        modules<span class="token punctuation">:</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+                            localIdentName<span class="token punctuation">:</span> <span class="token string">'[path][name]-[local]-[hash:5]'</span>
+                        <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+                    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+                <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">,</span> <span class="token string">'sass-loader'</span><span class="token punctuation">]</span>
+            <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">,</span>
+            <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span> test<span class="token punctuation">:</span> <span class="token regex">/\.ttf|woff|woff2|eot|svg$/</span><span class="token punctuation">,</span> use<span class="token punctuation">:</span> <span class="token string">'url-loader'</span> <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">,</span>
+            <span class="token comment" spellcheck="true">// &amp;#123;test:/\.css$/,use:['style-loader','css-loader?modules&amp;localIdentName=[path][name]-[local]-[hash:5]']&amp;#125;</span>
+        <span class="token punctuation">]</span><span class="token punctuation">,</span>
+    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">,</span>
+    resolve<span class="token punctuation">:</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+        alias<span class="token punctuation">:</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+            <span class="token string">'@'</span><span class="token punctuation">:</span>path<span class="token punctuation">.</span><span class="token function">join</span><span class="token punctuation">(</span>__dirname<span class="token punctuation">,</span><span class="token string">'./src'</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+            <span class="token string">'$'</span><span class="token punctuation">:</span>__dirname
+        <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">,</span>
+        extensions<span class="token punctuation">:</span><span class="token punctuation">[</span><span class="token string">'.js'</span><span class="token punctuation">,</span><span class="token string">'.jsx'</span><span class="token punctuation">,</span><span class="token string">'.json'</span><span class="token punctuation">]</span>
+    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">,</span>
+<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="附上完整的package-json文件"><a href="#附上完整的package-json文件" class="headerlink" title="附上完整的package.json文件"></a>附上完整的package.json文件</h2><pre class="line-numbers language-json"><code class="language-json">&amp;#<span class="token number">123</span><span class="token punctuation">;</span>
+  <span class="token property">"name"</span><span class="token operator">:</span> <span class="token string">"demo"</span><span class="token punctuation">,</span>
+  <span class="token property">"version"</span><span class="token operator">:</span> <span class="token string">"1.0.0"</span><span class="token punctuation">,</span>
+  <span class="token property">"description"</span><span class="token operator">:</span> <span class="token string">""</span><span class="token punctuation">,</span>
+  <span class="token property">"main"</span><span class="token operator">:</span> <span class="token string">"index.js"</span><span class="token punctuation">,</span>
+  <span class="token property">"scripts"</span><span class="token operator">:</span> &amp;#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token property">"test"</span><span class="token operator">:</span> <span class="token string">"echo \"Error: no test specified\" &amp;&amp; exit 1"</span><span class="token punctuation">,</span>
+    <span class="token property">"serve"</span><span class="token operator">:</span> <span class="token string">"webpack-dev-server --open --port 8080 --hot --host 127.0.0.1"</span>
+  &amp;#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">,</span>
+  <span class="token property">"keywords"</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+  <span class="token property">"author"</span><span class="token operator">:</span> <span class="token string">""</span><span class="token punctuation">,</span>
+  <span class="token property">"license"</span><span class="token operator">:</span> <span class="token string">"ISC"</span><span class="token punctuation">,</span>
+  <span class="token property">"devDependencies"</span><span class="token operator">:</span> &amp;#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token property">"babel-core"</span><span class="token operator">:</span> <span class="token string">"^6.26.3"</span><span class="token punctuation">,</span>
+    <span class="token property">"babel-loader"</span><span class="token operator">:</span> <span class="token string">"^7.0.0"</span><span class="token punctuation">,</span>
+    <span class="token property">"babel-plugin-transform-runtime"</span><span class="token operator">:</span> <span class="token string">"^6.23.0"</span><span class="token punctuation">,</span>
+    <span class="token property">"babel-preset-env"</span><span class="token operator">:</span> <span class="token string">"^1.7.0"</span><span class="token punctuation">,</span>
+    <span class="token property">"babel-preset-react"</span><span class="token operator">:</span> <span class="token string">"^6.24.1"</span><span class="token punctuation">,</span>
+    <span class="token property">"babel-preset-stage-0"</span><span class="token operator">:</span> <span class="token string">"^6.24.1"</span><span class="token punctuation">,</span>
+    <span class="token property">"bootstrap"</span><span class="token operator">:</span> <span class="token string">"^4.5.0"</span><span class="token punctuation">,</span>
+    <span class="token property">"create-react-class"</span><span class="token operator">:</span> <span class="token string">"^15.6.3"</span><span class="token punctuation">,</span>
+    <span class="token property">"css-loader"</span><span class="token operator">:</span> <span class="token string">"^3.5.3"</span><span class="token punctuation">,</span>
+    <span class="token property">"file-loader"</span><span class="token operator">:</span> <span class="token string">"^6.0.0"</span><span class="token punctuation">,</span>
+    <span class="token property">"html-webpack-plugin"</span><span class="token operator">:</span> <span class="token string">"^4.3.0"</span><span class="token punctuation">,</span>
+    <span class="token property">"jquery"</span><span class="token operator">:</span> <span class="token string">"^3.5.1"</span><span class="token punctuation">,</span>
+    <span class="token property">"prop-types"</span><span class="token operator">:</span> <span class="token string">"^15.7.2"</span><span class="token punctuation">,</span>
+    <span class="token property">"sass-loader"</span><span class="token operator">:</span> <span class="token string">"^8.0.2"</span><span class="token punctuation">,</span>
+    <span class="token property">"style-loader"</span><span class="token operator">:</span> <span class="token string">"^1.2.1"</span><span class="token punctuation">,</span>
+    <span class="token property">"url-loader"</span><span class="token operator">:</span> <span class="token string">"^4.1.0"</span><span class="token punctuation">,</span>
+    <span class="token property">"webpack"</span><span class="token operator">:</span> <span class="token string">"^4.43.0"</span><span class="token punctuation">,</span>
+    <span class="token property">"webpack-cli"</span><span class="token operator">:</span> <span class="token string">"^3.3.11"</span><span class="token punctuation">,</span>
+    <span class="token property">"webpack-dev-server"</span><span class="token operator">:</span> <span class="token string">"^3.11.0"</span>
+  &amp;#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">,</span>
+  <span class="token property">"dependencies"</span><span class="token operator">:</span> &amp;#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token property">"node-sass"</span><span class="token operator">:</span> <span class="token string">"^4.14.1"</span><span class="token punctuation">,</span>
+    <span class="token property">"react"</span><span class="token operator">:</span> <span class="token string">"^16.13.1"</span><span class="token punctuation">,</span>
+    <span class="token property">"react-dom"</span><span class="token operator">:</span> <span class="token string">"^16.13.1"</span>
+  &amp;#<span class="token number">125</span><span class="token punctuation">;</span>
+&amp;#<span class="token number">125</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+]]></content>
+      <categories>
+        <category>node</category>
+        <category>打包工具</category>
+      </categories>
+      <tags>
+        <tag>node</tag>
+        <tag>wepack,babel</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>常用css设置</title>
     <url>/2020/09/24/chang-yong-css-she-zhi/</url>
     <content><![CDATA[<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>列举常见的css命令，用于特定的功能。</p>
@@ -2696,131 +2832,6 @@ String regex <span class="token operator">=</span> <span class="token string">"\
       <tags>
         <tag>java</tag>
         <tag>正则</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>webpack和babel在项目中的应用</title>
-    <url>/2020/10/13/webpack-he-babel-zai-xiang-mu-zhong-de-ying-yong/</url>
-    <content><![CDATA[<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>使用vue-cli简单不少，但要是单纯想使用es6的打包工具webpack和转换代码工具的babel进行项目的打包转换，麻烦不少</p>
-<a id="more"></a>
-
-<h2 id="初始化项目"><a href="#初始化项目" class="headerlink" title="初始化项目"></a>初始化项目</h2><pre class="line-numbers language-bash"><code class="language-bash">//如果项目文件夹存在，可以省略项目名称
-<span class="token function">npm</span> init -y <span class="token punctuation">[</span>项目名称<span class="token punctuation">]</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-<p>使用上述命令生成package.json文件，此文件主要记录了项目的依赖，版本号等信息。当项目丢失部分依赖时可使用npm install依照此记录重新安装依赖。</p>
-<h2 id="安装依赖"><a href="#安装依赖" class="headerlink" title="安装依赖"></a>安装依赖</h2><p>webpack和babel的依赖包较多，且版本问题不兼容，很坑。直接使用固定版本命令安装</p>
-<ul>
-<li>安装babel的相关依赖</li>
-</ul>
-<pre class="line-numbers language-bash"><code class="language-bash"><span class="token function">npm</span> i -D babel-core@6.26.x babel-loader@7.0.0 babel-plugin-transform-runtime@6.23.x babel-preset-env@1.7.x babel-polyfill<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<ul>
-<li>安装webpack相关的依赖</li>
-</ul>
-<pre class="line-numbers language-bash"><code class="language-bash"><span class="token function">npm</span> i -D webpack@4.43.x webpack-cli@3.3.x webpack-dev-server@3.11.x html-webpack-plugin@4.3.x<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<ul>
-<li>安装css和字体文件相关的依赖</li>
-</ul>
-<pre class="line-numbers language-bash"><code class="language-bash">$ <span class="token function">npm</span> i -D node-sass@4.14.x sass-loader@8.0.x css-loader@3.5.x file-loader@6.0.x style-loader@1.2.x url-loader@4.1.x<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<h2 id="配置wepack"><a href="#配置wepack" class="headerlink" title="配置wepack"></a>配置wepack</h2><p>配置需要使用的babel转换环境和wepack打包配置，项目入口生成文件存放路径等</p>
-<p>1、在项目的根目录下创建webpack.config.js文件</p>
-<p>2、在文件中写如下配置即可，项目运行时会自动读取此文件的配置</p>
-<pre class="line-numbers language-js"><code class="language-js"><span class="token comment" spellcheck="true">//commonjs 导入文件格式</span>
-<span class="token keyword">const</span> htmlwebpackplugin <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'html-webpack-plugin'</span><span class="token punctuation">)</span>
-<span class="token keyword">const</span> path <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'path'</span><span class="token punctuation">)</span>
-
-<span class="token keyword">const</span> htmlwebplugin <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">htmlwebpackplugin</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
-    filename<span class="token punctuation">:</span><span class="token string">'index.html'</span><span class="token punctuation">,</span>
-    template<span class="token punctuation">:</span>path<span class="token punctuation">.</span><span class="token function">join</span><span class="token punctuation">(</span>__dirname<span class="token punctuation">,</span><span class="token string">'./src/index.html'</span><span class="token punctuation">)</span>
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">)</span>
-
-<span class="token comment" spellcheck="true">//安装node-sass特殊命令npm install node-sass -D --sass-binary-site=http://npm.taobao.org/mirrors/node-sass</span>
-module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
-    mode<span class="token punctuation">:</span><span class="token string">'development'</span><span class="token punctuation">,</span>
-    plugins<span class="token punctuation">:</span><span class="token punctuation">[</span>htmlwebplugin<span class="token punctuation">]</span><span class="token punctuation">,</span>
-    entry<span class="token punctuation">:</span><span class="token string">'./src/main.js'</span><span class="token punctuation">,</span>
-    module<span class="token punctuation">:</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
-        rules<span class="token punctuation">:</span><span class="token punctuation">[</span>
-            <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span> 
-                test<span class="token punctuation">:</span> <span class="token regex">/.js$/</span><span class="token punctuation">,</span> 
-                exclude<span class="token punctuation">:</span><span class="token regex">/node_modules/</span><span class="token punctuation">,</span>
-                use<span class="token punctuation">:</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
-                    loader<span class="token punctuation">:</span><span class="token string">'babel-loader'</span><span class="token punctuation">,</span>
-                    options<span class="token punctuation">:</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
-                        presets<span class="token punctuation">:</span><span class="token punctuation">[</span><span class="token string">'env'</span><span class="token punctuation">,</span><span class="token string">'babel-polyfill'</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
-                        plugins<span class="token punctuation">:</span><span class="token punctuation">[</span><span class="token string">'transform-runtime'</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
-                    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
-                <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">,</span>
-            <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">,</span>
-            <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span> test<span class="token punctuation">:</span> <span class="token regex">/\.css$/</span><span class="token punctuation">,</span> use<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token string">'style-loader'</span><span class="token punctuation">,</span> <span class="token string">'css-loader'</span><span class="token punctuation">]</span> <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">,</span>
-            <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
-                test<span class="token punctuation">:</span> <span class="token regex">/\.scss$/</span><span class="token punctuation">,</span> use<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token string">'style-loader'</span><span class="token punctuation">,</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
-                    loader<span class="token punctuation">:</span> <span class="token string">'css-loader'</span><span class="token punctuation">,</span>
-                    options<span class="token punctuation">:</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
-                        modules<span class="token punctuation">:</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
-                            localIdentName<span class="token punctuation">:</span> <span class="token string">'[path][name]-[local]-[hash:5]'</span>
-                        <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
-                    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
-                <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">,</span> <span class="token string">'sass-loader'</span><span class="token punctuation">]</span>
-            <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">,</span>
-            <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span> test<span class="token punctuation">:</span> <span class="token regex">/\.ttf|woff|woff2|eot|svg$/</span><span class="token punctuation">,</span> use<span class="token punctuation">:</span> <span class="token string">'url-loader'</span> <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">,</span>
-            <span class="token comment" spellcheck="true">// &amp;#123;test:/\.css$/,use:['style-loader','css-loader?modules&amp;localIdentName=[path][name]-[local]-[hash:5]']&amp;#125;</span>
-        <span class="token punctuation">]</span><span class="token punctuation">,</span>
-    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">,</span>
-    resolve<span class="token punctuation">:</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
-        alias<span class="token punctuation">:</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
-            <span class="token string">'@'</span><span class="token punctuation">:</span>path<span class="token punctuation">.</span><span class="token function">join</span><span class="token punctuation">(</span>__dirname<span class="token punctuation">,</span><span class="token string">'./src'</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
-            <span class="token string">'$'</span><span class="token punctuation">:</span>__dirname
-        <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">,</span>
-        extensions<span class="token punctuation">:</span><span class="token punctuation">[</span><span class="token string">'.js'</span><span class="token punctuation">,</span><span class="token string">'.jsx'</span><span class="token punctuation">,</span><span class="token string">'.json'</span><span class="token punctuation">]</span>
-    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">,</span>
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h2 id="附上完整的package-json文件"><a href="#附上完整的package-json文件" class="headerlink" title="附上完整的package.json文件"></a>附上完整的package.json文件</h2><pre class="line-numbers language-json"><code class="language-json">&amp;#<span class="token number">123</span><span class="token punctuation">;</span>
-  <span class="token property">"name"</span><span class="token operator">:</span> <span class="token string">"demo"</span><span class="token punctuation">,</span>
-  <span class="token property">"version"</span><span class="token operator">:</span> <span class="token string">"1.0.0"</span><span class="token punctuation">,</span>
-  <span class="token property">"description"</span><span class="token operator">:</span> <span class="token string">""</span><span class="token punctuation">,</span>
-  <span class="token property">"main"</span><span class="token operator">:</span> <span class="token string">"index.js"</span><span class="token punctuation">,</span>
-  <span class="token property">"scripts"</span><span class="token operator">:</span> &amp;#<span class="token number">123</span><span class="token punctuation">;</span>
-    <span class="token property">"test"</span><span class="token operator">:</span> <span class="token string">"echo \"Error: no test specified\" &amp;&amp; exit 1"</span><span class="token punctuation">,</span>
-    <span class="token property">"serve"</span><span class="token operator">:</span> <span class="token string">"webpack-dev-server --open --port 8080 --hot --host 127.0.0.1"</span>
-  &amp;#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">,</span>
-  <span class="token property">"keywords"</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
-  <span class="token property">"author"</span><span class="token operator">:</span> <span class="token string">""</span><span class="token punctuation">,</span>
-  <span class="token property">"license"</span><span class="token operator">:</span> <span class="token string">"ISC"</span><span class="token punctuation">,</span>
-  <span class="token property">"devDependencies"</span><span class="token operator">:</span> &amp;#<span class="token number">123</span><span class="token punctuation">;</span>
-    <span class="token property">"babel-core"</span><span class="token operator">:</span> <span class="token string">"^6.26.3"</span><span class="token punctuation">,</span>
-    <span class="token property">"babel-loader"</span><span class="token operator">:</span> <span class="token string">"^7.0.0"</span><span class="token punctuation">,</span>
-    <span class="token property">"babel-plugin-transform-runtime"</span><span class="token operator">:</span> <span class="token string">"^6.23.0"</span><span class="token punctuation">,</span>
-    <span class="token property">"babel-preset-env"</span><span class="token operator">:</span> <span class="token string">"^1.7.0"</span><span class="token punctuation">,</span>
-    <span class="token property">"babel-preset-react"</span><span class="token operator">:</span> <span class="token string">"^6.24.1"</span><span class="token punctuation">,</span>
-    <span class="token property">"babel-preset-stage-0"</span><span class="token operator">:</span> <span class="token string">"^6.24.1"</span><span class="token punctuation">,</span>
-    <span class="token property">"bootstrap"</span><span class="token operator">:</span> <span class="token string">"^4.5.0"</span><span class="token punctuation">,</span>
-    <span class="token property">"create-react-class"</span><span class="token operator">:</span> <span class="token string">"^15.6.3"</span><span class="token punctuation">,</span>
-    <span class="token property">"css-loader"</span><span class="token operator">:</span> <span class="token string">"^3.5.3"</span><span class="token punctuation">,</span>
-    <span class="token property">"file-loader"</span><span class="token operator">:</span> <span class="token string">"^6.0.0"</span><span class="token punctuation">,</span>
-    <span class="token property">"html-webpack-plugin"</span><span class="token operator">:</span> <span class="token string">"^4.3.0"</span><span class="token punctuation">,</span>
-    <span class="token property">"jquery"</span><span class="token operator">:</span> <span class="token string">"^3.5.1"</span><span class="token punctuation">,</span>
-    <span class="token property">"prop-types"</span><span class="token operator">:</span> <span class="token string">"^15.7.2"</span><span class="token punctuation">,</span>
-    <span class="token property">"sass-loader"</span><span class="token operator">:</span> <span class="token string">"^8.0.2"</span><span class="token punctuation">,</span>
-    <span class="token property">"style-loader"</span><span class="token operator">:</span> <span class="token string">"^1.2.1"</span><span class="token punctuation">,</span>
-    <span class="token property">"url-loader"</span><span class="token operator">:</span> <span class="token string">"^4.1.0"</span><span class="token punctuation">,</span>
-    <span class="token property">"webpack"</span><span class="token operator">:</span> <span class="token string">"^4.43.0"</span><span class="token punctuation">,</span>
-    <span class="token property">"webpack-cli"</span><span class="token operator">:</span> <span class="token string">"^3.3.11"</span><span class="token punctuation">,</span>
-    <span class="token property">"webpack-dev-server"</span><span class="token operator">:</span> <span class="token string">"^3.11.0"</span>
-  &amp;#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">,</span>
-  <span class="token property">"dependencies"</span><span class="token operator">:</span> &amp;#<span class="token number">123</span><span class="token punctuation">;</span>
-    <span class="token property">"node-sass"</span><span class="token operator">:</span> <span class="token string">"^4.14.1"</span><span class="token punctuation">,</span>
-    <span class="token property">"react"</span><span class="token operator">:</span> <span class="token string">"^16.13.1"</span><span class="token punctuation">,</span>
-    <span class="token property">"react-dom"</span><span class="token operator">:</span> <span class="token string">"^16.13.1"</span>
-  &amp;#<span class="token number">125</span><span class="token punctuation">;</span>
-&amp;#<span class="token number">125</span><span class="token punctuation">;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-]]></content>
-      <categories>
-        <category>node</category>
-        <category>打包工具</category>
-      </categories>
-      <tags>
-        <tag>node</tag>
-        <tag>wepack,babel</tag>
       </tags>
   </entry>
 </search>
