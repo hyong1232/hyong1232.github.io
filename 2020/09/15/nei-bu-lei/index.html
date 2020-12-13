@@ -4,7 +4,7 @@
 
 <head>
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
-    <meta name="keywords" content="java-day8, null">
+    <meta name="keywords" content="内部类, null">
     <meta name="description" content="人生有酒需尽欢，莫使金樽空对月">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>java-day8 | null</title>
+    <title>内部类 | null</title>
     <link rel="icon" type="image/png" href="/medias/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -335,12 +335,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('https://i.loli.net/2020/10/25/x1SZ7AJ3BbYDCcU.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://i.loli.net/2020/10/25/g1pviGLPwRAD6kh.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">java-day8</h1>
+                    <h1 class="description center-align post-title">内部类</h1>
                 </div>
             </div>
         </div>
@@ -465,8 +465,8 @@
                                 <span class="chip bg-color">java</span>
                             </a>
                         
-                            <a href="/tags/HashMap/">
-                                <span class="chip bg-color">HashMap</span>
+                            <a href="/tags/%E5%86%85%E9%83%A8%E7%B1%BB/">
+                                <span class="chip bg-color">内部类</span>
                             </a>
                         
                     </div>
@@ -481,8 +481,8 @@
                                 java
                             </a>
                         
-                            <a href="/categories/java/Collection/" class="post-category">
-                                Collection
+                            <a href="/categories/java/class/" class="post-category">
+                                class
                             </a>
                         
                     </div>
@@ -494,21 +494,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2020-10-09
+                    2020-09-15
                 </div>
                 
 
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2020-10-25
+                    2020-12-13
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    145
+                    269
                 </div>
                 
 
@@ -530,38 +530,47 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>第八天，决心改掉恶习，加油！</p>
+                <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>day6，upup~</p>
 <a id="more"></a>
 
-<h2 id="HashMap常用api"><a href="#HashMap常用api" class="headerlink" title="HashMap常用api"></a>HashMap常用api</h2><table>
+<h2 id="Date类的简单实用"><a href="#Date类的简单实用" class="headerlink" title="Date类的简单实用"></a>Date类的简单实用</h2><blockquote>
+<p>SimpleDateFormat+Date类</p>
+</blockquote>
+<h2 id="内部类"><a href="#内部类" class="headerlink" title="内部类"></a>内部类</h2><blockquote>
+<p>内部类就是类里面嵌套了类</p>
+</blockquote>
+<table>
 <thead>
 <tr>
-<th>api</th>
-<th>释义</th>
-<th>返回值</th>
+<th>普通内部类</th>
+<th>静态内部类</th>
 </tr>
 </thead>
 <tbody><tr>
-<td>get(key)</td>
-<td>获取指定键值对应的值，key为未保存的值时返回null值</td>
-<td>正常指定键对应的值，key不存在返回null值</td>
+<td>异</td>
+<td>普通内部类只能由具体的外部类对象生成内部内对象，静态内部类则可以直接生成对象</td>
 </tr>
 <tr>
-<td>put(key,value)</td>
-<td>添加指定的键值对，key和value均可为null值，重复保存相同的键而值不同则会覆盖</td>
-<td>正常null，覆盖保存返回被覆盖的值</td>
+<td>同</td>
+<td>在类的里面定义，引入有导入包+外部类名.内部类名两种方式</td>
 </tr>
 <tr>
-<td>remove(key)</td>
-<td>删除指定键值对，key为未保存的值时返回null值</td>
-<td>被删除的值</td>
-</tr>
-<tr>
-<td>size()</td>
-<td>获取map存储的键值对个数</td>
-<td>-</td>
+<td>同</td>
+<td>在内部类和其外部类中可以相互引用私有变量/方法，部手限制关键字影响</td>
 </tr>
 </tbody></table>
+<blockquote>
+<p>局部内部类</p>
+</blockquote>
+<p>1、使用场景，只出现一次，需要不确定的类型实现对象引用接口/父类方法<br>2、使用方式new +父类/接口名（）{}即可。<br><strong>限制</strong>：</p>
+<ul>
+<li>使用局部变量需要final关键字（jdk1.8后可省略）</li>
+<li>声明只在定义的局部代码块中有效/可用，但对象地址可以传递出去——&gt;用对象实现方法调用（传递出去时返回类型使用父类声明即可）</li>
+</ul>
+<p><strong>应用</strong></p>
+<ul>
+<li>sort方法总的comparator接口对象</li>
+</ul>
 
             </div>
             <hr/>
@@ -587,7 +596,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://hyong1232.github.io/2020/10/09/java-day8/">https://hyong1232.github.io/2020/10/09/java-day8/</a>
+                    <a href="https://hyong1232.github.io/2020/09/15/nei-bu-lei/">https://hyong1232.github.io/2020/09/15/nei-bu-lei/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -629,8 +638,8 @@
                                     <span class="chip bg-color">java</span>
                                 </a>
                             
-                                <a href="/tags/HashMap/">
-                                    <span class="chip bg-color">HashMap</span>
+                                <a href="/tags/%E5%86%85%E9%83%A8%E7%B1%BB/">
+                                    <span class="chip bg-color">内部类</span>
                                 </a>
                             
                         </div>
@@ -801,7 +810,7 @@
         repo: 'hyong1232.github.io',
         owner: 'hyong1232',
         admin: "hyong1232",
-        id: '2020-10-09T00-05-21',
+        id: '2020-09-15T23-14-47',
         distractionFreeMode: false  // Facebook-like distraction free mode
     });
 
@@ -1092,34 +1101,34 @@
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2020/10/10/python-ji-ben-shu-ju-lei-xing/">
+                <a href="/2020/09/20/comonjs-yu-es6-de-wen-jian-dao-ru-dao-chu-bi-jiao/">
                     <div class="card-image">
                         
-                        <img src="https://i.loli.net/2020/10/25/BKQqHjZdrIl4aix.jpg" class="responsive-img" alt="python基本数据类型">
+                        <img src="https://i.loli.net/2020/10/30/iwAXs3CUhHK2xvW.jpg" class="responsive-img" alt="comonjs与ES6的文件导入导出比较">
                         
-                        <span class="card-title">python基本数据类型</span>
+                        <span class="card-title">comonjs与ES6的文件导入导出比较</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            简介决心开始认真系统学习python，基本数据类型开始，记录自己感觉重要的知识点。
+                            简介es6的模块化加载和node服务端的模块化加载，他们的关键字比较相近，而且在webpack打包的项目中，两种方式的模块化引用都是有效的，为了便于区分，小结了一下。
                         
                     </div>
                     <div class="publish-info">
                         <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2020-10-10
+                            <i class="far fa-clock fa-fw icon-date"></i>2020-09-20
                         </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/python/" class="post-category">
-                                    python
+                            <a href="/categories/es6/" class="post-category">
+                                    es6
                                 </a>
                             
-                            <a href="/categories/python/%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" class="post-category">
-                                    基本数据类型
+                            <a href="/categories/es6/CommonJS%E6%A8%A1%E5%9D%97%E5%8C%96%E5%8A%A0%E8%BD%BD/" class="post-category">
+                                    CommonJS模块化加载
                                 </a>
                             
                             
@@ -1129,12 +1138,16 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/python/">
-                        <span class="chip bg-color">python</span>
+                    <a href="/tags/es6/">
+                        <span class="chip bg-color">es6</span>
                     </a>
                     
-                    <a href="/tags/%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/">
-                        <span class="chip bg-color">基本数据类型</span>
+                    <a href="/tags/node/">
+                        <span class="chip bg-color">node</span>
+                    </a>
+                    
+                    <a href="/tags/CommonJS%E6%A8%A1%E5%9D%97%E5%8C%96%E5%8A%A0%E8%BD%BD/">
+                        <span class="chip bg-color">CommonJS模块化加载</span>
                     </a>
                     
                 </div>
@@ -1148,34 +1161,34 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2020/10/07/npm-chang-yong-ming-ling/">
+                <a href="/2020/09/14/jie-kou-he-mian-xiang-dui-xiang/">
                     <div class="card-image">
                         
-                        <img src="https://i.loli.net/2020/10/25/vPUL5afAXloweuH.jpg" class="responsive-img" alt="npm常用命令">
+                        <img src="https://i.loli.net/2020/10/25/2UuGzN3shZalcKA.jpg" class="responsive-img" alt="接口和面向对象">
                         
-                        <span class="card-title">npm常用命令</span>
+                        <span class="card-title">接口和面向对象</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            简介npm包管理工具的命令较多，记录下常用的命令
+                            简介day5，访问控制符&amp;接口
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-10-07
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-09-14
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/node/" class="post-category">
-                                    node
+                            <a href="/categories/java/" class="post-category">
+                                    java
                                 </a>
                             
-                            <a href="/categories/node/npm/" class="post-category">
-                                    npm
+                            <a href="/categories/java/javase/" class="post-category">
+                                    javase
                                 </a>
                             
                             
@@ -1185,12 +1198,12 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/node/">
-                        <span class="chip bg-color">node</span>
+                    <a href="/tags/access-control-character/">
+                        <span class="chip bg-color">access-control-character</span>
                     </a>
                     
-                    <a href="/tags/npm/">
-                        <span class="chip bg-color">npm</span>
+                    <a href="/tags/interface/">
+                        <span class="chip bg-color">interface</span>
                     </a>
                     
                 </div>

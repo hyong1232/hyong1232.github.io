@@ -508,7 +508,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    726
+                    706
                 </div>
                 
 
@@ -536,30 +536,30 @@
 <h3 id="配置在项目中使用"><a href="#配置在项目中使用" class="headerlink" title="配置在项目中使用"></a>配置在项目中使用</h3><blockquote>
 <p>可使用配置文件.babelrc将常见配置写入文件中（放置在项目的根目录下），再webpack打包的过程中，会自动读取这个文件的配置，常见的配置写法如下:</p>
 </blockquote>
-<pre class="line-numbers language-js"><code class="language-js"><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+<pre class="line-numbers language-js"><code class="language-js"><span class="token punctuation">{</span>
     <span class="token string">"presets"</span><span class="token punctuation">:</span><span class="token punctuation">[</span><span class="token string">'es2015'</span><span class="token punctuation">,</span><span class="token string">'env'</span><span class="token punctuation">,</span><span class="token string">'stage-0'</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
     <span class="token string">"plugins"</span><span class="token punctuation">:</span><span class="token punctuation">[</span><span class="token string">'transform-runtime'</span><span class="token punctuation">]</span>
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>.babelrc文件整个就是一个对象，在对象{}中配置相应的属性即可</li>
 <li>常用的presets规则以及转换插件需要自行下载（npm命令即可）</li>
 </ul>
 <p><strong>babel配置也可以在webpack的配置文件中配置，即在module下的rules数组对象的规则对象的use属性中添加options属性中添加即可</strong></p>
-<pre class="line-numbers language-js"><code class="language-js">module<span class="token punctuation">:</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+<pre class="line-numbers language-js"><code class="language-js">module<span class="token punctuation">:</span><span class="token punctuation">{</span>
     rules<span class="token punctuation">:</span><span class="token punctuation">[</span>
-        <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+        <span class="token punctuation">{</span>
             test<span class="token punctuation">:</span><span class="token regex">/\.js$/</span><span class="token punctuation">,</span>
             exclude<span class="token punctuation">:</span><span class="token regex">/node_modules/</span><span class="token punctuation">,</span>
-            use<span class="token punctuation">:</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+            use<span class="token punctuation">:</span><span class="token punctuation">{</span>
                 loader<span class="token punctuation">:</span><span class="token string">'babel-loader'</span><span class="token punctuation">,</span>
-                options<span class="token punctuation">:</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+                options<span class="token punctuation">:</span><span class="token punctuation">{</span>
                     presets<span class="token punctuation">:</span><span class="token punctuation">[</span><span class="token string">'env'</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
                     plugins<span class="token punctuation">:</span><span class="token punctuation">[</span><span class="token string">'transform-runtime'</span><span class="token punctuation">]</span>
-                <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
-            <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
-        <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+                <span class="token punctuation">}</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
     <span class="token punctuation">]</span>
-<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p><strong>关于转换规则stage-0/1/2…在新的webpack中不在推荐使用，避免过多使用</strong></p>
 <h3 id="命令行中直接转换"><a href="#命令行中直接转换" class="headerlink" title="命令行中直接转换"></a>命令行中直接转换</h3><blockquote>
 <p>除了在项目中使用还可以直接在命令行转换es6的代码</p>
@@ -1144,12 +1144,12 @@ require<span class="token punctuation">(</span><span class="token string">'./es6
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2020/09/22/java-day7/">
+                <a href="/2020/09/22/shuang-xiang-lian-biao-he-arraylist/">
                     <div class="card-image">
                         
-                        <img src="https://i.loli.net/2020/10/25/Ewnpaq4WiBuDs8z.jpg" class="responsive-img" alt="java-day7">
+                        <img src="https://i.loli.net/2020/10/25/Ewnpaq4WiBuDs8z.jpg" class="responsive-img" alt="双向链表和ArrayList">
                         
-                        <span class="card-title">java-day7</span>
+                        <span class="card-title">双向链表和ArrayList</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -1164,11 +1164,31 @@ require<span class="token punctuation">(</span><span class="token string">'./es6
                         </span>
                         <span class="publish-author">
                             
-                            <i class="fas fa-user fa-fw"></i>
-                            Mr.H
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/java/" class="post-category">
+                                    java
+                                </a>
+                            
+                            <a href="/categories/java/List/" class="post-category">
+                                    List
+                                </a>
+                            
                             
                         </span>
                     </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/java/">
+                        <span class="chip bg-color">java</span>
+                    </a>
+                    
+                    <a href="/tags/ArrayList-LinkedList/">
+                        <span class="chip bg-color">ArrayList,LinkedList</span>
+                    </a>
+                    
                 </div>
                 
             </div>

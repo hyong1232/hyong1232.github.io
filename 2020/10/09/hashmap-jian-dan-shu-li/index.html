@@ -4,7 +4,7 @@
 
 <head>
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
-    <meta name="keywords" content="java-day4, null">
+    <meta name="keywords" content="HashMap简单梳理, null">
     <meta name="description" content="人生有酒需尽欢，莫使金樽空对月">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>java-day4 | null</title>
+    <title>HashMap简单梳理 | null</title>
     <link rel="icon" type="image/png" href="/medias/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -335,12 +335,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('https://i.loli.net/2020/10/25/RSnY7ediB5ju6Qm.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://i.loli.net/2020/10/25/x1SZ7AJ3BbYDCcU.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">java-day4</h1>
+                    <h1 class="description center-align post-title">HashMap简单梳理</h1>
                 </div>
             </div>
         </div>
@@ -461,16 +461,12 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/fileOperation/">
-                                <span class="chip bg-color">fileOperation</span>
+                            <a href="/tags/java/">
+                                <span class="chip bg-color">java</span>
                             </a>
                         
-                            <a href="/tags/String/">
-                                <span class="chip bg-color">String</span>
-                            </a>
-                        
-                            <a href="/tags/Arrays/">
-                                <span class="chip bg-color">Arrays</span>
+                            <a href="/tags/HashMap/">
+                                <span class="chip bg-color">HashMap</span>
                             </a>
                         
                     </div>
@@ -485,8 +481,8 @@
                                 java
                             </a>
                         
-                            <a href="/categories/java/javase/" class="post-category">
-                                javase
+                            <a href="/categories/java/Collection/" class="post-category">
+                                Collection
                             </a>
                         
                     </div>
@@ -498,21 +494,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2020-09-13
+                    2020-10-09
                 </div>
                 
 
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2020-10-25
+                    2020-12-13
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    282
+                    459
                 </div>
                 
 
@@ -534,19 +530,67 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>day4，主要讲了String类&amp;局部/全局变量&amp;Array常见方法使用&amp;递归&amp;BufferReader/FileReader/FileWriter&amp;混合变量后的类加载顺序</p>
+                <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>第八天，决心改掉恶习，加油！</p>
 <a id="more"></a>
 
-<h2 id="混合变量类加载顺序"><a href="#混合变量类加载顺序" class="headerlink" title="混合变量类加载顺序"></a>混合变量类加载顺序</h2><blockquote>
-<p>Array.copyOf(original,newlength)<br>返回新数组，不改变原数组<br>新数组的长度可大于或小于原数组——&gt;数组的切割/增大容量</p>
-</blockquote>
+<h2 id="HashMap常用api"><a href="#HashMap常用api" class="headerlink" title="HashMap常用api"></a>HashMap常用api</h2><table>
+<thead>
+<tr>
+<th>api</th>
+<th>释义</th>
+<th>返回值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>get(key)</td>
+<td>获取指定键值对应的值，key为未保存的值时返回null值</td>
+<td>正常指定键对应的值，key不存在返回null值</td>
+</tr>
+<tr>
+<td>put(key,value)</td>
+<td>添加指定的键值对，key和value均可为null值，重复保存相同的键而值不同则会覆盖</td>
+<td>正常null，覆盖保存返回被覆盖的值</td>
+</tr>
+<tr>
+<td>remove(key)</td>
+<td>删除指定键值对，key为未保存的值时返回null值</td>
+<td>被删除的值</td>
+</tr>
+<tr>
+<td>size()</td>
+<td>获取map存储的键值对个数</td>
+<td>-</td>
+</tr>
+</tbody></table>
+<h2 id="Hash运算过程"><a href="#Hash运算过程" class="headerlink" title="Hash运算过程"></a>Hash运算过程</h2><p>HashMap特性：</p>
+<ul>
+<li>内部由table数组组成，而每个键值对都会被封装成一个entry对象进行存储</li>
+<li>初始化数组大小为16</li>
+<li>增长大小为length*2+2</li>
+<li>负载因子为0.75</li>
+</ul>
+<p>HashMap的存储过程简单可以总结成一下几步</p>
 <blockquote>
-<p>类加载<br>1、将父类加载到方法区，并为其静态变量分配内存空间<br>2、将子类加载到方法区，并为其静态变量分配内存空间<br>3、为父类的静态变量赋值&amp;执行父类静态代码块（无先后顺序）<br>4、为子类的静态变量赋值&amp;执行子类静态代码块（无先后顺序）</p>
+<p>1、调用一个要存储键值对的key.hashCode()方法获取hash值，结合数组的长度计算出存放的效标位置<br> 2、将要存储的键值对封装成entry对象，并放入对应下标位置<br> 3、如果下标位置有值则用key.equals()方法比较键是否相等，若相等则替换值，否则将新键值对用链表方式连接起来。<br> 4、如果链表的长度超过了8则将链表转换成红黑树存储（jdk1.8）<br> 5、当量表的长度减少到6则又将红黑树转化成链表<br> 6、当table的负载因子（加载率）达到了0.75则扩大table的容量（2*length+2）</p>
 </blockquote>
-<blockquote>
-<p>new新对象<br>5、在堆中创建父类对象，为父类成员变量分配内存<br>6、在堆中创建子类对象，为子类成员变量分配内存<br>7、为父类的成员变量赋值<br>8、执行父类的构造函数<br>9、为子类的成员变量赋值<br>10、执行子类的构造函数</p>
-</blockquote>
-<p>binarySearch+ArrayList？？？</p>
+<h2 id="hash算法重写"><a href="#hash算法重写" class="headerlink" title="hash算法重写"></a>hash算法重写</h2><pre class="line-numbers language-java"><code class="language-java"><span class="token annotation punctuation">@Override</span>
+<span class="token keyword">public</span> <span class="token keyword">int</span> <span class="token function">hashCode</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+   <span class="token keyword">int</span> p <span class="token operator">=</span> <span class="token number">31</span><span class="token punctuation">;</span>
+   <span class="token keyword">int</span> r <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+   r <span class="token operator">=</span> r <span class="token operator">*</span> p <span class="token operator">+</span> x<span class="token punctuation">;</span>
+   r <span class="token operator">=</span> r <span class="token operator">*</span> p <span class="token operator">+</span> y<span class="token punctuation">;</span>
+   <span class="token keyword">return</span> r<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token comment" spellcheck="true">//尽量使hash值分散开</span>
+
+<span class="token annotation punctuation">@Override</span>
+<span class="token keyword">public</span> <span class="token keyword">boolean</span> <span class="token function">equals</span><span class="token punctuation">(</span>Object obj<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+   <span class="token keyword">if</span> <span class="token punctuation">(</span>obj <span class="token keyword">instanceof</span> <span class="token class-name">Point</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+       Point p <span class="token operator">=</span> <span class="token punctuation">(</span>Point<span class="token punctuation">)</span> obj<span class="token punctuation">;</span>
+       <span class="token keyword">return</span> x <span class="token operator">==</span> p<span class="token punctuation">.</span>x <span class="token operator">&amp;&amp;</span> y <span class="token operator">==</span> p<span class="token punctuation">.</span>y<span class="token punctuation">;</span>
+   <span class="token punctuation">}</span>
+   <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+   <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
             </div>
             <hr/>
@@ -572,7 +616,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://hyong1232.github.io/2020/09/13/java-day4/">https://hyong1232.github.io/2020/09/13/java-day4/</a>
+                    <a href="https://hyong1232.github.io/2020/10/09/hashmap-jian-dan-shu-li/">https://hyong1232.github.io/2020/10/09/hashmap-jian-dan-shu-li/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -610,16 +654,12 @@
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/fileOperation/">
-                                    <span class="chip bg-color">fileOperation</span>
+                                <a href="/tags/java/">
+                                    <span class="chip bg-color">java</span>
                                 </a>
                             
-                                <a href="/tags/String/">
-                                    <span class="chip bg-color">String</span>
-                                </a>
-                            
-                                <a href="/tags/Arrays/">
-                                    <span class="chip bg-color">Arrays</span>
+                                <a href="/tags/HashMap/">
+                                    <span class="chip bg-color">HashMap</span>
                                 </a>
                             
                         </div>
@@ -790,7 +830,7 @@
         repo: 'hyong1232.github.io',
         owner: 'hyong1232',
         admin: "hyong1232",
-        id: '2020-09-13T23-44-39',
+        id: '2020-10-09T00-05-21',
         distractionFreeMode: false  // Facebook-like distraction free mode
     });
 
@@ -1081,34 +1121,34 @@
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2020/09/14/java-day5/">
+                <a href="/2020/10/10/python-ji-ben-shu-ju-lei-xing/">
                     <div class="card-image">
                         
-                        <img src="https://i.loli.net/2020/10/25/2UuGzN3shZalcKA.jpg" class="responsive-img" alt="java-day5">
+                        <img src="https://i.loli.net/2020/10/25/BKQqHjZdrIl4aix.jpg" class="responsive-img" alt="python基本数据类型">
                         
-                        <span class="card-title">java-day5</span>
+                        <span class="card-title">python基本数据类型</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            简介day5，访问控制符&amp;接口
+                            简介决心开始认真系统学习python，基本数据类型开始，记录自己感觉重要的知识点。
                         
                     </div>
                     <div class="publish-info">
                         <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2020-09-14
+                            <i class="far fa-clock fa-fw icon-date"></i>2020-10-10
                         </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/java/" class="post-category">
-                                    java
+                            <a href="/categories/python/" class="post-category">
+                                    python
                                 </a>
                             
-                            <a href="/categories/java/javase/" class="post-category">
-                                    javase
+                            <a href="/categories/python/%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" class="post-category">
+                                    基本数据类型
                                 </a>
                             
                             
@@ -1118,12 +1158,12 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/access-control-character/">
-                        <span class="chip bg-color">access-control-character</span>
+                    <a href="/tags/python/">
+                        <span class="chip bg-color">python</span>
                     </a>
                     
-                    <a href="/tags/interface/">
-                        <span class="chip bg-color">interface</span>
+                    <a href="/tags/%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/">
+                        <span class="chip bg-color">基本数据类型</span>
                     </a>
                     
                 </div>
@@ -1137,30 +1177,34 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2020/09/08/java-day3/">
+                <a href="/2020/10/07/npm-chang-yong-ming-ling/">
                     <div class="card-image">
                         
-                        <img src="https://i.loli.net/2020/10/25/Ige4zGbjF8aLxS5.jpg" class="responsive-img" alt="java-day3">
+                        <img src="https://i.loli.net/2020/10/25/vPUL5afAXloweuH.jpg" class="responsive-img" alt="npm常用命令">
                         
-                        <span class="card-title">java-day3</span>
+                        <span class="card-title">npm常用命令</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            
+                            简介npm包管理工具的命令较多，记录下常用的命令
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-09-08
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-10-07
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/java/" class="post-category">
-                                    java
+                            <a href="/categories/node/" class="post-category">
+                                    node
+                                </a>
+                            
+                            <a href="/categories/node/npm/" class="post-category">
+                                    npm
                                 </a>
                             
                             
@@ -1170,24 +1214,12 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/java/">
-                        <span class="chip bg-color">java</span>
+                    <a href="/tags/node/">
+                        <span class="chip bg-color">node</span>
                     </a>
                     
-                    <a href="/tags/final/">
-                        <span class="chip bg-color">final</span>
-                    </a>
-                    
-                    <a href="/tags/static/">
-                        <span class="chip bg-color">static</span>
-                    </a>
-                    
-                    <a href="/tags/JVM/">
-                        <span class="chip bg-color">JVM</span>
-                    </a>
-                    
-                    <a href="/tags/Collection/">
-                        <span class="chip bg-color">Collection</span>
+                    <a href="/tags/npm/">
+                        <span class="chip bg-color">npm</span>
                     </a>
                     
                 </div>

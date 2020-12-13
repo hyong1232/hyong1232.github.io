@@ -4,7 +4,7 @@
 
 <head>
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
-    <meta name="keywords" content="java-day6, null">
+    <meta name="keywords" content="matery主题踩坑记录, null">
     <meta name="description" content="人生有酒需尽欢，莫使金樽空对月">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>java-day6 | null</title>
+    <title>matery主题踩坑记录 | null</title>
     <link rel="icon" type="image/png" href="/medias/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -335,12 +335,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('https://i.loli.net/2020/10/25/g1pviGLPwRAD6kh.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/6.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">java-day6</h1>
+                    <h1 class="description center-align post-title">matery主题踩坑记录</h1>
                 </div>
             </div>
         </div>
@@ -459,12 +459,33 @@
             <div class="row tag-cate">
                 <div class="col s7">
                     
-                          <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
-                          </div>
+                    <div class="article-tag">
+                        
+                            <a href="/tags/hexo/">
+                                <span class="chip bg-color">hexo</span>
+                            </a>
+                        
+                            <a href="/tags/hexo-theme-matery/">
+                                <span class="chip bg-color">hexo-theme-matery</span>
+                            </a>
+                        
+                    </div>
                     
                 </div>
                 <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/hexo/" class="post-category">
+                                hexo
+                            </a>
+                        
+                            <a href="/categories/hexo/matery%E4%B8%BB%E9%A2%98/" class="post-category">
+                                matery主题
+                            </a>
+                        
+                    </div>
                     
                 </div>
             </div>
@@ -473,21 +494,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2020-09-15
+                    2020-12-14
                 </div>
                 
 
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2020-10-25
+                    2020-12-14
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    269
+                    394
                 </div>
                 
 
@@ -509,47 +530,34 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>day6，upup~</p>
-<a id="more"></a>
+                <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>使用hexo快一年了，老是遇到坑，过一段时间又忘了，再找起来又得费一番功夫，记录下免得忘记。</p>
+<h2 id="prism相关的代码样式冲突，-大括号转换的相关问题。"><a href="#prism相关的代码样式冲突，-大括号转换的相关问题。" class="headerlink" title="prism相关的代码样式冲突，{}大括号转换的相关问题。"></a>prism相关的代码样式冲突，{}大括号转换的相关问题。</h2><blockquote>
+<p>hexo5.0内置了prism相关的功能，但是又和matery主题的使用相冲突，真的是坑死人了</p>
+</blockquote>
+<p>解决方法：<br>1、安装hexo-prism-plugin插件<br>2、屏蔽掉hexo自带的代码样式功能，直接注释掉自带的prism使用插件的配置。</p>
+<pre class="line-numbers language-yml"><code class="language-yml">prism_plugin:
+  mode: 'preprocess'    # realtime/preprocess
+  theme: 'ghcolors'
+  line_number: true    # default false
+  custom_css:
 
-<h2 id="Date类的简单实用"><a href="#Date类的简单实用" class="headerlink" title="Date类的简单实用"></a>Date类的简单实用</h2><blockquote>
-<p>SimpleDateFormat+Date类</p>
-</blockquote>
-<h2 id="内部类"><a href="#内部类" class="headerlink" title="内部类"></a>内部类</h2><blockquote>
-<p>内部类就是类里面嵌套了类</p>
-</blockquote>
-<table>
-<thead>
-<tr>
-<th>普通内部类</th>
-<th>静态内部类</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>异</td>
-<td>普通内部类只能由具体的外部类对象生成内部内对象，静态内部类则可以直接生成对象</td>
-</tr>
-<tr>
-<td>同</td>
-<td>在类的里面定义，引入有导入包+外部类名.内部类名两种方式</td>
-</tr>
-<tr>
-<td>同</td>
-<td>在内部类和其外部类中可以相互引用私有变量/方法，部手限制关键字影响</td>
-</tr>
-</tbody></table>
-<blockquote>
-<p>局部内部类</p>
-</blockquote>
-<p>1、使用场景，只出现一次，需要不确定的类型实现对象引用接口/父类方法<br>2、使用方式new +父类/接口名（）{}即可。<br><strong>限制</strong>：</p>
-<ul>
-<li>使用局部变量需要final关键字（jdk1.8后可省略）</li>
-<li>声明只在定义的局部代码块中有效/可用，但对象地址可以传递出去——&gt;用对象实现方法调用（传递出去时返回类型使用父类声明即可）</li>
-</ul>
-<p><strong>应用</strong></p>
-<ul>
-<li>sort方法总的comparator接口对象</li>
-</ul>
+# prismjs:
+#   enable: true
+#   preprocess: true
+#   theme: 'tomorrow'
+#   line_number: true
+#   tab_replace: ''<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>3、设置完之后你会发现颜色样式倒是可以了，但是{和}莫名其妙的被转换成了&#123;和&#125;!!!本想就这样放着，可我有老师忘不掉这个，而且他还影响阅读代码，真是要了命了。通过google大概知道了这个问题就是prism和hexo5自带的prism冲突引起的，解决办法有两个(原文地址)[<a target="_blank" rel="noopener" href="https://github.com/blinkfox/hexo-theme-matery/issues/503]%EF%BC%9A">https://github.com/blinkfox/hexo-theme-matery/issues/503]：</a><br>    + 退回hexo4然后清除public文件重新生成<br>    + 删除hexo-prism-pluging插件<br>像我这样懒得人怎么可能会回退版本！删除插件代码高亮又称问题，于是我看了下hexo-prism-plugin的依赖代码，在他的index文件中的map中添加了大括号的匹配。</p>
+<pre class="line-numbers language-js"><code class="language-js"><span class="token keyword">const</span> map <span class="token operator">=</span> <span class="token punctuation">{</span>
+  <span class="token string">'&amp;#123;'</span><span class="token punctuation">:</span> <span class="token string">'{'</span><span class="token punctuation">,</span>
+  <span class="token string">'&amp;#125;'</span><span class="token punctuation">:</span> <span class="token string">'}'</span><span class="token punctuation">,</span>
+  <span class="token string">'&amp;#39;'</span><span class="token punctuation">:</span> <span class="token string">'\''</span><span class="token punctuation">,</span>
+  <span class="token string">'&amp;amp;'</span><span class="token punctuation">:</span> <span class="token string">'&amp;'</span><span class="token punctuation">,</span>
+  <span class="token string">'&amp;gt;'</span><span class="token punctuation">:</span> <span class="token string">'>'</span><span class="token punctuation">,</span>
+  <span class="token string">'&amp;lt;'</span><span class="token punctuation">:</span> <span class="token string">'&lt;'</span><span class="token punctuation">,</span>
+  <span class="token string">'&amp;quot;'</span><span class="token punctuation">:</span> <span class="token string">'"'</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>大功告成！！！，缺点是升级依赖可能就失效，还得重新改代码，算了就这样吧，睡觉咯！</p>
 
             </div>
             <hr/>
@@ -565,7 +573,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="/about" rel="external nofollow noreferrer">Mr.H</a>
+                    <a href="/about" rel="external nofollow noreferrer"></a>
                 </span>
             </div>
             <div class="reprint__type">
@@ -575,7 +583,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://hyong1232.github.io/2020/09/15/java-day6/">https://hyong1232.github.io/2020/09/15/java-day6/</a>
+                    <a href="https://hyong1232.github.io/2020/12/14/matery-zhu-ti-cai-keng-ji-lu/">https://hyong1232.github.io/2020/12/14/matery-zhu-ti-cai-keng-ji-lu/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -588,7 +596,7 @@
                     本博客所有文章除特別声明外，均采用
                     <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
                     许可协议。转载请注明来源
-                    <a href="/about" target="_blank">Mr.H</a>
+                    <a href="/about" target="_blank"></a>
                     !
                 </span>
             </div>
@@ -612,7 +620,15 @@
                 <div class="post-meta__tag-list" style="display: inline-block;">
                     
                         <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
+                            
+                                <a href="/tags/hexo/">
+                                    <span class="chip bg-color">hexo</span>
+                                </a>
+                            
+                                <a href="/tags/hexo-theme-matery/">
+                                    <span class="chip bg-color">hexo-theme-matery</span>
+                                </a>
+                            
                         </div>
                     
                 </div>
@@ -781,7 +797,7 @@
         repo: 'hyong1232.github.io',
         owner: 'hyong1232',
         admin: "hyong1232",
-        id: '2020-09-15T23-14-47',
+        id: '2020-12-14T00-02-48',
         distractionFreeMode: false  // Facebook-like distraction free mode
     });
 
@@ -1068,57 +1084,56 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2020/09/20/comonjs-yu-es6-de-wen-jian-dao-ru-dao-chu-bi-jiao/">
+                <a href="/2020/12/14/matery-zhu-ti-cai-keng-ji-lu/">
                     <div class="card-image">
                         
-                        <img src="https://i.loli.net/2020/10/30/iwAXs3CUhHK2xvW.jpg" class="responsive-img" alt="comonjs与ES6的文件导入导出比较">
                         
-                        <span class="card-title">comonjs与ES6的文件导入导出比较</span>
+                        <img src="/medias/featureimages/6.jpg" class="responsive-img" alt="matery主题踩坑记录">
+                        
+                        <span class="card-title">matery主题踩坑记录</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            简介es6的模块化加载和node服务端的模块化加载，他们的关键字比较相近，而且在webpack打包的项目中，两种方式的模块化引用都是有效的，为了便于区分，小结了一下。
+                            记录下使用matery主题遇到的坑。。。
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2020-09-20
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-12-14
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/es6/" class="post-category">
-                                    es6
+                            <a href="/categories/hexo/" class="post-category">
+                                    hexo
                                 </a>
                             
-                            <a href="/categories/es6/CommonJS%E6%A8%A1%E5%9D%97%E5%8C%96%E5%8A%A0%E8%BD%BD/" class="post-category">
-                                    CommonJS模块化加载
+                            <a href="/categories/hexo/matery%E4%B8%BB%E9%A2%98/" class="post-category">
+                                    matery主题
                                 </a>
                             
                             
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/es6/">
-                        <span class="chip bg-color">es6</span>
+                    <a href="/tags/hexo/">
+                        <span class="chip bg-color">hexo</span>
                     </a>
                     
-                    <a href="/tags/node/">
-                        <span class="chip bg-color">node</span>
-                    </a>
-                    
-                    <a href="/tags/CommonJS%E6%A8%A1%E5%9D%97%E5%8C%96%E5%8A%A0%E8%BD%BD/">
-                        <span class="chip bg-color">CommonJS模块化加载</span>
+                    <a href="/tags/hexo-theme-matery/">
+                        <span class="chip bg-color">hexo-theme-matery</span>
                     </a>
                     
                 </div>
@@ -1132,34 +1147,34 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2020/09/14/java-day5/">
+                <a href="/2020/12/08/dom-chui-zhi-ju-zhong/">
                     <div class="card-image">
                         
-                        <img src="https://i.loli.net/2020/10/25/2UuGzN3shZalcKA.jpg" class="responsive-img" alt="java-day5">
+                        <img src="https://i.loli.net/2020/10/25/g1pviGLPwRAD6kh.jpg" class="responsive-img" alt="dom垂直居中">
                         
-                        <span class="card-title">java-day5</span>
+                        <span class="card-title">dom垂直居中</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            简介day5，访问控制符&amp;接口
+                            简介
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-09-14
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-12-08
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/java/" class="post-category">
-                                    java
+                            <a href="/categories/css/" class="post-category">
+                                    css
                                 </a>
                             
-                            <a href="/categories/java/javase/" class="post-category">
-                                    javase
+                            <a href="/categories/css/layout/" class="post-category">
+                                    layout
                                 </a>
                             
                             
@@ -1169,12 +1184,12 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/access-control-character/">
-                        <span class="chip bg-color">access-control-character</span>
+                    <a href="/tags/css/">
+                        <span class="chip bg-color">css</span>
                     </a>
                     
-                    <a href="/tags/interface/">
-                        <span class="chip bg-color">interface</span>
+                    <a href="/tags/layout/">
+                        <span class="chip bg-color">layout</span>
                     </a>
                     
                 </div>

@@ -4,7 +4,7 @@
 
 <head>
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
-    <meta name="keywords" content="java-day3, null">
+    <meta name="keywords" content="双向链表和ArrayList, null">
     <meta name="description" content="人生有酒需尽欢，莫使金樽空对月">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>java-day3 | null</title>
+    <title>双向链表和ArrayList | null</title>
     <link rel="icon" type="image/png" href="/medias/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -335,12 +335,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('https://i.loli.net/2020/10/25/Ige4zGbjF8aLxS5.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://i.loli.net/2020/10/25/Ewnpaq4WiBuDs8z.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">java-day3</h1>
+                    <h1 class="description center-align post-title">双向链表和ArrayList</h1>
                 </div>
             </div>
         </div>
@@ -465,20 +465,8 @@
                                 <span class="chip bg-color">java</span>
                             </a>
                         
-                            <a href="/tags/final/">
-                                <span class="chip bg-color">final</span>
-                            </a>
-                        
-                            <a href="/tags/static/">
-                                <span class="chip bg-color">static</span>
-                            </a>
-                        
-                            <a href="/tags/JVM/">
-                                <span class="chip bg-color">JVM</span>
-                            </a>
-                        
-                            <a href="/tags/Collection/">
-                                <span class="chip bg-color">Collection</span>
+                            <a href="/tags/ArrayList-LinkedList/">
+                                <span class="chip bg-color">ArrayList,LinkedList</span>
                             </a>
                         
                     </div>
@@ -493,6 +481,10 @@
                                 java
                             </a>
                         
+                            <a href="/categories/java/List/" class="post-category">
+                                List
+                            </a>
+                        
                     </div>
                     
                 </div>
@@ -502,21 +494,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2020-09-08
+                    2020-09-22
                 </div>
                 
 
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2020-10-25
+                    2020-12-13
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    79
+                    454
                 </div>
                 
 
@@ -538,7 +530,139 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>daythree，Java中的final变量，JVM堆栈区，binarysearch&amp;ArrayList的add方法，静态资源调用，代码块执行顺序<br>1、代码块执行顺序<br>2、重写listarray，并用cellction.binarysearch方法依次插入数据<br>3、输入整数，转换成byte数组，保存，查看使用静态代码块初始化</p>
+                <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>主要是集合内容，linklist以及ArrayList对比，应用场景的区分。</p>
+<a id="more"></a>
+
+<ul>
+<li>Java中没有引用传递都是值传递</li>
+</ul>
+<h4 id="LinkedList使用"><a href="#LinkedList使用" class="headerlink" title="LinkedList使用"></a>LinkedList使用</h4><ul>
+<li>双向链表，头部和尾部相互引用</li>
+<li>操作头/尾数据效率高，中间效率低 </li>
+</ul>
+<p>1、常用api</p>
+<table>
+<thead>
+<tr>
+<th>api</th>
+<th>释义</th>
+<th>返回值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>add(elem)</td>
+<td>添加list元素</td>
+<td>返回Boolean值，成功true</td>
+</tr>
+<tr>
+<td>get(num)</td>
+<td>通过下标来获取数组元素</td>
+<td>对应元素</td>
+</tr>
+<tr>
+<td>remove(num)</td>
+<td>删除指定位置元素</td>
+<td>删除的元素</td>
+</tr>
+<tr>
+<td>remove(elem)</td>
+<td>删除重载方法</td>
+<td>返回Boolean值，删除了为true</td>
+</tr>
+<tr>
+<td>size()</td>
+<td>list大小</td>
+<td>数字</td>
+</tr>
+<tr>
+<td>iterator()</td>
+<td>生成iterator对象</td>
+<td>一个Iterator对象</td>
+</tr>
+</tbody></table>
+<p>2、特性</p>
+<ul>
+<li><p>头/尾部两端效率高，中间效率低，由于内部结构是双向链表，可当作栈或队列stac/queue使用<br>  1、当普通双向链表时</p>
+<table>
+<thead>
+<tr>
+<th>api</th>
+<th>释义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>addFirst(elem)</td>
+<td>添加到头部</td>
+</tr>
+<tr>
+<td>getFirst()</td>
+<td>获取第一个元素</td>
+</tr>
+<tr>
+<td>removeFirst()</td>
+<td>删除第一个元素</td>
+</tr>
+<tr>
+<td>addLast(elem)</td>
+<td>添加到尾部</td>
+</tr>
+<tr>
+<td>getLast()</td>
+<td>获取最后一个元素</td>
+</tr>
+<tr>
+<td>removeLast()</td>
+<td>删除最后一个元素</td>
+</tr>
+</tbody></table>
+<p>  2、当成queue队列时</p>
+<table>
+<thead>
+<tr>
+<th>api</th>
+<th>释义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>offer(elem)</td>
+<td>添加到头部</td>
+</tr>
+<tr>
+<td>peek()</td>
+<td>获取第一个元素</td>
+</tr>
+<tr>
+<td>poll()</td>
+<td>删除第一个元素</td>
+</tr>
+</tbody></table>
+<p>  3、当成stack栈时</p>
+<table>
+<thead>
+<tr>
+<th>api</th>
+<th>释义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>posh(elem)</td>
+<td>添加到头部</td>
+</tr>
+<tr>
+<td>pop()</td>
+<td>删除第一个元素</td>
+</tr>
+</tbody></table>
+</li>
+<li><p>下标遍历效率低，使用iterator()方法生成迭代器对象，用迭代器的hasNext+next()方法遍历效率相对高。</p>
+</li>
+<li><p>iterator迭代器对象中存了list元素的引用，调用next方法自动引用元素值，同时将保存的引用换成下一个元素的。</p>
+</li>
+</ul>
+<h3 id="和ArrayList对比"><a href="#和ArrayList对比" class="headerlink" title="和ArrayList对比"></a>和ArrayList对比</h3><ul>
+<li>LinkedList适用于频繁的修改、添加头尾数据（丑数），获取数据较之慢</li>
+<li>ArrayList适用于海量数据的查询（可直接由内存大小算出存储元素的地址，因此快），数据添加（添加至末尾）</li>
+</ul>
 
             </div>
             <hr/>
@@ -564,7 +688,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://hyong1232.github.io/2020/09/08/java-day3/">https://hyong1232.github.io/2020/09/08/java-day3/</a>
+                    <a href="https://hyong1232.github.io/2020/09/22/shuang-xiang-lian-biao-he-arraylist/">https://hyong1232.github.io/2020/09/22/shuang-xiang-lian-biao-he-arraylist/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -606,20 +730,8 @@
                                     <span class="chip bg-color">java</span>
                                 </a>
                             
-                                <a href="/tags/final/">
-                                    <span class="chip bg-color">final</span>
-                                </a>
-                            
-                                <a href="/tags/static/">
-                                    <span class="chip bg-color">static</span>
-                                </a>
-                            
-                                <a href="/tags/JVM/">
-                                    <span class="chip bg-color">JVM</span>
-                                </a>
-                            
-                                <a href="/tags/Collection/">
-                                    <span class="chip bg-color">Collection</span>
+                                <a href="/tags/ArrayList-LinkedList/">
+                                    <span class="chip bg-color">ArrayList,LinkedList</span>
                                 </a>
                             
                         </div>
@@ -790,7 +902,7 @@
         repo: 'hyong1232.github.io',
         owner: 'hyong1232',
         admin: "hyong1232",
-        id: '2020-09-08T22-15-04',
+        id: '2020-09-22T22-40-05',
         distractionFreeMode: false  // Facebook-like distraction free mode
     });
 
@@ -1081,34 +1193,34 @@
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2020/09/13/java-day4/">
+                <a href="/2020/09/23/es6-bian-cheng-feng-ge/">
                     <div class="card-image">
                         
-                        <img src="https://i.loli.net/2020/10/25/RSnY7ediB5ju6Qm.jpg" class="responsive-img" alt="java-day4">
+                        <img src="https://i.loli.net/2020/10/25/4WIBAmYPD5vraVQ.jpg" class="responsive-img" alt="es6编程风格">
                         
-                        <span class="card-title">java-day4</span>
+                        <span class="card-title">es6编程风格</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            简介day4，主要讲了String类&amp;局部/全局变量&amp;Array常见方法使用&amp;递归&amp;BufferReader/FileReader/FileWriter&amp;混合变量后的类加载顺序
+                            简介由于现行js的使用版本不一致，导致老版js和es6混用，以及es6本身的使用不规范，造成代码的格式不标准，不便于代码的维护和修改，故参考行业先进规范以改正。
                         
                     </div>
                     <div class="publish-info">
                         <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2020-09-13
+                            <i class="far fa-clock fa-fw icon-date"></i>2020-09-23
                         </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/java/" class="post-category">
-                                    java
+                            <a href="/categories/es6/" class="post-category">
+                                    es6
                                 </a>
                             
-                            <a href="/categories/java/javase/" class="post-category">
-                                    javase
+                            <a href="/categories/es6/%E7%BC%96%E7%A8%8B%E9%A3%8E%E6%A0%BC-%E8%A7%84%E8%8C%83/" class="post-category">
+                                    编程风格/规范
                                 </a>
                             
                             
@@ -1118,16 +1230,12 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/fileOperation/">
-                        <span class="chip bg-color">fileOperation</span>
+                    <a href="/tags/es6/">
+                        <span class="chip bg-color">es6</span>
                     </a>
                     
-                    <a href="/tags/String/">
-                        <span class="chip bg-color">String</span>
-                    </a>
-                    
-                    <a href="/tags/Arrays/">
-                        <span class="chip bg-color">Arrays</span>
+                    <a href="/tags/%E7%BC%96%E7%A8%8B%E9%A3%8E%E6%A0%BC/">
+                        <span class="chip bg-color">编程风格</span>
                     </a>
                     
                 </div>
@@ -1141,34 +1249,34 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2020/09/08/scroll-gun-dong/">
+                <a href="/2020/09/21/babel-shi-yong-jie-shao/">
                     <div class="card-image">
                         
-                        <img src="https://i.loli.net/2020/10/25/CgV3zqGhY1dDQfZ.jpg" class="responsive-img" alt="scroll滚动">
+                        <img src="https://i.loli.net/2020/10/25/GJNOxtbfM6inU4I.jpg" class="responsive-img" alt="babel使用介绍">
                         
-                        <span class="card-title">scroll滚动</span>
+                        <span class="card-title">babel使用介绍</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            简介简单总结一下js的ceilheight&amp;offsetheight的关系，以及scroll的使用方法
+                            简介babel+webpack作为es6必用的工具，配置和使用较为麻烦，小节了一下常见的使用和配置。
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-09-08
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-09-21
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/js/" class="post-category">
-                                    js
+                            <a href="/categories/es6/" class="post-category">
+                                    es6
                                 </a>
                             
-                            <a href="/categories/js/css/" class="post-category">
-                                    css
+                            <a href="/categories/es6/babel/" class="post-category">
+                                    babel
                                 </a>
                             
                             
@@ -1178,16 +1286,12 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/css/">
-                        <span class="chip bg-color">css</span>
+                    <a href="/tags/es6/">
+                        <span class="chip bg-color">es6</span>
                     </a>
                     
-                    <a href="/tags/js/">
-                        <span class="chip bg-color">js</span>
-                    </a>
-                    
-                    <a href="/tags/css-layout/">
-                        <span class="chip bg-color">css-layout</span>
+                    <a href="/tags/babel/">
+                        <span class="chip bg-color">babel</span>
                     </a>
                     
                 </div>

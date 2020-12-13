@@ -501,14 +501,14 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2020-10-31
+                    2020-12-13
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    361
+                    337
                 </div>
                 
 
@@ -634,9 +634,9 @@
 </tbody></table>
 <ul>
 <li>注意java的字符串中将/默认为转义字符，因此在定义正则时应该加双斜杠<pre class="line-numbers language-java"><code class="language-java"><span class="token comment" spellcheck="true">//错误</span>
-String regex <span class="token operator">=</span> <span class="token string">"\d&amp;#123;3&amp;#125;|\(\d&amp;#123;4&amp;#125;\)\d&amp;#123;6&amp;#125;"</span><span class="token punctuation">;</span>
+String regex <span class="token operator">=</span> <span class="token string">"\d{3}|\(\d{4}\)\d{6}"</span><span class="token punctuation">;</span>
 <span class="token comment" spellcheck="true">//正确</span>
-String regex <span class="token operator">=</span> <span class="token string">"\\d&amp;#123;3&amp;#125;|\\(\\d&amp;#123;4&amp;#125;\\)\\d&amp;#123;6&amp;#125;"</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+String regex <span class="token operator">=</span> <span class="token string">"\\d{3}|\\(\\d{4}\\)\\d{6}"</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 </li>
 </ul>
 <h2 id="常用api（主要在String类中使用）"><a href="#常用api（主要在String类中使用）" class="headerlink" title="常用api（主要在String类中使用）"></a>常用api（主要在String类中使用）</h2><p>1、String对象的api</p>
