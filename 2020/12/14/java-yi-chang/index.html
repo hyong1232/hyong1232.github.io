@@ -4,7 +4,7 @@
 
 <head>
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
-    <meta name="keywords" content="HashMap简单梳理, null">
+    <meta name="keywords" content="java异常, null">
     <meta name="description" content="人生有酒需尽欢，莫使金樽空对月">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>HashMap简单梳理 | null</title>
+    <title>java异常 | null</title>
     <link rel="icon" type="image/png" href="/medias/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -335,12 +335,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('https://i.loli.net/2020/10/25/x1SZ7AJ3BbYDCcU.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/8.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">HashMap简单梳理</h1>
+                    <h1 class="description center-align post-title">java异常</h1>
                 </div>
             </div>
         </div>
@@ -465,8 +465,8 @@
                                 <span class="chip bg-color">java</span>
                             </a>
                         
-                            <a href="/tags/HashMap/">
-                                <span class="chip bg-color">HashMap</span>
+                            <a href="/tags/Exception/">
+                                <span class="chip bg-color">Exception</span>
                             </a>
                         
                     </div>
@@ -481,8 +481,8 @@
                                 java
                             </a>
                         
-                            <a href="/categories/java/Collection/" class="post-category">
-                                Collection
+                            <a href="/categories/java/Exception/" class="post-category">
+                                Exception
                             </a>
                         
                     </div>
@@ -494,21 +494,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2020-10-09
+                    2020-12-14
                 </div>
                 
 
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2020-12-14
+                    2020-12-15
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    646
+                    678
                 </div>
                 
 
@@ -530,104 +530,97 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>第八天，决心改掉恶习，加油！</p>
-<a id="more"></a>
-
-<h2 id="HashMap常用api"><a href="#HashMap常用api" class="headerlink" title="HashMap常用api"></a>HashMap常用api</h2><table>
-<thead>
-<tr>
-<th>api</th>
-<th>释义</th>
-<th>返回值</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>get(key)</td>
-<td>获取指定键值对应的值，key为未保存的值时返回null值</td>
-<td>正常指定键对应的值，key不存在返回null值</td>
-</tr>
-<tr>
-<td>put(key,value)</td>
-<td>添加指定的键值对，key和value均可为null值，重复保存相同的键而值不同则会覆盖</td>
-<td>正常null，覆盖保存返回被覆盖的值</td>
-</tr>
-<tr>
-<td>remove(key)</td>
-<td>删除指定键值对，key为未保存的值时返回null值</td>
-<td>被删除的值</td>
-</tr>
-<tr>
-<td>size()</td>
-<td>获取map存储的键值对个数</td>
-<td>-</td>
-</tr>
-</tbody></table>
-<h2 id="Hash运算过程"><a href="#Hash运算过程" class="headerlink" title="Hash运算过程"></a>Hash运算过程</h2><p>HashMap特性：</p>
+                <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>介绍常见的异常及其处理方式。</p>
+<p>异常的特性：</p>
 <ul>
-<li>内部由table数组组成，而每个键值对都会被封装成一个entry对象进行存储</li>
-<li>初始化数组大小为16</li>
-<li>增长大小为length*2+2</li>
-<li>负载因子为0.75</li>
+<li>java异常方法默认都有一个throws RuntimeException，用于处理异常的抛出。</li>
+<li>如果不在程序中处理，异常将会一直抛出直到jvm，jvm会打印异常并退出程序。</li>
+<li>处理异常只有两种方式，try-catch捕获和throws抛出</li>
 </ul>
-<p>HashMap的存储过程简单可以总结成一下几步</p>
-<blockquote>
-<p>1、调用一个要存储键值对的key.hashCode()方法获取hash值，结合数组的长度计算出存放的效标位置<br> 2、将要存储的键值对封装成entry对象，并放入对应下标位置<br> 3、如果下标位置有值则用key.equals()方法比较键是否相等，若相等则替换值，否则将新键值对用链表方式连接起来。<br> 4、如果链表的长度超过了8则将链表转换成红黑树存储（jdk1.8）<br> 5、当量表的长度减少到6则又将红黑树转化成链表<br> 6、当table的负载因子（加载率）达到了0.75则扩大table的容量（2*length+2）</p>
-</blockquote>
-<h2 id="hash算法重写"><a href="#hash算法重写" class="headerlink" title="hash算法重写"></a>hash算法重写</h2><pre class="line-numbers language-java"><code class="language-java"><span class="token annotation punctuation">@Override</span>
-<span class="token keyword">public</span> <span class="token keyword">int</span> <span class="token function">hashCode</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-   <span class="token keyword">int</span> p <span class="token operator">=</span> <span class="token number">31</span><span class="token punctuation">;</span>
-   <span class="token keyword">int</span> r <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
-   r <span class="token operator">=</span> r <span class="token operator">*</span> p <span class="token operator">+</span> x<span class="token punctuation">;</span>
-   r <span class="token operator">=</span> r <span class="token operator">*</span> p <span class="token operator">+</span> y<span class="token punctuation">;</span>
-   <span class="token keyword">return</span> r<span class="token punctuation">;</span>
+<h2 id="异常的分类"><a href="#异常的分类" class="headerlink" title="异常的分类"></a>异常的分类</h2><pre class="line-numbers language-md"><code class="language-md">throwable顶级父类
+    |--Error不可修复，多见于系统级的问题（例如递归栈/内存溢出），保证程序安全退出即可
+    |--Exception
+        |--其他Exception   
+        |--runtimeException
+           |--ArithmeticException
+           |--ArrayListIndexOutOfBoundsException
+           |--。。。等等异常<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="try-catch方法"><a href="#try-catch方法" class="headerlink" title="try-catch方法"></a>try-catch方法</h2><p>特性：<br>1、使用try-catch方法可以捕获多个异常，但要注意大的异常类要在后面捕获。<br>2、finally代码块内的代码一定会执行，无论try代码块中有无ruturn还是break及其他终止程序的关键字，都会执行。</p>
+<pre class="line-numbers language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span>String<span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"输入两个数字："</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    String inp <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Scanner</span><span class="token punctuation">(</span>System<span class="token punctuation">.</span>in<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">nextLine</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    String<span class="token punctuation">[</span><span class="token punctuation">]</span> sp <span class="token operator">=</span> inp<span class="token punctuation">.</span><span class="token function">split</span><span class="token punctuation">(</span><span class="token string">","</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">try</span> <span class="token punctuation">{</span>
+        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>Integer<span class="token punctuation">.</span><span class="token function">valueOf</span><span class="token punctuation">(</span>sp<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">/</span> Integer<span class="token punctuation">.</span><span class="token function">valueOf</span><span class="token punctuation">(</span>sp<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">ArithmeticException</span> e<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        e<span class="token punctuation">.</span><span class="token function">printStackTrace</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">ArrayIndexOutOfBoundsException</span> e<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        e<span class="token punctuation">.</span><span class="token function">printStackTrace</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span> <span class="token keyword">finally</span> <span class="token punctuation">{</span>
+        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"finly"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
-<span class="token comment" spellcheck="true">//尽量使hash值分散开</span>
+<span class="token comment" spellcheck="true">//无论是否有return等关键字都会执行finally内的代码</span>
+<span class="token comment" spellcheck="true">// 输出：</span>
+<span class="token comment" spellcheck="true">// 输入两个数字：</span>
+<span class="token comment" spellcheck="true">// 12</span>
+<span class="token comment" spellcheck="true">// java.lang.ArrayIndexOutOfBoundsException: 1</span>
+<span class="token comment" spellcheck="true">// finly</span>
+<span class="token comment" spellcheck="true">//     at day1214.ExceptionTset.main(ExceptionTset.java:11)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="throws抛出异常"><a href="#throws抛出异常" class="headerlink" title="throws抛出异常"></a>throws抛出异常</h2><p>特性：<br>1、使用throws关键字加在方法后面可以抛出多个异常。<br>2、往往需要抛出异常的代码块是它内部引用的方法已经有异常抛出，所以要继续抛出异常。</p>
+<pre class="line-numbers language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span>String<span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"请输入一个时间："</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">try</span> <span class="token punctuation">{</span>
+        <span class="token function">f</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">ParseException</span> e<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"时间格式错误"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        e<span class="token punctuation">.</span><span class="token function">printStackTrace</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">IOException</span> e<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"文件路径错误"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        e<span class="token punctuation">.</span><span class="token function">printStackTrace</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span class="token comment" spellcheck="true">//抛出多个异常</span>
+<span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">f</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">throws</span> ParseException<span class="token punctuation">,</span> IOException <span class="token punctuation">{</span>
+    String inp <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Scanner</span><span class="token punctuation">(</span>System<span class="token punctuation">.</span>in<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">nextLine</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    SimpleDateFormat sdf <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">SimpleDateFormat</span><span class="token punctuation">(</span><span class="token string">"yyyy/MM/dd"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    Date d <span class="token operator">=</span> sdf<span class="token punctuation">.</span><span class="token function">parse</span><span class="token punctuation">(</span>inp<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    File f <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">File</span><span class="token punctuation">(</span><span class="token string">"E://code/java/"</span> <span class="token operator">+</span> d<span class="token punctuation">.</span><span class="token function">getTime</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">".txt"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    f<span class="token punctuation">.</span><span class="token function">createNewFile</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token comment" spellcheck="true">//SimpleDateFarmat的parse方法抛出了ParseException异常，因此上面要跑出此异常</span>
+<span class="token keyword">public</span> Date <span class="token function">parse</span><span class="token punctuation">(</span>String source<span class="token punctuation">)</span> <span class="token keyword">throws</span> ParseException
+<span class="token punctuation">{</span>
+    ParsePosition pos <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ParsePosition</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    Date result <span class="token operator">=</span> <span class="token function">parse</span><span class="token punctuation">(</span>source<span class="token punctuation">,</span> pos<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>pos<span class="token punctuation">.</span>index <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span>
+        <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">ParseException</span><span class="token punctuation">(</span><span class="token string">"Unparseable date: \""</span> <span class="token operator">+</span> source <span class="token operator">+</span> <span class="token string">"\""</span> <span class="token punctuation">,</span>
+            pos<span class="token punctuation">.</span>errorIndex<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> result<span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="throw手动抛出异常"><a href="#throw手动抛出异常" class="headerlink" title="throw手动抛出异常"></a>throw手动抛出异常</h2><p>特性：<br>1、处理自定义的特殊情况，使用系统类型，自己抛出和捕获。<br>2、抛出的信息要准确描述特殊情况，打印的交互可以人性化一点。</p>
+<pre class="line-numbers language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span>String<span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"请输入两个浮点数："</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">double</span> inp1 <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Scanner</span><span class="token punctuation">(</span>System<span class="token punctuation">.</span>in<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">nextDouble</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">double</span> inp2 <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Scanner</span><span class="token punctuation">(</span>System<span class="token punctuation">.</span>in<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">nextDouble</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">try</span> <span class="token punctuation">{</span>
+        <span class="token function">f</span><span class="token punctuation">(</span>inp1<span class="token punctuation">,</span> inp2<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">ArithmeticException</span> e<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment" spellcheck="true">//交互信息人性化</span>
+        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"不能除0是我们的错，请鞭笞我们吧！"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        e<span class="token punctuation">.</span><span class="token function">printStackTrace</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
 
-<span class="token annotation punctuation">@Override</span>
-<span class="token keyword">public</span> <span class="token keyword">boolean</span> <span class="token function">equals</span><span class="token punctuation">(</span>Object obj<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-   <span class="token keyword">if</span> <span class="token punctuation">(</span>obj <span class="token keyword">instanceof</span> <span class="token class-name">Point</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-       Point p <span class="token operator">=</span> <span class="token punctuation">(</span>Point<span class="token punctuation">)</span> obj<span class="token punctuation">;</span>
-       <span class="token keyword">return</span> x <span class="token operator">==</span> p<span class="token punctuation">.</span>x <span class="token operator">&amp;&amp;</span> y <span class="token operator">==</span> p<span class="token punctuation">.</span>y<span class="token punctuation">;</span>
-   <span class="token punctuation">}</span>
-   <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
-   <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h2 id="iterator迭代器"><a href="#iterator迭代器" class="headerlink" title="iterator迭代器"></a>iterator迭代器</h2><blockquote>
-<p>常用api</p>
-</blockquote>
-<table>
-<thead>
-<tr>
-<th>名称</th>
-<th>释义</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>next()</td>
-<td>取出下一个数据元素</td>
-</tr>
-<tr>
-<td>remove()</td>
-<td>去除next方法取出的数据元素（要先取出数据元素，即调用next方法之后才能使用）</td>
-</tr>
-<tr>
-<td>hasNext()</td>
-<td>是否有下一个数据元素</td>
-</tr>
-</tbody></table>
-<p><strong>注意</strong>不能在使用iterator便利店时使用集合本身进行增删操作！！！</p>
-<h2 id="遍历map"><a href="#遍历map" class="headerlink" title="遍历map"></a>遍历map</h2><p>由于HashMap本身没有提供遍历自身的方法，需要借助key的迭代器来遍历或者直接遍历key的Set来实现</p>
-<pre class="line-numbers language-java"><code class="language-java">HashMap<span class="token operator">&lt;</span>Integer<span class="token punctuation">,</span> String<span class="token operator">></span> map <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">HashMap</span><span class="token operator">&lt;</span>Integer<span class="token punctuation">,</span> String<span class="token operator">></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-map<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span><span class="token number">123</span><span class="token punctuation">,</span> <span class="token string">"jack"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-map<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span><span class="token number">9527</span><span class="token punctuation">,</span> <span class="token string">"唐伯虎"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-Iterator<span class="token operator">&lt;</span>Integer<span class="token operator">></span> it <span class="token operator">=</span> map<span class="token punctuation">.</span><span class="token function">keySet</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">iterator</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token comment" spellcheck="true">//遍历器实现</span>
-<span class="token keyword">while</span> <span class="token punctuation">(</span>it<span class="token punctuation">.</span><span class="token function">hasNext</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>map<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span>it<span class="token punctuation">.</span><span class="token function">next</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-<span class="token comment" spellcheck="true">//遍历Set实现</span>
-<span class="token keyword">for</span> <span class="token punctuation">(</span>Integer in <span class="token operator">:</span> map<span class="token punctuation">.</span><span class="token function">keySet</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>map<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span>in<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">f</span><span class="token punctuation">(</span><span class="token keyword">double</span> inp1<span class="token punctuation">,</span> <span class="token keyword">double</span> inp2<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">//自定义特殊情况异常抛出</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>inp2 <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        ArithmeticException e <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ArithmeticException</span><span class="token punctuation">(</span><span class="token string">"/by zero"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">throw</span> e<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>inp1 <span class="token operator">/</span> inp2<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
             </div>
             <hr/>
@@ -643,7 +636,7 @@ Iterator<span class="token operator">&lt;</span>Integer<span class="token operat
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="/about" rel="external nofollow noreferrer">Mr.H</a>
+                    <a href="/about" rel="external nofollow noreferrer"></a>
                 </span>
             </div>
             <div class="reprint__type">
@@ -653,7 +646,7 @@ Iterator<span class="token operator">&lt;</span>Integer<span class="token operat
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://hyong1232.github.io/2020/10/09/hashmap-jian-dan-shu-li/">https://hyong1232.github.io/2020/10/09/hashmap-jian-dan-shu-li/</a>
+                    <a href="https://hyong1232.github.io/2020/12/14/java-yi-chang/">https://hyong1232.github.io/2020/12/14/java-yi-chang/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -666,7 +659,7 @@ Iterator<span class="token operator">&lt;</span>Integer<span class="token operat
                     本博客所有文章除特別声明外，均采用
                     <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
                     许可协议。转载请注明来源
-                    <a href="/about" target="_blank">Mr.H</a>
+                    <a href="/about" target="_blank"></a>
                     !
                 </span>
             </div>
@@ -695,8 +688,8 @@ Iterator<span class="token operator">&lt;</span>Integer<span class="token operat
                                     <span class="chip bg-color">java</span>
                                 </a>
                             
-                                <a href="/tags/HashMap/">
-                                    <span class="chip bg-color">HashMap</span>
+                                <a href="/tags/Exception/">
+                                    <span class="chip bg-color">Exception</span>
                                 </a>
                             
                         </div>
@@ -867,7 +860,7 @@ Iterator<span class="token operator">&lt;</span>Integer<span class="token operat
         repo: 'hyong1232.github.io',
         owner: 'hyong1232',
         admin: "hyong1232",
-        id: '2020-10-09T00-05-21',
+        id: '2020-12-14T22-50-11',
         distractionFreeMode: false  // Facebook-like distraction free mode
     });
 
@@ -1154,53 +1147,56 @@ Iterator<span class="token operator">&lt;</span>Integer<span class="token operat
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2020/10/10/python-ji-ben-shu-ju-lei-xing/">
+                <a href="/2020/12/14/java-yi-chang/">
                     <div class="card-image">
                         
-                        <img src="https://i.loli.net/2020/10/25/BKQqHjZdrIl4aix.jpg" class="responsive-img" alt="python基本数据类型">
                         
-                        <span class="card-title">python基本数据类型</span>
+                        <img src="/medias/featureimages/8.jpg" class="responsive-img" alt="java异常">
+                        
+                        <span class="card-title">java异常</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            简介决心开始认真系统学习python，基本数据类型开始，记录自己感觉重要的知识点。
+                            简介
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2020-10-10
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-12-14
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/python/" class="post-category">
-                                    python
+                            <a href="/categories/java/" class="post-category">
+                                    java
                                 </a>
                             
-                            <a href="/categories/python/%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" class="post-category">
-                                    基本数据类型
+                            <a href="/categories/java/Exception/" class="post-category">
+                                    Exception
                                 </a>
                             
                             
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/python/">
-                        <span class="chip bg-color">python</span>
+                    <a href="/tags/java/">
+                        <span class="chip bg-color">java</span>
                     </a>
                     
-                    <a href="/tags/%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/">
-                        <span class="chip bg-color">基本数据类型</span>
+                    <a href="/tags/Exception/">
+                        <span class="chip bg-color">Exception</span>
                     </a>
                     
                 </div>
@@ -1214,34 +1210,35 @@ Iterator<span class="token operator">&lt;</span>Integer<span class="token operat
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2020/10/07/npm-chang-yong-ming-ling/">
+                <a href="/2020/12/14/matery-zhu-ti-cai-keng-ji-lu/">
                     <div class="card-image">
                         
-                        <img src="https://i.loli.net/2020/10/25/vPUL5afAXloweuH.jpg" class="responsive-img" alt="npm常用命令">
                         
-                        <span class="card-title">npm常用命令</span>
+                        <img src="/medias/featureimages/6.jpg" class="responsive-img" alt="matery主题踩坑记录">
+                        
+                        <span class="card-title">matery主题踩坑记录</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            简介npm包管理工具的命令较多，记录下常用的命令
+                            记录下使用matery主题遇到的坑。。。
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-10-07
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-12-14
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/node/" class="post-category">
-                                    node
+                            <a href="/categories/hexo/" class="post-category">
+                                    hexo
                                 </a>
                             
-                            <a href="/categories/node/npm/" class="post-category">
-                                    npm
+                            <a href="/categories/hexo/matery%E4%B8%BB%E9%A2%98/" class="post-category">
+                                    matery主题
                                 </a>
                             
                             
@@ -1251,12 +1248,12 @@ Iterator<span class="token operator">&lt;</span>Integer<span class="token operat
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/node/">
-                        <span class="chip bg-color">node</span>
+                    <a href="/tags/hexo/">
+                        <span class="chip bg-color">hexo</span>
                     </a>
                     
-                    <a href="/tags/npm/">
-                        <span class="chip bg-color">npm</span>
+                    <a href="/tags/hexo-theme-matery/">
+                        <span class="chip bg-color">hexo-theme-matery</span>
                     </a>
                     
                 </div>
