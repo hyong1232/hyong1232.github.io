@@ -209,250 +209,6 @@ require<span class="token punctuation">(</span><span class="token string">'./es6
       </tags>
   </entry>
   <entry>
-    <title>Object.assign函数</title>
-    <url>/2020/09/23/object-assign-han-shu/</url>
-    <content><![CDATA[<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>**Object.assign()**方法使用target的setter方法和origin对象的getter方法，复制对象可枚举的属性值，适用于很多的object操作。</p>
-<a id="more"></a>
-
-<h2 id="常用方法"><a href="#常用方法" class="headerlink" title="常用方法"></a>常用方法</h2><p>1、复制对象值，并返回新创建新对象</p>
-<pre class="line-numbers language-js"><code class="language-js">Objec
-t<span class="token punctuation">.</span><span class="token function">assign</span><span class="token punctuation">(</span><span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span><span class="token punctuation">{</span>a<span class="token punctuation">:</span><span class="token string">'a'</span><span class="token punctuation">}</span><span class="token punctuation">,</span><span class="token punctuation">{</span>b<span class="token punctuation">:</span><span class="token string">'b'</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-<p>2、为对象添加新属性</p>
-<pre class="line-numbers language-js"><code class="language-js">Object<span class="token punctuation">.</span><span class="token function">assign</span><span class="token punctuation">(</span>orgin<span class="token punctuation">,</span><span class="token punctuation">{</span>add<span class="token punctuation">:</span><span class="token string">'add'</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p>3、为对象添加新方法</p>
-<pre class="line-numbers language-js"><code class="language-js"><span class="token keyword">const</span> obj <span class="token operator">=</span> <span class="token punctuation">{</span>
-    val<span class="token punctuation">:</span><span class="token string">'val'</span><span class="token punctuation">,</span>
-<span class="token punctuation">}</span>
-Object<span class="token punctuation">.</span><span class="token function">assign</span><span class="token punctuation">(</span>obj<span class="token punctuation">.</span>prototype<span class="token punctuation">,</span><span class="token punctuation">{</span>
-    <span class="token function">getName</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
-        <span class="token operator">...</span><span class="token punctuation">.</span>
-    <span class="token punctuation">}</span>
-<span class="token punctuation">}</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h3 id="特性："><a href="#特性：" class="headerlink" title="特性："></a>特性：</h3><p>1、由于Object.assign采用的是浅拷贝，因此源对象的属性值是对象时，只是复制了引用，再后面的复制中出现此对象的修改，则直接替换他的引用</p>
-<pre class="line-numbers language-js"><code class="language-js"><span class="token keyword">const</span> obj1 <span class="token operator">=</span> <span class="token punctuation">{</span>a<span class="token punctuation">:</span> <span class="token punctuation">{</span>b<span class="token punctuation">:</span> <span class="token number">1</span><span class="token punctuation">}</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
-<span class="token keyword">const</span> obj2 <span class="token operator">=</span> Object<span class="token punctuation">.</span><span class="token function">assign</span><span class="token punctuation">(</span><span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span> obj1<span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-obj1<span class="token punctuation">.</span>a<span class="token punctuation">.</span>b <span class="token operator">=</span> <span class="token number">2</span><span class="token punctuation">;</span>
-obj2<span class="token punctuation">.</span>a<span class="token punctuation">.</span>b <span class="token comment" spellcheck="true">// 2</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>2、不能复制origin源对象的继承属性，只能同通过Object.getPrototypeOf(origin)+Object.create()+origin方法，将其继承的方法单独调出来，然后合并</p>
-<pre class="line-numbers language-js"><code class="language-js"><span class="token keyword">let</span> originProto <span class="token operator">=</span> Object<span class="token punctuation">.</span><span class="token function">getPrototypeOf</span><span class="token punctuation">(</span>origin<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token keyword">return</span> Object<span class="token punctuation">.</span><span class="token function">assign</span><span class="token punctuation">(</span>Object<span class="token punctuation">.</span><span class="token function">create</span><span class="token punctuation">(</span>originProto<span class="token punctuation">)</span><span class="token punctuation">,</span> origin<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-<p>3、target/orgin对象为非对象</p>
-<ul>
-<li> target为非对象，转换成对象，如果是null/undefined不可转换成对象的属性时，报错</li>
-<li>origin为非对象时，自动转换，如果是null/undefined不可转换成对象的属性时，直接跳过</li>
-</ul>
-<p>4、数组处理</p>
-<blockquote>
-<p>将数组当成对象处理，键值为index下标</p>
-</blockquote>
-<pre class="line-numbers language-js"><code class="language-js">Object<span class="token punctuation">.</span><span class="token function">assign</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">,</span><span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">,</span><span class="token number">5</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token operator">=</span><span class="token operator">></span><span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">,</span><span class="token number">5</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">]</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p>5、取值函数处理（关键字get开头）</p>
-<blockquote>
-<p>直接取值，不会获取取值函数合并</p>
-</blockquote>
-<pre class="line-numbers language-js"><code class="language-js"><span class="token keyword">const</span> obj <span class="token operator">=</span> <span class="token punctuation">{</span>
-    <span class="token keyword">get</span> name <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
-        <span class="token keyword">return</span> <span class="token string">'jack'</span>
-    <span class="token punctuation">}</span>
-<span class="token punctuation">}</span>
-Object<span class="token punctuation">.</span><span class="token function">assign</span><span class="token punctuation">(</span><span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span>obj<span class="token punctuation">)</span><span class="token operator">=</span><span class="token operator">></span><span class="token punctuation">{</span>name<span class="token punctuation">:</span><span class="token string">'jack'</span><span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-]]></content>
-      <categories>
-        <category>es6</category>
-        <category>Object操作</category>
-      </categories>
-      <tags>
-        <tag>es6</tag>
-        <tag>Object操作</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>comonjs与ES6的文件导入导出比较</title>
-    <url>/2020/09/20/comonjs-yu-es6-de-wen-jian-dao-ru-dao-chu-bi-jiao/</url>
-    <content><![CDATA[<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>es6的模块化加载和node服务端的模块化加载，他们的关键字比较相近，而且在webpack打包的项目中，两种方式的模块化引用都是有效的，为了便于区分，小结了一下。</p>
-<a id="more"></a>
-
-<h2 id="CommonJS模块化加载"><a href="#CommonJS模块化加载" class="headerlink" title="CommonJS模块化加载"></a>CommonJS模块化加载</h2><blockquote>
-<p>只有在运行时才会加载（同步加载），而且是加载整个路径的文件生成一个对象，然后再从这个对象中解构赋值给要查找的属性,例如：</p>
-</blockquote>
-<pre class="line-numbers language-js"><code class="language-js"><span class="token keyword">let</span> <span class="token punctuation">{</span>a<span class="token punctuation">,</span>b<span class="token punctuation">}</span> <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'fs'</span><span class="token punctuation">)</span>
-<span class="token comment" spellcheck="true">//等同于</span>
-<span class="token keyword">let</span> _fs <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'fs'</span><span class="token punctuation">)</span>
-<span class="token keyword">let</span> a <span class="token operator">=</span>  _fs<span class="token punctuation">.</span>a
-<span class="token keyword">let</span> b <span class="token operator">=</span>  _fs<span class="token punctuation">.</span>b<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h3 id="导出"><a href="#导出" class="headerlink" title="导出"></a>导出</h3><p>1、导出单个对象时，给modules.exports对象直接赋值即可<br>2、导出多个对象时，使用关键字exports，将其看成对象，增加属性（为属性赋值）<br><strong>exports关键字只是modules.epxorts的引用，直接给exports赋值不会改变导出结果</strong></p>
-<h3 id="导入require（）函数"><a href="#导入require（）函数" class="headerlink" title="导入require（）函数"></a>导入require（）函数</h3><p>1、运行时加载且为同步加载。<br>2、优先从缓存加载，重复文件不回加载。<br>3、循环加载时不会将父文件完整加载，而是只加载到调用自身时为止的内容，避免循环产生。<br>4、路径可为运行时才可得到的结果。</p>
-<h2 id="ES6模块化加载"><a href="#ES6模块化加载" class="headerlink" title="ES6模块化加载"></a>ES6模块化加载</h2><blockquote>
-<p>静态化思想，<strong>编译时</strong>就确定模块关系，即在模块内就指定要加载模块，运行时使用import加载指定的模块 </p>
-</blockquote>
-<pre class="line-numbers language-js"><code class="language-js"><span class="token comment" spellcheck="true">//import {a,b} from 'fs'</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p><strong>fs文件可以不写后缀需要在webpack中配置说明</strong></p>
-<h3 id="export命令"><a href="#export命令" class="headerlink" title="export命令"></a>export命令</h3><blockquote>
-<p>常见写法</p>
-</blockquote>
-<pre class="line-numbers language-js"><code class="language-js"><span class="token keyword">export</span> <span class="token keyword">var</span> a <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
-<span class="token keyword">export</span> <span class="token keyword">var</span> b <span class="token operator">=</span> <span class="token string">'jack'</span><span class="token punctuation">;</span>
-<span class="token comment" spellcheck="true">//相当于</span>
-<span class="token keyword">var</span> a <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
-<span class="token keyword">var</span> b <span class="token operator">=</span> <span class="token string">'jack'</span>
-<span class="token keyword">export</span> <span class="token punctuation">{</span>a<span class="token punctuation">,</span>b<span class="token punctuation">}</span><span class="token punctuation">;</span>
-<span class="token comment" spellcheck="true">//函数或类</span>
-<span class="token keyword">export</span> <span class="token keyword">function</span> <span class="token function">exportFunc</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span><span class="token operator">...</span><span class="token punctuation">}</span>
-<span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">exportClass</span> <span class="token punctuation">{</span><span class="token operator">...</span><span class="token punctuation">}</span>
-<span class="token comment" spellcheck="true">//使用as关键字为导出变量重命名,同一个导出变量可有多个不同名称的输出</span>
-<span class="token keyword">var</span> a <span class="token operator">=</span> <span class="token string">'jack'</span>
-<span class="token keyword">export</span> <span class="token punctuation">{</span>a <span class="token keyword">as</span> summer<span class="token punctuation">,</span>a <span class="token keyword">as</span> peter<span class="token punctuation">}</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<ul>
-<li><p>通过export与import关键字进行导入导出，实际上就是导出了代码的引用到对应位置，因此他的数据是可变的（实时的）</p>
-<pre class="line-numbers language-js"><code class="language-js"><span class="token comment" spellcheck="true">//100ms之后导出的a的值会变成'change'</span>
-<span class="token keyword">var</span> a <span class="token operator">=</span> <span class="token string">'origin'</span>
-<span class="token function">setTimeout</span><span class="token punctuation">(</span>_<span class="token operator">=</span><span class="token operator">></span><span class="token punctuation">{</span>a <span class="token operator">=</span> <span class="token string">'change'</span><span class="token punctuation">}</span><span class="token punctuation">,</span><span class="token number">100</span><span class="token punctuation">)</span>
-<span class="token keyword">export</span> <span class="token punctuation">{</span>a<span class="token punctuation">}</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-</li>
-<li><p>因为静态时确定模块导入/出关系，export关键字不可放在函数中，导出/导入表达式中不可有运行之后才有明确结果的变量成分</p>
-</li>
-<li><p>导出的结果为一个对象类型，若没有指定default导出，则不可单独导出其他类型</p>
-</li>
-</ul>
-<h3 id="import关键字"><a href="#import关键字" class="headerlink" title="import关键字"></a>import关键字</h3><blockquote>
-<p>常见写法</p>
-</blockquote>
-<pre class="line-numbers language-js"><code class="language-js"><span class="token keyword">import</span> <span class="token punctuation">{</span>a<span class="token punctuation">,</span>b<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'./exprot.js'</span>
-<span class="token comment" spellcheck="true">//可为导入的成员重新命名</span>
-<span class="token keyword">import</span> <span class="token punctuation">{</span>a <span class="token keyword">as</span> c<span class="token punctuation">,</span>b <span class="token keyword">as</span> d<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'./exprot.js'</span>
-<span class="token comment" spellcheck="true">//导出变量如果不是对象，不可赋值（只读），是对象也不推荐赋值，影响代码维护</span>
-<span class="token keyword">import</span> <span class="token punctuation">{</span> a<span class="token punctuation">}</span> form <span class="token string">'export.js'</span>
-a <span class="token operator">=</span> XXX——错误（不推荐）的写法<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<ul>
-<li><p>多次调用一个导入文件，等同于引用一个导出的多个被选引用，会自动合并相同引用例如</p>
-<pre class="line-numbers language-js"><code class="language-js"><span class="token keyword">import</span> <span class="token punctuation">{</span> foo <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'my_module'</span><span class="token punctuation">;</span>
-<span class="token keyword">import</span> <span class="token punctuation">{</span> bar <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'my_module'</span><span class="token punctuation">;</span>
-<span class="token comment" spellcheck="true">// 等同于</span>
-<span class="token keyword">import</span> <span class="token punctuation">{</span> foo<span class="token punctuation">,</span> bar <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'my_module'</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-</li>
-<li><p>不要和CommonJS的模块加载混用，CommonJS是运行时加载会出问题</p>
-</li>
-</ul>
-<h3 id="特殊导入-导出"><a href="#特殊导入-导出" class="headerlink" title="特殊导入/导出"></a>特殊导入/导出</h3><p>1、导入*——将整体导入成一个对象（但不可为对象属性赋值），可用as重命名</p>
-<pre class="line-numbers language-js"><code class="language-js"><span class="token keyword">import</span> <span class="token operator">*</span> <span class="token keyword">as</span> circle <span class="token keyword">from</span> <span class="token string">'./circle'</span><span class="token punctuation">;</span>
-<span class="token comment" spellcheck="true">// 下面两行都是不允许的</span>
-circle<span class="token punctuation">.</span>foo <span class="token operator">=</span> <span class="token string">'hello'</span><span class="token punctuation">;</span>
-circle<span class="token punctuation">.</span>area <span class="token operator">=</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-<p>2、默认导入关键字default——导出default名称的变量，导入时可自由命名，不用使用as</p>
-<blockquote>
-<p>常见写法</p>
-</blockquote>
-<pre class="line-numbers language-js"><code class="language-js"><span class="token comment" spellcheck="true">//导出命名函数——同导出匿名函数一样，名称无用，导入时自用命名</span>
-exprot <span class="token keyword">default</span> <span class="token keyword">function</span> <span class="token function">f</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span><span class="token operator">...</span><span class="token punctuation">}</span>
-<span class="token comment" spellcheck="true">//等同于</span>
-exprot <span class="token keyword">default</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span><span class="token operator">...</span><span class="token punctuation">}</span>
-<span class="token comment" spellcheck="true">//导入时不用加{}</span>
-<span class="token keyword">import</span> anyname <span class="token keyword">from</span> <span class="token string">'default.js'</span>
-
-<span class="token comment" spellcheck="true">//上述操作等同于</span>
-<span class="token keyword">var</span> something<span class="token operator">=</span> <span class="token string">'...'</span>
-exprot <span class="token punctuation">{</span>something <span class="token keyword">as</span> <span class="token keyword">default</span><span class="token punctuation">}</span> 
-<span class="token keyword">import</span> <span class="token punctuation">{</span><span class="token keyword">default</span> <span class="token keyword">as</span> anyname<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<ul>
-<li>默认导入/导出可与导出对象叠加使用<pre class="line-numbers language-js"><code class="language-js"><span class="token comment" spellcheck="true">//导出</span>
-eport <span class="token keyword">default</span> <span class="token keyword">function</span> <span class="token punctuation">(</span>obj<span class="token punctuation">)</span> <span class="token punctuation">{</span>···<span class="token punctuation">}</span>
-<span class="token keyword">export</span> <span class="token keyword">function</span> <span class="token function">each</span><span class="token punctuation">(</span>obj<span class="token punctuation">,</span> iterator<span class="token punctuation">,</span> context<span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token operator">...</span><span class="token punctuation">}</span>
-<span class="token keyword">export</span> <span class="token punctuation">{</span> each <span class="token keyword">as</span> forEach <span class="token punctuation">}</span><span class="token punctuation">;</span>
-<span class="token comment" spellcheck="true">//导入</span>
-<span class="token keyword">import</span> _<span class="token punctuation">,</span> <span class="token punctuation">{</span> each<span class="token punctuation">,</span> forEach <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'export.js'</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-</li>
-</ul>
-<p>3、合并import+export做转发or重命名or模块继承（添加完善）</p>
-<pre class="line-numbers language-js"><code class="language-js"><span class="token comment" spellcheck="true">//模块转发</span>
-<span class="token keyword">export</span> <span class="token punctuation">{</span> foo<span class="token punctuation">,</span> bar <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'my_module'</span><span class="token punctuation">;</span>
-<span class="token comment" spellcheck="true">// 可以简单理解为</span>
-<span class="token keyword">import</span> <span class="token punctuation">{</span> foo<span class="token punctuation">,</span> bar <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'my_module'</span><span class="token punctuation">;</span>
-<span class="token keyword">export</span> <span class="token punctuation">{</span> foo<span class="token punctuation">,</span> bar <span class="token punctuation">}</span><span class="token punctuation">;</span>
-
-<span class="token comment" spellcheck="true">//模块转发并重命名</span>
-<span class="token keyword">export</span> <span class="token operator">*</span> <span class="token keyword">as</span> ns <span class="token keyword">from</span> <span class="token string">"mod"</span><span class="token punctuation">;</span>
-<span class="token comment" spellcheck="true">// 等同于</span>
-<span class="token keyword">import</span> <span class="token operator">*</span> <span class="token keyword">as</span> ns <span class="token keyword">from</span> <span class="token string">"mod"</span><span class="token punctuation">;</span>
-<span class="token keyword">export</span> <span class="token punctuation">{</span>ns<span class="token punctuation">}</span><span class="token punctuation">;</span>
-
-<span class="token comment" spellcheck="true">//模块继承（*号表示非默认default导出的对象）</span>
-<span class="token keyword">export</span> <span class="token operator">*</span> <span class="token keyword">from</span> <span class="token string">'circle'</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//不包括default默认导出</span>
-<span class="token keyword">export</span> <span class="token keyword">var</span> e <span class="token operator">=</span> <span class="token number">2.71828182846</span><span class="token punctuation">;</span>
-<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token keyword">function</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-  <span class="token keyword">return</span> Math<span class="token punctuation">.</span><span class="token function">exp</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-
-<span class="token comment" spellcheck="true">//引用修改（加强）的模块</span>
-<span class="token keyword">import</span> <span class="token operator">*</span> <span class="token keyword">as</span> math <span class="token keyword">from</span> <span class="token string">'circleplus'</span><span class="token punctuation">;</span>
-<span class="token keyword">import</span> exp <span class="token keyword">from</span> <span class="token string">'circleplus'</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//上面继承模块默认导出的对象引用（函数）</span>
-console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token function">exp</span><span class="token punctuation">(</span>math<span class="token punctuation">.</span>e<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>   <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h3 id="import（）函数"><a href="#import（）函数" class="headerlink" title="import（）函数"></a>import（）函数</h3><blockquote>
-<p>es2020添加了类似require的动态加载模块功能，返回一个promise对象，而加载成功则引用模块作为对象参数返回给回调函数</p>
-</blockquote>
-<pre class="line-numbers language-js"><code class="language-js"><span class="token comment" spellcheck="true">//常见写法</span>
-Promise<span class="token punctuation">.</span><span class="token function">all</span><span class="token punctuation">(</span><span class="token punctuation">[</span>
-  <span class="token keyword">import</span><span class="token punctuation">(</span><span class="token string">'./module1.js'</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
-  <span class="token keyword">import</span><span class="token punctuation">(</span><span class="token string">'./module2.js'</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
-  <span class="token keyword">import</span><span class="token punctuation">(</span><span class="token string">'./module3.js'</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
-<span class="token punctuation">]</span><span class="token punctuation">)</span>
-<span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">[</span>module1<span class="token punctuation">,</span> module2<span class="token punctuation">,</span> module3<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
-   ···
-<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token comment" spellcheck="true">//导入模块后直接解构获取值</span>
-<span class="token keyword">import</span><span class="token punctuation">(</span><span class="token string">'./myModule.js'</span><span class="token punctuation">)</span>
-<span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">{</span>export1<span class="token punctuation">,</span> export2<span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
-  <span class="token comment" spellcheck="true">// ...·</span>
-<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token comment" spellcheck="true">//获取默认导出</span>
-<span class="token keyword">import</span><span class="token punctuation">(</span><span class="token string">'./myModule.js'</span><span class="token punctuation">)</span>
-<span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span>myModule <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
-  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>myModule<span class="token punctuation">.</span><span class="token keyword">default</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token comment" spellcheck="true">//默认导出的具名形式</span>
-<span class="token keyword">import</span><span class="token punctuation">(</span><span class="token string">'./myModule.js'</span><span class="token punctuation">)</span>
-<span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">{</span><span class="token keyword">default</span><span class="token punctuation">:</span> theDefault<span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
-  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>theDefault<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<blockquote>
-<p>总结特点：1、加载路径可变，动态加载引用2、可在函数内使用3、异步加载</p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>es6</category>
-        <category>CommonJS模块化加载</category>
-      </categories>
-      <tags>
-        <tag>es6</tag>
-        <tag>node</tag>
-        <tag>CommonJS模块化加载</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>dom垂直居中</title>
-    <url>/2020/12/08/dom-chui-zhi-ju-zhong/</url>
-    <content><![CDATA[<h2 id="flex布局实现垂直居中"><a href="#flex布局实现垂直居中" class="headerlink" title="flex布局实现垂直居中"></a>flex布局实现垂直居中</h2><iframe id="cp_embed_YzGWgKX" src="//codepen.io/hyong1232/embed/YzGWgKX?height=360&theme-id=dark&slug-hash=YzGWgKX&default-tab=css,result" scrolling="no" frameborder="no" height="360" allowTransparency="true" allowfullscreen="true" class="cp_embed_iframe" style="width: 100%; overflow: hidden;"></iframe>
-
-<h2 id="position-transfrom实现垂直居中"><a href="#position-transfrom实现垂直居中" class="headerlink" title="position+transfrom实现垂直居中"></a>position+transfrom实现垂直居中</h2><iframe id="cp_embed_yLaazGz" src="//codepen.io/hyong1232/embed/yLaazGz?height=360&theme-id=dark&slug-hash=yLaazGz&default-tab=css,result" scrolling="no" frameborder="no" height="360" allowTransparency="true" allowfullscreen="true" class="cp_embed_iframe" style="width: 100%; overflow: hidden;"></iframe>
-
-<h2 id="margin实现垂直居中"><a href="#margin实现垂直居中" class="headerlink" title="margin实现垂直居中"></a>margin实现垂直居中</h2><iframe id="cp_embed_wvzzPEp" src="//codepen.io/hyong1232/embed/wvzzPEp?height=360&theme-id=dark&slug-hash=wvzzPEp&default-tab=css,result" scrolling="no" frameborder="no" height="360" allowTransparency="true" allowfullscreen="true" class="cp_embed_iframe" style="width: 100%; overflow: hidden;"></iframe>
-
-<h2 id="line-height-vertical实现垂直居中（仅适用于图片文字）"><a href="#line-height-vertical实现垂直居中（仅适用于图片文字）" class="headerlink" title="line-height+vertical实现垂直居中（仅适用于图片文字）"></a>line-height+vertical实现垂直居中（仅适用于图片文字）</h2><iframe id="cp_embed_bGwwaEx" src="//codepen.io/hyong1232/embed/bGwwaEx?height=360&theme-id=dark&slug-hash=bGwwaEx&default-tab=css,result" scrolling="no" frameborder="no" height="360" allowTransparency="true" allowfullscreen="true" class="cp_embed_iframe" style="width: 100%; overflow: hidden;"></iframe>
-
-<h2 id="display-table实现垂直居中"><a href="#display-table实现垂直居中" class="headerlink" title="display:table实现垂直居中"></a>display:table实现垂直居中</h2><iframe id="cp_embed_gOwwoLe" src="//codepen.io/hyong1232/embed/gOwwoLe?height=360&theme-id=dark&slug-hash=gOwwoLe&default-tab=css,result" scrolling="no" frameborder="no" height="360" allowTransparency="true" allowfullscreen="true" class="cp_embed_iframe" style="width: 100%; overflow: hidden;"></iframe>
-
-<h2 id="grid布局实现垂直居中"><a href="#grid布局实现垂直居中" class="headerlink" title="grid布局实现垂直居中"></a>grid布局实现垂直居中</h2><iframe id="cp_embed_PoGGEJB" src="//codepen.io/hyong1232/embed/PoGGEJB?height=360&theme-id=dark&slug-hash=PoGGEJB&default-tab=css,result" scrolling="no" frameborder="no" height="360" allowTransparency="true" allowfullscreen="true" class="cp_embed_iframe" style="width: 100%; overflow: hidden;"></iframe>
-]]></content>
-      <categories>
-        <category>css</category>
-        <category>layout</category>
-      </categories>
-      <tags>
-        <tag>css</tag>
-        <tag>layout</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>es6编程风格</title>
     <url>/2020/09/23/es6-bian-cheng-feng-ge/</url>
     <content><![CDATA[<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>由于现行js的使用版本不一致，导致老版js和es6混用，以及es6本身的使用不规范，造成代码的格式不标准，不便于代码的维护和修改，故参考行业先进规范以改正。</p>
@@ -571,6 +327,89 @@ PeekableQueue<span class="token punctuation">.</span>prototype<span class="token
       <tags>
         <tag>es6</tag>
         <tag>编程风格</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>dom垂直居中</title>
+    <url>/2020/12/08/dom-chui-zhi-ju-zhong/</url>
+    <content><![CDATA[<h2 id="flex布局实现垂直居中"><a href="#flex布局实现垂直居中" class="headerlink" title="flex布局实现垂直居中"></a>flex布局实现垂直居中</h2><iframe id="cp_embed_YzGWgKX" src="//codepen.io/hyong1232/embed/YzGWgKX?height=360&theme-id=dark&slug-hash=YzGWgKX&default-tab=css,result" scrolling="no" frameborder="no" height="360" allowTransparency="true" allowfullscreen="true" class="cp_embed_iframe" style="width: 100%; overflow: hidden;"></iframe>
+
+<h2 id="position-transfrom实现垂直居中"><a href="#position-transfrom实现垂直居中" class="headerlink" title="position+transfrom实现垂直居中"></a>position+transfrom实现垂直居中</h2><iframe id="cp_embed_yLaazGz" src="//codepen.io/hyong1232/embed/yLaazGz?height=360&theme-id=dark&slug-hash=yLaazGz&default-tab=css,result" scrolling="no" frameborder="no" height="360" allowTransparency="true" allowfullscreen="true" class="cp_embed_iframe" style="width: 100%; overflow: hidden;"></iframe>
+
+<h2 id="margin实现垂直居中"><a href="#margin实现垂直居中" class="headerlink" title="margin实现垂直居中"></a>margin实现垂直居中</h2><iframe id="cp_embed_wvzzPEp" src="//codepen.io/hyong1232/embed/wvzzPEp?height=360&theme-id=dark&slug-hash=wvzzPEp&default-tab=css,result" scrolling="no" frameborder="no" height="360" allowTransparency="true" allowfullscreen="true" class="cp_embed_iframe" style="width: 100%; overflow: hidden;"></iframe>
+
+<h2 id="line-height-vertical实现垂直居中（仅适用于图片文字）"><a href="#line-height-vertical实现垂直居中（仅适用于图片文字）" class="headerlink" title="line-height+vertical实现垂直居中（仅适用于图片文字）"></a>line-height+vertical实现垂直居中（仅适用于图片文字）</h2><iframe id="cp_embed_bGwwaEx" src="//codepen.io/hyong1232/embed/bGwwaEx?height=360&theme-id=dark&slug-hash=bGwwaEx&default-tab=css,result" scrolling="no" frameborder="no" height="360" allowTransparency="true" allowfullscreen="true" class="cp_embed_iframe" style="width: 100%; overflow: hidden;"></iframe>
+
+<h2 id="display-table实现垂直居中"><a href="#display-table实现垂直居中" class="headerlink" title="display:table实现垂直居中"></a>display:table实现垂直居中</h2><iframe id="cp_embed_gOwwoLe" src="//codepen.io/hyong1232/embed/gOwwoLe?height=360&theme-id=dark&slug-hash=gOwwoLe&default-tab=css,result" scrolling="no" frameborder="no" height="360" allowTransparency="true" allowfullscreen="true" class="cp_embed_iframe" style="width: 100%; overflow: hidden;"></iframe>
+
+<h2 id="grid布局实现垂直居中"><a href="#grid布局实现垂直居中" class="headerlink" title="grid布局实现垂直居中"></a>grid布局实现垂直居中</h2><iframe id="cp_embed_PoGGEJB" src="//codepen.io/hyong1232/embed/PoGGEJB?height=360&theme-id=dark&slug-hash=PoGGEJB&default-tab=css,result" scrolling="no" frameborder="no" height="360" allowTransparency="true" allowfullscreen="true" class="cp_embed_iframe" style="width: 100%; overflow: hidden;"></iframe>
+]]></content>
+      <categories>
+        <category>css</category>
+        <category>layout</category>
+      </categories>
+      <tags>
+        <tag>css</tag>
+        <tag>layout</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Object.assign函数</title>
+    <url>/2020/09/23/object-assign-han-shu/</url>
+    <content><![CDATA[<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>**Object.assign()**方法使用target的setter方法和origin对象的getter方法，复制对象可枚举的属性值，适用于很多的object操作。</p>
+<a id="more"></a>
+
+<h2 id="常用方法"><a href="#常用方法" class="headerlink" title="常用方法"></a>常用方法</h2><p>1、复制对象值，并返回新创建新对象</p>
+<pre class="line-numbers language-js"><code class="language-js">Objec
+t<span class="token punctuation">.</span><span class="token function">assign</span><span class="token punctuation">(</span><span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span><span class="token punctuation">{</span>a<span class="token punctuation">:</span><span class="token string">'a'</span><span class="token punctuation">}</span><span class="token punctuation">,</span><span class="token punctuation">{</span>b<span class="token punctuation">:</span><span class="token string">'b'</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p>2、为对象添加新属性</p>
+<pre class="line-numbers language-js"><code class="language-js">Object<span class="token punctuation">.</span><span class="token function">assign</span><span class="token punctuation">(</span>orgin<span class="token punctuation">,</span><span class="token punctuation">{</span>add<span class="token punctuation">:</span><span class="token string">'add'</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>3、为对象添加新方法</p>
+<pre class="line-numbers language-js"><code class="language-js"><span class="token keyword">const</span> obj <span class="token operator">=</span> <span class="token punctuation">{</span>
+    val<span class="token punctuation">:</span><span class="token string">'val'</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span>
+Object<span class="token punctuation">.</span><span class="token function">assign</span><span class="token punctuation">(</span>obj<span class="token punctuation">.</span>prototype<span class="token punctuation">,</span><span class="token punctuation">{</span>
+    <span class="token function">getName</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token operator">...</span><span class="token punctuation">.</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="特性："><a href="#特性：" class="headerlink" title="特性："></a>特性：</h3><p>1、由于Object.assign采用的是浅拷贝，因此源对象的属性值是对象时，只是复制了引用，再后面的复制中出现此对象的修改，则直接替换他的引用</p>
+<pre class="line-numbers language-js"><code class="language-js"><span class="token keyword">const</span> obj1 <span class="token operator">=</span> <span class="token punctuation">{</span>a<span class="token punctuation">:</span> <span class="token punctuation">{</span>b<span class="token punctuation">:</span> <span class="token number">1</span><span class="token punctuation">}</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> obj2 <span class="token operator">=</span> Object<span class="token punctuation">.</span><span class="token function">assign</span><span class="token punctuation">(</span><span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span> obj1<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+obj1<span class="token punctuation">.</span>a<span class="token punctuation">.</span>b <span class="token operator">=</span> <span class="token number">2</span><span class="token punctuation">;</span>
+obj2<span class="token punctuation">.</span>a<span class="token punctuation">.</span>b <span class="token comment" spellcheck="true">// 2</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>2、不能复制origin源对象的继承属性，只能同通过Object.getPrototypeOf(origin)+Object.create()+origin方法，将其继承的方法单独调出来，然后合并</p>
+<pre class="line-numbers language-js"><code class="language-js"><span class="token keyword">let</span> originProto <span class="token operator">=</span> Object<span class="token punctuation">.</span><span class="token function">getPrototypeOf</span><span class="token punctuation">(</span>origin<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">return</span> Object<span class="token punctuation">.</span><span class="token function">assign</span><span class="token punctuation">(</span>Object<span class="token punctuation">.</span><span class="token function">create</span><span class="token punctuation">(</span>originProto<span class="token punctuation">)</span><span class="token punctuation">,</span> origin<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p>3、target/orgin对象为非对象</p>
+<ul>
+<li> target为非对象，转换成对象，如果是null/undefined不可转换成对象的属性时，报错</li>
+<li>origin为非对象时，自动转换，如果是null/undefined不可转换成对象的属性时，直接跳过</li>
+</ul>
+<p>4、数组处理</p>
+<blockquote>
+<p>将数组当成对象处理，键值为index下标</p>
+</blockquote>
+<pre class="line-numbers language-js"><code class="language-js">Object<span class="token punctuation">.</span><span class="token function">assign</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">,</span><span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">,</span><span class="token number">5</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token operator">=</span><span class="token operator">></span><span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">,</span><span class="token number">5</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">]</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>5、取值函数处理（关键字get开头）</p>
+<blockquote>
+<p>直接取值，不会获取取值函数合并</p>
+</blockquote>
+<pre class="line-numbers language-js"><code class="language-js"><span class="token keyword">const</span> obj <span class="token operator">=</span> <span class="token punctuation">{</span>
+    <span class="token keyword">get</span> name <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token string">'jack'</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+Object<span class="token punctuation">.</span><span class="token function">assign</span><span class="token punctuation">(</span><span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span>obj<span class="token punctuation">)</span><span class="token operator">=</span><span class="token operator">></span><span class="token punctuation">{</span>name<span class="token punctuation">:</span><span class="token string">'jack'</span><span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+]]></content>
+      <categories>
+        <category>es6</category>
+        <category>Object操作</category>
+      </categories>
+      <tags>
+        <tag>es6</tag>
+        <tag>Object操作</tag>
       </tags>
   </entry>
   <entry>
@@ -738,6 +577,167 @@ flex-flow:<flex-direction> || <flex-wrap>
       <tags>
         <tag>css</tag>
         <tag>css布局</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>comonjs与ES6的文件导入导出比较</title>
+    <url>/2020/09/20/comonjs-yu-es6-de-wen-jian-dao-ru-dao-chu-bi-jiao/</url>
+    <content><![CDATA[<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>es6的模块化加载和node服务端的模块化加载，他们的关键字比较相近，而且在webpack打包的项目中，两种方式的模块化引用都是有效的，为了便于区分，小结了一下。</p>
+<a id="more"></a>
+
+<h2 id="CommonJS模块化加载"><a href="#CommonJS模块化加载" class="headerlink" title="CommonJS模块化加载"></a>CommonJS模块化加载</h2><blockquote>
+<p>只有在运行时才会加载（同步加载），而且是加载整个路径的文件生成一个对象，然后再从这个对象中解构赋值给要查找的属性,例如：</p>
+</blockquote>
+<pre class="line-numbers language-js"><code class="language-js"><span class="token keyword">let</span> <span class="token punctuation">{</span>a<span class="token punctuation">,</span>b<span class="token punctuation">}</span> <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'fs'</span><span class="token punctuation">)</span>
+<span class="token comment" spellcheck="true">//等同于</span>
+<span class="token keyword">let</span> _fs <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'fs'</span><span class="token punctuation">)</span>
+<span class="token keyword">let</span> a <span class="token operator">=</span>  _fs<span class="token punctuation">.</span>a
+<span class="token keyword">let</span> b <span class="token operator">=</span>  _fs<span class="token punctuation">.</span>b<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="导出"><a href="#导出" class="headerlink" title="导出"></a>导出</h3><p>1、导出单个对象时，给modules.exports对象直接赋值即可<br>2、导出多个对象时，使用关键字exports，将其看成对象，增加属性（为属性赋值）<br><strong>exports关键字只是modules.epxorts的引用，直接给exports赋值不会改变导出结果</strong></p>
+<h3 id="导入require（）函数"><a href="#导入require（）函数" class="headerlink" title="导入require（）函数"></a>导入require（）函数</h3><p>1、运行时加载且为同步加载。<br>2、优先从缓存加载，重复文件不回加载。<br>3、循环加载时不会将父文件完整加载，而是只加载到调用自身时为止的内容，避免循环产生。<br>4、路径可为运行时才可得到的结果。</p>
+<h2 id="ES6模块化加载"><a href="#ES6模块化加载" class="headerlink" title="ES6模块化加载"></a>ES6模块化加载</h2><blockquote>
+<p>静态化思想，<strong>编译时</strong>就确定模块关系，即在模块内就指定要加载模块，运行时使用import加载指定的模块 </p>
+</blockquote>
+<pre class="line-numbers language-js"><code class="language-js"><span class="token comment" spellcheck="true">//import {a,b} from 'fs'</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p><strong>fs文件可以不写后缀需要在webpack中配置说明</strong></p>
+<h3 id="export命令"><a href="#export命令" class="headerlink" title="export命令"></a>export命令</h3><blockquote>
+<p>常见写法</p>
+</blockquote>
+<pre class="line-numbers language-js"><code class="language-js"><span class="token keyword">export</span> <span class="token keyword">var</span> a <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+<span class="token keyword">export</span> <span class="token keyword">var</span> b <span class="token operator">=</span> <span class="token string">'jack'</span><span class="token punctuation">;</span>
+<span class="token comment" spellcheck="true">//相当于</span>
+<span class="token keyword">var</span> a <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+<span class="token keyword">var</span> b <span class="token operator">=</span> <span class="token string">'jack'</span>
+<span class="token keyword">export</span> <span class="token punctuation">{</span>a<span class="token punctuation">,</span>b<span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token comment" spellcheck="true">//函数或类</span>
+<span class="token keyword">export</span> <span class="token keyword">function</span> <span class="token function">exportFunc</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span><span class="token operator">...</span><span class="token punctuation">}</span>
+<span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">exportClass</span> <span class="token punctuation">{</span><span class="token operator">...</span><span class="token punctuation">}</span>
+<span class="token comment" spellcheck="true">//使用as关键字为导出变量重命名,同一个导出变量可有多个不同名称的输出</span>
+<span class="token keyword">var</span> a <span class="token operator">=</span> <span class="token string">'jack'</span>
+<span class="token keyword">export</span> <span class="token punctuation">{</span>a <span class="token keyword">as</span> summer<span class="token punctuation">,</span>a <span class="token keyword">as</span> peter<span class="token punctuation">}</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<ul>
+<li><p>通过export与import关键字进行导入导出，实际上就是导出了代码的引用到对应位置，因此他的数据是可变的（实时的）</p>
+<pre class="line-numbers language-js"><code class="language-js"><span class="token comment" spellcheck="true">//100ms之后导出的a的值会变成'change'</span>
+<span class="token keyword">var</span> a <span class="token operator">=</span> <span class="token string">'origin'</span>
+<span class="token function">setTimeout</span><span class="token punctuation">(</span>_<span class="token operator">=</span><span class="token operator">></span><span class="token punctuation">{</span>a <span class="token operator">=</span> <span class="token string">'change'</span><span class="token punctuation">}</span><span class="token punctuation">,</span><span class="token number">100</span><span class="token punctuation">)</span>
+<span class="token keyword">export</span> <span class="token punctuation">{</span>a<span class="token punctuation">}</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><p>因为静态时确定模块导入/出关系，export关键字不可放在函数中，导出/导入表达式中不可有运行之后才有明确结果的变量成分</p>
+</li>
+<li><p>导出的结果为一个对象类型，若没有指定default导出，则不可单独导出其他类型</p>
+</li>
+</ul>
+<h3 id="import关键字"><a href="#import关键字" class="headerlink" title="import关键字"></a>import关键字</h3><blockquote>
+<p>常见写法</p>
+</blockquote>
+<pre class="line-numbers language-js"><code class="language-js"><span class="token keyword">import</span> <span class="token punctuation">{</span>a<span class="token punctuation">,</span>b<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'./exprot.js'</span>
+<span class="token comment" spellcheck="true">//可为导入的成员重新命名</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span>a <span class="token keyword">as</span> c<span class="token punctuation">,</span>b <span class="token keyword">as</span> d<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'./exprot.js'</span>
+<span class="token comment" spellcheck="true">//导出变量如果不是对象，不可赋值（只读），是对象也不推荐赋值，影响代码维护</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> a<span class="token punctuation">}</span> form <span class="token string">'export.js'</span>
+a <span class="token operator">=</span> XXX——错误（不推荐）的写法<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<ul>
+<li><p>多次调用一个导入文件，等同于引用一个导出的多个被选引用，会自动合并相同引用例如</p>
+<pre class="line-numbers language-js"><code class="language-js"><span class="token keyword">import</span> <span class="token punctuation">{</span> foo <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'my_module'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> bar <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'my_module'</span><span class="token punctuation">;</span>
+<span class="token comment" spellcheck="true">// 等同于</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> foo<span class="token punctuation">,</span> bar <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'my_module'</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><p>不要和CommonJS的模块加载混用，CommonJS是运行时加载会出问题</p>
+</li>
+</ul>
+<h3 id="特殊导入-导出"><a href="#特殊导入-导出" class="headerlink" title="特殊导入/导出"></a>特殊导入/导出</h3><p>1、导入*——将整体导入成一个对象（但不可为对象属性赋值），可用as重命名</p>
+<pre class="line-numbers language-js"><code class="language-js"><span class="token keyword">import</span> <span class="token operator">*</span> <span class="token keyword">as</span> circle <span class="token keyword">from</span> <span class="token string">'./circle'</span><span class="token punctuation">;</span>
+<span class="token comment" spellcheck="true">// 下面两行都是不允许的</span>
+circle<span class="token punctuation">.</span>foo <span class="token operator">=</span> <span class="token string">'hello'</span><span class="token punctuation">;</span>
+circle<span class="token punctuation">.</span>area <span class="token operator">=</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<p>2、默认导入关键字default——导出default名称的变量，导入时可自由命名，不用使用as</p>
+<blockquote>
+<p>常见写法</p>
+</blockquote>
+<pre class="line-numbers language-js"><code class="language-js"><span class="token comment" spellcheck="true">//导出命名函数——同导出匿名函数一样，名称无用，导入时自用命名</span>
+exprot <span class="token keyword">default</span> <span class="token keyword">function</span> <span class="token function">f</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span><span class="token operator">...</span><span class="token punctuation">}</span>
+<span class="token comment" spellcheck="true">//等同于</span>
+exprot <span class="token keyword">default</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span><span class="token operator">...</span><span class="token punctuation">}</span>
+<span class="token comment" spellcheck="true">//导入时不用加{}</span>
+<span class="token keyword">import</span> anyname <span class="token keyword">from</span> <span class="token string">'default.js'</span>
+
+<span class="token comment" spellcheck="true">//上述操作等同于</span>
+<span class="token keyword">var</span> something<span class="token operator">=</span> <span class="token string">'...'</span>
+exprot <span class="token punctuation">{</span>something <span class="token keyword">as</span> <span class="token keyword">default</span><span class="token punctuation">}</span> 
+<span class="token keyword">import</span> <span class="token punctuation">{</span><span class="token keyword">default</span> <span class="token keyword">as</span> anyname<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<ul>
+<li>默认导入/导出可与导出对象叠加使用<pre class="line-numbers language-js"><code class="language-js"><span class="token comment" spellcheck="true">//导出</span>
+eport <span class="token keyword">default</span> <span class="token keyword">function</span> <span class="token punctuation">(</span>obj<span class="token punctuation">)</span> <span class="token punctuation">{</span>···<span class="token punctuation">}</span>
+<span class="token keyword">export</span> <span class="token keyword">function</span> <span class="token function">each</span><span class="token punctuation">(</span>obj<span class="token punctuation">,</span> iterator<span class="token punctuation">,</span> context<span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token operator">...</span><span class="token punctuation">}</span>
+<span class="token keyword">export</span> <span class="token punctuation">{</span> each <span class="token keyword">as</span> forEach <span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token comment" spellcheck="true">//导入</span>
+<span class="token keyword">import</span> _<span class="token punctuation">,</span> <span class="token punctuation">{</span> each<span class="token punctuation">,</span> forEach <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'export.js'</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+</ul>
+<p>3、合并import+export做转发or重命名or模块继承（添加完善）</p>
+<pre class="line-numbers language-js"><code class="language-js"><span class="token comment" spellcheck="true">//模块转发</span>
+<span class="token keyword">export</span> <span class="token punctuation">{</span> foo<span class="token punctuation">,</span> bar <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'my_module'</span><span class="token punctuation">;</span>
+<span class="token comment" spellcheck="true">// 可以简单理解为</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> foo<span class="token punctuation">,</span> bar <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'my_module'</span><span class="token punctuation">;</span>
+<span class="token keyword">export</span> <span class="token punctuation">{</span> foo<span class="token punctuation">,</span> bar <span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token comment" spellcheck="true">//模块转发并重命名</span>
+<span class="token keyword">export</span> <span class="token operator">*</span> <span class="token keyword">as</span> ns <span class="token keyword">from</span> <span class="token string">"mod"</span><span class="token punctuation">;</span>
+<span class="token comment" spellcheck="true">// 等同于</span>
+<span class="token keyword">import</span> <span class="token operator">*</span> <span class="token keyword">as</span> ns <span class="token keyword">from</span> <span class="token string">"mod"</span><span class="token punctuation">;</span>
+<span class="token keyword">export</span> <span class="token punctuation">{</span>ns<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token comment" spellcheck="true">//模块继承（*号表示非默认default导出的对象）</span>
+<span class="token keyword">export</span> <span class="token operator">*</span> <span class="token keyword">from</span> <span class="token string">'circle'</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//不包括default默认导出</span>
+<span class="token keyword">export</span> <span class="token keyword">var</span> e <span class="token operator">=</span> <span class="token number">2.71828182846</span><span class="token punctuation">;</span>
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token keyword">function</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">return</span> Math<span class="token punctuation">.</span><span class="token function">exp</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment" spellcheck="true">//引用修改（加强）的模块</span>
+<span class="token keyword">import</span> <span class="token operator">*</span> <span class="token keyword">as</span> math <span class="token keyword">from</span> <span class="token string">'circleplus'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> exp <span class="token keyword">from</span> <span class="token string">'circleplus'</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">//上面继承模块默认导出的对象引用（函数）</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token function">exp</span><span class="token punctuation">(</span>math<span class="token punctuation">.</span>e<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>   <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="import（）函数"><a href="#import（）函数" class="headerlink" title="import（）函数"></a>import（）函数</h3><blockquote>
+<p>es2020添加了类似require的动态加载模块功能，返回一个promise对象，而加载成功则引用模块作为对象参数返回给回调函数</p>
+</blockquote>
+<pre class="line-numbers language-js"><code class="language-js"><span class="token comment" spellcheck="true">//常见写法</span>
+Promise<span class="token punctuation">.</span><span class="token function">all</span><span class="token punctuation">(</span><span class="token punctuation">[</span>
+  <span class="token keyword">import</span><span class="token punctuation">(</span><span class="token string">'./module1.js'</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+  <span class="token keyword">import</span><span class="token punctuation">(</span><span class="token string">'./module2.js'</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+  <span class="token keyword">import</span><span class="token punctuation">(</span><span class="token string">'./module3.js'</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+<span class="token punctuation">]</span><span class="token punctuation">)</span>
+<span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">[</span>module1<span class="token punctuation">,</span> module2<span class="token punctuation">,</span> module3<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+   ···
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment" spellcheck="true">//导入模块后直接解构获取值</span>
+<span class="token keyword">import</span><span class="token punctuation">(</span><span class="token string">'./myModule.js'</span><span class="token punctuation">)</span>
+<span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">{</span>export1<span class="token punctuation">,</span> export2<span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+  <span class="token comment" spellcheck="true">// ...·</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment" spellcheck="true">//获取默认导出</span>
+<span class="token keyword">import</span><span class="token punctuation">(</span><span class="token string">'./myModule.js'</span><span class="token punctuation">)</span>
+<span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span>myModule <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>myModule<span class="token punctuation">.</span><span class="token keyword">default</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment" spellcheck="true">//默认导出的具名形式</span>
+<span class="token keyword">import</span><span class="token punctuation">(</span><span class="token string">'./myModule.js'</span><span class="token punctuation">)</span>
+<span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">{</span><span class="token keyword">default</span><span class="token punctuation">:</span> theDefault<span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>theDefault<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<blockquote>
+<p>总结特点：1、加载路径可变，动态加载引用2、可在函数内使用3、异步加载</p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>es6</category>
+        <category>CommonJS模块化加载</category>
+      </categories>
+      <tags>
+        <tag>es6</tag>
+        <tag>node</tag>
+        <tag>CommonJS模块化加载</tag>
       </tags>
   </entry>
   <entry>
@@ -1352,6 +1352,110 @@ example
 </tr>
 </tbody></table>
 ]]></content>
+  </entry>
+  <entry>
+    <title>java异常</title>
+    <url>/2020/12/14/java-yi-chang/</url>
+    <content><![CDATA[<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>介绍常见的异常及其处理方式。</p>
+<p>异常的特性：</p>
+<ul>
+<li>java异常方法默认都有一个throws RuntimeException，用于处理异常的抛出。</li>
+<li>如果不在程序中处理，异常将会一直抛出直到jvm，jvm会打印异常并退出程序。</li>
+<li>处理异常只有两种方式，try-catch捕获和throws抛出</li>
+</ul>
+<h2 id="异常的分类"><a href="#异常的分类" class="headerlink" title="异常的分类"></a>异常的分类</h2><pre class="line-numbers language-md"><code class="language-md">throwable顶级父类
+    |--Error不可修复，多见于系统级的问题（例如递归栈/内存溢出），保证程序安全退出即可
+    |--Exception
+        |--其他Exception   
+        |--runtimeException
+           |--ArithmeticException
+           |--ArrayListIndexOutOfBoundsException
+           |--。。。等等异常<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="try-catch方法"><a href="#try-catch方法" class="headerlink" title="try-catch方法"></a>try-catch方法</h2><p>特性：<br>1、使用try-catch方法可以捕获多个异常，但要注意大的异常类要在后面捕获。<br>2、finally代码块内的代码一定会执行，无论try代码块中有无ruturn还是break及其他终止程序的关键字，都会执行。</p>
+<pre class="line-numbers language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span>String<span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"输入两个数字："</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    String inp <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Scanner</span><span class="token punctuation">(</span>System<span class="token punctuation">.</span>in<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">nextLine</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    String<span class="token punctuation">[</span><span class="token punctuation">]</span> sp <span class="token operator">=</span> inp<span class="token punctuation">.</span><span class="token function">split</span><span class="token punctuation">(</span><span class="token string">","</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">try</span> <span class="token punctuation">{</span>
+        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>Integer<span class="token punctuation">.</span><span class="token function">valueOf</span><span class="token punctuation">(</span>sp<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">/</span> Integer<span class="token punctuation">.</span><span class="token function">valueOf</span><span class="token punctuation">(</span>sp<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">ArithmeticException</span> e<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        e<span class="token punctuation">.</span><span class="token function">printStackTrace</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">ArrayIndexOutOfBoundsException</span> e<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        e<span class="token punctuation">.</span><span class="token function">printStackTrace</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span> <span class="token keyword">finally</span> <span class="token punctuation">{</span>
+        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"finly"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span class="token comment" spellcheck="true">//无论是否有return等关键字都会执行finally内的代码</span>
+<span class="token comment" spellcheck="true">// 输出：</span>
+<span class="token comment" spellcheck="true">// 输入两个数字：</span>
+<span class="token comment" spellcheck="true">// 12</span>
+<span class="token comment" spellcheck="true">// java.lang.ArrayIndexOutOfBoundsException: 1</span>
+<span class="token comment" spellcheck="true">// finly</span>
+<span class="token comment" spellcheck="true">//     at day1214.ExceptionTset.main(ExceptionTset.java:11)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="throws抛出异常"><a href="#throws抛出异常" class="headerlink" title="throws抛出异常"></a>throws抛出异常</h2><p>特性：<br>1、使用throws关键字加在方法后面可以抛出多个异常。<br>2、往往需要抛出异常的代码块是它内部引用的方法已经有异常抛出，所以要继续抛出异常。</p>
+<pre class="line-numbers language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span>String<span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"请输入一个时间："</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">try</span> <span class="token punctuation">{</span>
+        <span class="token function">f</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">ParseException</span> e<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"时间格式错误"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        e<span class="token punctuation">.</span><span class="token function">printStackTrace</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">IOException</span> e<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"文件路径错误"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        e<span class="token punctuation">.</span><span class="token function">printStackTrace</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span class="token comment" spellcheck="true">//抛出多个异常</span>
+<span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">f</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">throws</span> ParseException<span class="token punctuation">,</span> IOException <span class="token punctuation">{</span>
+    String inp <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Scanner</span><span class="token punctuation">(</span>System<span class="token punctuation">.</span>in<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">nextLine</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    SimpleDateFormat sdf <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">SimpleDateFormat</span><span class="token punctuation">(</span><span class="token string">"yyyy/MM/dd"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    Date d <span class="token operator">=</span> sdf<span class="token punctuation">.</span><span class="token function">parse</span><span class="token punctuation">(</span>inp<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    File f <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">File</span><span class="token punctuation">(</span><span class="token string">"E://code/java/"</span> <span class="token operator">+</span> d<span class="token punctuation">.</span><span class="token function">getTime</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">".txt"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    f<span class="token punctuation">.</span><span class="token function">createNewFile</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token comment" spellcheck="true">//SimpleDateFarmat的parse方法抛出了ParseException异常，因此上面要跑出此异常</span>
+<span class="token keyword">public</span> Date <span class="token function">parse</span><span class="token punctuation">(</span>String source<span class="token punctuation">)</span> <span class="token keyword">throws</span> ParseException
+<span class="token punctuation">{</span>
+    ParsePosition pos <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ParsePosition</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    Date result <span class="token operator">=</span> <span class="token function">parse</span><span class="token punctuation">(</span>source<span class="token punctuation">,</span> pos<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>pos<span class="token punctuation">.</span>index <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span>
+        <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">ParseException</span><span class="token punctuation">(</span><span class="token string">"Unparseable date: \""</span> <span class="token operator">+</span> source <span class="token operator">+</span> <span class="token string">"\""</span> <span class="token punctuation">,</span>
+            pos<span class="token punctuation">.</span>errorIndex<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> result<span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="throw手动抛出异常"><a href="#throw手动抛出异常" class="headerlink" title="throw手动抛出异常"></a>throw手动抛出异常</h2><p>特性：<br>1、处理自定义的特殊情况，使用系统类型，自己抛出和捕获。<br>2、抛出的信息要准确描述特殊情况，打印的交互可以人性化一点。</p>
+<pre class="line-numbers language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span>String<span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"请输入两个浮点数："</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">double</span> inp1 <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Scanner</span><span class="token punctuation">(</span>System<span class="token punctuation">.</span>in<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">nextDouble</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">double</span> inp2 <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Scanner</span><span class="token punctuation">(</span>System<span class="token punctuation">.</span>in<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">nextDouble</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">try</span> <span class="token punctuation">{</span>
+        <span class="token function">f</span><span class="token punctuation">(</span>inp1<span class="token punctuation">,</span> inp2<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">ArithmeticException</span> e<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment" spellcheck="true">//交互信息人性化</span>
+        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"不能除0是我们的错，请鞭笞我们吧！"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        e<span class="token punctuation">.</span><span class="token function">printStackTrace</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">f</span><span class="token punctuation">(</span><span class="token keyword">double</span> inp1<span class="token punctuation">,</span> <span class="token keyword">double</span> inp2<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">//自定义特殊情况异常抛出</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>inp2 <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        ArithmeticException e <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ArithmeticException</span><span class="token punctuation">(</span><span class="token string">"/by zero"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">throw</span> e<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>inp1 <span class="token operator">/</span> inp2<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+]]></content>
+      <categories>
+        <category>java</category>
+        <category>Exception</category>
+      </categories>
+      <tags>
+        <tag>java</tag>
+        <tag>Exception</tag>
+      </tags>
   </entry>
   <entry>
     <title>js中的常用数组操作函数</title>
@@ -2498,6 +2602,19 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <ul>
 <li>sort方法总的comparator接口对象</li>
 </ul>
+<h2 id="类的类型判定"><a href="#类的类型判定" class="headerlink" title="类的类型判定"></a>类的类型判定</h2><ul>
+<li>判定类是否属于某个类使用instanceof关键字即可<pre class="line-numbers language-java"><code class="language-java">String s <span class="token operator">=</span> <span class="token string">"xx"</span><span class="token punctuation">;</span>
+<span class="token comment" spellcheck="true">//包装类才可使用下列方法判定</span>
+Integer i <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>s <span class="token keyword">instanceof</span> <span class="token class-name">Object</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>i <span class="token keyword">instanceof</span> <span class="token class-name">Integer</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>i <span class="token keyword">instanceof</span> <span class="token class-name">Number</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>i <span class="token keyword">instanceof</span> <span class="token class-name">Object</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+<li>判定是否是具体某个类型<pre class="line-numbers language-java"><code class="language-java">Integer i <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>i<span class="token punctuation">.</span><span class="token function">getClass</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">==</span> Integer<span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+</li>
+</ul>
 ]]></content>
       <categories>
         <category>java</category>
@@ -2506,6 +2623,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
       <tags>
         <tag>java</tag>
         <tag>内部类</tag>
+        <tag>类的类型判断</tag>
       </tags>
   </entry>
   <entry>
@@ -2644,6 +2762,70 @@ module<span class="token punctuation">.</span>exports <span class="token operato
 <li>LinkedList适用于频繁的修改、添加头尾数据（丑数），获取数据较之慢</li>
 <li>ArrayList适用于海量数据的查询（可直接由内存大小算出存储元素的地址，因此快），数据添加（添加至末尾）</li>
 </ul>
+<h3 id="手写简要双向链表增删功能"><a href="#手写简要双向链表增删功能" class="headerlink" title="手写简要双向链表增删功能"></a>手写简要双向链表增删功能</h3><blockquote>
+<p>主要是明确双向链表封装一个对象，对象包含了前一个和后一个对象的引用，增删就是对封装对象进行操作。</p>
+</blockquote>
+<pre class="line-numbers language-java"><code class="language-java"><span class="token keyword">package</span> day1215<span class="token punctuation">;</span>
+
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">DoubleLinkedListTest</span><span class="token operator">&lt;</span>T<span class="token operator">></span> <span class="token punctuation">{</span>
+    Node last<span class="token punctuation">;</span>
+    Node first<span class="token punctuation">;</span>
+    Integer size <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">//链表状态判定：两种情况为空和不为空</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">add</span><span class="token punctuation">(</span>T t<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        Node n <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Node</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        n<span class="token punctuation">.</span>value <span class="token operator">=</span> t<span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>size <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            n<span class="token punctuation">.</span>prev <span class="token operator">=</span> n<span class="token punctuation">;</span>
+            n<span class="token punctuation">.</span>next <span class="token operator">=</span> n<span class="token punctuation">;</span>
+            first <span class="token operator">=</span> n<span class="token punctuation">;</span>
+            last <span class="token operator">=</span> n<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+            last<span class="token punctuation">.</span>next <span class="token operator">=</span> n<span class="token punctuation">;</span>
+            n<span class="token punctuation">.</span>prev <span class="token operator">=</span> last<span class="token punctuation">;</span>
+            n<span class="token punctuation">.</span>next <span class="token operator">=</span> first<span class="token punctuation">;</span>
+            first<span class="token punctuation">.</span>prev <span class="token operator">=</span> n<span class="token punctuation">;</span>
+            last <span class="token operator">=</span> n<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        size<span class="token operator">++</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">public</span> T <span class="token function">get</span><span class="token punctuation">(</span><span class="token keyword">int</span> i<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        Node n <span class="token operator">=</span> <span class="token function">getNode</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> n<span class="token punctuation">.</span>value<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">private</span> DoubleLinkedListTest<span class="token operator">&lt;</span>T<span class="token operator">></span><span class="token punctuation">.</span>Node <span class="token function">getNode</span><span class="token punctuation">(</span><span class="token keyword">int</span> i<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment" spellcheck="true">//三种情况，越界，头尾部对象以及中间对象,分别处理即可</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>i <span class="token operator">&lt;</span> <span class="token number">0</span> <span class="token operator">||</span> i <span class="token operator">></span> size <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">IndexOutOfBoundsException</span><span class="token punctuation">(</span><span class="token string">""</span> <span class="token operator">+</span> i<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>i <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">return</span> first<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>i <span class="token operator">==</span> size <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">return</span> last<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        Node n <span class="token operator">=</span> null<span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>i <span class="token operator">&lt;</span> size <span class="token operator">/</span> <span class="token number">2</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            n <span class="token operator">=</span> first<span class="token punctuation">;</span>
+            <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> j <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> j <span class="token operator">&lt;=</span> i<span class="token punctuation">;</span> j<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                n <span class="token operator">=</span> n<span class="token punctuation">.</span>next<span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+            n <span class="token operator">=</span> last<span class="token punctuation">;</span>
+            <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> j <span class="token operator">=</span> size <span class="token operator">-</span> <span class="token number">2</span><span class="token punctuation">;</span> j <span class="token operator">>=</span> i<span class="token punctuation">;</span> j<span class="token operator">--</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                n <span class="token operator">=</span> n<span class="token punctuation">.</span>prev<span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">return</span> n<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">class</span> <span class="token class-name">Node</span> <span class="token punctuation">{</span>
+        T value<span class="token punctuation">;</span>
+        Node prev<span class="token punctuation">;</span>
+        Node next<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 ]]></content>
       <categories>
         <category>java</category>
@@ -2691,6 +2873,84 @@ module<span class="token punctuation">.</span>exports <span class="token operato
       <tags>
         <tag>css</tag>
         <tag>css常用设置</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>接口和面向对象</title>
+    <url>/2020/09/14/jie-kou-he-mian-xiang-dui-xiang/</url>
+    <content><![CDATA[<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>day5，访问控制符&amp;接口</p>
+<a id="more"></a>
+
+<h2 id="访问控制符"><a href="#访问控制符" class="headerlink" title="访问控制符"></a>访问控制符</h2><blockquote>
+<p>作用及范围</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>符号</th>
+<th>本类</th>
+<th>本包</th>
+<th>子类</th>
+<th>无限制</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>public</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+</tr>
+<tr>
+<td>protected</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+<td>-</td>
+</tr>
+<tr>
+<td>default</td>
+<td>√</td>
+<td>√</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td>private</td>
+<td>√</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>static关键字的使用时机：1.公用资源2.通用方法</p>
+</blockquote>
+<h2 id="接口"><a href="#接口" class="headerlink" title="接口"></a>接口</h2><blockquote>
+<p>常量+抽象方法<br>1、常量：在接口中定义的变量都是常量（自动加上public static final关键字）<br>2、抽象方法：自动加上（public abstract 关键字）</p>
+</blockquote>
+<ul>
+<li>作用分离具体功能类和功能类——变形金刚和他的武器库，而使用功能类则为测试类。</li>
+</ul>
+<h2 id="面向对象OOP（Object-oriented-programming）"><a href="#面向对象OOP（Object-oriented-programming）" class="headerlink" title="面向对象OOP（Object-oriented programming）"></a>面向对象OOP（Object-oriented programming）</h2><blockquote>
+<p>面向对象的三大原则——封装、继承、多态</p>
+</blockquote>
+<p>1、封装——类私有化——private</p>
+<ul>
+<li><p>构造方法—<strong>抽象类是有构造方法的，在实现他的子类创建对象的时候运行</strong>常用与给成员变量赋值</p>
+</li>
+<li><p>this指定当前对象的引用地址，构造方法之间的相互引用</p>
+</li>
+</ul>
+<p>2、继承——子类继承父类功能，并扩展自己的功能<br>3、多态——子类重写了父类的方法，同一个父类不同的实现类。</p>
+]]></content>
+      <categories>
+        <category>java</category>
+        <category>javase</category>
+      </categories>
+      <tags>
+        <tag>access-control-character</tag>
+        <tag>interface</tag>
       </tags>
   </entry>
   <entry>
@@ -2841,84 +3101,6 @@ String regex <span class="token operator">=</span> <span class="token string">"\
       </tags>
   </entry>
   <entry>
-    <title>接口和面向对象</title>
-    <url>/2020/09/14/jie-kou-he-mian-xiang-dui-xiang/</url>
-    <content><![CDATA[<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>day5，访问控制符&amp;接口</p>
-<a id="more"></a>
-
-<h2 id="访问控制符"><a href="#访问控制符" class="headerlink" title="访问控制符"></a>访问控制符</h2><blockquote>
-<p>作用及范围</p>
-</blockquote>
-<table>
-<thead>
-<tr>
-<th>符号</th>
-<th>本类</th>
-<th>本包</th>
-<th>子类</th>
-<th>无限制</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>public</td>
-<td>√</td>
-<td>√</td>
-<td>√</td>
-<td>√</td>
-</tr>
-<tr>
-<td>protected</td>
-<td>√</td>
-<td>√</td>
-<td>√</td>
-<td>-</td>
-</tr>
-<tr>
-<td>default</td>
-<td>√</td>
-<td>√</td>
-<td>-</td>
-<td>-</td>
-</tr>
-<tr>
-<td>private</td>
-<td>√</td>
-<td>-</td>
-<td>-</td>
-<td>-</td>
-</tr>
-</tbody></table>
-<blockquote>
-<p>static关键字的使用时机：1.公用资源2.通用方法</p>
-</blockquote>
-<h2 id="接口"><a href="#接口" class="headerlink" title="接口"></a>接口</h2><blockquote>
-<p>常量+抽象方法<br>1、常量：在接口中定义的变量都是常量（自动加上public static final关键字）<br>2、抽象方法：自动加上（public abstract 关键字）</p>
-</blockquote>
-<ul>
-<li>作用分离具体功能类和功能类——变形金刚和他的武器库，而使用功能类则为测试类。</li>
-</ul>
-<h2 id="面向对象OOP（Object-oriented-programming）"><a href="#面向对象OOP（Object-oriented-programming）" class="headerlink" title="面向对象OOP（Object-oriented programming）"></a>面向对象OOP（Object-oriented programming）</h2><blockquote>
-<p>面向对象的三大原则——封装、继承、多态</p>
-</blockquote>
-<p>1、封装——类私有化——private</p>
-<ul>
-<li><p>构造方法—<strong>抽象类是有构造方法的，在实现他的子类创建对象的时候运行</strong>常用与给成员变量赋值</p>
-</li>
-<li><p>this指定当前对象的引用地址，构造方法之间的相互引用</p>
-</li>
-</ul>
-<p>2、继承——子类继承父类功能，并扩展自己的功能<br>3、多态——子类重写了父类的方法，同一个父类不同的实现类。</p>
-]]></content>
-      <categories>
-        <category>java</category>
-        <category>javase</category>
-      </categories>
-      <tags>
-        <tag>access-control-character</tag>
-        <tag>interface</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>类的内部加载顺序</title>
     <url>/2020/09/13/lei-de-jia-zai-shun-xu/</url>
     <content><![CDATA[<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>day4，主要讲了String类&amp;局部/全局变量&amp;Array常见方法使用&amp;递归&amp;BufferReader/FileReader/FileWriter&amp;混合变量后的类加载顺序</p>
@@ -2943,110 +3125,6 @@ String regex <span class="token operator">=</span> <span class="token string">"\
         <tag>fileOperation</tag>
         <tag>String</tag>
         <tag>Arrays</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>java异常</title>
-    <url>/2020/12/14/java-yi-chang/</url>
-    <content><![CDATA[<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>介绍常见的异常及其处理方式。</p>
-<p>异常的特性：</p>
-<ul>
-<li>java异常方法默认都有一个throws RuntimeException，用于处理异常的抛出。</li>
-<li>如果不在程序中处理，异常将会一直抛出直到jvm，jvm会打印异常并退出程序。</li>
-<li>处理异常只有两种方式，try-catch捕获和throws抛出</li>
-</ul>
-<h2 id="异常的分类"><a href="#异常的分类" class="headerlink" title="异常的分类"></a>异常的分类</h2><pre class="line-numbers language-md"><code class="language-md">throwable顶级父类
-    |--Error不可修复，多见于系统级的问题（例如递归栈/内存溢出），保证程序安全退出即可
-    |--Exception
-        |--其他Exception   
-        |--runtimeException
-           |--ArithmeticException
-           |--ArrayListIndexOutOfBoundsException
-           |--。。。等等异常<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h2 id="try-catch方法"><a href="#try-catch方法" class="headerlink" title="try-catch方法"></a>try-catch方法</h2><p>特性：<br>1、使用try-catch方法可以捕获多个异常，但要注意大的异常类要在后面捕获。<br>2、finally代码块内的代码一定会执行，无论try代码块中有无ruturn还是break及其他终止程序的关键字，都会执行。</p>
-<pre class="line-numbers language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span>String<span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"输入两个数字："</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    String inp <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Scanner</span><span class="token punctuation">(</span>System<span class="token punctuation">.</span>in<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">nextLine</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    String<span class="token punctuation">[</span><span class="token punctuation">]</span> sp <span class="token operator">=</span> inp<span class="token punctuation">.</span><span class="token function">split</span><span class="token punctuation">(</span><span class="token string">","</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token keyword">try</span> <span class="token punctuation">{</span>
-        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>Integer<span class="token punctuation">.</span><span class="token function">valueOf</span><span class="token punctuation">(</span>sp<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">/</span> Integer<span class="token punctuation">.</span><span class="token function">valueOf</span><span class="token punctuation">(</span>sp<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token keyword">return</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">ArithmeticException</span> e<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        e<span class="token punctuation">.</span><span class="token function">printStackTrace</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">ArrayIndexOutOfBoundsException</span> e<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        e<span class="token punctuation">.</span><span class="token function">printStackTrace</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span> <span class="token keyword">finally</span> <span class="token punctuation">{</span>
-        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"finly"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-<span class="token punctuation">}</span>
-<span class="token comment" spellcheck="true">//无论是否有return等关键字都会执行finally内的代码</span>
-<span class="token comment" spellcheck="true">// 输出：</span>
-<span class="token comment" spellcheck="true">// 输入两个数字：</span>
-<span class="token comment" spellcheck="true">// 12</span>
-<span class="token comment" spellcheck="true">// java.lang.ArrayIndexOutOfBoundsException: 1</span>
-<span class="token comment" spellcheck="true">// finly</span>
-<span class="token comment" spellcheck="true">//     at day1214.ExceptionTset.main(ExceptionTset.java:11)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h2 id="throws抛出异常"><a href="#throws抛出异常" class="headerlink" title="throws抛出异常"></a>throws抛出异常</h2><p>特性：<br>1、使用throws关键字加在方法后面可以抛出多个异常。<br>2、往往需要抛出异常的代码块是它内部引用的方法已经有异常抛出，所以要继续抛出异常。</p>
-<pre class="line-numbers language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span>String<span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"请输入一个时间："</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token keyword">try</span> <span class="token punctuation">{</span>
-        <span class="token function">f</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">ParseException</span> e<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"时间格式错误"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        e<span class="token punctuation">.</span><span class="token function">printStackTrace</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">IOException</span> e<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"文件路径错误"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        e<span class="token punctuation">.</span><span class="token function">printStackTrace</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-<span class="token punctuation">}</span>
-<span class="token comment" spellcheck="true">//抛出多个异常</span>
-<span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">f</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">throws</span> ParseException<span class="token punctuation">,</span> IOException <span class="token punctuation">{</span>
-    String inp <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Scanner</span><span class="token punctuation">(</span>System<span class="token punctuation">.</span>in<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">nextLine</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    SimpleDateFormat sdf <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">SimpleDateFormat</span><span class="token punctuation">(</span><span class="token string">"yyyy/MM/dd"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    Date d <span class="token operator">=</span> sdf<span class="token punctuation">.</span><span class="token function">parse</span><span class="token punctuation">(</span>inp<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    File f <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">File</span><span class="token punctuation">(</span><span class="token string">"E://code/java/"</span> <span class="token operator">+</span> d<span class="token punctuation">.</span><span class="token function">getTime</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">".txt"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    f<span class="token punctuation">.</span><span class="token function">createNewFile</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-<span class="token comment" spellcheck="true">//SimpleDateFarmat的parse方法抛出了ParseException异常，因此上面要跑出此异常</span>
-<span class="token keyword">public</span> Date <span class="token function">parse</span><span class="token punctuation">(</span>String source<span class="token punctuation">)</span> <span class="token keyword">throws</span> ParseException
-<span class="token punctuation">{</span>
-    ParsePosition pos <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ParsePosition</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    Date result <span class="token operator">=</span> <span class="token function">parse</span><span class="token punctuation">(</span>source<span class="token punctuation">,</span> pos<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token keyword">if</span> <span class="token punctuation">(</span>pos<span class="token punctuation">.</span>index <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span>
-        <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">ParseException</span><span class="token punctuation">(</span><span class="token string">"Unparseable date: \""</span> <span class="token operator">+</span> source <span class="token operator">+</span> <span class="token string">"\""</span> <span class="token punctuation">,</span>
-            pos<span class="token punctuation">.</span>errorIndex<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token keyword">return</span> result<span class="token punctuation">;</span>
-<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h2 id="throw手动抛出异常"><a href="#throw手动抛出异常" class="headerlink" title="throw手动抛出异常"></a>throw手动抛出异常</h2><p>特性：<br>1、处理自定义的特殊情况，使用系统类型，自己抛出和捕获。<br>2、抛出的信息要准确描述特殊情况，打印的交互可以人性化一点。</p>
-<pre class="line-numbers language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span>String<span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"请输入两个浮点数："</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token keyword">double</span> inp1 <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Scanner</span><span class="token punctuation">(</span>System<span class="token punctuation">.</span>in<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">nextDouble</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token keyword">double</span> inp2 <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Scanner</span><span class="token punctuation">(</span>System<span class="token punctuation">.</span>in<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">nextDouble</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token keyword">try</span> <span class="token punctuation">{</span>
-        <span class="token function">f</span><span class="token punctuation">(</span>inp1<span class="token punctuation">,</span> inp2<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">ArithmeticException</span> e<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token comment" spellcheck="true">//交互信息人性化</span>
-        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"不能除0是我们的错，请鞭笞我们吧！"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        e<span class="token punctuation">.</span><span class="token function">printStackTrace</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-<span class="token punctuation">}</span>
-
-<span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">f</span><span class="token punctuation">(</span><span class="token keyword">double</span> inp1<span class="token punctuation">,</span> <span class="token keyword">double</span> inp2<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token comment" spellcheck="true">//自定义特殊情况异常抛出</span>
-    <span class="token keyword">if</span> <span class="token punctuation">(</span>inp2 <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        ArithmeticException e <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ArithmeticException</span><span class="token punctuation">(</span><span class="token string">"/by zero"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token keyword">throw</span> e<span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-    System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>inp1 <span class="token operator">/</span> inp2<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-]]></content>
-      <categories>
-        <category>java</category>
-        <category>Exception</category>
-      </categories>
-      <tags>
-        <tag>java</tag>
-        <tag>Exception</tag>
       </tags>
   </entry>
 </search>
