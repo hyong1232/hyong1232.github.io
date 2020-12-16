@@ -4,7 +4,7 @@
 
 <head>
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
-    <meta name="keywords" content="Object.assign函数, 寒冬之音">
+    <meta name="keywords" content="java特殊问题记录, 寒冬之音">
     <meta name="description" content="人生有酒需尽欢，莫使金樽空对月">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>Object.assign函数 | 寒冬之音</title>
+    <title>java特殊问题记录 | 寒冬之音</title>
     <link rel="icon" type="image/png" href="/medias/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -335,12 +335,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('https://i.loli.net/2020/10/25/VBN1485inZ7dTqG.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://i.loli.net/2020/10/30/QBtyYLJdEGzHmNV.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">Object.assign函数</h1>
+                    <h1 class="description center-align post-title">java特殊问题记录</h1>
                 </div>
             </div>
         </div>
@@ -461,12 +461,12 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/es6/">
-                                <span class="chip bg-color">es6</span>
+                            <a href="/tags/java/">
+                                <span class="chip bg-color">java</span>
                             </a>
                         
-                            <a href="/tags/Object%E6%93%8D%E4%BD%9C/">
-                                <span class="chip bg-color">Object操作</span>
+                            <a href="/tags/%E7%89%B9%E6%AE%8A%E9%97%AE%E9%A2%98/">
+                                <span class="chip bg-color">特殊问题</span>
                             </a>
                         
                     </div>
@@ -477,12 +477,12 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/es6/" class="post-category">
-                                es6
+                            <a href="/categories/java/" class="post-category">
+                                java
                             </a>
                         
-                            <a href="/categories/es6/Object%E6%93%8D%E4%BD%9C/" class="post-category">
-                                Object操作
+                            <a href="/categories/java/%E7%89%B9%E6%AE%8A%E9%97%AE%E9%A2%98/" class="post-category">
+                                特殊问题
                             </a>
                         
                     </div>
@@ -494,21 +494,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2020-09-23
+                    2020-12-16
                 </div>
                 
 
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2020-10-30
+                    2020-12-16
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    362
+                    211
                 </div>
                 
 
@@ -530,52 +530,36 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>**Object.assign()**方法使用target的setter方法和origin对象的getter方法，复制对象可枚举的属性值，适用于很多的object操作。</p>
-<a id="more"></a>
-
-<h2 id="常用方法"><a href="#常用方法" class="headerlink" title="常用方法"></a>常用方法</h2><p>1、复制对象值，并返回新创建新对象</p>
-<pre class="line-numbers language-js"><code class="language-js">Objec
-t<span class="token punctuation">.</span><span class="token function">assign</span><span class="token punctuation">(</span><span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span><span class="token punctuation">{</span>a<span class="token punctuation">:</span><span class="token string">'a'</span><span class="token punctuation">}</span><span class="token punctuation">,</span><span class="token punctuation">{</span>b<span class="token punctuation">:</span><span class="token string">'b'</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-<p>2、为对象添加新属性</p>
-<pre class="line-numbers language-js"><code class="language-js">Object<span class="token punctuation">.</span><span class="token function">assign</span><span class="token punctuation">(</span>orgin<span class="token punctuation">,</span><span class="token punctuation">{</span>add<span class="token punctuation">:</span><span class="token string">'add'</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p>3、为对象添加新方法</p>
-<pre class="line-numbers language-js"><code class="language-js"><span class="token keyword">const</span> obj <span class="token operator">=</span> <span class="token punctuation">{</span>
-    val<span class="token punctuation">:</span><span class="token string">'val'</span><span class="token punctuation">,</span>
-<span class="token punctuation">}</span>
-Object<span class="token punctuation">.</span><span class="token function">assign</span><span class="token punctuation">(</span>obj<span class="token punctuation">.</span>prototype<span class="token punctuation">,</span><span class="token punctuation">{</span>
-    <span class="token function">getName</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
-        <span class="token operator">...</span><span class="token punctuation">.</span>
+                <h2 id="在类中this的省略问题"><a href="#在类中this的省略问题" class="headerlink" title="在类中this的省略问题"></a>在类中this的省略问题</h2><pre class="line-numbers language-java"><code class="language-java"><span class="token keyword">class</span> <span class="token class-name">Student</span><span class="token punctuation">{</span>
+    <span class="token keyword">int</span> age<span class="token punctuation">;</span>
+    String name<span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">//变量名不同，可以省略this</span>
+    <span class="token keyword">public</span> <span class="token function">Student</span><span class="token punctuation">(</span><span class="token keyword">int</span> ag<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">super</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        age <span class="token operator">=</span> ag<span class="token punctuation">;</span>
     <span class="token punctuation">}</span>
-<span class="token punctuation">}</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h3 id="特性："><a href="#特性：" class="headerlink" title="特性："></a>特性：</h3><p>1、由于Object.assign采用的是浅拷贝，因此源对象的属性值是对象时，只是复制了引用，再后面的复制中出现此对象的修改，则直接替换他的引用</p>
-<pre class="line-numbers language-js"><code class="language-js"><span class="token keyword">const</span> obj1 <span class="token operator">=</span> <span class="token punctuation">{</span>a<span class="token punctuation">:</span> <span class="token punctuation">{</span>b<span class="token punctuation">:</span> <span class="token number">1</span><span class="token punctuation">}</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
-<span class="token keyword">const</span> obj2 <span class="token operator">=</span> Object<span class="token punctuation">.</span><span class="token function">assign</span><span class="token punctuation">(</span><span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span> obj1<span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-obj1<span class="token punctuation">.</span>a<span class="token punctuation">.</span>b <span class="token operator">=</span> <span class="token number">2</span><span class="token punctuation">;</span>
-obj2<span class="token punctuation">.</span>a<span class="token punctuation">.</span>b <span class="token comment" spellcheck="true">// 2</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>2、不能复制origin源对象的继承属性，只能同通过Object.getPrototypeOf(origin)+Object.create()+origin方法，将其继承的方法单独调出来，然后合并</p>
-<pre class="line-numbers language-js"><code class="language-js"><span class="token keyword">let</span> originProto <span class="token operator">=</span> Object<span class="token punctuation">.</span><span class="token function">getPrototypeOf</span><span class="token punctuation">(</span>origin<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token keyword">return</span> Object<span class="token punctuation">.</span><span class="token function">assign</span><span class="token punctuation">(</span>Object<span class="token punctuation">.</span><span class="token function">create</span><span class="token punctuation">(</span>originProto<span class="token punctuation">)</span><span class="token punctuation">,</span> origin<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-<p>3、target/orgin对象为非对象</p>
-<ul>
-<li> target为非对象，转换成对象，如果是null/undefined不可转换成对象的属性时，报错</li>
-<li>origin为非对象时，自动转换，如果是null/undefined不可转换成对象的属性时，直接跳过</li>
-</ul>
-<p>4、数组处理</p>
-<blockquote>
-<p>将数组当成对象处理，键值为index下标</p>
-</blockquote>
-<pre class="line-numbers language-js"><code class="language-js">Object<span class="token punctuation">.</span><span class="token function">assign</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">,</span><span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">,</span><span class="token number">5</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token operator">=</span><span class="token operator">></span><span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">,</span><span class="token number">5</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">]</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p>5、取值函数处理（关键字get开头）</p>
-<blockquote>
-<p>直接取值，不会获取取值函数合并</p>
-</blockquote>
-<pre class="line-numbers language-js"><code class="language-js"><span class="token keyword">const</span> obj <span class="token operator">=</span> <span class="token punctuation">{</span>
-    <span class="token keyword">get</span> name <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
-        <span class="token keyword">return</span> <span class="token string">'jack'</span>
+    <span class="token comment" spellcheck="true">//此时如果省略this，那么对象的age就会赋不上值</span>
+    <span class="token keyword">public</span> <span class="token function">Student</span><span class="token punctuation">(</span><span class="token keyword">int</span> age<span class="token punctuation">,</span> String name<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">super</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>age <span class="token operator">=</span> age<span class="token punctuation">;</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>name <span class="token operator">=</span> name<span class="token punctuation">;</span>
     <span class="token punctuation">}</span>
-<span class="token punctuation">}</span>
-Object<span class="token punctuation">.</span><span class="token function">assign</span><span class="token punctuation">(</span><span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span>obj<span class="token punctuation">)</span><span class="token operator">=</span><span class="token operator">></span><span class="token punctuation">{</span>name<span class="token punctuation">:</span><span class="token string">'jack'</span><span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<blockquote>
+<p>java中的变量采取就近原则，如果没有this特殊指定，它会自动寻找最近出现的变量作为他的值。</p>
+</blockquote>
+<h2 id="final关键字的编译器优化"><a href="#final关键字的编译器优化" class="headerlink" title="final关键字的编译器优化"></a>final关键字的编译器优化</h2><blockquote>
+<p>上代码</p>
+</blockquote>
+<pre class="line-numbers language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span>String<span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">final</span> <span class="token keyword">byte</span> a <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+    <span class="token keyword">final</span> <span class="token keyword">byte</span> b <span class="token operator">=</span> <span class="token number">2</span><span class="token punctuation">;</span>
+    <span class="token keyword">byte</span> c <span class="token operator">=</span> a <span class="token operator">+</span> b<span class="token punctuation">;</span>
+    System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>c<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<blockquote>
+<p>上面代码中a和b如果不加final关键字，在运算时java会自动转换成int类型，那么这个表达式就是错误的，可是加了final关键字之后，c的值编译器就会自动优化成3，而不会有运算了，所以是正确的。</p>
+</blockquote>
 
             </div>
             <hr/>
@@ -591,7 +575,7 @@ Object<span class="token punctuation">.</span><span class="token function">assig
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="/about" rel="external nofollow noreferrer">Mr.H</a>
+                    <a href="/about" rel="external nofollow noreferrer"></a>
                 </span>
             </div>
             <div class="reprint__type">
@@ -601,7 +585,7 @@ Object<span class="token punctuation">.</span><span class="token function">assig
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://hyong1232.github.io/2020/09/23/object-assign-han-shu/">https://hyong1232.github.io/2020/09/23/object-assign-han-shu/</a>
+                    <a href="https://hyong1232.github.io/2020/12/16/java-te-shu-wen-ti-ji-lu/">https://hyong1232.github.io/2020/12/16/java-te-shu-wen-ti-ji-lu/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -614,7 +598,7 @@ Object<span class="token punctuation">.</span><span class="token function">assig
                     本博客所有文章除特別声明外，均采用
                     <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
                     许可协议。转载请注明来源
-                    <a href="/about" target="_blank">Mr.H</a>
+                    <a href="/about" target="_blank"></a>
                     !
                 </span>
             </div>
@@ -639,12 +623,12 @@ Object<span class="token punctuation">.</span><span class="token function">assig
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/es6/">
-                                    <span class="chip bg-color">es6</span>
+                                <a href="/tags/java/">
+                                    <span class="chip bg-color">java</span>
                                 </a>
                             
-                                <a href="/tags/Object%E6%93%8D%E4%BD%9C/">
-                                    <span class="chip bg-color">Object操作</span>
+                                <a href="/tags/%E7%89%B9%E6%AE%8A%E9%97%AE%E9%A2%98/">
+                                    <span class="chip bg-color">特殊问题</span>
                                 </a>
                             
                         </div>
@@ -815,7 +799,7 @@ Object<span class="token punctuation">.</span><span class="token function">assig
         repo: 'hyong1232.github.io',
         owner: 'hyong1232',
         admin: "hyong1232",
-        id: '2020-09-23T17-05-02',
+        id: '2020-12-16T23-07-55',
         distractionFreeMode: false  // Facebook-like distraction free mode
     });
 
@@ -1102,53 +1086,55 @@ Object<span class="token punctuation">.</span><span class="token function">assig
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2020/09/24/chang-yong-css-she-zhi/">
+                <a href="/2020/12/16/java-te-shu-wen-ti-ji-lu/">
                     <div class="card-image">
                         
-                        <img src="https://i.loli.net/2020/10/25/1w5VSDIcq8HRGky.jpg" class="responsive-img" alt="常用css设置">
+                        <img src="https://i.loli.net/2020/10/30/QBtyYLJdEGzHmNV.jpg" class="responsive-img" alt="java特殊问题记录">
                         
-                        <span class="card-title">常用css设置</span>
+                        <span class="card-title">java特殊问题记录</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            简介列举常见的css命令，用于特定的功能。
+                            简介
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2020-09-24
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-12-16
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/css/" class="post-category">
-                                    css
+                            <a href="/categories/java/" class="post-category">
+                                    java
                                 </a>
                             
-                            <a href="/categories/css/css%E5%B8%B8%E7%94%A8%E8%AE%BE%E7%BD%AE/" class="post-category">
-                                    css常用设置
+                            <a href="/categories/java/%E7%89%B9%E6%AE%8A%E9%97%AE%E9%A2%98/" class="post-category">
+                                    特殊问题
                                 </a>
                             
                             
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/css/">
-                        <span class="chip bg-color">css</span>
+                    <a href="/tags/java/">
+                        <span class="chip bg-color">java</span>
                     </a>
                     
-                    <a href="/tags/css%E5%B8%B8%E7%94%A8%E8%AE%BE%E7%BD%AE/">
-                        <span class="chip bg-color">css常用设置</span>
+                    <a href="/tags/%E7%89%B9%E6%AE%8A%E9%97%AE%E9%A2%98/">
+                        <span class="chip bg-color">特殊问题</span>
                     </a>
                     
                 </div>
@@ -1162,34 +1148,34 @@ Object<span class="token punctuation">.</span><span class="token function">assig
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2020/09/23/es6-bian-cheng-feng-ge/">
+                <a href="/2020/12/14/java-yi-chang/">
                     <div class="card-image">
                         
-                        <img src="https://i.loli.net/2020/10/25/4WIBAmYPD5vraVQ.jpg" class="responsive-img" alt="es6编程风格">
+                        <img src="https://i.loli.net/2020/12/16/9e3SuqwE1nRZXsQ.jpg" class="responsive-img" alt="java异常">
                         
-                        <span class="card-title">es6编程风格</span>
+                        <span class="card-title">java异常</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            简介由于现行js的使用版本不一致，导致老版js和es6混用，以及es6本身的使用不规范，造成代码的格式不标准，不便于代码的维护和修改，故参考行业先进规范以改正。
+                            简介
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-09-23
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-12-14
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/es6/" class="post-category">
-                                    es6
+                            <a href="/categories/java/" class="post-category">
+                                    java
                                 </a>
                             
-                            <a href="/categories/es6/%E7%BC%96%E7%A8%8B%E9%A3%8E%E6%A0%BC-%E8%A7%84%E8%8C%83/" class="post-category">
-                                    编程风格/规范
+                            <a href="/categories/java/Exception/" class="post-category">
+                                    Exception
                                 </a>
                             
                             
@@ -1199,12 +1185,12 @@ Object<span class="token punctuation">.</span><span class="token function">assig
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/es6/">
-                        <span class="chip bg-color">es6</span>
+                    <a href="/tags/java/">
+                        <span class="chip bg-color">java</span>
                     </a>
                     
-                    <a href="/tags/%E7%BC%96%E7%A8%8B%E9%A3%8E%E6%A0%BC/">
-                        <span class="chip bg-color">编程风格</span>
+                    <a href="/tags/Exception/">
+                        <span class="chip bg-color">Exception</span>
                     </a>
                     
                 </div>
