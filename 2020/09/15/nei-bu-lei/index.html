@@ -461,10 +461,6 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/java/">
-                                <span class="chip bg-color">java</span>
-                            </a>
-                        
                             <a href="/tags/%E5%86%85%E9%83%A8%E7%B1%BB/">
                                 <span class="chip bg-color">内部类</span>
                             </a>
@@ -485,10 +481,6 @@
                                 java
                             </a>
                         
-                            <a href="/categories/java/class/" class="post-category">
-                                class
-                            </a>
-                        
                     </div>
                     
                 </div>
@@ -505,21 +497,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2020-12-15
+                    2020-12-20
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    356
+                    642
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    1 分
+                    2 分
                 </div>
                 
 
@@ -534,10 +526,7 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>day6，upup~</p>
-<a id="more"></a>
-
-<h2 id="Date类的简单实用"><a href="#Date类的简单实用" class="headerlink" title="Date类的简单实用"></a>Date类的简单实用</h2><blockquote>
+                <h2 id="Date类的简单实用"><a href="#Date类的简单实用" class="headerlink" title="Date类的简单实用"></a>Date类的简单实用</h2><blockquote>
 <p>SimpleDateFormat+Date类</p>
 </blockquote>
 <h2 id="内部类"><a href="#内部类" class="headerlink" title="内部类"></a>内部类</h2><blockquote>
@@ -576,7 +565,8 @@
 <li>sort方法总的comparator接口对象</li>
 </ul>
 <h2 id="类的类型判定"><a href="#类的类型判定" class="headerlink" title="类的类型判定"></a>类的类型判定</h2><ul>
-<li>判定类是否属于某个类使用instanceof关键字即可<pre class="line-numbers language-java"><code class="language-java">String s <span class="token operator">=</span> <span class="token string">"xx"</span><span class="token punctuation">;</span>
+<li><p>判定类是否属于某个类使用instanceof关键字即可</p>
+<pre class="line-numbers language-java"><code class="language-java">String s <span class="token operator">=</span> <span class="token string">"xx"</span><span class="token punctuation">;</span>
 <span class="token comment" spellcheck="true">//包装类才可使用下列方法判定</span>
 Integer i <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
 System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>s <span class="token keyword">instanceof</span> <span class="token class-name">Object</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -584,8 +574,99 @@ System<span class="token punctuation">.</span>out<span class="token punctuation"
 System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>i <span class="token keyword">instanceof</span> <span class="token class-name">Number</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>i <span class="token keyword">instanceof</span> <span class="token class-name">Object</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 </li>
-<li>判定是否是具体某个类型<pre class="line-numbers language-java"><code class="language-java">Integer i <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+<li><p>判定是否是具体某个类型</p>
+<pre class="line-numbers language-java"><code class="language-java">Integer i <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
 System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>i<span class="token punctuation">.</span><span class="token function">getClass</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">==</span> Integer<span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<h2 id="内部类作为私有类的应用"><a href="#内部类作为私有类的应用" class="headerlink" title="内部类作为私有类的应用"></a>内部类作为私有类的应用</h2><blockquote>
+<p>使用私有定义，公共方法提供访问内部类的对象。</p>
+</blockquote>
+<pre class="line-numbers language-java"><code class="language-java"><span class="token keyword">package</span> day1220<span class="token punctuation">;</span>
+<span class="token keyword">import</span> java<span class="token punctuation">.</span>util<span class="token punctuation">.</span>Iterator<span class="token punctuation">;</span>
+<span class="token comment" spellcheck="true">//泛型T代替具体类型</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">InnerClassIteratroDemo</span><span class="token operator">&lt;</span>T<span class="token operator">></span> <span class="token keyword">implements</span> <span class="token class-name">Iterable</span><span class="token operator">&lt;</span>T<span class="token operator">></span> <span class="token punctuation">{</span>
+  <span class="token keyword">int</span> size <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+  Node first<span class="token punctuation">;</span>
+  Node last<span class="token punctuation">;</span>
+  <span class="token comment" spellcheck="true">//自定义的添加方法</span>
+  <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">add</span><span class="token punctuation">(</span>T t<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      Node n <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Node</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      n<span class="token punctuation">.</span>value <span class="token operator">=</span> t<span class="token punctuation">;</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span>size <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+          first <span class="token operator">=</span> n<span class="token punctuation">;</span>
+          last <span class="token operator">=</span> n<span class="token punctuation">;</span>
+          n<span class="token punctuation">.</span>next <span class="token operator">=</span> n<span class="token punctuation">;</span>
+          n<span class="token punctuation">.</span>prev <span class="token operator">=</span> n<span class="token punctuation">;</span>
+      <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+          first<span class="token punctuation">.</span>prev <span class="token operator">=</span> n<span class="token punctuation">;</span>
+          last<span class="token punctuation">.</span>next <span class="token operator">=</span> n<span class="token punctuation">;</span>
+          n<span class="token punctuation">.</span>next <span class="token operator">=</span> first<span class="token punctuation">;</span>
+          n<span class="token punctuation">.</span>prev <span class="token operator">=</span> last<span class="token punctuation">;</span>
+          last <span class="token operator">=</span> n<span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+      size<span class="token operator">++</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+  <span class="token comment" spellcheck="true">//获取类双向链表的值</span>
+  <span class="token keyword">public</span> T <span class="token function">get</span><span class="token punctuation">(</span><span class="token keyword">int</span> num<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      Node n <span class="token operator">=</span> <span class="token function">getNode</span><span class="token punctuation">(</span>num<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token keyword">return</span> n<span class="token punctuation">.</span>value<span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+  <span class="token keyword">private</span> Node <span class="token function">getNode</span><span class="token punctuation">(</span><span class="token keyword">int</span> num<span class="token punctuation">)</span><span class="token punctuation">{</span>
+      Node n <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Node</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span>num <span class="token operator">&lt;</span> <span class="token number">0</span> <span class="token operator">||</span> num <span class="token operator">></span> size<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+          <span class="token keyword">return</span> null<span class="token punctuation">;</span>
+      <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>num <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+          <span class="token keyword">return</span> first<span class="token punctuation">;</span>
+      <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>num <span class="token operator">==</span> size <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+          <span class="token keyword">return</span> last<span class="token punctuation">;</span>
+      <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+          <span class="token keyword">if</span> <span class="token punctuation">(</span>num <span class="token operator">&lt;</span> size <span class="token operator">/</span> <span class="token number">2</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+              n <span class="token operator">=</span> first<span class="token punctuation">;</span>
+              <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> i <span class="token operator">&lt;=</span> num<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                  n <span class="token operator">=</span> n<span class="token punctuation">.</span>next<span class="token punctuation">;</span>
+              <span class="token punctuation">}</span>
+          <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+              n <span class="token operator">=</span> last<span class="token punctuation">;</span>
+              <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> j <span class="token operator">=</span> size <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">;</span> j <span class="token operator">>=</span> num<span class="token punctuation">;</span> j<span class="token operator">--</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                  n <span class="token operator">=</span> n<span class="token punctuation">.</span>prev<span class="token punctuation">;</span>
+              <span class="token punctuation">}</span>
+          <span class="token punctuation">}</span>
+      <span class="token punctuation">}</span>
+      <span class="token keyword">return</span> n<span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+  <span class="token comment" spellcheck="true">//私有内部类</span>
+  <span class="token keyword">private</span> <span class="token keyword">class</span> <span class="token class-name">itr</span> <span class="token keyword">implements</span> <span class="token class-name">Iterator</span> <span class="token punctuation">{</span>
+      Node n <span class="token operator">=</span> null<span class="token punctuation">;</span>
+
+      <span class="token annotation punctuation">@Override</span>
+      <span class="token keyword">public</span> <span class="token keyword">boolean</span> <span class="token function">hasNext</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+          <span class="token keyword">if</span> <span class="token punctuation">(</span>size <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span>
+              <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+          <span class="token keyword">return</span> n <span class="token operator">!=</span> first<span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+
+      <span class="token annotation punctuation">@Override</span>
+      <span class="token keyword">public</span> T <span class="token function">next</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+          <span class="token keyword">if</span> <span class="token punctuation">(</span>null <span class="token operator">==</span> n<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+              n <span class="token operator">=</span> first<span class="token punctuation">;</span>
+          <span class="token punctuation">}</span>
+          T temp <span class="token operator">=</span> n<span class="token punctuation">.</span>value<span class="token punctuation">;</span>
+          n <span class="token operator">=</span> n<span class="token punctuation">.</span>next<span class="token punctuation">;</span>
+          <span class="token keyword">return</span> temp<span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+
+  <span class="token punctuation">}</span>
+  <span class="token comment" spellcheck="true">//内部的封装对象的类</span>
+  <span class="token keyword">class</span> <span class="token class-name">Node</span> <span class="token punctuation">{</span>
+      T value<span class="token punctuation">;</span>
+      Node prev<span class="token punctuation">;</span>
+      Node next<span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+  <span class="token comment" spellcheck="true">//继承Iterable接口，重写此方法，提供公共的访问内部类的方法</span>
+  <span class="token annotation punctuation">@Override</span>
+  <span class="token keyword">public</span> Iterator<span class="token operator">&lt;</span>T<span class="token operator">></span> <span class="token function">iterator</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">itr</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 </li>
 </ul>
 
@@ -650,10 +731,6 @@ System<span class="token punctuation">.</span>out<span class="token punctuation"
                 <div class="post-meta__tag-list" style="display: inline-block;">
                     
                         <div class="article-tag">
-                            
-                                <a href="/tags/java/">
-                                    <span class="chip bg-color">java</span>
-                                </a>
                             
                                 <a href="/tags/%E5%86%85%E9%83%A8%E7%B1%BB/">
                                     <span class="chip bg-color">内部类</span>
@@ -1148,8 +1225,8 @@ System<span class="token punctuation">.</span>out<span class="token punctuation"
                                     es6
                                 </a>
                             
-                            <a href="/categories/es6/CommonJS%E6%A8%A1%E5%9D%97%E5%8C%96%E5%8A%A0%E8%BD%BD/" class="post-category">
-                                    CommonJS模块化加载
+                            <a href="/categories/node/" class="post-category">
+                                    node
                                 </a>
                             
                             
@@ -1158,14 +1235,6 @@ System<span class="token punctuation">.</span>out<span class="token punctuation"
                 </div>
                 
                 <div class="card-action article-tags">
-                    
-                    <a href="/tags/es6/">
-                        <span class="chip bg-color">es6</span>
-                    </a>
-                    
-                    <a href="/tags/node/">
-                        <span class="chip bg-color">node</span>
-                    </a>
                     
                     <a href="/tags/CommonJS%E6%A8%A1%E5%9D%97%E5%8C%96%E5%8A%A0%E8%BD%BD/">
                         <span class="chip bg-color">CommonJS模块化加载</span>
@@ -1193,7 +1262,7 @@ System<span class="token punctuation">.</span>out<span class="token punctuation"
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            简介day5，访问控制符&amp;接口
+                            
                         
                     </div>
                     <div class="publish-info">
@@ -1206,10 +1275,6 @@ System<span class="token punctuation">.</span>out<span class="token punctuation"
                             
                             <a href="/categories/java/" class="post-category">
                                     java
-                                </a>
-                            
-                            <a href="/categories/java/javase/" class="post-category">
-                                    javase
                                 </a>
                             
                             
@@ -1377,7 +1442,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">18.6k</span>&nbsp;字
+                class="white-color">20.2k</span>&nbsp;字
             
             
             

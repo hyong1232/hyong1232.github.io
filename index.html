@@ -522,7 +522,12 @@ CommonJS模块化加载
                             <div class="title center-align">java特殊问题记录</div>
                             <div class="description center-align">
                                 
-                                    简介
+                                    在类中this的省略问题class Student{
+    int age;
+    String name;
+    //变量名不同，可以省略this
+    public Student(int ag) {
+        super
                                 
                             </div>
                             <div class="cover-btns">
@@ -726,8 +731,6 @@ npm init -y [项目名称]
                         
                             <a href="/categories/es6/" class="category">es6</a>
                         
-                            <a href="/categories/es6/Object%E6%93%8D%E4%BD%9C/" class="category">Object操作</a>
-                        
                     
                 </div>
                 <a href="/2020/09/23/object-assign-han-shu/">
@@ -755,8 +758,6 @@ npm init -y [项目名称]
                     
                         
                             <a href="/categories/es6/" class="category">es6</a>
-                        
-                            <a href="/categories/es6/babel/" class="category">babel</a>
                         
                     
                 </div>
@@ -790,8 +791,6 @@ npm init -y [项目名称]
                         
                             <a href="/categories/css/" class="category">css</a>
                         
-                            <a href="/categories/css/css%E5%B8%83%E5%B1%80/" class="category">css布局</a>
-                        
                     
                 </div>
                 <a href="/2020/05/16/flex-bu-ju/">
@@ -819,8 +818,6 @@ npm init -y [项目名称]
                     
                         
                             <a href="/categories/git/" class="category">git</a>
-                        
-                            <a href="/categories/git/git%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C/" class="category">git常用操作</a>
                         
                     
                 </div>
@@ -852,8 +849,6 @@ npm init -y [项目名称]
                         
                             <a href="/categories/css/" class="category">css</a>
                         
-                            <a href="/categories/css/css%E5%B8%83%E5%B1%80/" class="category">css布局</a>
-                        
                     
                 </div>
                 <a href="/2020/05/14/grid-bu-ju/">
@@ -884,10 +879,6 @@ npm init -y [项目名称]
                         
                             <a href="/categories/java/" class="category">java</a>
                         
-                            <a href="/categories/java/BigDecimal/" class="category">BigDecimal</a>
-                        
-                            <a href="/categories/java/BigInteger/" class="category">BigInteger</a>
-                        
                     
                 </div>
                 <a href="/2020/09/07/java-bigdecimal/">
@@ -895,10 +886,19 @@ npm init -y [项目名称]
                 </a>
                 <p class="post-description">
                     
-                        简介daytwo，Java中的大数据精确计算使用BigInteger和BigDecimal分别尽心大整数和精确浮点数的计算
+                        java中的大数字运算BigDecimal
 
 
-java中的
+常用api
+参数
+释义
+
+
+
+a.multiply(b)
+BigDecimal类对象
+加法
+
                     
                 </p>
                 <a href="/2020/09/07/java-bigdecimal/" class="read-more btn waves-effect waves-light" style="background: linear-gradient(to right, #C644FC 0%, #5856D6 100%)" target="_blank">
@@ -918,8 +918,6 @@ java中的
                     
                         
                             <a href="/categories/node/" class="category">node</a>
-                        
-                            <a href="/categories/node/npm/" class="category">npm</a>
                         
                     
                 </div>
@@ -951,8 +949,6 @@ java中的
                     
                         
                             <a href="/categories/python/" class="category">python</a>
-                        
-                            <a href="/categories/python/%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" class="category">基本数据类型</a>
                         
                     
                 </div>
@@ -996,6 +992,124 @@ java中的
             
             <div class="article col s12 m6 l4" data-aos="zoom-in">
                 <div class="card">
+                    <a href="/2020/12/20/stream-liu-cao-zuo/">
+                        <div class="card-image">
+                            
+                            
+                            <img src="/medias/featureimages/8.jpg" class="responsive-img" alt="Stream流操作">
+                            
+                            <span class="card-title">Stream流操作</span>
+                        </div>
+                    </a>
+
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                FileInputStream和FileOutputStream
+读写文件必要的工具类，只有有了这两个类的实例才可操作文件内容。
+
+
+创建对象既可以是文件路径String也可以是文件对象（File类型对象）
+如果文件不存在/没有权限访问/无
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-12-20
+                            </span>
+                            <span class="publish-author">
+                                
+                                <i class="fas fa-bookmark fa-fw icon-category"></i>
+                                
+                                <a href="/categories/java/" class="post-category">
+                                    java
+                                </a>
+                                
+                                
+                            </span>
+                        </div>
+                    </div>
+
+                    
+                    <div class="card-action article-tags">
+                        
+                        <a href="/tags/Stream/">
+                            <span class="chip bg-color">Stream</span>
+                        </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="article col s12 m6 l4" data-aos="zoom-in">
+                <div class="card">
+                    <a href="/2020/12/19/javaio-shi-yong/">
+                        <div class="card-image">
+                            
+                            
+                            <img src="/medias/featureimages/7.jpg" class="responsive-img" alt="javaIO使用">
+                            
+                            <span class="card-title">javaIO使用</span>
+                        </div>
+                    </a>
+
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                File对象常用api
+
+
+名称
+释义
+返回值类型
+返回值
+
+
+
+exists()
+是否存在文件文件对象
+Boolean
+存在返回true，其他为false
+
+
+getAbsolutePath()
+获取文件的完整路径
+String
+返回完整
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-12-19
+                            </span>
+                            <span class="publish-author">
+                                
+                                <i class="fas fa-bookmark fa-fw icon-category"></i>
+                                
+                                <a href="/categories/java/" class="post-category">
+                                    java
+                                </a>
+                                
+                                
+                            </span>
+                        </div>
+                    </div>
+
+                    
+                    <div class="card-action article-tags">
+                        
+                        <a href="/tags/IO/">
+                            <span class="chip bg-color">IO</span>
+                        </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="article col s12 m6 l4" data-aos="zoom-in">
+                <div class="card">
                     <a href="/2020/12/16/java-te-shu-wen-ti-ji-lu/">
                         <div class="card-image">
                             
@@ -1008,7 +1122,12 @@ java中的
                     <div class="card-content article-content">
                         <div class="summary block-with-text">
                             
-                                简介
+                                在类中this的省略问题class Student{
+    int age;
+    String name;
+    //变量名不同，可以省略this
+    public Student(int ag) {
+        super
                             
                         </div>
                         <div class="publish-info">
@@ -1023,10 +1142,6 @@ java中的
                                     java
                                 </a>
                                 
-                                <a href="/categories/java/%E7%89%B9%E6%AE%8A%E9%97%AE%E9%A2%98/" class="post-category">
-                                    特殊问题
-                                </a>
-                                
                                 
                             </span>
                         </div>
@@ -1034,10 +1149,6 @@ java中的
 
                     
                     <div class="card-action article-tags">
-                        
-                        <a href="/tags/java/">
-                            <span class="chip bg-color">java</span>
-                        </a>
                         
                         <a href="/tags/%E7%89%B9%E6%AE%8A%E9%97%AE%E9%A2%98/">
                             <span class="chip bg-color">特殊问题</span>
@@ -1062,7 +1173,10 @@ java中的
                     <div class="card-content article-content">
                         <div class="summary block-with-text">
                             
-                                简介
+                                异常介绍异常的特性：
+
+java异常方法默认都有一个throws RuntimeException，所以当程序有这种类型的异常或者他的子类异常出现时，通常我们不必自己添加异常管道。
+如果不在程序中处理，异常将会一直抛出直到jvm，jvm会打
                             
                         </div>
                         <div class="publish-info">
@@ -1077,10 +1191,6 @@ java中的
                                     java
                                 </a>
                                 
-                                <a href="/categories/java/Exception/" class="post-category">
-                                    Exception
-                                </a>
-                                
                                 
                             </span>
                         </div>
@@ -1088,10 +1198,6 @@ java中的
 
                     
                     <div class="card-action article-tags">
-                        
-                        <a href="/tags/java/">
-                            <span class="chip bg-color">java</span>
-                        </a>
                         
                         <a href="/tags/Exception/">
                             <span class="chip bg-color">Exception</span>
@@ -1132,10 +1238,6 @@ java中的
                                     hexo
                                 </a>
                                 
-                                <a href="/categories/hexo/matery%E4%B8%BB%E9%A2%98/" class="post-category">
-                                    matery主题
-                                </a>
-                                
                                 
                             </span>
                         </div>
@@ -1144,12 +1246,12 @@ java中的
                     
                     <div class="card-action article-tags">
                         
-                        <a href="/tags/hexo/">
-                            <span class="chip bg-color">hexo</span>
-                        </a>
-                        
                         <a href="/tags/hexo-theme-matery/">
                             <span class="chip bg-color">hexo-theme-matery</span>
+                        </a>
+                        
+                        <a href="/tags/matery%E4%B8%BB%E9%A2%98/">
+                            <span class="chip bg-color">matery主题</span>
                         </a>
                         
                     </div>
@@ -1186,10 +1288,6 @@ java中的
                                     css
                                 </a>
                                 
-                                <a href="/categories/css/layout/" class="post-category">
-                                    layout
-                                </a>
-                                
                                 
                             </span>
                         </div>
@@ -1198,8 +1296,8 @@ java中的
                     
                     <div class="card-action article-tags">
                         
-                        <a href="/tags/css/">
-                            <span class="chip bg-color">css</span>
+                        <a href="/tags/css%E5%B8%83%E5%B1%80/">
+                            <span class="chip bg-color">css布局</span>
                         </a>
                         
                         <a href="/tags/layout/">
@@ -1240,10 +1338,6 @@ java中的
                                     js
                                 </a>
                                 
-                                <a href="/categories/js/Array/" class="post-category">
-                                    Array
-                                </a>
-                                
                                 
                             </span>
                         </div>
@@ -1252,12 +1346,12 @@ java中的
                     
                     <div class="card-action article-tags">
                         
-                        <a href="/tags/js/">
-                            <span class="chip bg-color">js</span>
-                        </a>
-                        
                         <a href="/tags/Array/">
                             <span class="chip bg-color">Array</span>
+                        </a>
+                        
+                        <a href="/tags/%E6%95%B0%E7%BB%84%E5%B8%B8%E7%94%A8api/">
+                            <span class="chip bg-color">数组常用api</span>
                         </a>
                         
                     </div>
@@ -1294,10 +1388,6 @@ java中的
                                     node
                                 </a>
                                 
-                                <a href="/categories/node/%E6%89%93%E5%8C%85%E5%B7%A5%E5%85%B7/" class="post-category">
-                                    打包工具
-                                </a>
-                                
                                 
                             </span>
                         </div>
@@ -1306,12 +1396,12 @@ java中的
                     
                     <div class="card-action article-tags">
                         
-                        <a href="/tags/node/">
-                            <span class="chip bg-color">node</span>
+                        <a href="/tags/babel/">
+                            <span class="chip bg-color">babel</span>
                         </a>
                         
-                        <a href="/tags/wepack-babel/">
-                            <span class="chip bg-color">wepack,babel</span>
+                        <a href="/tags/wepack/">
+                            <span class="chip bg-color">wepack</span>
                         </a>
                         
                     </div>
@@ -1348,10 +1438,6 @@ java中的
                                     python
                                 </a>
                                 
-                                <a href="/categories/python/function/" class="post-category">
-                                    function
-                                </a>
-                                
                                 
                             </span>
                         </div>
@@ -1360,12 +1446,8 @@ java中的
                     
                     <div class="card-action article-tags">
                         
-                        <a href="/tags/python/">
-                            <span class="chip bg-color">python</span>
-                        </a>
-                        
-                        <a href="/tags/function/">
-                            <span class="chip bg-color">function</span>
+                        <a href="/tags/python%E5%87%BD%E6%95%B0/">
+                            <span class="chip bg-color">python函数</span>
                         </a>
                         
                     </div>
@@ -1402,10 +1484,6 @@ java中的
                                     python
                                 </a>
                                 
-                                <a href="/categories/python/list-tuple/" class="post-category">
-                                    list&tuple
-                                </a>
-                                
                                 
                             </span>
                         </div>
@@ -1413,10 +1491,6 @@ java中的
 
                     
                     <div class="card-action article-tags">
-                        
-                        <a href="/tags/python/">
-                            <span class="chip bg-color">python</span>
-                        </a>
                         
                         <a href="/tags/list/">
                             <span class="chip bg-color">list</span>
@@ -1424,114 +1498,6 @@ java中的
                         
                         <a href="/tags/tuple/">
                             <span class="chip bg-color">tuple</span>
-                        </a>
-                        
-                    </div>
-                    
-                </div>
-            </div>
-            
-            <div class="article col s12 m6 l4" data-aos="zoom-in">
-                <div class="card">
-                    <a href="/2020/10/10/python-ji-ben-shu-ju-lei-xing/">
-                        <div class="card-image">
-                            
-                            <img src="https://i.loli.net/2020/10/25/BKQqHjZdrIl4aix.jpg" class="responsive-img" alt="python基本数据类型">
-                            
-                            <span class="card-title">python基本数据类型</span>
-                        </div>
-                    </a>
-
-                    <div class="card-content article-content">
-                        <div class="summary block-with-text">
-                            
-                                简介决心开始认真系统学习python，基本数据类型开始，记录自己感觉重要的知识点。
-                            
-                        </div>
-                        <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-10-10
-                            </span>
-                            <span class="publish-author">
-                                
-                                <i class="fas fa-bookmark fa-fw icon-category"></i>
-                                
-                                <a href="/categories/python/" class="post-category">
-                                    python
-                                </a>
-                                
-                                <a href="/categories/python/%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" class="post-category">
-                                    基本数据类型
-                                </a>
-                                
-                                
-                            </span>
-                        </div>
-                    </div>
-
-                    
-                    <div class="card-action article-tags">
-                        
-                        <a href="/tags/python/">
-                            <span class="chip bg-color">python</span>
-                        </a>
-                        
-                        <a href="/tags/%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/">
-                            <span class="chip bg-color">基本数据类型</span>
-                        </a>
-                        
-                    </div>
-                    
-                </div>
-            </div>
-            
-            <div class="article col s12 m6 l4" data-aos="zoom-in">
-                <div class="card">
-                    <a href="/2020/10/09/hashmap-jian-dan-shu-li/">
-                        <div class="card-image">
-                            
-                            <img src="https://i.loli.net/2020/10/25/x1SZ7AJ3BbYDCcU.jpg" class="responsive-img" alt="HashMap简单梳理">
-                            
-                            <span class="card-title">HashMap简单梳理</span>
-                        </div>
-                    </a>
-
-                    <div class="card-content article-content">
-                        <div class="summary block-with-text">
-                            
-                                简介第八天，决心改掉恶习，加油！
-                            
-                        </div>
-                        <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-10-09
-                            </span>
-                            <span class="publish-author">
-                                
-                                <i class="fas fa-bookmark fa-fw icon-category"></i>
-                                
-                                <a href="/categories/java/" class="post-category">
-                                    java
-                                </a>
-                                
-                                <a href="/categories/java/Collection/" class="post-category">
-                                    Collection
-                                </a>
-                                
-                                
-                            </span>
-                        </div>
-                    </div>
-
-                    
-                    <div class="card-action article-tags">
-                        
-                        <a href="/tags/java/">
-                            <span class="chip bg-color">java</span>
-                        </a>
-                        
-                        <a href="/tags/HashMap/">
-                            <span class="chip bg-color">HashMap</span>
                         </a>
                         
                     </div>
@@ -1555,7 +1521,7 @@ java中的
             
         </div>
         <div class="page-info col m4 l4 hide-on-small-only">
-            <div class="center-align b-text-gray">1 / 3</div>
+            <div class="center-align b-text-gray">1 / 4</div>
         </div>
         <div class="col s6 m4 l4">
             
@@ -1583,7 +1549,7 @@ java中的
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">18.6k</span>&nbsp;字
+                class="white-color">20.2k</span>&nbsp;字
             
             
             

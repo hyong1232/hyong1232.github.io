@@ -461,12 +461,12 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/java/">
-                                <span class="chip bg-color">java</span>
+                            <a href="/tags/ArrayList/">
+                                <span class="chip bg-color">ArrayList</span>
                             </a>
                         
-                            <a href="/tags/ArrayList-LinkedList/">
-                                <span class="chip bg-color">ArrayList,LinkedList</span>
+                            <a href="/tags/LinkedList/">
+                                <span class="chip bg-color">LinkedList</span>
                             </a>
                         
                     </div>
@@ -479,10 +479,6 @@
                         
                             <a href="/categories/java/" class="post-category">
                                 java
-                            </a>
-                        
-                            <a href="/categories/java/List/" class="post-category">
-                                List
                             </a>
                         
                     </div>
@@ -501,14 +497,14 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2020-12-15
+                    2020-12-20
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    693
+                    712
                 </div>
                 
 
@@ -674,7 +670,9 @@
     Integer size <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
     <span class="token comment" spellcheck="true">//链表状态判定：两种情况为空和不为空</span>
     <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">add</span><span class="token punctuation">(</span>T t<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment" spellcheck="true">//使用匿名内部类，省略了this</span>
         Node n <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Node</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment" spellcheck="true">//相当于Node n = this.new Node();</span>
         n<span class="token punctuation">.</span>value <span class="token operator">=</span> t<span class="token punctuation">;</span>
         <span class="token keyword">if</span> <span class="token punctuation">(</span>size <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
             n<span class="token punctuation">.</span>prev <span class="token operator">=</span> n<span class="token punctuation">;</span>
@@ -726,7 +724,7 @@
         Node prev<span class="token punctuation">;</span>
         Node next<span class="token punctuation">;</span>
     <span class="token punctuation">}</span>
-<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
             </div>
             <hr/>
@@ -790,12 +788,12 @@
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/java/">
-                                    <span class="chip bg-color">java</span>
+                                <a href="/tags/ArrayList/">
+                                    <span class="chip bg-color">ArrayList</span>
                                 </a>
                             
-                                <a href="/tags/ArrayList-LinkedList/">
-                                    <span class="chip bg-color">ArrayList,LinkedList</span>
+                                <a href="/tags/LinkedList/">
+                                    <span class="chip bg-color">LinkedList</span>
                                 </a>
                             
                         </div>
@@ -1283,10 +1281,6 @@
                                     es6
                                 </a>
                             
-                            <a href="/categories/es6/%E7%BC%96%E7%A8%8B%E9%A3%8E%E6%A0%BC-%E8%A7%84%E8%8C%83/" class="post-category">
-                                    编程风格/规范
-                                </a>
-                            
                             
                         </span>
                     </div>
@@ -1294,8 +1288,8 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/es6/">
-                        <span class="chip bg-color">es6</span>
+                    <a href="/tags/%E4%BB%A3%E7%A0%81%E8%A7%84%E8%8C%83/">
+                        <span class="chip bg-color">代码规范</span>
                     </a>
                     
                     <a href="/tags/%E7%BC%96%E7%A8%8B%E9%A3%8E%E6%A0%BC/">
@@ -1339,20 +1333,12 @@
                                     es6
                                 </a>
                             
-                            <a href="/categories/es6/babel/" class="post-category">
-                                    babel
-                                </a>
-                            
                             
                         </span>
                     </div>
                 </div>
                 
                 <div class="card-action article-tags">
-                    
-                    <a href="/tags/es6/">
-                        <span class="chip bg-color">es6</span>
-                    </a>
                     
                     <a href="/tags/babel/">
                         <span class="chip bg-color">babel</span>
@@ -1508,7 +1494,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">18.6k</span>&nbsp;字
+                class="white-color">20.2k</span>&nbsp;字
             
             
             
