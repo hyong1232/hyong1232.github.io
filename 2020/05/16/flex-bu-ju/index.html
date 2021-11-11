@@ -4,7 +4,7 @@
 
 <head>
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
-    <meta name="keywords" content="flex布局, 寒冬之音">
+    <meta name="keywords" content="flex布局, 出云阁">
     <meta name="description" content="人生有酒需尽欢，莫使金樽空对月">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>flex布局 | 寒冬之音</title>
+    <title>flex布局 | 出云阁</title>
     <link rel="icon" type="image/png" href="/medias/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -29,7 +29,7 @@
 
     <script src="/libs/jquery/jquery.min.js"></script>
 
-<meta name="generator" content="Hexo 5.2.0"><link rel="alternate" href="/atom.xml" title="寒冬之音" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="出云阁" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 <link rel="stylesheet" href="/css/prism-ghcolors.css" type="text/css">
 <link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
 
@@ -55,7 +55,7 @@
                     
                     <img src="/medias/favicon.png" class="logo-img" alt="LOGO">
                     
-                    <span class="logo-span">寒冬之音</span>
+                    <span class="logo-span">出云阁</span>
                 </a>
             </div>
             
@@ -154,7 +154,7 @@
         
         <img src="/medias/favicon.png" class="logo-img circle responsive-img">
         
-        <div class="logo-name">寒冬之音</div>
+        <div class="logo-name">出云阁</div>
         <div class="logo-desc">
             
             人生有酒需尽欢，莫使金樽空对月
@@ -522,7 +522,7 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p><strong>感谢阮一峰先生的分享<a target="_blank" rel="noopener" href="http://www.ruanyifeng.com/blog/2015/07/flex-examples.html">flex-examples</a> 仅供个人学习</strong><br>2009年，W3C 提出了一种新的方案—-Flex 布局，可以简便、完整、响应式地实现各种页面布局。目前，它已经得到了所有浏览器的支持，这意味着，现在就能很安全地使用这项功能。<a id="more"></a></p>
+                <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p><strong>感谢阮一峰先生的分享<a target="_blank" rel="noopener" href="http://www.ruanyifeng.com/blog/2015/07/flex-examples.html">flex-examples</a> 仅供个人学习</strong><br>2009年，W3C 提出了一种新的方案—-Flex 布局，可以简便、完整、响应式地实现各种页面布局。目前，它已经得到了所有浏览器的支持，这意味着，现在就能很安全地使用这项功能。<span id="more"></span></p>
 <blockquote>
 <ul>
 <li>Flex 是 Flexible Box 的缩写，意为”弹性布局”，用来为盒状模型提供最大的灵活性。<br>任何一个容器都可以指定为 Flex 布局，行内元素也可以使用flex布局，跳帧位置。</li>
@@ -531,7 +531,8 @@
 <pre class="line-numbers language-css"><code class="language-css"><span class="token comment" spellcheck="true">/*块级元素*/</span>
 <span class="token property">display</span><span class="token punctuation">:</span> flex<span class="token punctuation">;</span>
 <span class="token comment" spellcheck="true">/*行内元素*/</span>
-<span class="token property">display</span><span class="token punctuation">:</span> inline-flex<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token property">display</span><span class="token punctuation">:</span> inline-flex<span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 <blockquote>
 <ul>
 <li>Webkit 内核的浏览器，必须加上-webkit前缀。</li>
@@ -540,7 +541,8 @@
 <pre class="line-numbers language-css"><code class="language-css"><span class="token selector"><span class="token class">.box</span></span><span class="token punctuation">{</span>
   <span class="token property">display</span><span class="token punctuation">:</span> -webkit-flex<span class="token punctuation">;</span> <span class="token comment" spellcheck="true">/* Safari */</span>
   <span class="token property">display</span><span class="token punctuation">:</span> flex<span class="token punctuation">;</span>
-<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 <p><strong><em>注意，设为 Flex 布局以后，子元素的float、clear和vertical-align属性将失效。</em></strong></p>
 <blockquote>
 <ul>
@@ -667,7 +669,8 @@ flex-flow:<flex-direction> || <flex-wrap>
 <pre class="line-numbers language-css"><code class="language-css"><span class="token comment" spellcheck="true">/*默认*/</span>
 <span class="token property">flex-basis</span><span class="token punctuation">:</span>auto<span class="token punctuation">;</span>
 <span class="token comment" spellcheck="true">/*自定义*/</span>
-<span class="token property">flex-basis</span><span class="token punctuation">:</span><span class="token number">300</span>px<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token property">flex-basis</span><span class="token punctuation">:</span><span class="token number">300</span>px<span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 <p><img src="/images/flex/fi-flex-basis.PNG" alt="默认值auto，即为原本main-size"></p>
 <h4 id="flex"><a href="#flex" class="headerlink" title="flex"></a>flex</h4><blockquote>
 <p>1、是flex-grow&amp;flex-shrink&amp;flex-basis的简写形式<br>2、特殊样例 auto = 1 1 auto &amp;&amp; none = 0 0 auto</p>
@@ -1439,7 +1442,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">21.5k</span>&nbsp;字
+                class="white-color">57.4k</span>&nbsp;字
             
             
             

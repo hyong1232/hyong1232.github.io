@@ -4,7 +4,7 @@
 
 <head>
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
-    <meta name="keywords" content="gird布局, 寒冬之音">
+    <meta name="keywords" content="gird布局, 出云阁">
     <meta name="description" content="人生有酒需尽欢，莫使金樽空对月">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>gird布局 | 寒冬之音</title>
+    <title>gird布局 | 出云阁</title>
     <link rel="icon" type="image/png" href="/medias/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -29,7 +29,7 @@
 
     <script src="/libs/jquery/jquery.min.js"></script>
 
-<meta name="generator" content="Hexo 5.2.0"><link rel="alternate" href="/atom.xml" title="寒冬之音" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="出云阁" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 <link rel="stylesheet" href="/css/prism-ghcolors.css" type="text/css">
 <link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
 
@@ -55,7 +55,7 @@
                     
                     <img src="/medias/favicon.png" class="logo-img" alt="LOGO">
                     
-                    <span class="logo-span">寒冬之音</span>
+                    <span class="logo-span">出云阁</span>
                 </a>
             </div>
             
@@ -154,7 +154,7 @@
         
         <img src="/medias/favicon.png" class="logo-img circle responsive-img">
         
-        <div class="logo-name">寒冬之音</div>
+        <div class="logo-name">出云阁</div>
         <div class="logo-desc">
             
             人生有酒需尽欢，莫使金樽空对月
@@ -525,7 +525,7 @@
                 <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p><strong>感谢阮一峰先生的分享<a target="_blank" rel="noopener" href="http://www.ruanyifeng.com/blog/2019/03/grid-layout-tutorial.html">grid-layout-tutorial</a> 仅供个人学习。</strong></p>
 <p>网格布局（Grid）是最强大的 CSS 布局方案。</p>
 <p>它将网页划分成一个个网格，可以任意组合不同的网格，做出各种各样的布局。以前，只能通过复杂的 CSS 框架达到的效果，现在浏览器内置了。</p>
-<a id="more"></a>
+<span id="more"></span>
 
 <img src="https://www.wangbase.com/blogimg/asset/201903/1_bg2019032501.png" class="" width="802" height="366" title="grid布局演示图片">
 
@@ -539,13 +539,15 @@
 <h3 id="grid-template-columns"><a href="#grid-template-columns" class="headerlink" title="grid-template-columns"></a>grid-template-columns</h3><blockquote>
 <p>规定grid的列宽<br>example:</p>
 </blockquote>
-<pre class="line-numbers language-css"><code class="language-css"><span class="token property">grid-template-columns</span><span class="token punctuation">:</span><span class="token number">100</span>px <span class="token number">100</span>px <span class="token number">100</span>px<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre class="line-numbers language-css"><code class="language-css"><span class="token property">grid-template-columns</span><span class="token punctuation">:</span><span class="token number">100</span>px <span class="token number">100</span>px <span class="token number">100</span>px<span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <h3 id="grid-template-rows"><a href="#grid-template-rows" class="headerlink" title="grid-template-rows"></a>grid-template-rows</h3><blockquote>
 <p>规定grid的行宽<br>example:</p>
 </blockquote>
 <pre class="line-numbers language-css"><code class="language-css"><span class="token property">grid-template-rows</span><span class="token punctuation">:</span><span class="token number">100</span>px <span class="token number">100</span>px <span class="token number">100</span>px<span class="token punctuation">;</span>
 <span class="token property">grid-template-rows</span><span class="token punctuation">:</span><span class="token number">33%</span> <span class="token number">33%</span> <span class="token number">33%</span><span class="token punctuation">;</span>
-<span class="token property">grid-template-rows</span><span class="token punctuation">:</span><span class="token function">repeat</span><span class="token punctuation">(</span><span class="token number">3</span>,<span class="token number">33%</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<span class="token property">grid-template-rows</span><span class="token punctuation">:</span><span class="token function">repeat</span><span class="token punctuation">(</span><span class="token number">3</span>,<span class="token number">33%</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 <p><strong>grid函数设置宽高的函数</strong><br>这些函数都可以与百分比、px、fr特数字组合定义宽高</p>
 <p>固定100px的结果如下图所示</p>
 <img src="https://www.wangbase.com/blogimg/asset/201903/bg2019032506.png" class="" width="220" height="320" title="固定px的grid示例">
@@ -556,56 +558,67 @@
 <p>循环次数可为特殊关键字auto-fill，表示使用循环体格式自动填充满整个grid布局 。</p>
 </blockquote>
 <pre class="line-numbers language-css"><code class="language-css"><span class="token property">grid-template-rows</span><span class="token punctuation">:</span><span class="token function">repeat</span><span class="token punctuation">(</span><span class="token number">3</span>,<span class="token number">1</span>fr<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token property">grid-template-rows</span><span class="token punctuation">:</span><span class="token function">repeat</span><span class="token punctuation">(</span><span class="token number">3</span>,<span class="token number">33%</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<span class="token property">grid-template-rows</span><span class="token punctuation">:</span><span class="token function">repeat</span><span class="token punctuation">(</span><span class="token number">3</span>,<span class="token number">33%</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <blockquote>
 <p>特殊的循环体</p>
 </blockquote>
-<pre class="line-numbers language-css"><code class="language-css"><span class="token property">grid-template-columns</span><span class="token punctuation">:</span> <span class="token function">repeat</span><span class="token punctuation">(</span><span class="token number">2</span>, <span class="token number">100</span>px <span class="token number">20</span>px <span class="token number">80</span>px<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre class="line-numbers language-css"><code class="language-css"><span class="token property">grid-template-columns</span><span class="token punctuation">:</span> <span class="token function">repeat</span><span class="token punctuation">(</span><span class="token number">2</span>, <span class="token number">100</span>px <span class="token number">20</span>px <span class="token number">80</span>px<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <img src="https://www.wangbase.com/blogimg/asset/201903/bg2019032507.png" class="" title="特殊循环体的repeat示例">
 
 <h4 id="minmax-min-max-函数"><a href="#minmax-min-max-函数" class="headerlink" title="minmax(min,max)函数"></a>minmax(min,max)函数</h4><blockquote>
 <p>参数：最大最小值，可以为px，fr，百分比<br>定义一个范围值，让宽高在这之中自适应</p>
 </blockquote>
 <pre class="line-numbers language-css"><code class="language-css"><span class="token property">grid-template-rows</span><span class="token punctuation">:</span><span class="token function">minmax</span><span class="token punctuation">(</span><span class="token number">100</span>px,<span class="token number">1</span>fr<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token property">grid-template-rows</span><span class="token punctuation">:</span><span class="token function">minmax</span><span class="token punctuation">(</span><span class="token number">100</span>px,<span class="token number">33%</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<span class="token property">grid-template-rows</span><span class="token punctuation">:</span><span class="token function">minmax</span><span class="token punctuation">(</span><span class="token number">100</span>px,<span class="token number">33%</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <h4 id="auto关键字"><a href="#auto关键字" class="headerlink" title="auto关键字"></a>auto关键字</h4><blockquote>
 <p>可在宽高定义时，与百分比，px，fr混用</p>
 </blockquote>
-<pre class="line-numbers language-css"><code class="language-css"><span class="token property">grid-template-columns</span><span class="token punctuation">:</span> <span class="token number">100</span>px auto <span class="token number">100</span>px<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre class="line-numbers language-css"><code class="language-css"><span class="token property">grid-template-columns</span><span class="token punctuation">:</span> <span class="token number">100</span>px auto <span class="token number">100</span>px<span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <blockquote>
 <p>表示grid布局中，左右为100px，中间为自适应宽度</p>
 </blockquote>
 <h4 id="auto-fill关键字"><a href="#auto-fill关键字" class="headerlink" title="auto-fill关键字"></a>auto-fill关键字</h4><blockquote>
 <p>可以与百分比，fr，px混用，还可以代替repeat函数的循环次数，让他自适应，并换行，类似flex布局的</p>
 </blockquote>
-<pre class="line-numbers language-css"><code class="language-css"><span class="token property">flex-wrap</span><span class="token punctuation">:</span>wrap<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre class="line-numbers language-css"><code class="language-css"><span class="token property">flex-wrap</span><span class="token punctuation">:</span>wrap<span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <blockquote>
 <p>自动换行：</p>
 </blockquote>
 <pre class="line-numbers language-css"><code class="language-css"><span class="token property">display</span><span class="token punctuation">:</span> grid<span class="token punctuation">;</span>
-<span class="token property">grid-template-columns</span><span class="token punctuation">:</span> <span class="token function">repeat</span><span class="token punctuation">(</span>auto-fill, <span class="token number">100</span>px<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<span class="token property">grid-template-columns</span><span class="token punctuation">:</span> <span class="token function">repeat</span><span class="token punctuation">(</span>auto-fill, <span class="token number">100</span>px<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <img src="https://www.wangbase.com/blogimg/asset/201903/bg2019032508.png" class="" title="auto-fill关键字+repeat函数自动换行示例">
 
 <h4 id="布局实用示例"><a href="#布局实用示例" class="headerlink" title="布局实用示例"></a>布局实用示例</h4><ul>
 <li>3:7两栏式布局<pre class="line-numbers language-css"><code class="language-css"><span class="token property">display</span><span class="token punctuation">:</span> grid<span class="token punctuation">;</span>
-<span class="token property">grid-template-columns</span><span class="token punctuation">:</span> <span class="token number">70%</span> <span class="token number">30%</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<span class="token property">grid-template-columns</span><span class="token punctuation">:</span> <span class="token number">70%</span> <span class="token number">30%</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 </li>
 <li>十二网格布局<pre class="line-numbers language-css"><code class="language-css"><span class="token property">display</span><span class="token punctuation">:</span> grid<span class="token punctuation">;</span>
-<span class="token property">grid-template-columns</span><span class="token punctuation">:</span> <span class="token function">repeat</span><span class="token punctuation">(</span><span class="token number">12</span>,<span class="token number">1</span>fr<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<span class="token property">grid-template-columns</span><span class="token punctuation">:</span> <span class="token function">repeat</span><span class="token punctuation">(</span><span class="token number">12</span>,<span class="token number">1</span>fr<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 </li>
 </ul>
 <h3 id="grid-row-gap-amp-amp-grid-column-gap"><a href="#grid-row-gap-amp-amp-grid-column-gap" class="headerlink" title="grid-row-gap&amp;&amp;grid-column-gap"></a>grid-row-gap&amp;&amp;grid-column-gap</h3><blockquote>
 <p>两者可以结合写成</p>
 </blockquote>
-<pre class="line-numbers language-css"><code class="language-css"><span class="token property">gird-gap</span><span class="token punctuation">:</span>&lt;grid-row-gap> &lt;grid-column-gap><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre class="line-numbers language-css"><code class="language-css"><span class="token property">gird-gap</span><span class="token punctuation">:</span>&lt;grid-row-gap> &lt;grid-column-gap>
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <blockquote>
 <p>简写成gird-gap时，可以只写一个值，表示行间距与列间距相同</p>
 </blockquote>
-<pre class="line-numbers language-css"><code class="language-css"><span class="token property">grid-gap</span><span class="token punctuation">:</span> <span class="token number">20</span>px<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre class="line-numbers language-css"><code class="language-css"><span class="token property">grid-gap</span><span class="token punctuation">:</span> <span class="token number">20</span>px
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <blockquote>
 <p>新标准省略grid-字符，简写为</p>
 </blockquote>
-<pre class="line-numbers language-css"><code class="language-css"><span class="token property">gap</span><span class="token punctuation">:</span> <span class="token number">20</span>px<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre class="line-numbers language-css"><code class="language-css"><span class="token property">gap</span><span class="token punctuation">:</span> <span class="token number">20</span>px
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <img src="https://www.wangbase.com/blogimg/asset/201903/bg2019032511.png" class="" width="280" title="gap间距为20px示例">
 
 <h3 id="grid-auto-flow"><a href="#grid-auto-flow" class="headerlink" title="grid-auto-flow"></a>grid-auto-flow</h3><blockquote>
@@ -614,12 +627,14 @@
 <pre class="line-numbers language-css"><code class="language-css"><span class="token property">display</span><span class="token punctuation">:</span>grid<span class="token punctuation">;</span>
 <span class="token property">grid-template-rows</span><span class="token punctuation">:</span><span class="token function">repeat</span><span class="token punctuation">(</span><span class="token number">3</span>,<span class="token number">100</span>px<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token property">grid-template-columns</span><span class="token punctuation">:</span><span class="token function">repeat</span><span class="token punctuation">(</span><span class="token number">3</span>,<span class="token number">100</span>px<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token property">grid-auto-flow</span><span class="token punctuation">:</span>row dense<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token property">grid-auto-flow</span><span class="token punctuation">:</span>row dense<span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 <blockquote>
 <p>指定grid-cell的列宽，左闭右开原则</p>
 </blockquote>
 <pre class="line-numbers language-css"><code class="language-css"><span class="token property">grid-column-start</span><span class="token punctuation">:</span><span class="token number">1</span><span class="token punctuation">;</span>
-<span class="token property">grid-column-end</span><span class="token punctuation">:</span><span class="token number">3</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<span class="token property">grid-column-end</span><span class="token punctuation">:</span><span class="token number">3</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <blockquote>
 <p>grid-column-start/end设置的数字单位为grid-cell面积，左闭右开，结果如下图所示：</p>
 </blockquote>
@@ -634,7 +649,8 @@
 <h3 id="align-items-amp-amp-justliy-items-amp-amp-place-items"><a href="#align-items-amp-amp-justliy-items-amp-amp-place-items" class="headerlink" title="align-items&amp;&amp;justliy-items&amp;&amp;place-items"></a>align-items&amp;&amp;justliy-items&amp;&amp;place-items</h3><blockquote>
 <p>规定grid-cell的位置，align表示高（上、中、下）、justlify表示宽（左、中、右）<br>可选属性：start|center|end|stretch——靠左|居中|靠右|自动填满<br>place-items是简写形式</p>
 </blockquote>
-<pre class="line-numbers language-css"><code class="language-css"><span class="token property">place-items</span><span class="token punctuation">:</span>&lt;align-items> &lt;justify-items><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre class="line-numbers language-css"><code class="language-css"><span class="token property">place-items</span><span class="token punctuation">:</span>&lt;align-items> &lt;justify-items>
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <blockquote>
 <p>如果不写第二个参数则默认两个属性值相同</p>
 </blockquote>
@@ -642,7 +658,8 @@
 <span class="token property">justify-items</span><span class="token punctuation">:</span>strech<span class="token punctuation">;</span>
 <span class="token comment" spellcheck="true">/* 简写 */</span>
 <span class="token property">place-items</span><span class="token punctuation">:</span>&lt;align-items> &lt;justify-items>
-<span class="token property">place-items</span><span class="token punctuation">:</span>stretch center<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token property">place-items</span><span class="token punctuation">:</span>stretch center<span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>如下图所示<br><img src="/images/center-stretch.PNG" alt="place-items结果图"></p>
 <h3 id="align-self-amp-amp-justify-self-amp-amp-place-self"><a href="#align-self-amp-amp-justify-self-amp-amp-place-self" class="headerlink" title="align-self&amp;&amp;justify-self&amp;&amp;place-self"></a>align-self&amp;&amp;justify-self&amp;&amp;place-self</h3><blockquote>
 <p>与align|justify|place-items用法完全一致，但只作用于单个grid-cell</p>
@@ -650,7 +667,8 @@
 <pre class="line-numbers language-css"><code class="language-css"><span class="token selector"><span class="token class">.item-1</span> </span><span class="token punctuation">{</span>
   <span class="token property">place-self</span><span class="token punctuation">:</span>stretch center<span class="token punctuation">;</span>
   <span class="token property">background-color</span><span class="token punctuation">:</span> <span class="token hexcode">#ef342a</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span> <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">}</span> 
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 <p><img src="/images/place-self.PNG" alt="place-self单个grid-cell作用域"></p>
 <h3 id="align-content-amp-amp-justify-content-amp-amp-place-content"><a href="#align-content-amp-amp-justify-content-amp-amp-place-content" class="headerlink" title="align-content&amp;&amp;justify-content&amp;&amp;place-content"></a>align-content&amp;&amp;justify-content&amp;&amp;place-content</h3><blockquote>
 <p>规定整个项目在grid-container中的位置<br>可选属性：start|center|space-between|space-evenly|space-around——between间隔在项目之间</p>
@@ -667,7 +685,8 @@
 <pre class="line-numbers language-css"><code class="language-css">  <span class="token property">display</span><span class="token punctuation">:</span> grid<span class="token punctuation">;</span>
   <span class="token property">grid-template-columns</span><span class="token punctuation">:</span> <span class="token number">100</span>px <span class="token number">100</span>px <span class="token number">100</span>px<span class="token punctuation">;</span>
   <span class="token property">grid-template-rows</span><span class="token punctuation">:</span> <span class="token number">100</span>px <span class="token number">100</span>px <span class="token number">100</span>px<span class="token punctuation">;</span>
-  <span class="token property">grid-auto-rows</span><span class="token punctuation">:</span> <span class="token number">50</span>px<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+  <span class="token property">grid-auto-rows</span><span class="token punctuation">:</span> <span class="token number">50</span>px<span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 <img src="https://www.wangbase.com/blogimg/asset/201903/bg2019032525.png" class="" width="280" title="grid-auto-row为50px">
 
 <h3 id="grid-template-amp-amp-grid"><a href="#grid-template-amp-amp-grid" class="headerlink" title="grid-template&amp;&amp;grid"></a>grid-template&amp;&amp;grid</h3><blockquote>
@@ -678,11 +697,13 @@ example
 <span class="token property">grid-template</span><span class="token punctuation">:</span> [header-left] <span class="token string">"head head"</span> <span class="token number">30</span>px [header-right]
                 [main-left]   <span class="token string">"nav  main"</span> <span class="token number">1</span>fr  [main-right]
                 [footer-left] <span class="token string">"nav  foot"</span> <span class="token number">30</span>px [footer-right]
-                / <span class="token number">120</span>px <span class="token number">1</span>fr<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+                / <span class="token number">120</span>px <span class="token number">1</span>fr<span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>等同于</p>
 <pre class="line-numbers language-css"><code class="language-css"><span class="token property">grid-template-rows</span><span class="token punctuation">:</span> [header-left] <span class="token number">30</span>px [header-right main-left] <span class="token number">1</span>fr [main-right footer-left] <span class="token number">30</span>px [footer-right]<span class="token punctuation">;</span>
 <span class="token property">grid-template-columns</span><span class="token punctuation">:</span> <span class="token number">120</span>px <span class="token number">1</span>fr<span class="token punctuation">;</span>
-<span class="token property">grid-template-areas</span><span class="token punctuation">:</span> <span class="token string">"head head"</span> <span class="token string">"nav main"</span> <span class="token string">"nav foot"</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<span class="token property">grid-template-areas</span><span class="token punctuation">:</span> <span class="token string">"head head"</span> <span class="token string">"nav main"</span> <span class="token string">"nav foot"</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 <p><img src="/images/grid-template.PNG" alt="grid-template简写结果图"></p>
 <blockquote>
 <p>grid属性是grid-template-rows、grid-template-columns、grid-template-areas、 grid-auto-rows、grid-auto-columns、grid-auto-flow这六个属性的合并简写形式。<br>从易读易写的角度考虑，还是建议不要合并属性，所以这里就不详细介绍这个属性了。</p>
@@ -693,12 +714,14 @@ example
 <pre class="line-numbers language-css"><code class="language-css">  <span class="token property">grid-column-start</span><span class="token punctuation">:</span> <span class="token number">1</span><span class="token punctuation">;</span>
   <span class="token property">grid-column-end</span><span class="token punctuation">:</span> <span class="token number">3</span><span class="token punctuation">;</span>
   <span class="token property">grid-row-start</span><span class="token punctuation">:</span> <span class="token number">2</span><span class="token punctuation">;</span>
-  <span class="token property">grid-row-end</span><span class="token punctuation">:</span> <span class="token number">4</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+  <span class="token property">grid-row-end</span><span class="token punctuation">:</span> <span class="token number">4</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 <img src="https://www.wangbase.com/blogimg/asset/201903/bg2019032527.png" class="" width="280" title="数字方式定义grid-cell起始位置">
 <blockquote>
 <p>2、span参数结合使用，表示跨过多少个grid-cell，即可用在start，也可用在end</p>
 </blockquote>
-<pre class="line-numbers language-css"><code class="language-css"> <span class="token property">grid-column-end</span><span class="token punctuation">:</span> span <span class="token number">2</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre class="line-numbers language-css"><code class="language-css"> <span class="token property">grid-column-end</span><span class="token punctuation">:</span> span <span class="token number">2</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <img src="https://www.wangbase.com/blogimg/asset/201903/bg2019032528.png" class="" width="280" title="数字方式定义grid-cell起始位置">
 <blockquote>
 <p>3、如果因为设置属性产生了重叠，可通过设置z-index调整</p>
@@ -707,7 +730,8 @@ example
 <p>1、是grid-row-start|end和grid-column-start|end的简写</p>
 </blockquote>
 <pre class="line-numbers language-css"><code class="language-css"> <span class="token property">grid-row</span><span class="token punctuation">:</span>&lt;grid-row-start> &lt;grid-row-end><span class="token punctuation">;</span>
- <span class="token property">grid-columns</span><span class="token punctuation">:</span>&lt;grid-columns-start> &lt;grid-columns-end><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+ <span class="token property">grid-columns</span><span class="token punctuation">:</span>&lt;grid-columns-start> &lt;grid-columns-end><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <blockquote>
 <p>2、可以与span（宽行）联合使用</p>
 </blockquote>
@@ -717,12 +741,14 @@ example
 <span class="token comment" spellcheck="true">/* 等同于 */</span>
   <span class="token property">background</span><span class="token punctuation">:</span> <span class="token hexcode">#b03532</span><span class="token punctuation">;</span>
   <span class="token property">grid-column</span><span class="token punctuation">:</span> <span class="token number">1</span> / span <span class="token number">2</span><span class="token punctuation">;</span>
-  <span class="token property">grid-row</span><span class="token punctuation">:</span> <span class="token number">1</span> / span <span class="token number">2</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+  <span class="token property">grid-row</span><span class="token punctuation">:</span> <span class="token number">1</span> / span <span class="token number">2</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <blockquote>
 <p>3、可以不写/end，默认是跨了一行</p>
 </blockquote>
 <pre class="line-numbers language-css"><code class="language-css">  <span class="token property">grid-column</span><span class="token punctuation">:</span> <span class="token number">1</span><span class="token punctuation">;</span>
-  <span class="token property">grid-row</span><span class="token punctuation">:</span> <span class="token number">1</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+  <span class="token property">grid-row</span><span class="token punctuation">:</span> <span class="token number">1</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <blockquote>
 <p>上面代码表示第一个grid</p>
 </blockquote>
@@ -735,7 +761,8 @@ example
   <span class="token property">grid-template-rows</span><span class="token punctuation">:</span> <span class="token number">100</span>px <span class="token number">100</span>px <span class="token number">100</span>px<span class="token punctuation">;</span>
   <span class="token property">grid-template-areas</span><span class="token punctuation">:</span> <span class="token string">'a b c'</span>
                        <span class="token string">'d e f'</span>
-                       <span class="token string">'g h i'</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+                       <span class="token string">'g h i'</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <blockquote>
 <p>上面代码表示将grid划分为a~i的九个区域，相同命名就是同一个区域，结合grid-area可指定grid-cell大小</p>
 </blockquote>
@@ -747,7 +774,8 @@ example
     <span class="token property">grid-template-rows</span><span class="token punctuation">:</span> <span class="token number">100</span>px <span class="token number">100</span>px <span class="token number">100</span>px<span class="token punctuation">;</span>
     <span class="token property">grid-template-areas</span><span class="token punctuation">:</span> <span class="token string">'a . c'</span>
                         <span class="token string">'d . f'</span>
-                        <span class="token string">'g . i'</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+                        <span class="token string">'g . i'</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <blockquote>
 <p>上面代码表示中间区域不使用,不属于任何区域</p>
 </blockquote>
@@ -768,7 +796,8 @@ example
 <span class="token selector"><span class="token class">.item-1</span> </span><span class="token punctuation">{</span>
   <span class="token property">background-color</span><span class="token punctuation">:</span> <span class="token hexcode">#ef342a</span><span class="token punctuation">;</span>
   <span class="token property">grid-area</span><span class="token punctuation">:</span> e<span class="token punctuation">;</span>
-<span class="token punctuation">}</span>       <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">}</span>       
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>如下图</p>
 <img src="https://www.wangbase.com/blogimg/asset/201903/bg2019032530.png" class="" width="280" title="grid-area指定grid-cell位置">
 
@@ -777,7 +806,8 @@ example
 </blockquote>
 <pre class="line-numbers language-css"><code class="language-css">    <span class="token property">grid-area</span><span class="token punctuation">:</span> &lt;row-start> / &lt;column-start> / &lt;row-end> / &lt;column-end><span class="token punctuation">;</span>
     example
-    <span class="token property">gird</span><span class="token punctuation">:</span><span class="token number">1</span>/<span class="token number">1</span>/<span class="token number">3</span>/<span class="token number">3</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+    <span class="token property">gird</span><span class="token punctuation">:</span><span class="token number">1</span>/<span class="token number">1</span>/<span class="token number">3</span>/<span class="token number">3</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 <p>如下图所示，简写结果 <strong>不支持span结合使用</strong><br><img src="/images/grid-area.PNG" alt="grid-area简写结果图"></p>
 
             </div>
@@ -1543,7 +1573,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">21.5k</span>&nbsp;字
+                class="white-color">57.4k</span>&nbsp;字
             
             
             

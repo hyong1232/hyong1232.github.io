@@ -4,7 +4,7 @@
 
 <head>
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
-    <meta name="keywords" content="类的内部加载顺序, 寒冬之音">
+    <meta name="keywords" content="类的内部加载顺序, 出云阁">
     <meta name="description" content="人生有酒需尽欢，莫使金樽空对月">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>类的内部加载顺序 | 寒冬之音</title>
+    <title>类的内部加载顺序 | 出云阁</title>
     <link rel="icon" type="image/png" href="/medias/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -29,7 +29,7 @@
 
     <script src="/libs/jquery/jquery.min.js"></script>
 
-<meta name="generator" content="Hexo 5.2.0"><link rel="alternate" href="/atom.xml" title="寒冬之音" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="出云阁" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 <link rel="stylesheet" href="/css/prism-ghcolors.css" type="text/css">
 <link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
 
@@ -55,7 +55,7 @@
                     
                     <img src="/medias/favicon.png" class="logo-img" alt="LOGO">
                     
-                    <span class="logo-span">寒冬之音</span>
+                    <span class="logo-span">出云阁</span>
                 </a>
             </div>
             
@@ -154,7 +154,7 @@
         
         <img src="/medias/favicon.png" class="logo-img circle responsive-img">
         
-        <div class="logo-name">寒冬之音</div>
+        <div class="logo-name">出云阁</div>
         <div class="logo-desc">
             
             人生有酒需尽欢，莫使金樽空对月
@@ -505,21 +505,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2020-12-21
+                    2021-03-11
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    277
+                    1.3k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    1 分
+                    5 分
                 </div>
                 
 
@@ -535,8 +535,30 @@
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>String类&amp;局部/全局变量&amp;Array常见方法使用&amp;递归&amp;BufferReader/FileReader/FileWriter&amp;混合变量后的类加载顺序</p>
-<a id="more"></a>
+<span id="more"></span>
 
+<h2 id="java类的加载过程"><a href="#java类的加载过程" class="headerlink" title="java类的加载过程"></a>java类的加载过程</h2><blockquote>
+<p>总体来说分为三个部分，即加载、链接、初始化，而链接又分为验证、准备和解析三个阶段。</p>
+</blockquote>
+<p><img src="/images/classloaderProcess.png" alt="类加载过程"></p>
+<h3 id="加载"><a href="#加载" class="headerlink" title="加载"></a>加载</h3><blockquote>
+<p>加载二进制数据到内存 —&gt; 映射成jvm能识别的结构 —&gt; 在内存中生成class文件。</p>
+</blockquote>
+<ul>
+<li>字节码文件来源：1、本地存储class文件。2、网络中的class文件</li>
+<li>类加载器：1、启动类加载器、2、扩展类加载器。3、应用类加载器。4、自定义加载器（非本地加载资源or加密/解密）。</li>
+</ul>
+<h3 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h3><blockquote>
+<p>链接是指将上面创建好的class类合并至Java虚拟机中，使之能够执行的过程，可分为验证、准备、解析三个阶段。</p>
+</blockquote>
+<ul>
+<li>验证：验证文件格式、元数据、字节码等，保证类符合虚拟机要求，不影响虚拟机的运行。</li>
+<li>准备：为类变量（static修饰的）分配内存，并赋值（默认值：int-0,引用null）</li>
+<li>解析：常量池中的符号引用（表示引用的字符串）===&gt;&gt;&gt;直接引用（内存地址/偏移量）</li>
+</ul>
+<h3 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h3><blockquote>
+<p>初始化static修饰的内容（若父类也有static修饰的内容限制性父类的内容）。</p>
+</blockquote>
 <h2 id="混合变量类加载顺序"><a href="#混合变量类加载顺序" class="headerlink" title="混合变量类加载顺序"></a>混合变量类加载顺序</h2><blockquote>
 <p>Array.copyOf(original,newlength)<br>返回新数组，不改变原数组<br>新数组的长度可大于或小于原数组——&gt;数组的切割/增大容量</p>
 </blockquote>
@@ -546,7 +568,128 @@
 <blockquote>
 <p>new新对象<br>5、在堆中创建父类对象，为父类成员变量分配内存<br>6、在堆中创建子类对象，为子类成员变量分配内存<br>7、为父类的成员变量赋值<br>8、执行父类的构造函数<br>9、为子类的成员变量赋值<br>10、执行子类的构造函数</p>
 </blockquote>
+<h2 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h2><blockquote>
+<p>类对象加载实例在静态对象申明前的两种解决办法：1、将静态声明提前or2、将声明改为非静态。</p>
+</blockquote>
+<pre class="line-numbers language-java"><code class="language-java"><span class="token keyword">package</span> test<span class="token punctuation">;</span>
+<span class="token keyword">import</span> java<span class="token punctuation">.</span>util<span class="token punctuation">.</span>HashMap<span class="token punctuation">;</span>
+<span class="token keyword">import</span> org<span class="token punctuation">.</span>junit<span class="token punctuation">.</span>Test<span class="token punctuation">;</span>
+<span class="token keyword">class</span> <span class="token class-name">TC</span><span class="token punctuation">{</span>
+<span class="token comment" spellcheck="true">//    static HashMap&lt;String, String> map=new HashMap&lt;String, String>(); </span>
+    <span class="token keyword">static</span> TC t <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">TC</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    HashMap<span class="token operator">&lt;</span>String<span class="token punctuation">,</span> String<span class="token operator">></span> map<span class="token operator">=</span><span class="token keyword">new</span> <span class="token class-name">HashMap</span><span class="token operator">&lt;</span>String<span class="token punctuation">,</span> String<span class="token operator">></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
+    <span class="token keyword">public</span> <span class="token function">TC</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        map<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span><span class="token string">"xixi"</span><span class="token punctuation">,</span><span class="token string">"xixi"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">public</span> HashMap<span class="token operator">&lt;</span>String<span class="token punctuation">,</span> String<span class="token operator">></span> <span class="token function">getMap</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token keyword">return</span> map<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">static</span> <span class="token punctuation">{</span>
+        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"xixi"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">TestClassObj</span> <span class="token punctuation">{</span>
+    <span class="token annotation punctuation">@Test</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">test</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">throws</span> ClassNotFoundException<span class="token punctuation">,</span> InstantiationException<span class="token punctuation">,</span> IllegalAccessException <span class="token punctuation">{</span>
+        Class <span class="token operator">&lt;</span>TC<span class="token operator">></span> t <span class="token operator">=</span> TC<span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">;</span>
+        ClassLoader classloader <span class="token operator">=</span> ClassLoader<span class="token punctuation">.</span><span class="token function">getSystemClassLoader</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        Class<span class="token operator">&lt;</span>TC<span class="token operator">></span> t1 <span class="token operator">=</span> <span class="token punctuation">(</span>Class<span class="token operator">&lt;</span>TC<span class="token operator">></span><span class="token punctuation">)</span> Class<span class="token punctuation">.</span><span class="token function">forName</span><span class="token punctuation">(</span><span class="token string">"test.TC"</span><span class="token punctuation">,</span><span class="token boolean">true</span><span class="token punctuation">,</span>classloader<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>t1<span class="token punctuation">.</span><span class="token function">newInstance</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getMap</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><strong>eclipse查看类加载的顺序</strong> ==&gt;&gt;在run configuration中的arguments中添加<strong>-XX:+TraceClassLoding</strong>代码，即可在控制台看到打印的输出。</p>
 <p>binarySearch+ArrayList？？？</p>
+<h2 id="字节码对象"><a href="#字节码对象" class="headerlink" title="字节码对象"></a>字节码对象</h2><h3 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h3><p>1、一个jvm中只有一个相同的类对象<br>2、加载类对象可能执行静态方法（取决于classloader的读取方式）<br>3、加载类对象可能执行静态属性（取决于classloader的读取方式）</p>
+<pre class="line-numbers language-java"><code class="language-java">ClassLoader classloader <span class="token operator">=</span> ClassLoader<span class="token punctuation">.</span><span class="token function">getSystemClassLoader</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+Class<span class="token operator">&lt;</span><span class="token operator">?</span><span class="token operator">></span> t1 <span class="token operator">=</span> Class<span class="token punctuation">.</span><span class="token function">forName</span><span class="token punctuation">(</span><span class="token string">"test.TC"</span><span class="token punctuation">,</span><span class="token boolean">true</span><span class="token punctuation">,</span>classloader<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment" spellcheck="true">//forName的第二个参数为true表示加载时执行静态方法，默认为true</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<p>ClassLoader是jdk提供的标准，mybatis和tomcat均有自己的实现，</p>
+<h3 id="获取方法"><a href="#获取方法" class="headerlink" title="获取方法"></a>获取方法</h3><p>1、Class.forName(完整包路径)<br>2、实例.getClass()<br>3、类.class</p>
+<h2 id="泛型"><a href="#泛型" class="headerlink" title="泛型"></a>泛型</h2><ul>
+<li><?>在不能确定类型时使用
+
+</li>
+</ul>
+<pre class="line-numbers language-java"><code class="language-java">Class<span class="token operator">&lt;</span><span class="token operator">?</span><span class="token operator">></span> c <span class="token operator">=</span> Class<span class="token punctuation">.</span><span class="token function">forName</span><span class="token punctuation">(</span><span class="token string">"java.lang.Object"</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>因为String路径在编译阶段不能确定是否正确，已经他的具体类型，因此要使用&lt;?&gt;。</p>
+<h2 id="特性"><a href="#特性" class="headerlink" title="特性"></a>特性</h2><h3 id="封装"><a href="#封装" class="headerlink" title="封装"></a>封装</h3><blockquote>
+<p>对象：属性私有化，方法能公开就公开<br>设计：一个mybatis要哪些对象？Connector+DataSource+pooled….</p>
+</blockquote>
+<h3 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h3><blockquote>
+<p>继承规则，<strong>扩展</strong>特性内容。例如简易缓存淘汰实现。</p>
+</blockquote>
+<pre class="line-numbers language-java"><code class="language-java"><span class="token keyword">package</span> test<span class="token punctuation">;</span>
+<span class="token keyword">import</span> java<span class="token punctuation">.</span>util<span class="token punctuation">.</span>LinkedHashMap<span class="token punctuation">;</span>
+<span class="token keyword">import</span> org<span class="token punctuation">.</span>junit<span class="token punctuation">.</span>Test<span class="token punctuation">;</span>
+<span class="token keyword">class</span> <span class="token class-name">LruCache</span> <span class="token keyword">extends</span> <span class="token class-name">LinkedHashMap</span><span class="token operator">&lt;</span>String<span class="token punctuation">,</span> Object<span class="token operator">></span><span class="token punctuation">{</span>
+    
+    <span class="token keyword">private</span> <span class="token keyword">int</span> maxCap<span class="token punctuation">;</span>
+    <span class="token keyword">public</span> <span class="token function">LruCache</span><span class="token punctuation">(</span><span class="token keyword">int</span> maxCap<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">super</span><span class="token punctuation">(</span>maxCap<span class="token punctuation">,</span><span class="token number">0.75f</span> <span class="token punctuation">,</span><span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>maxCap <span class="token operator">=</span> maxCap<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">protected</span> <span class="token keyword">boolean</span> <span class="token function">removeEldestEntry</span><span class="token punctuation">(</span>java<span class="token punctuation">.</span>util<span class="token punctuation">.</span>Map<span class="token punctuation">.</span>Entry<span class="token operator">&lt;</span>String<span class="token punctuation">,</span> Object<span class="token operator">></span> eldest<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>maxCap <span class="token operator">&lt;</span> <span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">LruCacheDemo</span><span class="token punctuation">{</span>
+    <span class="token annotation punctuation">@Test</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">asfsfds</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        LruCache l <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">LruCache</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        l<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span><span class="token string">"A"</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        l<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span><span class="token string">"B"</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        l<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span><span class="token string">"D"</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        l<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token string">"A"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        l<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span><span class="token string">"C"</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>l<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="FAQ"><a href="#FAQ" class="headerlink" title="FAQ"></a>FAQ</h2><h3 id="类加载一定会执行静态代码块？"><a href="#类加载一定会执行静态代码块？" class="headerlink" title="类加载一定会执行静态代码块？"></a>类加载一定会执行静态代码块？</h3><blockquote>
+<p>不一定，看类加载的方式。Class.forName(类名称)和new 对象是一定会执行static代码块的。而通过类名调用静态资源时，只调用了父类则只会执行静态代码块。如果调用了子类则子类父类的静态代码块都会执行。</p>
+</blockquote>
+<pre class="line-numbers language-java"><code class="language-java"><span class="token keyword">class</span> <span class="token class-name">A</span><span class="token punctuation">{</span>
+    <span class="token keyword">static</span> <span class="token keyword">int</span> a <span class="token operator">=</span> <span class="token number">3</span><span class="token punctuation">;</span>
+    <span class="token keyword">static</span> <span class="token punctuation">{</span>
+        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"A...."</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">class</span> <span class="token class-name">B</span> <span class="token keyword">extends</span> <span class="token class-name">A</span><span class="token punctuation">{</span>
+    <span class="token keyword">static</span> <span class="token keyword">int</span> b <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+    <span class="token keyword">static</span> <span class="token punctuation">{</span>
+        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"B...."</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span class="token annotation punctuation">@Test</span>
+<span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">testClassLoad</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">new</span> <span class="token class-name">B</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">//>>>A...B...</span>
+    <span class="token keyword">int</span> a <span class="token operator">=</span> B<span class="token punctuation">.</span>a<span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">//>>>A...</span>
+    <span class="token keyword">int</span> b <span class="token operator">=</span> B<span class="token punctuation">.</span>b<span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">//>>>A...B...</span>
+    <span class="token keyword">try</span> <span class="token punctuation">{</span>
+        Class<span class="token punctuation">.</span><span class="token function">forName</span><span class="token punctuation">(</span><span class="token string">"test.B"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment" spellcheck="true">//>>>A...B...</span>
+        ClassLoader scl <span class="token operator">=</span> ClassLoader<span class="token punctuation">.</span><span class="token function">getSystemClassLoader</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        Class<span class="token punctuation">.</span><span class="token function">forName</span><span class="token punctuation">(</span><span class="token string">"test.B"</span><span class="token punctuation">,</span><span class="token boolean">true</span><span class="token punctuation">,</span>scl<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment" spellcheck="true">//>>>A...B...</span>
+        Class<span class="token operator">&lt;</span><span class="token operator">?</span><span class="token operator">></span> b <span class="token operator">=</span> B<span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">;</span>
+        <span class="token comment" spellcheck="true">//>>>无内容</span>
+    <span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">Exception</span> e<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        e<span class="token punctuation">.</span><span class="token function">printStackTrace</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>dip<br>ocp</p>
 
             </div>
             <hr/>
@@ -1159,11 +1302,7 @@
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/js/" class="post-category">
-                                    js
-                                </a>
-                            
-                            <a href="/categories/js/css/" class="post-category">
+                            <a href="/categories/css/" class="post-category">
                                     css
                                 </a>
                             
@@ -1332,7 +1471,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">21.5k</span>&nbsp;字
+                class="white-color">57.4k</span>&nbsp;字
             
             
             

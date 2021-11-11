@@ -4,7 +4,7 @@
 
 <head>
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
-    <meta name="keywords" content="babel使用介绍, 寒冬之音">
+    <meta name="keywords" content="babel使用介绍, 出云阁">
     <meta name="description" content="人生有酒需尽欢，莫使金樽空对月">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>babel使用介绍 | 寒冬之音</title>
+    <title>babel使用介绍 | 出云阁</title>
     <link rel="icon" type="image/png" href="/medias/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -29,7 +29,7 @@
 
     <script src="/libs/jquery/jquery.min.js"></script>
 
-<meta name="generator" content="Hexo 5.2.0"><link rel="alternate" href="/atom.xml" title="寒冬之音" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="出云阁" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 <link rel="stylesheet" href="/css/prism-ghcolors.css" type="text/css">
 <link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
 
@@ -55,7 +55,7 @@
                     
                     <img src="/medias/favicon.png" class="logo-img" alt="LOGO">
                     
-                    <span class="logo-span">寒冬之音</span>
+                    <span class="logo-span">出云阁</span>
                 </a>
             </div>
             
@@ -154,7 +154,7 @@
         
         <img src="/medias/favicon.png" class="logo-img circle responsive-img">
         
-        <div class="logo-name">寒冬之音</div>
+        <div class="logo-name">出云阁</div>
         <div class="logo-desc">
             
             人生有酒需尽欢，莫使金樽空对月
@@ -523,7 +523,7 @@
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>babel+webpack作为es6必用的工具，配置和使用较为麻烦，小节了一下常见的使用和配置。</p>
-<a id="more"></a>
+<span id="more"></span>
 
 <h3 id="配置在项目中使用"><a href="#配置在项目中使用" class="headerlink" title="配置在项目中使用"></a>配置在项目中使用</h3><blockquote>
 <p>可使用配置文件.babelrc将常见配置写入文件中（放置在项目的根目录下），再webpack打包的过程中，会自动读取这个文件的配置，常见的配置写法如下:</p>
@@ -531,7 +531,8 @@
 <pre class="line-numbers language-js"><code class="language-js"><span class="token punctuation">{</span>
     <span class="token string">"presets"</span><span class="token punctuation">:</span><span class="token punctuation">[</span><span class="token string">'es2015'</span><span class="token punctuation">,</span><span class="token string">'env'</span><span class="token punctuation">,</span><span class="token string">'stage-0'</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
     <span class="token string">"plugins"</span><span class="token punctuation">:</span><span class="token punctuation">[</span><span class="token string">'transform-runtime'</span><span class="token punctuation">]</span>
-<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>.babelrc文件整个就是一个对象，在对象{}中配置相应的属性即可</li>
 <li>常用的presets规则以及转换插件需要自行下载（npm命令即可）</li>
@@ -551,13 +552,15 @@
             <span class="token punctuation">}</span>
         <span class="token punctuation">}</span>
     <span class="token punctuation">]</span>
-<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p><strong>关于转换规则stage-0/1/2…在新的webpack中不在推荐使用，避免过多使用</strong></p>
 <h3 id="命令行中直接转换"><a href="#命令行中直接转换" class="headerlink" title="命令行中直接转换"></a>命令行中直接转换</h3><blockquote>
 <p>除了在项目中使用还可以直接在命令行转换es6的代码</p>
 </blockquote>
 <p>1、安装@babel/cli</p>
-<pre class="line-numbers language-bash"><code class="language-bash"><span class="token function">npm</span> i -D @babel/cli<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre class="line-numbers language-bash"><code class="language-bash"><span class="token function">npm</span> i -D @babel/cli
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>2、基本用法</p>
 <pre class="line-numbers language-bash"><code class="language-bash">//转换单个es6语法的文件到指定文件夹
 npx babel es6.js --out-file out.js
@@ -570,7 +573,8 @@ npx babel es6dir -out-dir outdir
 npx babel es6dir -d outdir
 
 //加上 -s参数生产source map文件
-npx babel es6dir -d outdir -s<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+npx babel es6dir -d outdir -s
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>转换文件到目标文件/文件夹时，没有会自动创建</li>
 <li>文件夹转换是将源文件夹中的文件依次转换到对应的输出，出错则停止转换</li>
@@ -583,7 +587,8 @@ npx babel es6dir -d outdir -s<span aria-hidden="true" class="line-numbers-rows">
 <p>安装了这个包就可以在命令行直接执行es6命令，或者直接运行es6文件</p>
 </blockquote>
 <pre class="line-numbers language-bash"><code class="language-bash">//直接运行es6文件
-npx node-node es6.js<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+npx node-node es6.js
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <h3 id="babel-register"><a href="#babel-register" class="headerlink" title="@babel/register"></a>@babel/register</h3><blockquote>
 <p>这个包的作用是在文件中对通过require加载的文件进行实时转换</p>
 </blockquote>
@@ -592,7 +597,8 @@ npx node-node es6.js<span aria-hidden="true" class="line-numbers-rows"><span></s
 //使用（文件中）
 require<span class="token punctuation">(</span><span class="token string">'@babel/register'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 require<span class="token punctuation">(</span><span class="token string">'./es6.js'</span><span class="token punctuation">)</span>
-//上述代码会自动将加载的es6文件转换<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+//上述代码会自动将加载的es6文件转换
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>此包仅在运行时有效（适用于开发时使用）</li>
 <li>使用时要先加载此包，放在文件的顶部</li>
@@ -605,7 +611,8 @@ require<span class="token punctuation">(</span><span class="token string">'./es6
 <span class="token function">npm</span> i core-js regenerator-runtime -D
 //使用（文件中）导入即可（require/import）
 <span class="token function">import</span> <span class="token string">'core-js'</span>
-<span class="token function">import</span> <span class="token string">'regenerator-runtime/runtime'</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token function">import</span> <span class="token string">'regenerator-runtime/runtime'</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
             </div>
             <hr/>
@@ -1371,7 +1378,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">21.5k</span>&nbsp;字
+                class="white-color">57.4k</span>&nbsp;字
             
             
             

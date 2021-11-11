@@ -4,7 +4,7 @@
 
 <head>
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
-    <meta name="keywords" content="matery主题踩坑记录, 寒冬之音">
+    <meta name="keywords" content="matery主题踩坑记录, 出云阁">
     <meta name="description" content="人生有酒需尽欢，莫使金樽空对月">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>matery主题踩坑记录 | 寒冬之音</title>
+    <title>matery主题踩坑记录 | 出云阁</title>
     <link rel="icon" type="image/png" href="/medias/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -29,7 +29,7 @@
 
     <script src="/libs/jquery/jquery.min.js"></script>
 
-<meta name="generator" content="Hexo 5.2.0"><link rel="alternate" href="/atom.xml" title="寒冬之音" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="出云阁" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 <link rel="stylesheet" href="/css/prism-ghcolors.css" type="text/css">
 <link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
 
@@ -55,7 +55,7 @@
                     
                     <img src="/medias/favicon.png" class="logo-img" alt="LOGO">
                     
-                    <span class="logo-span">寒冬之音</span>
+                    <span class="logo-span">出云阁</span>
                 </a>
             </div>
             
@@ -154,7 +154,7 @@
         
         <img src="/medias/favicon.png" class="logo-img circle responsive-img">
         
-        <div class="logo-name">寒冬之音</div>
+        <div class="logo-name">出云阁</div>
         <div class="logo-desc">
             
             人生有酒需尽欢，莫使金樽空对月
@@ -542,7 +542,8 @@
 #   preprocess: true
 #   theme: 'tomorrow'
 #   line_number: true
-#   tab_replace: ''<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+#   tab_replace: ''
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>3、设置完之后你会发现颜色样式倒是可以了，但是{和}莫名其妙的被转换成了&#123;和&#125;!!!本想就这样放着，可我有老师忘不掉这个，而且他还影响阅读代码，真是要了命了。通过google大概知道了这个问题就是prism和hexo5自带的prism冲突引起的，解决办法有两个(原文地址)[<a target="_blank" rel="noopener" href="https://github.com/blinkfox/hexo-theme-matery/issues/503]%EF%BC%9A">https://github.com/blinkfox/hexo-theme-matery/issues/503]：</a><br>    + 退回hexo4然后清除public文件重新生成<br>    + 删除hexo-prism-pluging插件<br>像我这样懒得人怎么可能会回退版本！删除插件代码高亮又称问题，于是我看了下hexo-prism-plugin的依赖代码，在他的index文件中的map中添加了大括号的匹配。</p>
 <pre class="line-numbers language-js"><code class="language-js"><span class="token keyword">const</span> map <span class="token operator">=</span> <span class="token punctuation">{</span>
   <span class="token string">'&amp;#123;'</span><span class="token punctuation">:</span> <span class="token string">'{'</span><span class="token punctuation">,</span>
@@ -552,7 +553,8 @@
   <span class="token string">'&amp;gt;'</span><span class="token punctuation">:</span> <span class="token string">'>'</span><span class="token punctuation">,</span>
   <span class="token string">'&amp;lt;'</span><span class="token punctuation">:</span> <span class="token string">'&lt;'</span><span class="token punctuation">,</span>
   <span class="token string">'&amp;quot;'</span><span class="token punctuation">:</span> <span class="token string">'"'</span>
-<span class="token punctuation">}</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>大功告成！！！，缺点是升级依赖可能就失效，还得重新改代码，算了就这样吧，睡觉咯！</p>
 
             </div>
@@ -1143,7 +1145,7 @@
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            简介
+                            
                         
                     </div>
                     <div class="publish-info">
@@ -1323,7 +1325,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">21.5k</span>&nbsp;字
+                class="white-color">57.4k</span>&nbsp;字
             
             
             

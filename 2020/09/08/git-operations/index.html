@@ -4,7 +4,7 @@
 
 <head>
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
-    <meta name="keywords" content="git-operations, 寒冬之音">
+    <meta name="keywords" content="git-operations, 出云阁">
     <meta name="description" content="人生有酒需尽欢，莫使金樽空对月">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>git-operations | 寒冬之音</title>
+    <title>git-operations | 出云阁</title>
     <link rel="icon" type="image/png" href="/medias/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -29,7 +29,7 @@
 
     <script src="/libs/jquery/jquery.min.js"></script>
 
-<meta name="generator" content="Hexo 5.2.0"><link rel="alternate" href="/atom.xml" title="寒冬之音" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="出云阁" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 <link rel="stylesheet" href="/css/prism-ghcolors.css" type="text/css">
 <link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
 
@@ -55,7 +55,7 @@
                     
                     <img src="/medias/favicon.png" class="logo-img" alt="LOGO">
                     
-                    <span class="logo-span">寒冬之音</span>
+                    <span class="logo-span">出云阁</span>
                 </a>
             </div>
             
@@ -154,7 +154,7 @@
         
         <img src="/medias/favicon.png" class="logo-img circle responsive-img">
         
-        <div class="logo-name">寒冬之音</div>
+        <div class="logo-name">出云阁</div>
         <div class="logo-desc">
             
             人生有酒需尽欢，莫使金樽空对月
@@ -493,21 +493,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2020-12-17
+                    2021-11-02
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    893
+                    1.1k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    3 分
+                    4 分
                 </div>
                 
 
@@ -523,7 +523,7 @@
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p><strong>感谢阮一峰先生的分享<a target="_blank" rel="noopener" href="http://www.ruanyifeng.com/blog/2015/12/git-cheat-sheet.html">常用git命令清单</a> 仅供个人学习。</strong><br>关于git的常见操作命令，和对版本，分支的处理还有git的工作流程的解释说明。</p>
-<a id="more"></a>
+<span id="more"></span>
 <p>常用的6个git命令可以用下面的一张图表示：</p>
 <img src="/images/git.png" class="" title="常用git命令图">
 
@@ -555,33 +555,38 @@
 <blockquote>
 <p>本地初始化</p>
 </blockquote>
-<pre class="line-numbers language-git"><code class="language-git">git init [project-name]<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre class="line-numbers language-git"><code class="language-git">git init [project-name]
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <ul>
 <li>本地新建一个代码库会新建一个.git隐藏文件</li>
 </ul>
 <blockquote>
 <p>clone仓库中已有的代码到本地</p>
 </blockquote>
-<pre class="line-numbers language-git"><code class="language-git">git clone url [project-name] [--depth=num] <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre class="line-numbers language-git"><code class="language-git">git clone url [project-name] [--depth=num] 
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <ul>
 <li>其中num为想要拷取的代码仓库深度，为1则表示最近一次的更新的最新代码</li>
 </ul>
 <h2 id="暂存区操作"><a href="#暂存区操作" class="headerlink" title="暂存区操作"></a>暂存区操作</h2><p>1、添加文件到暂存区</p>
 <pre class="line-numbers language-git"><code class="language-git">git add [file1] [file2] ...
 git add [dir]
-git add .<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+git add .
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li>其中 . 代表所有修改了的文件，最常用</li>
 </ul>
 <p>2、将文件删除/从暂存区删除</p>
 <pre class="line-numbers language-git"><code class="language-git">git rm [file1] [file2] ...
-git rm --cached [filename]<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+git rm --cached [filename]
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <ul>
 <li>其中–cached代表不删除工作区文件，只是从暂存区中删除</li>
 <li>只有在暂存区中的文件对其执行删除操作才有效</li>
 </ul>
 <p>3、修改文件名称，并将修改信息存入暂存区</p>
-<pre class="line-numbers language-git"><code class="language-git">git mv [file-origin-name] [file-new-name] <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre class="line-numbers language-git"><code class="language-git">git mv [file-origin-name] [file-new-name] 
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <ul>
 <li>文件要先在暂存区中</li>
 </ul>
@@ -593,19 +598,22 @@ git rm --cached [filename]<span aria-hidden="true" class="line-numbers-rows"><sp
 git commit -m <span class="token string">"message"</span>
 
 <span class="token comment" spellcheck="true">#指定要提交的提交文件</span>
-git commit [file1] [file2]... -m <span class="token string">"message"</span> <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+git commit [file1] [file2]... -m <span class="token string">"message"</span> 
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>2、用本次提交覆盖上次的提交</p>
 <pre class="line-numbers language-git"><code class="language-git"><span class="token comment" spellcheck="true">#覆盖上次提交到仓库的内容，仓库中的文件修改一本次为准</span>
 git commit --amend -m <span class="token string">"message"</span>
 
 <span class="token comment" spellcheck="true">#指定要覆盖的仓库文件</span>
-git commit --amend [file1] [file2]... -m <span class="token string">"message"</span> <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+git commit --amend [file1] [file2]... -m <span class="token string">"message"</span> 
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>3、其他提交</p>
 <pre class="line-numbers language-git"><code class="language-git"><span class="token comment" spellcheck="true">#提交工作区自上次commit之后的变化，直接到仓库区(不包括新增文件/文件夹)</span>
 git commit -a
 
 <span class="token comment" spellcheck="true">#提交时显示所有diff信息</span>
-git commit -v<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+git commit -v
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h2 id="提交文件至远程仓库"><a href="#提交文件至远程仓库" class="headerlink" title="提交文件至远程仓库"></a>提交文件至远程仓库</h2><table>
 <thead>
 <tr>
@@ -667,17 +675,52 @@ git branch
 git branch -r
 
 <span class="token comment" spellcheck="true">#查看所有分支（本地加远程）</span>
-git branch -a<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+git branch -a
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>3、删除分支</p>
 <pre class="line-numbers language-git"><code class="language-git"><span class="token comment" spellcheck="true">#删除本地分支</span>
 git branch -d [branch-name]
 
 <span class="token comment" spellcheck="true">#删除远程分支</span>
 git branch [remote-name] --delete [branch-name]
-git branch -dr [remote/branch]<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+git branch -dr [remote/branch]
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>4、合并分支</p>
 <pre class="line-numbers language-git"><code class="language-git"><span class="token comment" spellcheck="true">#合并指定分支到当前分支</span>
-git merge [branch]<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+git merge [branch]
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<h3 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h3><h4 id="远程分支相关"><a href="#远程分支相关" class="headerlink" title="远程分支相关"></a>远程分支相关</h4><pre class="line-numbers language-shell"><code class="language-shell"># 新建远程分支
+git push origin localbranch:remotebranch
+# 删除远程分支
+git push origin :remotebranch
+git push origin --delete remotebranch
+git branch -dr origin/remotebranch
+# 本地与远程建立追踪关系
+git branch -u origin/remotebranch
+git branch --set-upstream-to origin remotebranch
+# 设置远程dev分支为默认分支
+git remote set-head origin dev
+# 合并保留临时分支 --no-ff
+git merge --no-ff -m "" targetBranch
+# 暂存workspace和index/stage
+git stash
+git stash list
+git stash apply [stash@{num}]
+git stash pop [stash@{num}]
+# 创建本地分支，并于远程分支建立追踪关系
+git checkout -b newBranch origin/remoteBranch
+# 日志
+git log --graph --pretty=oneline --abbrev-commit
+git log --pretty=oneline --abbrev-commit
+# 标签
+git tag
+git tag [tagName] [commitId]
+git tag -d tagName
+git tag -a tagName -m "description"
+git push origin tagName
+git push origin --tags
+git push origin :refs/tags/tagName # 先删除本地，然后推送到远程
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
             </div>
             <hr/>
@@ -1226,11 +1269,7 @@ git merge [branch]<span aria-hidden="true" class="line-numbers-rows"><span></spa
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/js/" class="post-category">
-                                    js
-                                </a>
-                            
-                            <a href="/categories/js/css/" class="post-category">
+                            <a href="/categories/css/" class="post-category">
                                     css
                                 </a>
                             
@@ -1451,7 +1490,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">21.5k</span>&nbsp;字
+                class="white-color">57.4k</span>&nbsp;字
             
             
             

@@ -4,7 +4,7 @@
 
 <head>
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
-    <meta name="keywords" content="npm常用命令, 寒冬之音">
+    <meta name="keywords" content="npm常用命令, 出云阁">
     <meta name="description" content="人生有酒需尽欢，莫使金樽空对月">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>npm常用命令 | 寒冬之音</title>
+    <title>npm常用命令 | 出云阁</title>
     <link rel="icon" type="image/png" href="/medias/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -29,7 +29,7 @@
 
     <script src="/libs/jquery/jquery.min.js"></script>
 
-<meta name="generator" content="Hexo 5.2.0"><link rel="alternate" href="/atom.xml" title="寒冬之音" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="出云阁" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 <link rel="stylesheet" href="/css/prism-ghcolors.css" type="text/css">
 <link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
 
@@ -55,7 +55,7 @@
                     
                     <img src="/medias/favicon.png" class="logo-img" alt="LOGO">
                     
-                    <span class="logo-span">寒冬之音</span>
+                    <span class="logo-span">出云阁</span>
                 </a>
             </div>
             
@@ -154,7 +154,7 @@
         
         <img src="/medias/favicon.png" class="logo-img circle responsive-img">
         
-        <div class="logo-name">寒冬之音</div>
+        <div class="logo-name">出云阁</div>
         <div class="logo-desc">
             
             人生有酒需尽欢，莫使金樽空对月
@@ -523,7 +523,7 @@
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>npm包管理工具的命令较多，记录下常用的命令</p>
-<a id="more"></a>
+<span id="more"></span>
 
 <h3 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h3><p>详见 <strong><a target="_blank" rel="noopener" href="http://www.ruanyifeng.com/blog/2016/10/npm_scripts.html">npm使用指南</a></strong> 阮一峰先生写的npm原理很清楚，通俗易懂。总结起来就是在运行npm run+关键字的命令时，npm会自动创建一个shell，同时将/node_moudles/.bin文件加到Path路径下，从而执行.bin文件里面的脚本代码（支持所有shell脚本，不仅是node的脚本）</p>
 <h3 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h3><table>
@@ -616,11 +616,13 @@
 <p>1、特殊字符^<br>详见**二不挂五先生的文章<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/66039729">npm install 版本号^的坑</a>**，简单点来说就是^标识的范围是版本号[major, minor, patch]中从左到右第一个非0位开始，小于此非零位+1的版本号</p>
 <pre class="line-numbers language-bash"><code class="language-bash">^1.2.3版本包括：<span class="token operator">>=</span> 1.2.3 并且 <span class="token operator">&lt;</span> 2.0.0
 ^0.2.3版本包括：<span class="token operator">>=</span> 0.2.3 并且 <span class="token operator">&lt;</span> 0.3.0
-^0.0.3版本包括：<span class="token operator">>=</span> 0.0.3 并且 <span class="token operator">&lt;</span> 0.0.4<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+^0.0.3版本包括：<span class="token operator">>=</span> 0.0.3 并且 <span class="token operator">&lt;</span> 0.0.4
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 <p>2、特殊字符~<br>与^类似，~字符则指定匹配版本号[major, minor, patch]中最新的patch位包依赖（方便修复小bug后依然适用于代码）</p>
 <pre class="line-numbers language-bash"><code class="language-bash">~1.2.3版本包括：<span class="token operator">>=</span> 1.2.3 并且 <span class="token operator">&lt;</span> 1.3.0
 ~0.2.3版本包括：<span class="token operator">>=</span> 0.2.3 并且 <span class="token operator">&lt;</span> 0.3.0
-~0.0.3版本包括：<span class="token operator">>=</span> 0.0.3 并且 <span class="token operator">&lt;</span> 0.1.0<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+~0.0.3版本包括：<span class="token operator">>=</span> 0.0.3 并且 <span class="token operator">&lt;</span> 0.1.0
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 <p>3、特殊字符@<br>在@后面可以添加具体的版本号，以指定依赖包的确切版本，@latest表示安装最新的依赖包</p>
 
             </div>
@@ -1387,7 +1389,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">21.5k</span>&nbsp;字
+                class="white-color">57.4k</span>&nbsp;字
             
             
             

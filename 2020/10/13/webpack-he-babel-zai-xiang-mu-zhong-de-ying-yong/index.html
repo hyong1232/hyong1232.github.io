@@ -4,7 +4,7 @@
 
 <head>
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
-    <meta name="keywords" content="webpack和babel在项目中的应用, 寒冬之音">
+    <meta name="keywords" content="webpack和babel在项目中的应用, 出云阁">
     <meta name="description" content="人生有酒需尽欢，莫使金樽空对月">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>webpack和babel在项目中的应用 | 寒冬之音</title>
+    <title>webpack和babel在项目中的应用 | 出云阁</title>
     <link rel="icon" type="image/png" href="/medias/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -29,7 +29,7 @@
 
     <script src="/libs/jquery/jquery.min.js"></script>
 
-<meta name="generator" content="Hexo 5.2.0"><link rel="alternate" href="/atom.xml" title="寒冬之音" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="出云阁" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 <link rel="stylesheet" href="/css/prism-ghcolors.css" type="text/css">
 <link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
 
@@ -55,7 +55,7 @@
                     
                     <img src="/medias/favicon.png" class="logo-img" alt="LOGO">
                     
-                    <span class="logo-span">寒冬之音</span>
+                    <span class="logo-span">出云阁</span>
                 </a>
             </div>
             
@@ -154,7 +154,7 @@
         
         <img src="/medias/favicon.png" class="logo-img circle responsive-img">
         
-        <div class="logo-name">寒冬之音</div>
+        <div class="logo-name">出云阁</div>
         <div class="logo-desc">
             
             人生有酒需尽欢，莫使金樽空对月
@@ -527,24 +527,28 @@
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>使用vue-cli简单不少，但要是单纯想使用es6的打包工具webpack和转换代码工具的babel进行项目的打包转换，麻烦不少</p>
-<a id="more"></a>
+<span id="more"></span>
 
 <h2 id="初始化项目"><a href="#初始化项目" class="headerlink" title="初始化项目"></a>初始化项目</h2><pre class="line-numbers language-bash"><code class="language-bash">//如果项目文件夹存在，可以省略项目名称
-<span class="token function">npm</span> init -y <span class="token punctuation">[</span>项目名称<span class="token punctuation">]</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<span class="token function">npm</span> init -y <span class="token punctuation">[</span>项目名称<span class="token punctuation">]</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <p>使用上述命令生成package.json文件，此文件主要记录了项目的依赖，版本号等信息。当项目丢失部分依赖时可使用npm install依照此记录重新安装依赖。</p>
 <h2 id="安装依赖"><a href="#安装依赖" class="headerlink" title="安装依赖"></a>安装依赖</h2><p>webpack和babel的依赖包较多，且版本问题不兼容，很坑。直接使用固定版本命令安装</p>
 <ul>
 <li>安装babel的相关依赖</li>
 </ul>
-<pre class="line-numbers language-bash"><code class="language-bash"><span class="token function">npm</span> i -D babel-core@6.26.x babel-loader@7.0.0 babel-plugin-transform-runtime@6.23.x babel-preset-env@1.7.x babel-polyfill<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre class="line-numbers language-bash"><code class="language-bash"><span class="token function">npm</span> i -D babel-core@6.26.x babel-loader@7.0.0 babel-plugin-transform-runtime@6.23.x babel-preset-env@1.7.x babel-polyfill
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <ul>
 <li>安装webpack相关的依赖</li>
 </ul>
-<pre class="line-numbers language-bash"><code class="language-bash"><span class="token function">npm</span> i -D webpack@4.43.x webpack-cli@3.3.x webpack-dev-server@3.11.x html-webpack-plugin@4.3.x<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre class="line-numbers language-bash"><code class="language-bash"><span class="token function">npm</span> i -D webpack@4.43.x webpack-cli@3.3.x webpack-dev-server@3.11.x html-webpack-plugin@4.3.x
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <ul>
 <li>安装css和字体文件相关的依赖</li>
 </ul>
-<pre class="line-numbers language-bash"><code class="language-bash">$ <span class="token function">npm</span> i -D node-sass@4.14.x sass-loader@8.0.x css-loader@3.5.x file-loader@6.0.x style-loader@1.2.x url-loader@4.1.x<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre class="line-numbers language-bash"><code class="language-bash">$ <span class="token function">npm</span> i -D node-sass@4.14.x sass-loader@8.0.x css-loader@3.5.x file-loader@6.0.x style-loader@1.2.x url-loader@4.1.x
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <h2 id="配置wepack"><a href="#配置wepack" class="headerlink" title="配置wepack"></a>配置wepack</h2><p>配置需要使用的babel转换环境和wepack打包配置，项目入口生成文件存放路径等</p>
 <p>1、在项目的根目录下创建webpack.config.js文件</p>
 <p>2、在文件中写如下配置即可，项目运行时会自动读取此文件的配置</p>
@@ -597,7 +601,8 @@ module<span class="token punctuation">.</span>exports <span class="token operato
         <span class="token punctuation">}</span><span class="token punctuation">,</span>
         extensions<span class="token punctuation">:</span><span class="token punctuation">[</span><span class="token string">'.js'</span><span class="token punctuation">,</span><span class="token string">'.jsx'</span><span class="token punctuation">,</span><span class="token string">'.json'</span><span class="token punctuation">]</span>
     <span class="token punctuation">}</span><span class="token punctuation">,</span>
-<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h2 id="附上完整的package-json文件"><a href="#附上完整的package-json文件" class="headerlink" title="附上完整的package.json文件"></a>附上完整的package.json文件</h2><pre class="line-numbers language-json"><code class="language-json"><span class="token punctuation">{</span>
   <span class="token property">"name"</span><span class="token operator">:</span> <span class="token string">"demo"</span><span class="token punctuation">,</span>
   <span class="token property">"version"</span><span class="token operator">:</span> <span class="token string">"1.0.0"</span><span class="token punctuation">,</span>
@@ -1179,7 +1184,7 @@ module<span class="token punctuation">.</span>exports <span class="token operato
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            记录下js中常用的数组操作函数，温故知新
+                            
                         
                     </div>
                     <div class="publish-info">
@@ -1407,7 +1412,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">21.5k</span>&nbsp;字
+                class="white-color">57.4k</span>&nbsp;字
             
             
             

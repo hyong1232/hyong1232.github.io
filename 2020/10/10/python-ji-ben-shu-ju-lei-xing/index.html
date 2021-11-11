@@ -4,7 +4,7 @@
 
 <head>
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
-    <meta name="keywords" content="python基本数据类型, 寒冬之音">
+    <meta name="keywords" content="python基本数据类型, 出云阁">
     <meta name="description" content="人生有酒需尽欢，莫使金樽空对月">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>python基本数据类型 | 寒冬之音</title>
+    <title>python基本数据类型 | 出云阁</title>
     <link rel="icon" type="image/png" href="/medias/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -29,7 +29,7 @@
 
     <script src="/libs/jquery/jquery.min.js"></script>
 
-<meta name="generator" content="Hexo 5.2.0"><link rel="alternate" href="/atom.xml" title="寒冬之音" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="出云阁" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 <link rel="stylesheet" href="/css/prism-ghcolors.css" type="text/css">
 <link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
 
@@ -55,7 +55,7 @@
                     
                     <img src="/medias/favicon.png" class="logo-img" alt="LOGO">
                     
-                    <span class="logo-span">寒冬之音</span>
+                    <span class="logo-span">出云阁</span>
                 </a>
             </div>
             
@@ -154,7 +154,7 @@
         
         <img src="/medias/favicon.png" class="logo-img circle responsive-img">
         
-        <div class="logo-name">寒冬之音</div>
+        <div class="logo-name">出云阁</div>
         <div class="logo-desc">
             
             人生有酒需尽欢，莫使金樽空对月
@@ -523,13 +523,14 @@
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>决心开始认真系统学习python，基本数据类型开始，记录自己感觉重要的知识点。</p>
-<a id="more"></a>
+<span id="more"></span>
 <h2 id="整数"><a href="#整数" class="headerlink" title="整数"></a>整数</h2><ul>
 <li><p>十六进制ox开头</p>
 </li>
 <li><p>允许使用_下划线分割多个0的大数据</p>
 <pre class="line-numbers language-python"><code class="language-python"><span class="token comment" spellcheck="true">#等效写法</span>
-100_000_000 <span class="token operator">==</span> <span class="token number">100000000</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+100_000_000 <span class="token operator">==</span> <span class="token number">100000000</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 </li>
 <li><p>整数运算永远是精确计算（除法也是），浮点数计算会有四舍五入误差</p>
 </li>
@@ -571,24 +572,29 @@
 <p>  示例：</p>
 <pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'%s is %d year\'s old,he have $%f'</span> <span class="token operator">%</span><span class="token punctuation">(</span><span class="token string">'jack'</span><span class="token punctuation">,</span><span class="token number">23</span><span class="token punctuation">,</span><span class="token number">3456345643.234</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
 <span class="token comment" spellcheck="true">#使用%%转义%</span>
-<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'%%%d'</span><span class="token operator">%</span><span class="token number">25</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'%%%d'</span><span class="token operator">%</span><span class="token number">25</span><span class="token punctuation">)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 <p>  <strong>在字符串中可加入整数/浮点数在%和特定字符间对数据输出位数处理</strong></p>
 <pre class="line-numbers language-python"><code class="language-python"><span class="token comment" spellcheck="true">#整数数字表示占位</span>
 <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'%3d'</span><span class="token operator">%</span><span class="token number">23</span><span class="token punctuation">)</span>
 <span class="token comment" spellcheck="true">#浮点数对浮点数的位数处理</span>
-<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'%.2f'</span><span class="token operator">%</span><span class="token number">12.23453</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'%.2f'</span><span class="token operator">%</span><span class="token number">12.23453</span><span class="token punctuation">)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 <p>  2、使用string类型的format函数配合{}</p>
-<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'{} is {} year\'s old,he have ${}'</span><span class="token punctuation">.</span>format<span class="token punctuation">(</span><span class="token string">'jack'</span><span class="token punctuation">,</span><span class="token number">23</span><span class="token punctuation">,</span><span class="token number">3456345643.234</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'{} is {} year\'s old,he have ${}'</span><span class="token punctuation">.</span>format<span class="token punctuation">(</span><span class="token string">'jack'</span><span class="token punctuation">,</span><span class="token number">23</span><span class="token punctuation">,</span><span class="token number">3456345643.234</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>  3、在字符串前加上f，然后使用{变量名}，自动替换字符串（类似es6中的反引号字符串）</p>
 <pre class="line-numbers language-python"><code class="language-python">name <span class="token operator">=</span> <span class="token string">'jack'</span>
 age <span class="token operator">=</span> <span class="token number">23</span>
 money <span class="token operator">=</span> <span class="token number">3456345643.234</span>
-<span class="token keyword">print</span><span class="token punctuation">(</span>f<span class="token string">'{name} is {age} year\'s old,he have ${money}'</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token keyword">print</span><span class="token punctuation">(</span>f<span class="token string">'{name} is {age} year\'s old,he have ${money}'</span><span class="token punctuation">)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 </li>
 </ul>
 <h2 id="布尔值Boolean"><a href="#布尔值Boolean" class="headerlink" title="布尔值Boolean"></a>布尔值Boolean</h2><ul>
 <li>值表示是首字符大写<pre class="line-numbers language-python"><code class="language-python"><span class="token number">1</span><span class="token operator">==</span><span class="token number">2</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">></span><span class="token boolean">False</span>
-<span class="token number">1</span><span class="token operator">==</span><span class="token number">1</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">></span><span class="token boolean">True</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<span class="token number">1</span><span class="token operator">==</span><span class="token number">1</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">></span><span class="token boolean">True</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 </li>
 </ul>
 <h2 id="空置None"><a href="#空置None" class="headerlink" title="空置None"></a>空置None</h2><ul>
@@ -1376,7 +1382,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">21.5k</span>&nbsp;字
+                class="white-color">57.4k</span>&nbsp;字
             
             
             
